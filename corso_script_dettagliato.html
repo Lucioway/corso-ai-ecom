@@ -529,16 +529,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
 
   <div class="point">
     <span class="num">04</span>
-    <h2>Step 3 — Install Antigravity IDE</h2>
-    <p>Apri browser. Vai su <b>antigravity.google</b> (sito Google Antigravity). Download per macOS. Installa trascinando in /Applications come ogni app Mac.</p>
-    <p>Premessa onesta: "Io uso Antigravity perché è il mio daily driver. Quando ho montato questo stack, l'app Claude Code Desktop in questa forma non esisteva ancora. Antigravity è un IDE visivo con pannelli agent, browser integrato, multi-agent UI. Dentro ci gira la stessa Claude Code CLI che hai appena installato."</p>
-    <p>Primo avvio: apri Antigravity, apri una cartella (es. <code>~/Documents/MioVault</code> che faremo in L4), poi apri il terminale integrato (View → Terminal o <code>Ctrl+`</code>). Da lì <code>claude</code>. "Da dentro Antigravity, lanci la CLI. Adesso hai IDE + agent insieme."</p>
-    <div class="say"><b>Da dire:</b> "Antigravity = la macchina. Claude Code CLI = il motore. Stesso Claude sotto, ma da qui ci lavoro tutto il giorno."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">05</span>
-    <h2>Step 4 — Install Claude Code Desktop</h2>
+    <h2>Step 3 — Install Claude Code Desktop</h2>
     <p>Apri browser. Vai su <b>claude.com/download</b>. Scarica l'app desktop Claude per macOS. Installa, login con lo stesso account Anthropic.</p>
     <p>Mostra l'interfaccia: chat persistente, progetti, file knowledge. "Questa è l'app che ti tieni aperta in background. La uso per chat lunghe, ricerca con knowledge files, brainstorm. Quando devo scrivere codice o lanciare agent — torno in Antigravity."</p>
     <p>Differenza chiave: "Desktop = chat con cervello. Antigravity + CLI = mani che lavorano sul filesystem. Capisci che sono complementari quando li usi entrambi."</p>
@@ -546,8 +537,8 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">06</span>
-    <h2>Step 5 — way-stack: il mio kit pubblico in 3 comandi</h2>
+    <span class="num">05</span>
+    <h2>Step 4 — way-stack: il mio kit pubblico in 3 comandi</h2>
     <p>Apri terminale, in Antigravity o normale. Spiega way-stack in una riga: "il mio Claude Code stack pubblicato su GitHub. Plugin, skill, orchestrator, hook. Tre comandi e te lo monti uguale al mio."</p>
     <p>Comando 1: <code>/plugin marketplace add Lucioway/way-stack</code>. Comando 2: <code>/plugin install way-stack</code>. Comando 3: copi il CLAUDE.md root del repo dentro il tuo vault.</p>
     <p>"Da quel momento hai GSD, BMAD, gstack, superpowers, frontend-design, cli-anything, ralph-loop, tutti i miei skill pre-cablati. Niente da configurare a mano."</p>
@@ -556,8 +547,8 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">07</span>
-    <h2>Step 6 — Verifica che tutto comunichi</h2>
+    <span class="num">06</span>
+    <h2>Step 5 — Verifica che tutto comunichi</h2>
     <p>Test live di fine setup. In Antigravity, terminale integrato. <code>claude</code>. Chiedigli: "elenca i plugin installati". Deve rispondere con way-stack visibile.</p>
     <p>Secondo test: chiedi "che modello stai usando?". Deve rispondere con il nome del modello Anthropic corrente. Terzo test: chiedi "mostrami il CLAUDE.md attivo". Deve leggerlo e riassumertelo.</p>
     <p>"Se tutti e tre i test passano — sei pronto. Da L4 in poi entriamo dentro il vault e iniziamo a costruire."</p>
@@ -565,7 +556,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">08</span>
+    <span class="num">07</span>
     <h2>Come si lavora in Antigravity — la sessione di lavoro</h2>
     <p>Adesso che è tutto installato, mostra il flusso reale di una giornata. Apri Antigravity. <b>File → Open Folder</b> → apri la cartella del progetto (il vault, una cartella agent, quello su cui lavori). "Antigravity lavora sempre dentro una cartella. Quella cartella è il contesto."</p>
     <p>Apri il terminale integrato (<code>Ctrl+`</code>) e lancia <code>claude</code>. "Parte una sessione. Claude legge il CLAUDE.md di quella cartella, capisce dove sei, ed è pronto." Mostra i pannelli: editor file a sinistra, browser integrato, pannello task degli agent. "Tutto in una finestra: scrivi, vedi il browser, leggi i diff, lanci agent."</p>
@@ -575,7 +566,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">09</span>
+    <span class="num">08</span>
     <h2>Su Windows? — WSL2 + CLI, IDE a scelta</h2>
     <p>Premessa identica a L2: "Io uso Mac. Windows non lo padroneggio. Ma la rotta è chiara."</p>
     <p>Su Windows, la CLI gira dentro <b>WSL2</b> (Windows Subsystem for Linux). PowerShell amministratore → <code>wsl --install</code> → riavvio → apri Ubuntu → installi Node → <code>npm install -g @anthropic-ai/claude-code</code> → <code>claude</code> per autenticare. Stessi comandi del Mac, dentro la shell Linux di WSL.</p>
@@ -585,7 +576,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">10</span>
+    <span class="num">09</span>
     <h2>Esercizio — fai il setup ora, prima di L4</h2>
     <p>"Adesso pausa il video. Fai i 5 step. Quando torni, in L4 entriamo nel vault e iniziamo a metterci dentro la conoscenza. Senza la CLI installata, L4 non parte."</p>
     <p>Checklist a schermo: ☐ Homebrew + Node installati · ☐ Claude Code CLI globale + login fatto · ☐ Antigravity installato e CLI parte dal terminale integrato · ☐ Claude Code Desktop installato e loggato · ☐ way-stack installato via /plugin · ☐ 3 test di verifica passati.</p>
