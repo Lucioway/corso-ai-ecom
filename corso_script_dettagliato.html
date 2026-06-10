@@ -154,7 +154,6 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <li><a href="#l1">AI sta sostituendo il lavoro</a></li>
     <li><a href="#l2">Claude Code</a></li>
     <li><a href="#l3">Setup pratico</a></li>
-    <li><a href="#l4">Il vault</a></li>
     <li><a href="#l5">Memoria + Graphify</a></li>
     <li><a href="#l6">Creare un brain</a></li>
     <li><a href="#l7">Primo agent</a></li>
@@ -584,86 +583,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <div class="say"><b>Da dire:</b> "Setup fatto = sei un costruttore. Non sei più uno spettatore. Da L4 in poi si lavora sul tuo sistema."</div>
   </div>
 
-  <div class="lesson-end">Fine L3 · CTA → L4 il vault</div>
-</section>
-
-<!-- =================== LEZIONE 4 =================== -->
-<section class="lesson" id="l4">
-  <div class="lesson-tag">Lezione 04 · 15–18 min</div>
-  <h1>Il vault: come organizzare tutta la conoscenza per farla leggere a Claude</h1>
-
-  <div class="point">
-    <span class="num">01</span>
-    <h2>Il vault unico — una sola cartella</h2>
-    <p>Apri ~/Documents/Lucio_AI. Mostra la root. "Una sola cartella sul Mac. Mai disperdere. Tutto quello che ti serve sapere — progetti, brain, agent, sessioni, knowledge — vive qui dentro."</p>
-    <p>Spiega perché unica: Claude può fare query trasversali, Graphify può indicizzare tutto insieme, i backup sono uno solo, il search è uno solo. Cartelle sparse = caos cognitivo per te e per Claude.</p>
-    <div class="say"><b>Da dire:</b> "Una root. Tutto dentro. Punto. Se ti viene voglia di farne un'altra fuori, fermati e mettila qui dentro come sottocartella."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">02</span>
-    <h2>Struttura PARA — INBOX, PROJECTS, KNOWLEDGE, REFERENCE, SESSIONS</h2>
-    <p>Apri il livello 1 del vault. Mostra le 5 cartelle: 00_INBOX, 01_PROJECTS, 02_KNOWLEDGE, 03_REFERENCE, 04_SESSIONS. "Prefisso numerico per ordinarle in Finder. Niente filosofia — solo funzione."</p>
-    <p>Spiega cosa va in ognuna. INBOX — roba che arriva, non ancora classificata. PROJECTS — lavori attivi con scopo e deadline. KNOWLEDGE — pattern, decisioni, retro, learning consolidati. REFERENCE — materiale immutabile (PDF originali, libri, docs API). SESSIONS — log automatici delle sessioni Claude.</p>
-    <p>Regola d'oro: se è temporaneo va in INBOX, se ha uno scopo va in PROJECTS, se è una lezione appresa va in KNOWLEDGE, se è un originale immutabile va in REFERENCE.</p>
-    <div class="say"><b>Da dire:</b> "Cinque cartelle. Non sei. Non quattro. Cinque. Tutto il resto è dentro come sottocartella."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">03</span>
-    <h2>CLAUDE.md root — la voce madre del sistema</h2>
-    <p>Apri il CLAUDE.md alla root del vault. "Questo è il padre di tutti i CLAUDE.md. Vale per tutto il vault. Qui dentro c'è scritto chi sei, come parli, come si lavora qui dentro."</p>
-    <p>Esempio del mio: routing per intent, vault layer, regole su atomic commits, riferimenti ai progetti, framework SDD. Quando Claude apre una sessione qui dentro, prima cosa che legge è questo.</p>
-    <p>I CLAUDE.md di sottoprogetti aggiungono regole specifiche al progetto, non riscrivono il padre.</p>
-    <div class="say"><b>Da dire:</b> "Il CLAUDE.md root è il manuale dell'azienda. I CLAUDE.md di progetto sono il manuale del reparto."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">04</span>
-    <h2>File index.md — il catalogo</h2>
-    <p>Apri un index.md di un brain o di un progetto. "Index = la mappa di una cartella. Lista i file che ci sono, una riga ognuno, con una descrizione di 5 parole."</p>
-    <p>Perché serve: Claude apre l'index prima dei file. Se l'index è ben fatto, capisce subito dove andare. Senza index, deve leggere 50 file per orientarsi.</p>
-    <p>Aggiornamento: ogni volta che aggiungi un file importante in una cartella, aggiungi una riga all'index. Una skill /update-index può farlo per te.</p>
-    <div class="say"><b>Da dire:</b> "Index = sommario del libro. Senza sommario nessuno apre un libro di 500 pagine."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">05</span>
-    <h2>File log.md — la cronologia</h2>
-    <p>Apri log.md alla root del vault. Mostra le ultime 10 righe. "Log = diario cronologico. Una riga per evento importante: nuovo progetto, decisione, fix, milestone. Append only — non si modifica mai indietro."</p>
-    <p>Perché in italiano semplice: per te quando lo rileggi tra 3 mesi. Per Claude quando deve ricostruire la timeline del vault. Per onboarding di nuovi tool che devono capire la storia.</p>
-    <p>Auto-popola: il hook SessionEnd aggiunge automaticamente una riga ogni volta che chiudi una sessione Claude. Gratis.</p>
-    <div class="say"><b>Da dire:</b> "Log.md è il giornale di bordo. Non lo guardi mai, finché un giorno ti serve disperatamente. E allora ti salva il culo."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">06</span>
-    <h2>Naming convention dei file</h2>
-    <p>Mostra una cartella tua. Pattern: <code>YYYY-MM-DD_descrizione-trattini.md</code> o <code>NN_nome_funzione.md</code>. Niente spazi, niente caratteri strani, lowercase, trattini come separatori.</p>
-    <p>Perché: Claude e shell e grep e Graphify ringraziano. Spazi e caratteri unicode sono il diavolo nei filename. Una volta che ti abitui, niente più scocciature.</p>
-    <p>Mostra un controesempio orribile: "Note Importanti — Riunione del 5 marzo (FINAL v2).md". Ridici sopra. Poi mostra la versione pulita: "2026-03-05_riunione-fornitori-final.md".</p>
-    <div class="say"><b>Da dire:</b> "Pattern di naming costante. Sembra ossessione, è disciplina. In 6 mesi avrai 2000 file. Senza pattern, non li trovi più."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">07</span>
-    <h2>Cosa NON tenere nel vault</h2>
-    <p>Lista chiara di cosa NON va nel vault: video raw (troppo pesanti, vanno su Drive o disco esterno), credenziali in chiaro (usa keychain o .env fuori vault), file binari grandi senza motivo, copie di backup di altri sistemi.</p>
-    <p>Il vault è leggero e indicizzabile. Se ci metti 200 GB di MP4, Graphify si pianta, git si pianta, il backup si pianta. Tieni i sorgenti pesanti fuori e linka.</p>
-    <p>Eccezione: PDF e DOCX dei brain vanno bene, sono leggeri e sono fonte di knowledge.</p>
-    <div class="say"><b>Da dire:</b> "Il vault è il cervello. Non è l'hard disk. I file pesanti vanno altrove."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">08</span>
-    <h2>Esercizio — crei il tuo vault</h2>
-    <p>Esercizio guidato live: apri terminale. <code>mkdir -p ~/Documents/MioVault/{00_INBOX,01_PROJECTS,02_KNOWLEDGE,03_REFERENCE,04_SESSIONS}</code>. Touch dei file base: CLAUDE.md, index.md, log.md.</p>
-    <p>Apri VSCode su quella cartella. Lancia Claude lì dentro. Mostra che Claude legge il CLAUDE.md (anche se vuoto) e si accorge della struttura PARA.</p>
-    <p>Compito a casa: incollare nel proprio CLAUDE.md il template che gli dai (link in descrizione). Aggiungere il primo progetto in 01_PROJECTS/. Fare la prima sessione di test.</p>
-    <div class="say"><b>Da dire:</b> "Adesso pausa il video. Vai a creare il tuo vault. Quando torni, in L5 ci mettiamo la memoria e Graphify dentro."</div>
-  </div>
-
-  <div class="lesson-end">Fine L4 · CTA → L5 memoria + Graphify</div>
+  <div class="lesson-end">Fine L3 · CTA → L5 memoria + Graphify</div>
 </section>
 
 <!-- =================== LEZIONE 5 =================== -->
