@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Corso AI + Ecom con Claude — Scaletta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;
+  --ink:#0a0a0a;
+  --fog:#666;
+  --hair:#e5e5e5;
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --body:"Inter",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:400;line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+.shell{max-width:760px;margin:0 auto;padding:80px 40px 140px}
+@media (max-width:640px){.shell{padding:48px 24px 100px}}
+
+h1{font-family:var(--display);font-weight:500;font-size:clamp(32px,4.5vw,48px);letter-spacing:-.02em;margin:0 0 12px;line-height:1.1}
+.sub{color:var(--fog);font-size:16px;margin:0 0 64px}
+
+.lesson{margin:0 0 56px;padding-bottom:32px;border-bottom:1px solid var(--hair)}
+.lesson:last-of-type{border-bottom:none}
+.lesson h2{font-family:var(--display);font-weight:500;font-size:22px;letter-spacing:-.01em;margin:0 0 18px;line-height:1.3}
+
+.lesson ol{margin:0;padding-left:0;list-style:none;counter-reset:item}
+.lesson ol li{counter-increment:item;padding:6px 0 6px 32px;position:relative;color:var(--ink)}
+.lesson ol li::before{
+  content:counter(item) ".";
+  position:absolute;left:0;top:6px;
+  font-family:var(--display);font-weight:500;
+  color:var(--fog);width:24px
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<h1>Corso AI + Ecom con Claude</h1>
+<p class="sub">10 lezioni + Bonus · Scaletta completa</p>
+
+<div class="lesson">
+  <h2>Lezione 1 — L'AI sta sostituendo il lavoro: le 4 regole, la paura giusta, demo del mio sistema</h2>
+  <ol>
+    <li>Hook + autorità (3 brand, numeri reali, nomi censurati)</li>
+    <li>Le 4 regole d'oro</li>
+    <li>La paura giusta — finestra di 18 mesi, dirigi o vieni diretto</li>
+    <li>Demo Vault Viewer</li>
+    <li>Demo LiveKPI</li>
+    <li>Demo Meta Scraper</li>
+    <li>Demo Brain + Graphify</li>
+    <li>Demo Customer Care Dashboard</li>
+    <li>Agent senza frontend (DailyReport, ProductPusher, Fulfillment, Order Agent, AdBriefer, GrowthGuide)</li>
+    <li>La promessa di fine corso</li>
+    <li>Anteprima delle 4 parti + bonus</li>
+    <li>Chiusura + CTA Lezione 2</li>
+  </ol>
+</div>
+
+<div class="lesson">
+  <h2>Lezione 2 — I pezzi del sistema: Claude Code, skill, hook, MCP, sub-agent, vault</h2>
+  <ol>
+    <li>Differenza tra Claude (chat) e Claude Code (terminale)</li>
+    <li>Claude Code — il motore nel terminale</li>
+    <li>CLAUDE.md — il file madre</li>
+    <li>Skill — i comandi rapidi</li>
+    <li>Hook — gli script che partono da soli</li>
+    <li>MCP — i ponti verso sistemi esterni</li>
+    <li>Sub-agent — Claude in miniatura, contesto pulito</li>
+    <li>Il vault locale — dove vivono i progetti</li>
+    <li>Google Drive — solo per condividere</li>
+    <li>Memoria persistente — MEMORY.md</li>
+    <li>VSCode — l'editor</li>
+    <li>way-stack (il mio GitHub) — replicare tutte le mie skill e tool con 3 comandi</li>
+  </ol>
+</div>
+
+<div class="lesson">
+  <h2>Lezione 3 — Il vault: come organizzare tutta la conoscenza per farla leggere a Claude</h2>
+  <ol>
+    <li>Il vault unico — una sola cartella</li>
+    <li>Struttura PARA — INBOX, PROJECTS, KNOWLEDGE, REFERENCE, SESSIONS</li>
+    <li>CLAUDE.md root — la voce madre del sistema</li>
+    <li>File index.md — il catalogo</li>
+    <li>File log.md — la cronologia</li>
+    <li>Naming convention dei file</li>
+    <li>Cosa NON tenere nel vault</li>
+    <li>Esercizio — crei il tuo vault</li>
+  </ol>
+</div>
+
+<div class="lesson">
+  <h2>Lezione 4 — Far ricordare e collegare tutto a Claude: memoria persistente + grafo Graphify</h2>
+  <ol>
+    <li>Il problema — Claude dimentica ad ogni chat</li>
+    <li>Auto-memory MEMORY.md — i 4 tipi (user, feedback, project, reference)</li>
+    <li>Cos'è Graphify</li>
+    <li>Install Graphify in 3 comandi</li>
+    <li>Indicizzare il vault</li>
+    <li>Interrogare il grafo</li>
+    <li>Cosa indicizzare e cosa no</li>
+    <li>Refresh giornaliero</li>
+  </ol>
+</div>
+
+<div class="lesson">
+  <h2>Lezione 5 — Creare un brain: trasformare i tuoi documenti in un esperto interrogabile (esempio: Brain Marketing → Creative Strategist)</h2>
+  <ol>
+    <li>Cos'è un brain — un argomento + le sue fonti + le sue regole</li>
+    <li>Le fonti — documenti del tuo brand, libri, corsi, video</li>
+    <li>La pipeline — fonte → estrazione → strutturazione</li>
+    <li>Struttura cartella Brains/NomeArgomento/</li>
+    <li>Le lessons — come spezzare le fonti in unità interrogabili</li>
+    <li>La wiki interna del brain</li>
+    <li>Voice contract — come parla il brain, cosa dice, cosa NON dice</li>
+    <li>La skill /nome-brain</li>
+    <li>Q&A volanti vs decision-grade</li>
+    <li>Esempio pratico — costruire il Brain Marketing dai file forniti + i tuoi documenti</li>
+    <li>Strutturare hook, angle, copy, offer</li>
+    <li>Voice contract del Creative Strategist</li>
+    <li>Build della skill /creative-strategist</li>
+    <li>Test — input prodotto, output 3 angle + 3 hook + script video</li>
+  </ol>
+</div>
+
+<div class="lesson">
+  <h2>Lezione 6 — Creare il tuo primo agent: automatizzare un task ripetitivo del tuo business</h2>
+  <ol>
+    <li>Anatomia di un agent — input, ragionamento, output, memoria</li>
+    <li>AgentFactory — il meta-agent che ne costruisce altri</li>
+    <li>SDD applicato — Spec, Plan, Build, Verify</li>
+    <li>Sub-agent e isolamento del contesto</li>
+    <li>Hook — far partire l'agent da solo</li>
+    <li>MCP — collegare a Shopify, Drive, Telegram</li>
+    <li>Skill custom /comando</li>
+    <li>Esercizio — il tuo primo agent in produzione</li>
+  </ol>
+</div>
+
+<div class="lesson">
+  <h2>Lezione 7 — Far girare l'agent da solo: schedulazione, output Telegram/Drive, deploy come tool</h2>
+  <ol>
+    <li>Differenza tra agent e tool</li>
+    <li>launchd / cron — schedulare l'esecuzione</li>
+    <li>Report giornalieri e settimanali</li>
+    <li>Output su Telegram</li>
+    <li>Output su Drive</li>
+    <li>Output via email</li>
+    <li>Logging base</li>
+    <li>Error handling base</li>
+    <li>Esempio live — tool report fornitore da zero a deploy</li>
+  </ol>
+</div>
+
+<div class="lesson">
+  <h2>Lezione 8 — Dare un'interfaccia visiva al tuo agent: dashboard in browser + deploy online</h2>
+  <ol>
+    <li>Quando serve un frontend</li>
+    <li>Stack minimo — HTML, JS, CSS, niente framework</li>
+    <li>Design system base</li>
+    <li>Fetch dati dall'agent</li>
+    <li>Render in browser</li>
+    <li>Deploy locale</li>
+    <li>Deploy online su Render</li>
+    <li>Cookie auth e accesso protetto</li>
+  </ol>
+</div>
+
+<div class="lesson">
+  <h2>Lezione 9 — Controllare Shopify dal terminale: caricare prodotti, clonare PDP, modificare il tema</h2>
+  <ol>
+    <li>Connettere Shopify — app custom, token, permessi</li>
+    <li>Caricare prodotti da Word + foto</li>
+    <li>Clonare PDP competitor</li>
+    <li>Modificare il tema da terminale</li>
+    <li>Deploy automatico del tema</li>
+    <li>Polish PDP — modifiche chirurgiche</li>
+    <li>Cache busting trick</li>
+  </ol>
+</div>
+
+<div class="lesson">
+  <h2>Lezione 10 — Contabilità del tuo store + LiveKPI: dai dati al report alle 06:00, fino alla dashboard live nel browser</h2>
+  <ol>
+    <li>Cosa misurare — revenue, COGS, GW, net, BE ROAS</li>
+    <li>Hard rules — no IVA scorporo, no estimate, no overwrite</li>
+    <li>Pull dati ordini da Shopify</li>
+    <li>Integrazione COGS reali da XLSX fornitore</li>
+    <li>Calcolo profit e BE ROAS</li>
+    <li>DailyReport — il report Telegram alle 06:00</li>
+    <li>Alert Telegram su soglia net</li>
+    <li>LiveKPI — dashboard fatturato in tempo reale nel browser</li>
+    <li>Architettura — agent dati + frontend</li>
+    <li>Card revenue, ordini, AOV, BE ROAS in live polling</li>
+    <li>Stile dashboard e responsive</li>
+    <li>Deploy su Render + dominio custom + cookie auth</li>
+    <li>Esercizio — il tuo LiveKPI live sul tuo brand</li>
+  </ol>
+</div>
+
+<div class="lesson">
+  <h2>Bonus — Agent Marketing: come usarlo, GrowthGuide e analisi competitor con Meta Scraper</h2>
+  <ol>
+    <li>L'agent marketing pre-configurato</li>
+    <li>Quali documenti inserire — brand voice, prodotti, customer voice, top ads</li>
+    <li>Come si interroga l'agent (esempi reali)</li>
+    <li>GrowthGuide — la dashboard del loop di test ads</li>
+    <li>Meta Scraper — installare e lanciare lo scrape</li>
+    <li>Analisi pratica di un ad competitor (hook, angle, copy, offer)</li>
+    <li>Quando l'agent ha ragione e quando no</li>
+  </ol>
+</div>
+
+</div>
+</body>
+</html>
