@@ -146,14 +146,18 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--ink);font-fami
   </div>
 
   <nav class="tabs" id="tabs">
-    <button class="tab active" data-target="t-l1"><span class="n">S01</span></button>
+    <button class="tab active" data-target="t-scaletta"><span class="n">00</span>Scaletta</button>
+    <button class="tab"          data-target="t-script"><span class="n">01</span>Script</button>
+    <button class="tab"          data-target="t-l1"><span class="n">S01</span></button>
     <button class="tab"          data-target="t-l2"><span class="n">S02</span></button>
     <button class="tab"          data-target="t-l3"><span class="n">S03</span></button>
     <button class="tab"          data-target="t-links"><span class="n">↗</span>Link</button>
   </nav>
 
   <div class="frame" id="frame">
-    <iframe id="t-l1"       class="active" src="slide_L1_deck.html" loading="eager"></iframe>
+    <iframe id="t-scaletta" class="active" src="corso_scaletta_completa.html" loading="eager"></iframe>
+    <iframe id="t-script"   src="corso_script_dettagliato.html" loading="lazy"></iframe>
+    <iframe id="t-l1"       src="slide_L1_deck.html" loading="lazy"></iframe>
     <iframe id="t-l2"       src="slide_L2_deck.html" loading="lazy"></iframe>
     <iframe id="t-l3"       src="lezione3.html" loading="lazy"></iframe>
     <iframe id="t-links"    src="corso_links.html" loading="lazy"></iframe>
