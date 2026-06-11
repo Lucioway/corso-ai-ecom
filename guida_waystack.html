@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Il way-stack — la mappa completa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;
+  --ink:#0a0a0a;
+  --fog:#4a4a4a;
+  --silt:#8a8a8a;
+  --hair:#ececec;
+  --ghost:#f3f3f3;
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --body:"Inter",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#f6f6f6;color:var(--ink);font-family:var(--body);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+.sheet{width:210mm;margin:0 auto;background:#fff;padding:18mm 18mm;box-shadow:0 1px 8px rgba(0,0,0,.08)}
+@media screen{ body{padding:18px 0} }
+
+.cover{position:relative;min-height:255mm;display:flex;flex-direction:column;justify-content:center;break-after:page;page-break-after:always;margin-bottom:14mm}
+.cover .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--silt);margin-bottom:18px}
+.cover h1{font-family:var(--display);font-weight:600;font-size:52px;line-height:1.04;letter-spacing:-.025em;margin-bottom:20px}
+.cover .lead{font-family:var(--display);font-weight:400;font-size:20px;line-height:1.4;color:var(--fog);max-width:150mm}
+.cover .ghostnum{position:absolute;top:6mm;right:0;font-family:var(--display);font-weight:700;font-size:190px;color:var(--ghost);line-height:1;letter-spacing:-.05em}
+.cover .meta{margin-top:38px;border-top:1px solid var(--ink);padding-top:16px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--silt)}
+.cover .toc{margin-top:30px;font-family:var(--body);font-size:14px;color:var(--fog);line-height:1.85}
+.cover .toc b{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--ink);margin-right:12px}
+
+h2.sec{font-family:var(--display);font-weight:600;font-size:28px;letter-spacing:-.02em;margin:0 0 6px;padding-top:4px}
+.sec-tag{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--silt);margin-bottom:8px}
+.sec-wrap{border-top:2px solid var(--ink);padding-top:14px;margin-bottom:24px;page-break-inside:avoid;break-inside:avoid}
+p.body{font-size:14px;line-height:1.6;color:var(--fog);margin:8px 0;max-width:165mm}
+p.body b{color:var(--ink);font-weight:600}
+.note{background:var(--ghost);border-left:3px solid var(--ink);padding:11px 15px;font-size:13px;line-height:1.55;color:var(--fog);margin:11px 0;border-radius:0 3px 3px 0}
+.note b{color:var(--ink)}
+
+code{font-family:var(--mono);font-size:.92em;background:#f0f0f0;padding:1px 5px;border-radius:3px;color:var(--ink)}
+pre{font-family:var(--mono);font-size:12px;line-height:1.6;background:#0a0a0a;color:#e6e6e6;padding:15px 17px;border-radius:5px;margin:11px 0;overflow-x:auto;white-space:pre-wrap;word-break:break-word}
+pre .c{color:#7a7a7a}
+pre .o{color:#fff}
+
+.steplist{margin:6px 0}
+.step{display:flex;gap:15px;padding:9px 0;border-bottom:1px solid var(--hair);page-break-inside:avoid;break-inside:avoid}
+.step:last-child{border-bottom:none}
+.step .n{flex:0 0 auto;width:28px;height:28px;border:1.5px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:500}
+.step .t{font-size:14px;line-height:1.5}
+.step .t b{font-family:var(--display);font-weight:600;font-size:15.5px;display:block;margin-bottom:3px;color:var(--ink)}
+
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:13px 0}
+.three .c{border:1px solid var(--hair);background:#fafafa;border-radius:3px;padding:13px}
+.three .c .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--silt);margin-bottom:6px}
+.three .c .nm{font-family:var(--display);font-weight:600;font-size:18px;margin-bottom:6px;letter-spacing:-.01em}
+.three .c .ds{font-size:12px;line-height:1.45;color:var(--fog)}
+
+.tbl{width:100%;border-collapse:collapse;margin:11px 0;font-size:12.5px}
+.tbl th,.tbl td{text-align:left;padding:8px 11px;border-bottom:1px solid var(--hair);vertical-align:top}
+.tbl th{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--silt);border-bottom:1.5px solid var(--ink)}
+.tbl td b{font-family:var(--display);color:var(--ink)}
+
+.endline{border-top:2px solid var(--ink);padding-top:14px;margin-top:8px;page-break-inside:avoid;break-inside:avoid}
+.endline h2{font-family:var(--display);font-weight:600;font-size:23px;letter-spacing:-.015em;margin-bottom:6px}
+
+@media print{
+  @page{size:A4;margin:15mm 16mm}
+  html,body{background:#fff}
+  .sheet{width:auto;margin:0;padding:0;box-shadow:none}
+  .cover{min-height:auto;height:calc(297mm - 30mm);margin-bottom:0;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <!-- ===================== COVER ===================== -->
+  <section class="cover">
+    <div class="ghostnum">WS</div>
+    <div class="kicker">Corso AI + Ecommerce · Guida di riferimento</div>
+    <h1>Il way-stack.<br>La mappa completa.</h1>
+    <p class="lead">Tutto quello che hai installato con 3 comandi: cosa c'è dentro, a cosa serve ogni pezzo, quando usarlo. Una pagina per pezzo, in parole semplici.</p>
+    <div class="toc">
+      <div><b>01</b> Cos'è il way-stack</div>
+      <div><b>02</b> Install in 3 comandi</div>
+      <div><b>03</b> Vocabolario — plugin, skill, comando</div>
+      <div><b>04</b> La struttura — orchestrator, vault, hook</div>
+      <div><b>05</b> I 5 plugin</div>
+      <div><b>06</b> La agent factory — i 5 comandi</div>
+      <div><b>07</b> Le vault skills — il bibliotecario</div>
+      <div><b>08</b> Design — frontend-design + SHIN-EN</div>
+      <div><b>09</b> Cheat-sheet — tutti i comandi</div>
+    </div>
+    <div class="meta"><span>Guida way-stack</span><span>github.com/Lucioway/way-stack</span><span>Lettura ~10 min</span></div>
+  </section>
+
+  <!-- 01 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">01 · Cos'è</div>
+    <h2 class="sec">Cos'è il way-stack</h2>
+    <p class="body">Il way-stack è <b>il mio setup completo di Claude Code</b>, impacchettato e pubblicato gratis su GitHub. Dentro c'è tutto quello che uso ogni giorno per lavorare con gli agent: il cervello che decide quale strumento usare, la libreria dove vive la conoscenza, i plugin che danno capacità in più, e la catena di montaggio che costruisce agent nuovi.</p>
+    <p class="body">Senza stack, ogni volta dovresti spiegare a Claude come lavorare. Con lo stack, Claude <b>sa già il metodo</b>: fa le domande prima di scrivere codice, salva quello che impara, controlla il lavoro prima di consegnarlo.</p>
+    <div class="note"><b>In una frase:</b> due anni del mio lavoro di configurazione, tre comandi per averlo identico sul tuo computer.</div>
+  </div>
+
+  <!-- 02 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">02 · Install</div>
+    <h2 class="sec">Install in 3 comandi</h2>
+    <p class="body">Da dentro Claude Code (CLI aperto nel terminale):</p>
+    <pre><span class="c"># 1. Aggiungi il marketplace</span>
+<span class="o">› /plugin marketplace add Lucioway/way-stack</span>
+
+<span class="c"># 2. Installa il plugin</span>
+<span class="o">› /plugin install way-stack</span>
+
+<span class="c"># 3. Monta tutto (orchestrator, vault, skill, comandi)</span>
+<span class="o">› /stack-bootstrap</span></pre>
+    <div class="note">Verifica con <code>/stack-verify</code>: controlla che ogni pezzo sia al suo posto. Se qualcosa manca, te lo dice lui.</div>
+  </div>
+
+  <!-- 03 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">03 · Vocabolario</div>
+    <h2 class="sec">Le 3 parole da sapere</h2>
+    <div class="three">
+      <div class="c"><div class="lbl">parola · 01</div><div class="nm">Plugin</div><div class="ds">Un pacchetto di capacità in più che installi dentro Claude. Come un'app sul telefono: la metti, e Claude sa fare cose nuove.</div></div>
+      <div class="c"><div class="lbl">parola · 02</div><div class="nm">Skill</div><div class="ds">Una ricetta che Claude sa seguire passo passo. Tu chiedi, lui usa il metodo giusto senza che glielo spieghi ogni volta.</div></div>
+      <div class="c"><div class="lbl">parola · 03</div><div class="nm">Comando</div><div class="ds">Una scorciatoia che inizia con <code>/</code>. Scrivi <code>/agent-spec</code> e parte tutta la procedura. Un tasto, un lavoro.</div></div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">04 · La struttura</div>
+    <h2 class="sec">Le fondamenta — orchestrator, vault, hook</h2>
+    <div class="three">
+      <div class="c"><div class="lbl">cervello</div><div class="nm">Orchestrator</div><div class="ds">Il CLAUDE.md principale: il vigile che smista. Legge la tua richiesta e decide da solo quale skill o plugin usare. Tu chiedi, lui instrada.</div></div>
+      <div class="c"><div class="lbl">libreria</div><div class="nm">Vault PARA</div><div class="ds">La cartella dove vive tutta la conoscenza: progetti, decisioni, appunti, materiale. Organizzata sempre allo stesso modo, così Claude trova tutto.</div></div>
+      <div class="c"><div class="lbl">diario</div><div class="nm">Hook di sessione</div><div class="ds">Il diario automatico. A fine sessione scrive da solo cosa è stato fatto. Tu non scrivi niente: la cronologia si costruisce da sola.</div></div>
+    </div>
+    <div class="note"><b>Insieme:</b> il vigile decide, la libreria ricorda, il diario registra. Questa è la base su cui gira tutto il resto.</div>
+  </div>
+
+  <!-- 05 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">05 · I plugin</div>
+    <h2 class="sec">I 5 plugin</h2>
+    <table class="tbl">
+      <tr><th>Plugin</th><th>Cosa fa, in parole semplici</th><th>Quando lo usi</th></tr>
+      <tr><td><b>superpowers</b></td><td>Dà a Claude un metodo di lavoro: prima le domande, poi il piano, poi il build, poi il controllo. Senza, parte a scrivere codice a caso.</td><td>Sempre. Si attiva da solo.</td></tr>
+      <tr><td><b>frontend-design</b></td><td>Fa uscire pagine, slide e PDF belli — niente grafica "da AI", direzione precisa. Lavora con la grafica SHIN-EN.</td><td>Ogni volta che serve qualcosa di visivo.</td></tr>
+      <tr><td><b>code-review</b></td><td>Fa controllare il codice da più revisori AI insieme: uno cerca i bug, uno la sicurezza, uno le cose scritte male.</td><td>Prima di usare codice importante.</td></tr>
+      <tr><td><b>cli-anything</b></td><td>Comanda da terminale i programmi con interfaccia grafica (GIMP, Blender, LibreOffice…). L'agent li usa senza aprire finestre.</td><td>Quando un agent deve usare un programma "da click".</td></tr>
+      <tr><td><b>ralph-loop</b></td><td>Fa ripetere il lavoro a Claude da solo, un pezzo alla volta, finché la lista non è finita.</td><td>Lavori lunghi: "sistemami tutte e 100 le pagine".</td></tr>
+    </table>
+  </div>
+
+  <!-- 06 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">06 · Agent factory</div>
+    <h2 class="sec">La agent factory — la catena di montaggio</h2>
+    <p class="body">Cinque comandi in fila: entra un'idea, esce un agent finito. È il pezzo che usi per costruire qualsiasi agent nuovo.</p>
+    <div class="steplist">
+      <div class="step"><div class="n">1</div><div class="t"><b>/agent-spec</b>Scrive il contratto: cosa entra, cosa esce, con quali regole. In italiano semplice. Mai codice prima della spec.</div></div>
+      <div class="step"><div class="n">2</div><div class="t"><b>/agent-tasks</b>Trasforma la spec in una lista di lavori numerati. La to-do list dell'agent, scritta da lui.</div></div>
+      <div class="step"><div class="n">3</div><div class="t"><b>/agent-execute</b>Esegue i lavori uno alla volta. Ogni lavoro finito = un salvataggio: se qualcosa va storto, torni indietro di un passo.</div></div>
+      <div class="step"><div class="n">4</div><div class="t"><b>/agent-verify</b>Controlla che ogni punto della spec sia coperto davvero. Mai fidarsi del primo run.</div></div>
+      <div class="step"><div class="n">5</div><div class="t"><b>/agent-ship</b>Consegna: l'agent è pronto da usare, documentato e verificato.</div></div>
+    </div>
+    <div class="note"><b>Regola d'oro:</b> spec all'inizio, verify alla fine. È un cerchio che si chiude — tutto quello che sta in mezzo lo fa l'agent.</div>
+  </div>
+
+  <!-- 07 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">07 · Vault skills</div>
+    <h2 class="sec">Le vault skills — il bibliotecario</h2>
+    <p class="body">Tre skill che tengono in ordine la tua libreria. Tu porti il materiale, loro lo sistemano, lo trovano e lo tengono pulito.</p>
+    <div class="three">
+      <div class="c"><div class="lbl">mette dentro</div><div class="nm">vault-ingest</div><div class="ds">Prende un file grezzo (transcript, PDF, appunti), lo spezza in pagine ordinate, dà un titolo a ognuna e aggiorna l'indice.</div></div>
+      <div class="c"><div class="lbl">trova</div><div class="nm">vault-query</div><div class="ds">Cerca nel vault e ti risponde. "Cosa avevo deciso sul pricing?" — lui pesca la pagina giusta e sintetizza.</div></div>
+      <div class="c"><div class="lbl">pulisce</div><div class="nm">vault-lint</div><div class="ds">Controlla la salute della libreria: pagine orfane, contraddizioni, roba vecchia. Segnala il disordine prima che diventi un problema.</div></div>
+    </div>
+  </div>
+
+  <!-- 08 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">08 · Design</div>
+    <h2 class="sec">Frontend-design + SHIN-EN + 7 design skills</h2>
+    <p class="body">Il lato visivo dello stack. <b>Frontend-design</b> è il plugin che impagina; <b>SHIN-EN</b> è la mia grafica — bianco e nero, scritte grandi, zero decorazioni inutili. La vedi in queste pagine, nelle slide del corso, nei miei PDF. È nel way-stack: <b>la usi anche tu, gratis</b>.</p>
+    <p class="body">Insieme arrivano <b>7 design skills</b>: regole di design professionale (gerarchia visiva, spazi, colori, usabilità) che si attivano da sole ogni volta che Claude tocca qualcosa di grafico. Risultato: documenti e pagine che escono già belli, senza designer e senza Canva.</p>
+    <div class="note"><b>Il pattern:</b> Claude scrive la pagina HTML in SHIN-EN → Chrome headless (Chrome senza finestra) la stampa in PDF. Report, guide, preventivi: stesso giro per tutto.</div>
+  </div>
+
+  <!-- 09 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">09 · Cheat-sheet</div>
+    <h2 class="sec">Tutti i comandi in una tabella</h2>
+    <table class="tbl">
+      <tr><th>Comando</th><th>Cosa fa</th></tr>
+      <tr><td><b>/stack-bootstrap</b></td><td>Monta tutto lo stack: orchestrator, vault, skill, comandi.</td></tr>
+      <tr><td><b>/stack-verify</b></td><td>Controlla che ogni pezzo dello stack sia al suo posto.</td></tr>
+      <tr><td><b>/agent-spec</b></td><td>Scrive il contratto del nuovo agent (cosa entra, cosa esce, regole).</td></tr>
+      <tr><td><b>/agent-tasks</b></td><td>Trasforma la spec nella lista dei lavori.</td></tr>
+      <tr><td><b>/agent-execute</b></td><td>Esegue i lavori uno alla volta, con salvataggio a ogni passo.</td></tr>
+      <tr><td><b>/agent-verify</b></td><td>Controlla che la spec sia coperta al 100%.</td></tr>
+      <tr><td><b>/agent-ship</b></td><td>Consegna l'agent finito.</td></tr>
+      <tr><td><b>vault-ingest</b></td><td>Mette materiale nuovo nel vault, ordinato e indicizzato.</td></tr>
+      <tr><td><b>vault-query</b></td><td>Cerca e risponde dal vault.</td></tr>
+      <tr><td><b>vault-lint</b></td><td>Pulizia e salute del vault.</td></tr>
+    </table>
+  </div>
+
+  <!-- END -->
+  <div class="endline">
+    <h2>Da qui in poi</h2>
+    <p class="body">Hai la mappa. Nelle lezioni vedi ogni pezzo lavorare dal vivo: la agent factory che monta il primo agent, le vault skills che riempiono la libreria, SHIN-EN che impagina i PDF. <b>Non devi memorizzare niente</b>: torna a questa guida quando ti serve, e ricorda la regola che vale per tutto — qualsiasi dubbio, chiedi a Claude.</p>
+    <p class="body">Repo + README: <code>github.com/Lucioway/way-stack</code></p>
+  </div>
+
+</div>
+
+</body>
+</html>

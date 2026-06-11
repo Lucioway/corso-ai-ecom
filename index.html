@@ -148,15 +148,13 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--ink);font-fami
   <nav class="tabs" id="tabs">
     <button class="tab active" data-target="t-scaletta"><span class="n">00</span>Scaletta</button>
     <button class="tab"          data-target="t-script"><span class="n">01</span>Script</button>
-    <button class="tab"          data-target="t-slide"><span class="n">▦</span>Slide</button>
-    <button class="tab"          data-target="t-links"><span class="n">↗</span>Link</button>
+    <button class="tab"          data-target="t-risorse"><span class="n">↗</span>Risorse</button>
   </nav>
 
   <div class="frame" id="frame">
     <iframe id="t-scaletta" class="active" src="corso_scaletta_completa.html?v=6" loading="eager"></iframe>
     <iframe id="t-script"   src="corso_script_dettagliato.html?v=7" loading="lazy"></iframe>
-    <iframe id="t-slide"    src="slide_hub.html?v=8" loading="lazy"></iframe>
-    <iframe id="t-links"    src="corso_links.html?v=2" loading="lazy"></iframe>
+    <iframe id="t-risorse"  src="corso_risorse.html?v=1" loading="lazy"></iframe>
   </div>
 
 </div>
@@ -175,13 +173,13 @@ tabs.forEach(t => t.addEventListener('click', () => activate(t.dataset.target)))
 
 document.addEventListener('keydown', e => {
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-  const map = {'1':'t-scaletta','2':'t-script','3':'t-slide','4':'t-links'};
+  const map = {'1':'t-scaletta','2':'t-script','3':'t-risorse'};
   if (map[e.key]) activate(map[e.key]);
 });
 
 // deep-link via hash
 const h = location.hash.replace('#','');
-const valid = ['scaletta','script','slide','links'];
+const valid = ['scaletta','script','risorse'];
 if (valid.includes(h)) activate('t-'+h);
 </script>
 
