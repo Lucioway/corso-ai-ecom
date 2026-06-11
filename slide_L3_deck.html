@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>L3 · Deck — Setup pratico</title>
+<title>L3 · Deck — Installare Claude Code</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
@@ -301,361 +301,107 @@ h1.huge{font-size:200px;line-height:.96}
     <div class="ghost" style="font-size:560px;top:120px;right:160px">03</div>
     <div class="kanji" style="top:200px;right:140px">設定</div>
     <div class="content">
-      <div class="eyebrow">Da zero a operativo</div>
-      <h1 class="title huge" style="font-size:160px">Setup pratico.</h1>
-      <p class="sub" style="margin-top:24px;font-size:36px">Claude Code, Antigravity e Claude Desktop installati da zero. Alla fine sei operativo.</p>
+      <div class="eyebrow">Da zero a operativo · 3 minuti</div>
+      <h1 class="title huge" style="font-size:140px">Installare<br>Claude Code.</h1>
+      <p class="sub" style="margin-top:24px;font-size:36px">Guida rapida. Apri il Terminale (Mac) o PowerShell (Windows) e segui i passi in ordine.</p>
     </div>
     <div class="strip"><span>AI PER ECOMMERCE</span><span>Lezione 03 · Setup</span></div>
   </section>
 
-  <!-- SLIDE 2 — La mappa: 3 pezzi -->
+  <!-- SLIDE 2 — Documentazione ufficiale -->
   <section class="slide" data-i="2">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">01 · La mappa</div>
-    <div class="kanji" style="top:200px;right:140px">三つ</div>
+    <div class="tag">01 · Documentazione ufficiale</div>
+    <div class="kanji" style="top:200px;right:140px">公式</div>
     <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Tre porte d'ingresso, stesso Claude dentro.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Cosa installiamo. E perché.</h1>
-      <div class="g6 reveal">
-        <div><b class="k">Cos'è</b>Tre programmi distinti che parlano allo stesso Claude: il CLI, un IDE, un'app chat.</div>
-        <div><b class="k">A cosa serve</b>Ogni pezzo copre un uso: eseguire, sviluppare ogni giorno, pensare e pianificare.</div>
-        <div><b class="k">Come si usa</b>Li installi tutti e tre oggi, in ordine. Da domani usi quello giusto per il momento giusto.</div>
-      </div>
-      <div class="triplet reveal" style="margin-top:24px">
-        <div class="tcard" style="border-color:var(--ink);border-width:2px">
-          <div class="tl-label">Pezzo · 01 — il motore</div>
-          <div class="tname">Claude Code CLI</div>
-          <div class="tdesc">Vive nel terminale. Legge file, esegue comandi, lancia agent. Tutto il sistema gira qui dentro.</div>
-        </div>
-        <div class="tcard">
-          <div class="tl-label">Pezzo · 02 — daily driver</div>
-          <div class="tname">Antigravity</div>
-          <div class="tdesc">L'IDE dove lavori ogni giorno: editor, browser, terminale integrato. Il CLI gira nel suo terminale.</div>
-        </div>
-        <div class="tcard">
-          <div class="tl-label">Pezzo · 03 — la chat</div>
-          <div class="tname">Claude Desktop</div>
-          <div class="tdesc">App chat persistente. Per pensare, pianificare, fare domande lunghe. Niente codice obbligatorio.</div>
+      <div class="eyebrow">Se qualcosa non torna, la verità è sempre qui.</div>
+      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:24px">Leggi prima la guida Anthropic.</h1>
+      <div class="brw reveal" style="max-width:1300px">
+        <div class="top"><i></i><i></i><i></i><div class="url">docs.claude.com/en/docs/claude-code/setup</div></div>
+        <div class="bd" style="min-height:120px">
+          <div class="hbar"></div>
+          <div class="lbar" style="width:80%"></div>
+          <div class="lbar" style="width:65%"></div>
         </div>
       </div>
-      <p class="sub" style="margin-top:24px;font-size:24px"><b style="color:var(--ink)">CLI = motore</b> · <b style="color:var(--ink)">Antigravity = officina</b> · <b style="color:var(--ink)">Desktop = scrivania</b>. Stesso Claude, tre vestiti.</p>
+      <div class="split reveal" style="margin-top:32px;gap:48px">
+        <div class="col" style="min-height:auto;padding:36px 40px">
+          <div class="label">macOS / Linux</div>
+          <div class="desc" style="margin-bottom:0">Terminale + il comando curl della prossima slide.</div>
+        </div>
+        <div class="col" style="min-height:auto;padding:36px 40px">
+          <div class="label">Windows</div>
+          <div class="desc" style="margin-bottom:0">Segui la sezione Windows nella doc (PowerShell / WSL2).</div>
+        </div>
+      </div>
     </div>
-    <div class="strip"><span>Blocco 01</span><span>La mappa · 3 pezzi</span></div>
+    <div class="strip"><span>Blocco 01</span><span>Documentazione ufficiale</span></div>
   </section>
 
-  <!-- SLIDE 3 — Homebrew + Node -->
+  <!-- SLIDE 3 — Installazione Mac -->
   <section class="slide" data-i="3">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">02 · Fondamenta</div>
-    <div class="ghost" style="font-size:420px;top:160px;right:200px">⌘</div>
-    <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Prima del motore servono le fondamenta.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Homebrew + Node.</h1>
-      <div class="g6 reveal">
-        <div><b class="k">Cos'è</b>Homebrew = l'app store del terminale Mac. Node.js = il runtime su cui gira Claude Code.</div>
-        <div><b class="k">A cosa serve</b>Con Homebrew installi qualunque tool in un comando. Node serve a far girare il CLI.</div>
-        <div><b class="k">Come si usa</b>Due comandi, copia e incolla. Poi verifichi con <code>node -v</code>. Fine.</div>
-      </div>
-      <div class="term reveal" style="max-width:1500px;margin-top:18px">
-        <div class="bar"><i></i><i></i><i></i><span style="margin-left:14px;font-size:13px;color:#7a7a7a;letter-spacing:.18em">— zsh — Terminale —</span></div>
-        <div class="bd" style="font-size:17px">
-          <div><span class="ps"># 1. Homebrew (se non ce l'hai già)</span></div>
-          <div><span class="ps">$</span> /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</div>
-          <div><span class="ps"># 2. Node.js</span></div>
-          <div><span class="ps">$</span> brew install node</div>
-          <div><span class="ps"># 3. Verifica — devono uscire due numeri di versione</span></div>
-          <div><span class="ps">$</span> node -v <span class="ps">&nbsp;&nbsp;# v22.x</span></div>
-          <div><span class="ps">$</span> npm -v <span class="ps">&nbsp;&nbsp;&nbsp;# 10.x</span> <span class="ck">▌</span></div>
-        </div>
-      </div>
-      <p class="sub" style="margin-top:20px;font-size:22px">Se i due numeri escono, le fondamenta sono pronte. Se qualcosa si rompe: incolla l'errore a Claude in chat — te lo risolve lui.</p>
-    </div>
-    <div class="strip"><span>Blocco 02</span><span>Homebrew + Node</span><span>~5 min</span></div>
-  </section>
-
-  <!-- SLIDE 4 — Claude Code install + login -->
-  <section class="slide" data-i="4">
-    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">03 · Il motore</div>
+    <div class="tag">02 · Installazione · Mac</div>
     <div class="ghost" style="font-size:420px;top:160px;right:200px">$</div>
     <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Un comando per installare. Un login. Operativo.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Claude Code CLI.</h1>
-      <div class="g6 reveal">
-        <div><b class="k">Cos'è</b>Il CLI ufficiale di Anthropic. Il motore di tutto il corso.</div>
-        <div><b class="k">A cosa serve</b>Da qui lanci agent, skill, automazioni. È il pezzo che lavora.</div>
-        <div><b class="k">Come si usa</b>Installi con npm, scrivi <code>claude</code>, fai login dal browser, parli a parole.</div>
+      <div class="eyebrow">Copia, incolla, Invio.</div>
+      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:24px">I comandi.</h1>
+      <div class="term reveal" style="max-width:1560px">
+        <div class="bar"><i></i><i></i><i></i></div>
+        <div class="bd"><span class="ps"># 1. Installa — scarica e installa Claude Code da solo</span>
+$ <b>curl -fsSL https://claude.ai/install.sh | bash</b>
+
+<span class="ps"># 2. Solo SE esce la nota "~/.local/bin is not in your PATH" — poi riavvia il Terminale</span>
+$ <b>echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc</b>
+
+<span class="ps"># 3. Verifica — se parte, sei dentro</span>
+$ <b>claude</b><span class="ck">▌</span></div>
       </div>
-      <div class="code reveal" style="margin-top:18px;font-size:20px">
-        <span class="c"># Installa</span><br>
-        <span class="c">$</span> <span class="o">npm install -g @anthropic-ai/claude-code</span><br>
-        <span class="c"># Verifica</span><br>
-        <span class="c">$</span> <span class="o">claude --version</span><br>
-        <span class="c"># Avvia — apre il browser per il login Anthropic</span><br>
-        <span class="c">$</span> <span class="o">claude</span><br>
-        <span class="c"># Primo test</span><br>
-        <span class="c">›</span> <span class="o">ciao, chi sei?</span>
-      </div>
-      <p class="sub" style="margin-top:20px;font-size:22px">Se risponde, sei dentro. Se il login non parte da solo: <b style="color:var(--ink)"><code>claude /login</code></b> e segui il link.</p>
+      <p class="sub" style="margin-top:28px;font-size:26px">Al primo avvio fai il <b style="color:var(--ink)">login</b> con il tuo account. Fine.</p>
     </div>
-    <div class="strip"><span>Blocco 03</span><span>Install + login</span><span>~3 min</span></div>
+    <div class="strip"><span>Blocco 02</span><span>Installazione Mac</span></div>
   </section>
 
-  <!-- SLIDE 5 — Antigravity -->
+  <!-- SLIDE 4 — way-stack -->
+  <section class="slide" data-i="4">
+    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
+    <div class="tag">03 · Il mio stack</div>
+    <div class="kanji" style="top:200px;right:140px">道具</div>
+    <div class="content" style="bottom:auto;top:220px">
+      <div class="eyebrow">Plugin, skill e orchestratore già pronti.</div>
+      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:24px">Installa il Way Stack.</h1>
+      <p class="sub" style="font-size:28px;max-width:1300px;margin-bottom:32px">Una volta dentro Claude Code, aggiungi il mio stack pubblico. Apri il link e segui le istruzioni del README.</p>
+      <div class="brw reveal" style="max-width:1300px">
+        <div class="top"><i></i><i></i><i></i><div class="url">github.com/Lucioway/way-stack</div></div>
+        <div class="bd" style="min-height:140px">
+          <div class="hbar" style="width:40%"></div>
+          <div class="lbar" style="width:75%"></div>
+          <div class="lbar" style="width:60%"></div>
+          <div class="btn">README → ISTRUZIONI</div>
+        </div>
+      </div>
+    </div>
+    <div class="strip"><span>Blocco 03</span><span>way-stack</span></div>
+  </section>
+
+  <!-- SLIDE 5 — Chiusura → L4 -->
   <section class="slide" data-i="5">
-    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">04 · Daily driver</div>
-    <div class="kanji" style="top:200px;right:140px">工房</div>
-    <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">L'officina dove vivi ogni giorno.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Antigravity.</h1>
-      <div class="g6 reveal">
-        <div><b class="k">Cos'è</b>L'IDE di Google: editor, browser e terminale in una finestra sola.</div>
-        <div><b class="k">A cosa serve</b>È dove lavori ogni giorno. Il CLI di Claude gira nel suo terminale integrato.</div>
-        <div><b class="k">Come si usa</b>Scarichi da antigravity.google, trascini in Applicazioni, apri il terminale con <code>Ctrl + `</code>, digiti <code>claude</code>.</div>
-      </div>
-      <div class="reveal" style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:18px;max-width:1600px;align-items:start">
-        <div class="brw">
-          <div class="top"><i></i><i></i><i></i>
-            <div class="url">https://antigravity.google</div>
-          </div>
-          <div class="bd">
-            <div class="hbar"></div>
-            <div class="lbar" style="width:78%"></div>
-            <div class="lbar" style="width:62%"></div>
-            <div class="lbar" style="width:70%"></div>
-            <div class="btn">Download for Mac</div>
-            <div class="cur" style="bottom:42px;left:160px">
-              <svg viewBox="0 0 24 24"><path d="M2 2 L2 18 L7 14 L10 22 L13 21 L10 13 L17 13 Z" fill="#0a0a0a" stroke="#fff" stroke-width="1"/></svg>
-            </div>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <div class="tcard" style="padding:16px 22px">
-            <div class="tl-label">Passo · 01</div>
-            <div class="tname" style="font-size:30px">Scarica + trascina</div>
-            <div class="tdesc">antigravity.google → .dmg → trascini in /Applicazioni. Come ogni app Mac.</div>
-          </div>
-          <div class="tcard" style="padding:16px 22px">
-            <div class="tl-label">Passo · 02</div>
-            <div class="tname" style="font-size:30px">Apri il terminale integrato</div>
-            <div class="tdesc"><b>Ctrl + `</b> apre il terminale dentro l'IDE. Stessa shell del Mac.</div>
-          </div>
-          <div class="tcard" style="padding:16px 22px;border-color:#0a0a0a;border-width:2px">
-            <div class="tl-label">Passo · 03</div>
-            <div class="tname" style="font-size:30px">Digita <code style="font-family:var(--mono)">claude</code></div>
-            <div class="tdesc">Il CLI parte lì dentro. Antigravity = la macchina. CLI = il motore.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="strip"><span>Blocco 04</span><span>Antigravity · IDE</span><span>~3 min</span></div>
-  </section>
-
-  <!-- SLIDE 5b — Antigravity: come si lavora / sessioni -->
-  <section class="slide" data-i="5b">
-    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">04 · La sessione</div>
-    <div class="kanji" style="top:200px;right:140px">作業</div>
-    <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Apri cartella, lanci claude, parli a parole.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Come si lavora.</h1>
-      <div class="g6 reveal">
-        <div><b class="k">Cos'è</b>Una sessione = una cartella aperta in Antigravity + la CLI di Claude che gira nel suo terminale.</div>
-        <div><b class="k">A cosa serve</b>Quella cartella è il contesto. Claude legge il CLAUDE.md, capisce dove sei, lavora lì dentro.</div>
-        <div><b class="k">Come si usa</b>File → Open Folder → <code>Ctrl + `</code> → <code>claude</code>. Cambi progetto = apri un'altra cartella.</div>
-      </div>
-      <div class="triplet reveal" style="margin-top:24px">
-        <div class="tcard">
-          <div class="tl-label">Passo · 01 — apri</div>
-          <div class="tname" style="font-size:36px">Apri la cartella</div>
-          <div class="tdesc">File → Open Folder → il vault o il progetto. Antigravity lavora sempre dentro una cartella.</div>
-        </div>
-        <div class="tcard">
-          <div class="tl-label">Passo · 02 — avvia</div>
-          <div class="tname" style="font-size:36px">Lancia <code style="font-family:var(--mono)">claude</code></div>
-          <div class="tdesc">Terminale integrato (Ctrl + `). Parte la sessione: Claude legge il CLAUDE.md e capisce il contesto.</div>
-        </div>
-        <div class="tcard" style="border-color:var(--ink);border-width:2px">
-          <div class="tl-label">Passo · 03 — il ciclo</div>
-          <div class="tname" style="font-size:36px">Chiedi · leggi il diff · approvi</div>
-          <div class="tdesc">Lui propone le modifiche, tu leggi il diff, approvi o correggi. Mai accettare alla cieca.</div>
-        </div>
-      </div>
-      <p class="sub" style="margin-top:24px;font-size:22px">Contesto pieno o cambi task? <b style="color:var(--ink)"><code>/clear</code></b> azzera e riparti pulito. &nbsp;·&nbsp; Chiudi il terminale = chiudi la sessione. Riapri + <code>claude</code> = riprendi.</p>
-    </div>
-    <div class="strip"><span>Blocco 04b</span><span>La sessione di lavoro</span></div>
-  </section>
-
-  <!-- SLIDE 6 — Claude Desktop -->
-  <section class="slide" data-i="6">
-    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">05 · La chat</div>
-    <div class="kanji" style="top:200px;right:140px">思考</div>
-    <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Desktop per pensare. Antigravity + CLI per fare.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Claude Desktop.</h1>
-      <div class="g6 reveal">
-        <div><b class="k">Cos'è</b>L'app chat ufficiale di Claude per Mac. Stesso account del CLI.</div>
-        <div><b class="k">A cosa serve</b>Pensare, pianificare, scrivere, fare domande lunghe. Progetti con knowledge files e memoria.</div>
-        <div><b class="k">Come si usa</b>Scarichi da claude.com/download, login con lo stesso account. Apri e parli.</div>
-      </div>
-      <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:18px;max-width:1600px;align-items:start">
-        <div class="brw">
-          <div class="top"><i></i><i></i><i></i>
-            <div class="url">https://claude.com/download</div>
-          </div>
-          <div class="bd">
-            <div class="hbar" style="width:48%"></div>
-            <div class="lbar" style="width:70%"></div>
-            <div class="lbar" style="width:58%"></div>
-            <div class="btn">Download for macOS</div>
-            <div class="cur" style="bottom:42px;left:170px">
-              <svg viewBox="0 0 24 24"><path d="M2 2 L2 18 L7 14 L10 22 L13 21 L10 13 L17 13 Z" fill="#0a0a0a" stroke="#fff" stroke-width="1"/></svg>
-            </div>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <div class="tcard" style="padding:16px 22px">
-            <div class="tl-label">Quando usarlo</div>
-            <div class="tname" style="font-size:30px">Pensare e pianificare</div>
-            <div class="tdesc">Strategia, copy, analisi, brainstorming. Conversazioni lunghe con contesto persistente.</div>
-          </div>
-          <div class="tcard" style="padding:16px 22px">
-            <div class="tl-label">Quando NON usarlo</div>
-            <div class="tname" style="font-size:30px">Eseguire sul Mac</div>
-            <div class="tdesc">File, comandi, automazioni → quello è lavoro per il CLI dentro Antigravity.</div>
-          </div>
-        </div>
-      </div>
-      <p class="sub" style="margin-top:18px;font-size:22px">Regola semplice: <b style="color:var(--ink)">Desktop per pensare, Antigravity + CLI per fare.</b></p>
-    </div>
-    <div class="strip"><span>Blocco 05</span><span>Claude Desktop</span><span>~2 min</span></div>
-  </section>
-
-  <!-- SLIDE 7 — way-stack -->
-  <section class="slide" data-i="7">
-    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">06 · way-stack</div>
-    <div class="ghost" style="font-size:380px;top:140px;right:180px;opacity:.5">↓</div>
-    <div class="kanji" style="top:200px;right:140px">複製</div>
-    <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">6 mesi del mio lavoro. 3 comandi.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">way-stack.</h1>
-      <div class="g6 reveal">
-        <div><b class="k">Cos'è</b>Il mio stack pubblico su GitHub: skill, agent, hook, orchestrator, vault.</div>
-        <div><b class="k">A cosa serve</b>Partire con il mio sistema già montato invece che da un terminale vuoto.</div>
-        <div><b class="k">Come si usa</b>Dentro Claude Code: aggiungi il marketplace, installi il plugin, copi il CLAUDE.md.</div>
-      </div>
-      <div class="code reveal" style="margin-top:24px;font-size:20px">
-        <span class="c"># Dentro Claude Code (CLI aperto)</span><br>
-        <span class="c">›</span> <span class="o">/plugin marketplace add Lucioway/way-stack</span><br>
-        <span class="c">›</span> <span class="o">/plugin install way-stack</span><br>
-        <span class="c"># Poi copia il CLAUDE.md nella root del tuo progetto</span><br>
-        <span class="c">›</span> <span class="o">copia il CLAUDE.md di way-stack nella root di questo progetto</span>
-      </div>
-      <p class="sub" style="margin-top:28px;font-size:24px">Skill, agent, hook, configurazioni — tutto il mio sistema sul tuo Mac. Da lì in poi solo personalizzazione.</p>
-    </div>
-    <div class="strip"><span>Blocco 06</span><span>Stack pubblico</span><span>~2 min</span></div>
-  </section>
-
-  <!-- SLIDE 8 — Verifica: 3 test -->
-  <section class="slide" data-i="8">
-    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">07 · Verifica</div>
-    <div class="ghost" style="font-size:420px;top:140px;right:180px;opacity:.5">✓</div>
-    <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Tre domande. Se rispondono, è tutto in piedi.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">I 3 test.</h1>
-      <div class="triplet reveal" style="margin-top:32px">
-        <div class="tcard">
-          <div class="tl-label">Test · 01 — plugin</div>
-          <div class="tname" style="font-size:34px">"Elenca i plugin installati"</div>
-          <div class="tdesc">Deve comparire way-stack nella lista. Se manca, ripeti il blocco 06.</div>
-        </div>
-        <div class="tcard">
-          <div class="tl-label">Test · 02 — modello</div>
-          <div class="tname" style="font-size:34px">"Che modello sei?"</div>
-          <div class="tdesc">Deve rispondere con il modello Claude attivo. Conferma che login e API funzionano.</div>
-        </div>
-        <div class="tcard">
-          <div class="tl-label">Test · 03 — file</div>
-          <div class="tname" style="font-size:34px">"Mostrami il CLAUDE.md"</div>
-          <div class="tdesc">Deve leggere e mostrare il file. Conferma che vede i tuoi file e le tue regole.</div>
-        </div>
-      </div>
-      <p class="sub" style="margin-top:40px;font-size:26px">Tre sì = setup completo. Un no = incolla l'errore a Claude e fatti guidare.</p>
-    </div>
-    <div class="strip"><span>Blocco 07</span><span>Verifica · 3 test</span></div>
-  </section>
-
-  <!-- SLIDE 9 — Windows WSL2 -->
-  <section class="slide" data-i="9">
-    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">08 · Windows</div>
-    <div class="ghost" style="font-size:380px;top:140px;right:200px;opacity:.45">⊞</div>
-    <div class="kanji" style="top:200px;right:140px">窓</div>
-    <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Funziona su Windows, ma passa da Linux.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Windows · WSL2.</h1>
-      <div class="g6 reveal">
-        <div><b class="k">Cos'è</b>WSL2 = un Linux che gira dentro Windows. Claude Code richiede WSL2 (non Windows nativo).</div>
-        <div><b class="k">A cosa serve</b>Far girare il terminale Unix che Claude Code si aspetta. Stessa esperienza del Mac.</div>
-        <div><b class="k">Come si usa</b>Un comando PowerShell, riavvio, poi gli stessi passi del Mac dentro Ubuntu.</div>
-      </div>
-      <div class="code reveal" style="margin-top:24px;font-size:20px">
-        <span class="c"># In PowerShell come amministratore</span><br>
-        <span class="c">&gt;</span> <span class="o">wsl --install</span><br>
-        <span class="c"># Riavvii, apri Ubuntu, poi:</span><br>
-        <span class="c">$</span> <span class="o">curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -</span><br>
-        <span class="c">$</span> <span class="o">sudo apt install nodejs</span><br>
-        <span class="c">$</span> <span class="o">npm install -g @anthropic-ai/claude-code</span><br>
-        <span class="c">$</span> <span class="o">claude</span>
-      </div>
-      <p class="sub reveal" style="margin-top:28px;font-size:22px">Io uso Mac e Windows non lo padroneggio. Per la guida ufficiale aggiornata → <b style="color:var(--ink)">docs.claude.com/en/docs/claude-code</b></p>
-    </div>
-    <div class="strip"><span>Blocco 08</span><span>Windows via WSL2</span></div>
-  </section>
-
-  <!-- SLIDE 10 — Esercizio: checklist -->
-  <section class="slide" data-i="10">
-    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">09 · Esercizio</div>
-    <div class="kanji" style="top:200px;right:140px">宿題</div>
-    <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Non passare alla L4 senza 6 spunte.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">La checklist.</h1>
-      <div class="check reveal">
-        <div class="ci"><div class="bx"></div><div class="ct">Homebrew + Node installati<small><code>node -v</code> e <code>npm -v</code> rispondono con un numero</small></div></div>
-        <div class="ci"><div class="bx"></div><div class="ct">Claude Code CLI + login<small><code>claude</code> parte e risponde a "ciao, chi sei?"</small></div></div>
-        <div class="ci"><div class="bx"></div><div class="ct">Antigravity installato<small>terminale integrato aperto con Ctrl + ` e <code>claude</code> dentro</small></div></div>
-        <div class="ci"><div class="bx"></div><div class="ct">Claude Desktop installato<small>stesso account, chat funzionante</small></div></div>
-        <div class="ci"><div class="bx"></div><div class="ct">way-stack installato<small>marketplace + plugin + CLAUDE.md copiato in root</small></div></div>
-        <div class="ci"><div class="bx"></div><div class="ct">I 3 test passati<small>plugin · modello · CLAUDE.md — tutti e tre rispondono</small></div></div>
-      </div>
-      <p class="sub" style="margin-top:36px;font-size:24px">Sei spunte = sistema pronto. Dalla prossima lezione non installiamo più niente: <b style="color:var(--ink)">costruiamo</b>.</p>
-    </div>
-    <div class="strip"><span>Blocco 09</span><span>Esercizio · 6 spunte</span></div>
-  </section>
-
-  <!-- SLIDE 11 — Chiusura → L4 -->
-  <section class="slide" data-i="11">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
     <div class="tag">Chiusura</div>
     <div class="ghost" style="font-size:420px;top:120px;right:140px;opacity:.5">→</div>
     <div class="kanji" style="top:220px;right:120px">次へ</div>
     <div class="content" style="bottom:auto;top:240px;right:340px">
-      <div class="eyebrow">Prossima lezione · Memoria + Graphify</div>
-      <h1 class="title" style="font-size:128px;line-height:.98;margin-bottom:32px">Setup completo.<br>Ora la memoria.</h1>
-      <p class="sub" style="font-size:28px;max-width:1200px">Con il setup completo, nella prossima lezione diamo a Claude una memoria che non dimentica nulla — e il grafo Graphify che collega tutto.</p>
+      <div class="eyebrow">Prossima lezione · La memoria del sistema</div>
+      <h1 class="title" style="font-size:128px;line-height:.98;margin-bottom:32px">Setup completo.<br>Ora costruiamo.</h1>
+      <p class="sub" style="font-size:28px;max-width:1200px">Claude Code installato e way-stack a bordo. Nella prossima lezione diamo a Claude una memoria che non dimentica nulla.</p>
     </div>
-    <div class="strip"><span>Fine L3</span><span>CTA · 30 sec</span><span>→ L4 Memoria + Graphify</span></div>
+    <div class="strip"><span>Fine L3</span><span>CTA · 30 sec</span><span>→ L4 La memoria del sistema</span></div>
   </section>
 
 </div>
 
 <div class="progress" id="prog"></div>
-<div class="hud" id="hud">01 / 11 · ← →</div>
+<div class="hud" id="hud">01 / 05 · ← →</div>
 <button class="dl" onclick="window.print()">↓ Download PDF</button>
 
 <script>
