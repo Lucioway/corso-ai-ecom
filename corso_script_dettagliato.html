@@ -158,7 +158,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <li><a href="#l5">Brain + cos'è un agent</a></li>
     <li><a href="#l6">Primo agent — build live</a></li>
     <li><a href="#l7">Shopify — setup</a></li>
-    <li><a href="#l8">Shopify — utilizzo</a></li>
+    <li><a href="#l8">Shopify — replica 1:1</a></li>
     <li><a href="#l9">Agent ecommerce</a></li>
     <li><a href="#l10">Dashboard + contabilità</a></li>
     <li class="bonus"><a href="#bonus">Agent Marketing</a></li>
@@ -896,7 +896,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <span class="num">01</span>
     <h2>Perché collegare Shopify a Claude</h2>
     <p>Frame della lezione: tutto quello che fai nell'admin Shopify a mano — caricare prodotti, modificare il tema, leggere gli ordini — Claude lo può fare via API. Più veloce, ripetibile, senza errori di click.</p>
-    <p>Anticipa cosa vedranno nella prossima lezione: prodotto caricato da un Word in 3 minuti, PDP competitor clonata, tema modificato da terminale. "Oggi prepariamo le chiavi. Domani apriamo le porte."</p>
+    <p>Anticipa cosa vedranno nella prossima lezione: prodotto caricato da un Word in 3 minuti e la replica 1:1 della product page di uno store di riferimento, sezione per sezione. "Oggi prepariamo le chiavi. Domani apriamo le porte."</p>
     <div class="say"><b>Da dire:</b> "L'admin Shopify è fatto per le mani. L'API è fatta per gli agent. Da oggi lavorate con la seconda."</div>
   </div>
 
@@ -946,58 +946,73 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
 
 <!-- =================== LEZIONE 8 =================== -->
 <section class="lesson" id="l8">
-  <div class="lesson-tag">Lezione 08 · 18–22 min</div>
-  <h1>Shopify dal terminale — utilizzo: caricare prodotti, clonare PDP, modificare il tema</h1>
+  <div class="lesson-tag">Lezione 08 · 35–40 min</div>
+  <h1>Shopify dal terminale — replica 1:1: ricostruiamo la product page di uno store di riferimento, sezione per sezione</h1>
 
   <div class="point">
     <span class="num">01</span>
-    <h2>Caricare prodotti da Word + foto</h2>
-    <p>Mostra ProductPusher. Input: cartella con file Word (descrizione + titolo + prezzo strutturato) + cartella immagini. Output: prodotto draft su Shopify, link admin stampato in chat.</p>
-    <p>Demo dal vivo: carichi un Word di prova, lanci /product-pusher, in 3 minuti il prodotto è online (in draft). Aprilo nell'admin per mostrare il risultato.</p>
-    <p>Sotto il cofano: Claude legge il Word, mappa i campi (titolo, body, prezzo, variants), API Shopify create product, upload immagini. Tutto in chiamate REST.</p>
-    <div class="say"><b>Da dire:</b> "Da 40 minuti manuali a 3 minuti automatici. Per ogni prodotto. Per sempre. Fai il conto sui prodotti che carichi all'anno."</div>
+    <h2>Lo store di riferimento — anatomia della PDP che converte</h2>
+    <p>Apri lo store di riferimento: jiyuskin.com, PDP "Complete Korean Anti-Aging Glow-Up Bundle". Scroll completo davanti alla camera, sezione per sezione, e nomini ogni blocco: bundle tiers con prezzo per-day, gallery 10 foto, badges (cruelty-free, vegan, dermatologist-tested, 90-day guarantee), 1.152 reviews, "13+ active ingredients", 4 key benefits, ingredient breakdown per prodotto, usage instructions, before/after con timeline 4-8 settimane, comparison table vs competitor, FAQ 10 domande, social proof "650.000+ faces" + feed TikTok.</p>
+    <p>Messaggio: questa pagina non è "bella". È una macchina di conversione con ~14 sezioni, ognuna con un lavoro preciso. Oggi la ricostruiamo identica, pezzo per pezzo, con Claude.</p>
+    <div class="say"><b>Da dire:</b> "Una PDP che converte non è design. È una sequenza di obiezioni gestite. Sezione dopo sezione. E ogni sezione è un file che Claude sa scrivere."</div>
   </div>
 
   <div class="point">
     <span class="num">02</span>
-    <h2>Clonare PDP competitor</h2>
-    <p>ProductCloner: dai un URL competitor, l'agent scrappa la PDP (titolo, immagini, descrizione, varianti, prezzo), riadatta, crea draft sul tuo Shopify.</p>
-    <p>Caso d'uso: prodotto che fa numeri da un competitor, vuoi testarlo. In 5 minuti hai la PDP draft pronta. Polish manuale, push live.</p>
-    <p>Nota: rispetta le policy. Cloni la struttura, riscrivi i testi col tuo brand voice — niente plagio.</p>
-    <div class="say"><b>Da dire:</b> "Cloni la struttura, non il copy. La struttura è informazione. Il copy è il tuo brand."</div>
+    <h2>Step 1 — Estrarre la struttura: Claude legge la pagina</h2>
+    <p>Dal terminale: dai a Claude l'URL della PDP. Lui fetcha la pagina e produce la mappa: lista ordinata delle sezioni, per ognuna contenuto, layout (colonne, slider, accordion), elementi (immagini, stelle, tabelle). Questa mappa è la spec della replica.</p>
+    <p>Regola etica/legale chiarita subito: si replica la STRUTTURA (l'informazione), si riscrive il COPY col proprio brand voice e si usano le PROPRIE immagini. Niente plagio, niente foto rubate.</p>
+    <div class="say"><b>Da dire:</b> "La struttura è informazione, e l'informazione non ha copyright. Il copy e le foto sì. Cloni la prima, rifai i secondi."</div>
   </div>
 
   <div class="point">
     <span class="num">03</span>
-    <h2>Modificare il tema da terminale</h2>
-    <p>Riprendi il dev theme della lezione setup. Demo: chiedi a Claude di aggiungere una sezione custom (esempio: trust badges) al tema. Lui scrive il file Liquid, push sul dev, ti dà l'URL preview.</p>
-    <p>Guardi la preview, chiedi un aggiustamento ("più piccoli i badge, sfondo chiaro"), Claude modifica e ri-pusha. Iterazione in minuti, non in giornate da freelancer.</p>
-    <div class="say"><b>Da dire:</b> "Quello che prima era un preventivo da 300 euro e una settimana di attesa, adesso è una frase in italiano e due minuti di attesa."</div>
+    <h2>Step 2 — Caricare il prodotto con Claude</h2>
+    <p>Prima la base: il prodotto. Mostra ProductPusher. Input: file Word (titolo, descrizione, prezzo, varianti — qui le 3 bundle tiers: 1, 2, 3 jars) + cartella immagini. Output: prodotto draft su Shopify, link admin stampato in chat.</p>
+    <p>Demo dal vivo: lanci /product-pusher, in 3 minuti il prodotto bundle è nell'admin in draft, con varianti e prezzi scalati (sconto crescente per quantità, come il riferimento).</p>
+    <p>Sotto il cofano: Claude legge il Word, mappa i campi, API Shopify create product, upload immagini. Tutto in chiamate REST.</p>
+    <div class="say"><b>Da dire:</b> "Da 40 minuti manuali a 3 minuti automatici. E le varianti bundle con sconto a scalare le ha fatte giuste al primo colpo."</div>
   </div>
 
   <div class="point">
     <span class="num">04</span>
-    <h2>Deploy automatico del tema</h2>
-    <p>Pattern reale: script bash <code>deploy-section.sh</code> che fa push del file modificato sul dev theme, ti dà l'URL preview. Quando vuoi push live, env var <code>FORCE_LIVE=1</code>.</p>
-    <p>Salvaguardia: warning a video se stai per fare push live. "Stai per pushare su LIVE. Conferma." Una digitazione in più che salva la cantonata.</p>
-    <div class="say"><b>Da dire:</b> "Deploy live deve sempre fare un po' paura. Se non fa paura, hai disattivato la salvaguardia. Riattivala."</div>
+    <h2>Step 3 — Le sezioni alte: buy box, badges, benefits</h2>
+    <p>Si parte dalla parte alta della pagina. Per ogni blocco chiedi a Claude una sezione Liquid dedicata: buy box con i 3 tier e prezzo per-day ("less than your coffee"), riga badges con icone, blocco 4 key benefits.</p>
+    <p>Workflow per ogni sezione: descrivi il blocco di riferimento → Claude scrive il file Liquid (schema + blocchi configurabili) → push sul dev theme → URL preview → confronto side-by-side col riferimento → aggiustamenti a voce ("più piccoli i badge, sfondo chiaro") → ri-push. Iterazione in minuti.</p>
+    <div class="say"><b>Da dire:</b> "Una sezione = un file. Il tema smette di essere una scatola nera: è una pila di blocchi che monti uno alla volta."</div>
   </div>
 
   <div class="point">
     <span class="num">05</span>
-    <h2>Polish PDP — modifiche chirurgiche</h2>
-    <p>ProductPusher mode "polish": modifiche surgical alla PDP esistente. Aggiungi carosello reviews, slider, metafield related products. Senza ricreare il prodotto.</p>
-    <p>Vantaggio: tieni traffico/SEO della PDP esistente, ma migliori la conversion rate. Iterazione rapida.</p>
-    <p>Demo: prendi una PDP che converte male, aggiungi il blocco reviews carousel, vedi il diff su dev, push live.</p>
-    <div class="say"><b>Da dire:</b> "Mai ricreare per migliorare. Modifiche chirurgiche sulla cosa che già funziona."</div>
+    <h2>Step 4 — Le sezioni di prova: reviews, before/after, comparison table</h2>
+    <p>Le tre sezioni che vendono davvero. Reviews slider con stelle e card cliente. Before/after con foto + timeline ("risultati in 4-8 settimane"). Comparison table noi-vs-loro a colonne con check verdi e croci rosse.</p>
+    <p>Ognuna come sezione riusabile con blocchi: il contenuto lo cambi dall'editor tema, il layout è fisso. Le costruisci una volta, le riusi su ogni prodotto futuro.</p>
+    <p>Demo: la comparison table dal niente al preview in una richiesta. Confronto col riferimento, due fix, fatta.</p>
+    <div class="say"><b>Da dire:</b> "Reviews, before/after, comparison: il 70% della conversione vive in queste tre sezioni. E adesso le hai come blocchi riusabili, per sempre."</div>
   </div>
 
   <div class="point">
     <span class="num">06</span>
-    <h2>Cache busting trick</h2>
-    <p>Problema: dopo push su live, gli utenti vecchi vedono ancora il vecchio HTML cachato per minuti. Soluzione: fire un secondo PUT vuoto sull'asset → invalida la cache CDN Shopify.</p>
-    <p>Mostra il pattern: deploy.sh → first PUT (vero contenuto) → wait 2 sec → second PUT touch (timestamp only). Storefront aggiornato per tutti in 5 secondi invece di 10 minuti.</p>
-    <div class="say"><b>Da dire:</b> "Senza cache bust, gli utenti vedono il vecchio per 10 minuti. Una PUT vuota = problema risolto. Trick da $0."</div>
+    <h2>Step 5 — Le sezioni basse: FAQ accordion + social proof</h2>
+    <p>FAQ accordion con le 10 domande tipo del riferimento (guarantee, subscription, tempi risultati, ingredienti) — copy riscritto per il tuo prodotto. Social proof bar con la tua metrica reale ("X clienti", "Y ordini spediti") — mai numeri inventati.</p>
+    <p>Assembli la pagina nell'editor: ordini le sezioni nella stessa sequenza del riferimento, scroll completo del risultato accanto all'originale. Replica 1:1 della struttura, contenuto 100% tuo.</p>
+    <div class="say"><b>Da dire:</b> "Scrolla le due pagine affiancate. Stessa macchina, motore tuo. Questo è clonare bene."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">07</span>
+    <h2>Deploy: dev → live + cache busting</h2>
+    <p>Pattern reale: script bash <code>deploy-section.sh</code> che pusha il file modificato sul dev theme e stampa l'URL preview. Push live solo con env var <code>FORCE_LIVE=1</code> + warning di conferma a video. Una digitazione in più che salva la cantonata.</p>
+    <p>Cache busting: dopo push su live gli utenti vedono il vecchio HTML cachato per minuti. Fix: secondo PUT vuoto sull'asset dopo 2 secondi → invalida la cache CDN Shopify. Storefront aggiornato per tutti in 5 secondi invece di 10 minuti.</p>
+    <div class="say"><b>Da dire:</b> "Deploy live deve sempre fare un po' paura. E senza cache bust gli utenti vedono il vecchio per 10 minuti — una PUT vuota e il problema sparisce."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">08</span>
+    <h2>Esercizio — replica la PDP del tuo riferimento</h2>
+    <p>Esercizio per lo studente: scegli UNO store di riferimento nella tua nicchia (uno che converte, non uno bello). Estrai la mappa delle sezioni con Claude, carica un tuo prodotto con ProductPusher, ricostruisci le 3 sezioni di prova (reviews, before/after o comparison, FAQ) sul dev theme.</p>
+    <p>Tempo target: mezza giornata la prima volta. Le sezioni che costruisci oggi sono blocchi riusabili su ogni prodotto che lancerai dopo.</p>
+    <div class="say"><b>Da dire:</b> "Non partire mai da pagina bianca. Parti da chi sta già convertendo, replica la struttura, metti il tuo motore dentro."</div>
   </div>
 
   <div class="lesson-end">Fine L8 · CTA → L9 agent ecommerce + schedulazione</div>
