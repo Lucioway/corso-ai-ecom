@@ -742,8 +742,8 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <p>Recap finale di TUTTO quello che è entrato col way-stack, anche i pezzi che oggi non abbiamo toccato. <b>L'orchestrator</b> (il CLAUDE.md principale): il vigile che smista — legge la tua richiesta e decide da solo quale skill o plugin usare. <b>Il vault PARA</b>: la libreria dove vive tutto (l'abbiamo riempito oggi). <b>Gli hook di sessione</b>: il diario automatico — a fine sessione scrivono da soli cosa è stato fatto.</p>
     <p>I 5 plugin: <b>superpowers</b> (il metodo: domande → piano → build → controllo — usato), <b>frontend-design</b> (grafica — usato), <b>code-review</b> (revisori AI — usato), <b>cli-anything</b> (comanda da terminale i programmi con interfaccia grafica, tipo GIMP o Blender — non usato oggi), <b>ralph-loop</b> (ripete il lavoro da solo, un pezzo alla volta, finché la lista non è finita — per i lavori lunghi tipo "sistemami 100 pagine" — non usato oggi).</p>
     <p>E poi: la <b>agent factory</b> (i 5 comandi /agent-* — usata tutta), le <b>vault skills</b> (ingest usata, query e lint le vedrete usare sempre), le <b>7 design skills</b> (regole di design che si attivano da sole quando si tocca grafica). "Tutto questo ce l'avete già installato. Oggi l'avete visto lavorare insieme."</p>
-    <p>Ponte verso la L6: "il materiale è scaricato, trascritto, organizzato, e si aggiorna da solo ogni giorno. Ma Claude ancora non lo SA — non è memoria, è archivio. Nella prossima lezione lo colleghiamo a Graphify e lo trasformiamo in un brain che risponde con la voce del creator."</p>
-    <div class="say"><b>Da dire:</b> "Adesso sapete cosa c'è dentro il way-stack, pezzo per pezzo, e l'avete visto montare un agent vero. Prossima lezione: lo trasformiamo in memoria viva con Graphify."</div>
+    <p>Ponte verso la L6: "il materiale è scaricato, trascritto, organizzato, e si aggiorna da solo ogni giorno. Ma Claude ancora non lo SA — non è memoria, è archivio. Nella prossima lezione lo trasformiamo in un knowledge vero: cartella ordinata, database di lessons e grafo interrogabile con Graphify."</p>
+    <div class="say"><b>Da dire:</b> "Adesso sapete cosa c'è dentro il way-stack, pezzo per pezzo, e l'avete visto montare un agent vero. Prossima lezione: i transcript diventano un knowledge interrogabile con Graphify."</div>
   </div>
 
   <div class="lesson-end">Fine L5 · CTA → L6 Graphify + brain</div>
@@ -751,166 +751,96 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
 
 <!-- =================== LEZIONE 6 =================== -->
 <section class="lesson" id="l6">
-  <div class="lesson-tag">Lezione 06 · 35–40 min</div>
-  <h1>Creare l'intera memoria con Graphify: dal canale YouTube a un brain interrogabile</h1>
+  <div class="lesson-tag">Lezione 06 · 25–30 min</div>
+  <h1>Il knowledge di Hormozi: da transcript a grafo interrogabile, step by step</h1>
 
   <div class="point">
     <span class="num">01</span>
-    <h2>Install Graphify in 3 comandi</h2>
-    <p>Riprendi la teoria della L4 (MEMORY = elenco, Graphify = mappa). Ora si costruisce. Mostra i 3 comandi: install di uv (se manca), <code>uv tool install graphifyy</code>, verifica con <code>graphify --help</code>. 5 minuti netti.</p>
-    <p>Attenzione al nome: il pacchetto è graphifyy (doppia y), il comando è graphify (singola). Mostra l'help a schermo = installato.</p>
-    <div class="say"><b>Da dire:</b> "Tre comandi. Cinque minuti. Da quel momento il tuo vault può diventare un grafo."</div>
+    <h2>Cosa costruiamo oggi — cartella, database, grafo</h2>
+    <p>Frame della lezione: nella L5 l'agent ha scaricato e trascritto tutto il canale YouTube di Hormozi. Oggi quei transcript diventano un <b>knowledge vero</b>: una cartella ordinata, un database di lessons interrogabile, e un grafo che collega tutti i concetti. Da zero, davanti alla camera.</p>
+    <p>La differenza chiave da spiegare subito: un mucchio di transcript è un <b>archivio</b> (ci devi cercare tu dentro). Un knowledge è <b>memoria</b> (chiedi, e lui risponde). Oggi facciamo il passaggio.</p>
+    <div class="say"><b>Da dire:</b> "Ieri avevamo file. Oggi costruiamo un cervello. Stesso materiale, valore completamente diverso."</div>
   </div>
 
   <div class="point">
     <span class="num">02</span>
-    <h2>Indicizzare il vault</h2>
-    <p>Lancia il comando di index puntando a 02_KNOWLEDGE (la regola dentro/fuori vista in L4) — dentro ci sono anche le lessons del canale YouTube generate dall'agent nella L5. Mostra l'output: scansiona tutti i .md, estrae entità, costruisce nodi, calcola archi. Tempo: tipicamente 1-3 minuti per vault medi.</p>
-    <p>Apri il grafo HTML generato. Mostra come navigarlo: click su nodo, vedi vicini, shortest path tra 2 concetti, zoom su comunità. Indica i nodi nati dalle lessons del canale: "questo lo ha scaricato l'agent ieri, oggi è un concetto nel grafo".</p>
-    <div class="say"><b>Da dire:</b> "Una sola indicizzazione e vedi tutto il tuo cervello in 3D. La prima volta che lo apri ti emoziona."</div>
+    <h2>Il punto di partenza — i transcript dell'agent della L5</h2>
+    <p>Apri la cartella prodotta dall'agent della lezione 5: tutti i video del canale Hormozi trascritti in markdown, uno per file. Mostra 2-3 file dentro: titolo del video, transcript pulito.</p>
+    <p>Punto didattico: questo è materiale <b>grezzo</b>. Un transcript di 20 minuti parla di 5 argomenti diversi mescolati — non puoi interrogarlo bene così com'è. Serve spezzarlo.</p>
+    <div class="say"><b>Da dire:</b> "L'agent ci ha dato la materia prima. Adesso la raffiniamo."</div>
   </div>
 
   <div class="point">
     <span class="num">03</span>
-    <h2>Interrogare il grafo</h2>
-    <p>Collega il grafo a Claude via MCP (<code>claude mcp add graphify-vault -- python -m graphify.serve …/graph.json</code>), poi apri Claude Code. Esempio: "Quali sono i god-node nel mio vault?" → risposta con i 5 concetti più collegati. "Trova il path tra retention e bundle" → 3 hop.</p>
-    <p>Use case reale: stai lavorando su una decisione di pricing. Chiedi a Claude di interrogare Graphify per estrarre tutte le decisioni passate collegate a pricing. Risposta in 5 secondi. Niente che hai mai fatto a mano.</p>
-    <div class="say"><b>Da dire:</b> "Smetti di cercare con grep. Inizi a chiedere al grafo. Velocità diversa, profondità diversa."</div>
+    <h2>Step 1 — la cartella: la struttura standard del knowledge</h2>
+    <p>Crei la casa del knowledge: <code>Brains/Hormozi/</code> dentro il vault. Tre sottocartelle + un indice: <b>sources/</b> (i transcript grezzi dell'agent — non si toccano mai), <b>lessons/</b> (le pillole estratte — il vero database), <b>wiki/</b> (le pagine di sintesi) e <b>index.md</b> (il catalogo di tutto).</p>
+    <p>Regola insegnata: <b>grezzo e raffinato sempre separati</b>. Le sources sono la prova; le lessons sono il prodotto. Se domani vuoi rifare le lessons con un metodo migliore, le sources sono ancora lì intatte.</p>
+    <div class="say"><b>Da dire:</b> "Stessa struttura per qualsiasi knowledge: sources, lessons, wiki, index. La impari una volta, la replichi all'infinito."</div>
   </div>
 
   <div class="point">
     <span class="num">04</span>
-    <h2>Warm-up — refresh giornaliero del grafo</h2>
-    <p>Il vault cresce ogni giorno: il grafo deve seguirlo da solo. Mostra il job launchd / cron che gira ogni notte alle 03:00 e fa il re-index. Output: stats di delta (nuovi nodi, nuovi archi, nodi rimossi).</p>
-    <p>Mostra come si crea: lo detti a Claude. "Schedula un refresh giornaliero del mio grafo alle 03:00, comando graphify --refresh, usa launchd, log su file." Lui crea il file, lo carica, lo testa. Frequenza giusta: giornaliero se modifichi tanto, settimanale se poco. Mai manuale.</p>
-    <div class="say"><b>Da dire:</b> "Una volta scheduled, Graphify si aggiorna da solo. Tu lo apri quando ti serve, ed è sempre fresco."</div>
+    <h2>Step 2 — vault-ingest: dai transcript alle lessons</h2>
+    <p>Qui entra la skill <b>vault-ingest</b> del way-stack (il bibliotecario). Dici a Claude: "ingerisci i transcript di sources/ e spezzali in lessons". Lui legge ogni transcript, individua i concetti, e scrive una lesson per concetto in lessons/.</p>
+    <p>Regole della lesson da mostrare a schermo: <b>una lesson = un concetto</b>, 200-400 parole, naming <code>NN_titolo-lesson.md</code> in ordine logico, e chiusura sempre con il <b>Take-away</b> — la frase secca da ricordare. Mostra 2 lessons appena nate: una su pricing, una su offer.</p>
+    <p>Lancia l'ingest su tutto il canale e lascia girare: mentre lavora, spieghi che da 1 transcript escono in media 3-5 lessons.</p>
+    <div class="say"><b>Da dire:</b> "Una lesson = una pillola. Un video da 20 minuti diventa 4 pillole da 30 secondi. Questo è il database."</div>
   </div>
 
   <div class="point">
     <span class="num">05</span>
-    <h2>Troubleshooting memoria + grafo</h2>
-    <p>I 6 errori che vedrai davvero. command not found: uv → PATH, riapri il terminale. command not found: graphify → uv tool update-shell. Indicizzazione lentissima → stai puntando a una cartella con PDF/media, punta solo a 02_KNOWLEDGE. MCP non in lista → path del graph.json sbagliato, verifica con ls e ripeti claude mcp add. Claude non ricorda tra sessioni → cartella diversa = progetto diverso, riapri nella stessa cartella. Grafo vuoto → Graphify legge markdown, converti i file in .md.</p>
+    <h2>Step 3 — index.md: il catalogo del database</h2>
+    <p>L'ingest aggiorna anche <b>index.md</b>: l'elenco di tutte le lessons, raggruppate per tema (pricing, offer, acquisizione, mindset…). È l'indice del libro: Claude lo legge per primo e da lì salta alla lesson giusta.</p>
+    <p>Test immediato con <b>vault-query</b>: "cosa dice Hormozi sul prezzo?" — Claude passa dall'index, pesca le 3 lessons giuste, sintetizza e cita i file. Prima risposta del knowledge appena nato.</p>
+    <div class="say"><b>Da dire:</b> "Index = il database ha un indice. Query = il database risponde. E vi cita sempre la fonte."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">06</span>
+    <h2>Step 4 — install Graphify in 3 comandi</h2>
+    <p>Riprendi la teoria della L4 (elenco vs mappa). Ora si costruisce la mappa. I 3 comandi: install di uv (se manca), <code>uv tool install graphifyy</code>, verifica con <code>graphify --help</code>. 5 minuti netti.</p>
+    <p>Attenzione al nome: il pacchetto è graphifyy (doppia y), il comando è graphify (singola). Mostra l'help a schermo = installato.</p>
+    <div class="say"><b>Da dire:</b> "Tre comandi. Cinque minuti. Da questo momento il knowledge può diventare un grafo."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">07</span>
+    <h2>Step 5 — costruire il grafo del knowledge</h2>
+    <p>Lanci <code>/graphify</code> puntando a <code>Brains/Hormozi/</code>. Mostra l'output: scansiona le lessons, estrae i concetti (nodi), calcola i collegamenti (archi). 1-3 minuti.</p>
+    <p>Apri il grafo HTML generato — il momento "wow" della lezione. Naviga dal vivo: click su un nodo ("pricing"), vedi i vicini, zoom sulle comunità di concetti. Indica un nodo e ricorda: "questo era un video YouTube due giorni fa. Oggi è un concetto collegato ad altri venti".</p>
+    <div class="say"><b>Da dire:</b> "Questo è il canale di Hormozi visto dall'alto. Ogni puntino un concetto, ogni linea un collegamento. Nessuno l'ha disegnato a mano."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">08</span>
+    <h2>Step 6 — collegare il grafo a Claude e interrogarlo</h2>
+    <p>Colleghi il grafo a Claude via MCP (<code>claude mcp add graphify-hormozi …</code>) — la presa di corrente vista in L4. Da qui Claude interroga il grafo direttamente.</p>
+    <p>Demo dal vivo, 3 domande: "quali sono i concetti più collegati del knowledge?" (i god-node: offer, value, pricing…), "che strada c'è tra pricing e garanzia?" (il path, 2-3 hop), "cosa dice Hormozi sugli sconti?" (risposta con lessons citate). Risposta in secondi, zero ricerca a mano.</p>
+    <div class="say"><b>Da dire:</b> "Smetti di cercare. Inizi a chiedere. Il grafo sa anche i collegamenti che tu non ricordavi di aver letto."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">09</span>
+    <h2>Step 7 — il knowledge si aggiorna da solo</h2>
+    <p>Chiusura del cerchio con la L5: l'agent ogni mattina scarica i video nuovi del canale. Aggiungi l'ultimo anello: dopo l'ingest dei nuovi transcript, re-index del grafo. Lo detti a Claude: "schedula ogni notte il refresh del grafo Hormozi" — lui crea la sveglia launchd da solo.</p>
+    <p>Risultato: Hormozi pubblica un video → l'agent lo scarica e trascrive → le lessons nuove entrano nel database → il grafo si aggiorna. <b>Tutto senza di te.</b></p>
+    <div class="say"><b>Da dire:</b> "Hormozi lavora per il mio knowledge. Lui pubblica, il sistema impara. Io chiedo e basta."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">10</span>
+    <h2>Troubleshooting — i 6 errori che vedrai davvero</h2>
+    <p>command not found: uv → PATH, riapri il terminale. command not found: graphify → uv tool update-shell. Indicizzazione lentissima → stai puntando a una cartella con PDF/media, punta solo alle lessons. MCP non in lista → path del graph.json sbagliato, verifica con ls e ripeti claude mcp add. Claude non ricorda tra sessioni → cartella diversa = progetto diverso, riapri nella stessa cartella. Grafo vuoto → Graphify legge markdown, converti i file in .md.</p>
     <p>Regola d'oro che vale per tutto il corso: qualunque errore, copia il testo esatto e incollalo a Claude in chat. Descrivi cosa stavi facendo. Nel 90% dei casi te lo risolve al primo colpo.</p>
     <div class="say"><b>Da dire:</b> "Non memorizzare i fix. Memorizza il metodo: errore esatto, incollato a Claude, contesto. Lui ripara, tu impari."</div>
   </div>
 
   <div class="point">
-    <span class="num">06</span>
-    <h2>Cos'è un brain — un argomento + le sue fonti + le sue regole</h2>
-    <p>Apri Brains/ nel vault. Mostra le sottocartelle (anonimizzate o no a tua scelta). "Un brain è una persona finta che vive nel vault. Ha un nome, una voce, fonti, regole. Lo interroghi e ti risponde come fosse quel personaggio."</p>
-    <p>Esempi: Brain Marketing (= esperto di acquisition), Brain Nutrition (= dietologo), Brain Legal (= avvocato base). Ogni brain copre un dominio. E il materiale del canale YouTube della L5? È il primo candidato perfetto.</p>
-    <div class="say"><b>Da dire:</b> "Un brain non è un prompt. È una persona finta che vive nel vault. Ha mood, memoria, regole, opinioni."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">07</span>
-    <h2>Le fonti — documenti del tuo brand, libri, corsi, video</h2>
-    <p>Apri la cartella sources/ di un brain esempio. Mostra dentro: PDF, DOCX, MD, transcript di video, screenshot di chat, post Twitter, articoli. Tutto va dentro. Per il canale YouTube le sources le ha già raccolte l'agent della L5.</p>
-    <p>Regola: solo materiale che vuoi che il brain "abbia letto". Niente spazzatura. Se hai 50 PDF di un guru, mettili dentro. Se hai 10 video tradotti in markdown, dentro. È il libro di testo del personaggio.</p>
-    <div class="say"><b>Da dire:</b> "Quello che metti in sources/ è quello che lui ha studiato. Quello che non metti, non sa."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">08</span>
-    <h2>Struttura cartella Brains/NomeArgomento/</h2>
-    <p>Apri Brains/Hormozi/ (o un brain tuo). Mostra le 4-5 cartelle standard: sources/ (grezzo), lessons/ (estratto), wiki/ (sintesi a forma di pagina interna), CLAUDE.md (voice contract), SKILL.md (come si invoca).</p>
-    <p>Spiega l'ADR-003: tutti i miei brain seguono la stessa struttura. Una volta che impari uno, sai farne 9. La forma è standard, il contenuto è specifico.</p>
-    <div class="say"><b>Da dire:</b> "Stessa struttura per tutti i brain. Pattern matching. Una volta che lo sai, lo replichi all'infinito."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">09</span>
-    <h2>Le lessons — come spezzare le fonti in unità interrogabili</h2>
-    <p>Apri lessons/ di un brain. Mostra 5 file. Una lesson = un concetto, un esempio, una regola pratica. Lunghezza tipica 200-400 parole. Più breve = poco contenuto. Più lungo = perdi focus. Quelle del canale YouTube le ha già scritte l'agent della L5 — esattamente in questo formato.</p>
-    <p>Naming: <code>NN_titolo-lesson.md</code> con ordine logico (non cronologico). La gerarchia te la dai tu — Claude impara la struttura dall'index della cartella.</p>
-    <p>Ogni lesson finisce con "Take-away" — la frase secca che vuoi che il brain ripeta quando interrogato.</p>
-    <div class="say"><b>Da dire:</b> "Una lesson = una pillola. Più pillole = brain più forte."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">10</span>
-    <h2>La wiki interna del brain</h2>
-    <p>Apri wiki/ del brain. Mostra 5-10 file: glossario, frameworks, cheat-sheet, decisioni note. È la "manualistica" che il brain consulta quando gli serve sintesi.</p>
-    <p>Differenza con lessons: lesson = pillola di insegnamento. Wiki = pagina di riferimento rapido. Quando il brain risponde, attinge da entrambe.</p>
-    <p>Auto-generata: Haiku scansiona le lessons e produce le pagine wiki. Costo basso, manutenzione automatica.</p>
-    <div class="say"><b>Da dire:</b> "Lessons = corso. Wiki = cheat-sheet. Brain forte ha entrambi."</div>
-  </div>
-
-  <div class="point">
     <span class="num">11</span>
-    <h2>Voice contract — come parla il brain, cosa dice, cosa NON dice</h2>
-    <p>Apri CLAUDE.md del brain. Mostra le sezioni: voice (tono, registro, lingua), do (cosa dice sempre), don't (cosa non dice mai), examples (3-5 risposte campione).</p>
-    <p>Esempio Hormozi-brain: voce diretta, frasi corte, no hedge, parla di money e leverage. Non dice "dipende" — sceglie e motiva. Esempio: "Aumenti i prezzi del 30%. Chi non compra non era cliente tuo."</p>
-    <p>Per il canale YouTube il voice contract si genera da solo: Claude analizza come parla il creator nei transcript e scrive il CLAUDE.md (voce, do/don't, esempi). Senza voice contract il brain risponde generico Claude. Con voice contract risponde "in persona".</p>
-    <div class="say"><b>Da dire:</b> "Senza voice contract è Claude. Con voice contract è il personaggio. La differenza la senti dalla prima riga."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">12</span>
-    <h2>La skill /nome-brain</h2>
-    <p>Apri SKILL.md di un brain. Mostra come si attiva: <code>/hormozi</code>, <code>/zakaria</code>, ecc. Dietro le quinte la skill: carica il CLAUDE.md del brain, lo applica come voice, mette il brain in "modalità persona".</p>
-    <p>Mostra demo dal vivo: <code>/hormozi come triplo i prezzi?</code> → risposta secca in stile. <code>/sarah quale hook funziona meglio per skincare?</code> → risposta in stile Sarah.</p>
-    <div class="say"><b>Da dire:</b> "Una slash, un personaggio. /nome → entri in stanza con lui."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">13</span>
-    <h2>Q&A volanti vs decision-grade</h2>
-    <p>Spiega i 2 modi di usare un brain. Volante = risposta breve (5-10 righe), per allineamenti rapidi durante il lavoro. Decision-grade = output strutturato (decisione + alternative + reasoning + rischi), quando devi prendere decisioni che costano soldi.</p>
-    <p>Mostra esempio volante: "/hormozi quanto sconto sul black friday?" → risposta in 4 righe. Mostra esempio decision-grade: stesso brand, stessa domanda, ma "decision-grade" attivato → output di 1 pagina strutturato.</p>
-    <p>Regola: volante per decisioni < €500. Decision-grade per decisioni > €500. La soglia te la dai tu.</p>
-    <div class="say"><b>Da dire:</b> "Volante per allineamento. Decision-grade per scommesse. Sapere quale usare ti salva tempo e soldi."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">14</span>
-    <h2>Build + test — il brain del canale YouTube risponde "in persona"</h2>
-    <p>Momento clou: assembli il brain del canale. Le sources/ e le lessons/ le ha già preparate l'agent della L5. Dici a Claude: "genera wiki, voice contract e skill per Brains/NomeCanale/". 5 minuti e la struttura ADR-003 è completa.</p>
-    <p>Test live: <code>/nomebrain</code> e fai una domanda al brain appena nato. Risponde con la voce del creator, citando le sue lessons. Poi re-index Graphify: il brain entra nel grafo, i suoi concetti si collegano al resto del vault. Cerchio chiuso.</p>
-    <div class="say"><b>Da dire:</b> "Ieri era un canale YouTube. Oggi è un esperto che vive nel mio vault, parla con la sua voce e si collega a tutto il resto della mia memoria."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">15</span>
-    <h2>Secondo brain — costruire il Brain Marketing dai file forniti</h2>
-    <p>Annuncio: "Adesso il metodo lo applichiamo al tuo business. Secondo brain: Brain Marketing = Creative Strategist." Apri una cartella vuota Brains/Marketing/. Lancia uno script che ti ho preparato: scaffold delle cartelle, CLAUDE.md template, sources/ vuoto.</p>
-    <p>Carichi nei sources/ 3 documenti tuoi (esempio): un PDF di marketing che ami, le tue customer-voice notes, i tuoi top-ad screenshot con commento. Hai dato in pasto al brain il materiale base.</p>
-    <p>Lanci la pipeline: estrazione → lessons → wiki. 5-10 minuti, ed è già operativo.</p>
-    <div class="say"><b>Da dire:</b> "Da zero a brain operativo in 15 minuti, se hai i materiali pronti. Niente magia. Solo pipeline."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">16</span>
-    <h2>Strutturare hook, angle, copy, offer</h2>
-    <p>Mostra l'organizzazione del brain marketing: 4 sotto-tag per le lessons (hook, angle, copy, offer). Quando interroghi puoi dire "/creative quale hook funziona per shapewear?" e lui pesca solo dal sotto-tag hook.</p>
-    <p>Mini-spiegazione di ognuno: hook = i primi 3 secondi. Angle = la storia/promessa. Copy = il testo del corpo. Offer = lo scambio (prezzo + bonus + garanzia).</p>
-    <div class="say"><b>Da dire:</b> "4 leve. Hook, angle, copy, offer. Una è rotta — la campagna è rotta. Il brain marketing le tiene tutte e quattro vive."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">17</span>
-    <h2>Voice contract del Creative Strategist</h2>
-    <p>Apri CLAUDE.md del brain Marketing. Voice: senior creative + direct-response copywriter, parla in italiano se brief in italiano altrimenti inglese. Cita sempre la fonte (quale lesson, quale ad reference). Non inventa numeri di benchmark — se non li ha, dice "non li ho".</p>
-    <p>Esempi do/don't concreti. Do: "Hook A vince perché il primo frame interrompe il pattern di shapewear (fonte: Sarah lesson 03)." Don't: "Hook A è migliore per varie ragioni." (vago, niente fonte).</p>
-    <div class="say"><b>Da dire:</b> "Il Creative Strategist non scrive copy generico. Scrive copy citando la lezione su cui si fonda. Tracciabilità totale."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">18</span>
-    <h2>Build della skill /creative-strategist</h2>
-    <p>Apri la skill /creative-strategist. Mostra la SKILL.md: descrizione, contesto da caricare (CLAUDE.md brain + ultimi top ads del brand), output format (3 angle + 3 hook + 1 script video).</p>
-    <p>Demo: <code>/creative-strategist prodotto: Bronzata tan cream</code>. Mentre gira, mostra che pesca dalle lessons del brain + dai top ads salvati nel vault.</p>
-    <p>Output: 3 angle ognuno con razionale, 3 hook copia-pronti per video di 15s, 1 script video completo. Tutto citando le fonti.</p>
-    <div class="say"><b>Da dire:</b> "Una slash, 30 secondi, hai 3 angle + 3 hook + script. Quello che un copywriter ti fattura 500 euro a brief."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">19</span>
-    <h2>Test — input prodotto, output 3 angle + 3 hook + script video</h2>
-    <p>Test live: prendi un prodotto vero di un tuo brand. Lanci la skill. Aspetti 30 secondi. Output.</p>
-    <p>Leggi gli output a voce alta. Commenta: "Questo angle ha senso perché…", "Questo hook lo girerei perché…". Mostra anche un'ipotesi non perfetta: "Questa direi di scartarla perché…".</p>
-    <p>Lezione meta: il brain non è infallibile. È un partner di brainstorming velocissimo. Tu sei ancora il direttore creativo. Chiusura: "Memoria completa: archivio, grafo, brain. Adesso facciamo lavorare tutto questo sul vostro store — prossima lezione, Shopify."</p>
-    <div class="say"><b>Da dire:</b> "30 secondi e ho 6 ipotesi creative concrete. Una vale. Le altre cinque mi spingono a pensare. Costo: zero."</div>
+    <h2>Test finale + ponte verso Shopify</h2>
+    <p>Gran finale: 3 domande vere al knowledge davanti alla camera. Una facile ("cosa dice Hormozi sulla garanzia?"), una trasversale ("collega pricing e acquisizione"), una operativa ("come strutturo l'offerta del mio prodotto secondo Hormozi?"). Leggi le risposte e commenta: cita le lessons, segue i collegamenti del grafo.</p>
+    <p>Recap del metodo in una riga: transcript → cartella → lessons → index → grafo → query. Lo stesso identico giro vale per qualsiasi fonte: un altro canale, un corso, i documenti del tuo brand. Ponte L7: "il knowledge è vivo. Adesso lo mettiamo al lavoro sul vostro store — prossima lezione, Shopify dal terminale."</p>
+    <div class="say"><b>Da dire:</b> "Da un canale YouTube a un esperto interrogabile nel mio vault. Materiale: gratis. Metodo: sempre lo stesso. Prossima fermata: il vostro store."</div>
   </div>
 
   <div class="lesson-end">Fine L6 · CTA → L7 Shopify setup</div>
