@@ -625,13 +625,110 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <div class="say"><b>Da dire:</b> "Più non è meglio. Indicizza solo ciò che ha senso semantico. Il rumore degrada il segnale."</div>
   </div>
 
-  <div class="lesson-end">Fine L4 · CTA → L5 brain + agent</div>
+  <div class="lesson-end">Fine L4 · CTA → L5 build del primo agent</div>
 </section>
 
 <!-- =================== LEZIONE 5 =================== -->
 <section class="lesson" id="l5">
-  <div class="lesson-tag">Lezione 05 · 35–40 min</div>
-  <h1>Creare un brain + cos'è un agent: dai tuoi documenti a un esperto interrogabile</h1>
+  <div class="lesson-tag">Lezione 05 · 30–35 min</div>
+  <h1>Build live del primo agent: gestione, download, organizzazione e transcript da un canale YouTube</h1>
+
+  <div class="point">
+    <span class="num">01</span>
+    <h2>Cos'è un agent — anatomia (input, ragionamento, output, memoria)</h2>
+    <p>Frame della lezione: finora hai parlato CON Claude. Un agent è Claude che lavora DA SOLO, anche mentre dormi. Schema dei 4 componenti: input (cosa riceve), ragionamento (cosa decide), output (cosa restituisce), memoria (cosa ricorda dalla volta prima).</p>
+    <p>Esempio: DailyReport. Input = ordini Shopify del giorno. Ragionamento = aggregare per prodotto, calcolare margini. Output = messaggio Telegram. Memoria = stato del giorno precedente. 4 componenti, sempre tutti e 4 — ne mancano due, non è un agent, è uno script.</p>
+    <div class="say"><b>Da dire:</b> "Un agent ha 4 organi: input, ragionamento, output, memoria. Oggi ne costruiamo uno vero, da zero, davanti alla camera."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02</span>
+    <h2>Il piano — un comando, sette superpoteri</h2>
+    <p>Annuncio: "Il primo agent si occupa di una cosa che fareste a mano per ore: gestire una fonte. Gli dai un canale YouTube e lui scarica, trascrive, organizza, riassume, archivia e ti avvisa. E mentre lo fa, vi mostro tutto quello che Claude Code sa fare su un computer."</p>
+    <p>Mostra lo schema della catena completa: YouTube → audio → trascrizione → lessons organizzate → PDF → Drive → Telegram → WhatsApp → GitHub. Un input, nove output. "Questa è la potenza di cui parlavo nella Lezione 1. Adesso la vedete tutta in fila."</p>
+    <div class="say"><b>Da dire:</b> "Un comando solo. E alla fine avrete: un archivio organizzato, un PDF, un file su Drive, un messaggio sul telefono e un backup su GitHub. Tutto da solo."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">03</span>
+    <h2>La spec — scrivere cosa deve fare PRIMA di costruire</h2>
+    <p>Apri un file vuoto SPEC.md. Scrivi insieme allo studente la spec in italiano semplice: input (URL canale o lista video), output (cartella nel vault con sources/ + lessons/ + PDF + notifiche), vincoli (niente video sopra 1 ora, lessons da 200-400 parole).</p>
+    <p>Regola d'oro ripetuta: mai codice prima della spec. La spec è il contratto. Claude la legge e sa esattamente cosa costruire — e tu sai esattamente cosa verificare alla fine.</p>
+    <div class="say"><b>Da dire:</b> "Dieci righe di italiano valgono più di cento righe di codice scritto a caso. Prima pensi, poi costruisci."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">04</span>
+    <h2>Step 1 — Scaricare i video (yt-dlp)</h2>
+    <p>Dici a Claude: "installa yt-dlp e scarica l'audio di questi 3 video". Mostra che Claude installa il tool da solo, lancia il download, e i file .mp3 appaiono nella cartella sources/.</p>
+    <p>Punto didattico: non hai aperto un browser, non hai cliccato niente. Hai descritto il risultato e Claude ha scelto il tool, l'ha installato e l'ha usato. Questa è la differenza tra usare un computer e dirigere un computer.</p>
+    <div class="say"><b>Da dire:</b> "Io non ho scaricato niente. Ho detto cosa volevo. Lui ha fatto. Memorizzate questa sensazione."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">05</span>
+    <h2>Step 2 — Trascrivere (Whisper)</h2>
+    <p>Claude lancia Whisper sugli audio: da .mp3 a .txt. Mentre gira (1-2 minuti a video), spieghi cosa sta succedendo: un modello AI locale che trasforma il parlato in testo, gratis, sul tuo computer.</p>
+    <p>Apri un transcript appena generato. Mostra che è testo grezzo: niente punteggiatura perfetta, ripetizioni, intercalari. "Questo è il grezzo. Non si interroga. Adesso lo raffiniamo."</p>
+    <div class="say"><b>Da dire:</b> "Audio → testo, gratis, in locale. Qualsiasi video, qualsiasi podcast, qualsiasi vocale diventa testo lavorabile."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">06</span>
+    <h2>Step 3 — Da transcript a lessons (Claude)</h2>
+    <p>Il cuore della pipeline: Claude legge ogni transcript e lo spezza in lessons da 200-400 parole, una per concetto, con take-away finale. Mostra il prompt che fa il lavoro — è dentro l'agent, lo studente lo riusa così com'è.</p>
+    <p>Apri lessons/ e leggi una lesson a voce alta. Confronta col transcript grezzo: stesso contenuto, forma completamente diversa. "Questo adesso è organizzato. E nella prossima lezione diventa interrogabile."</p>
+    <div class="say"><b>Da dire:</b> "Il grezzo diventa pillole. Una lesson = un concetto. Questo è il formato che l'AI legge meglio."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">07</span>
+    <h2>Step 4 — Il PDF riassunto (Chrome headless)</h2>
+    <p>L'agent genera un PDF di presentazione dell'archivio: chi è il creator, quante lessons, gli argomenti coperti, i 10 take-away migliori. Come lo fa: genera una pagina HTML con lo stile del corso, poi Chrome headless la stampa in PDF. Un comando.</p>
+    <p>Apri il PDF appena creato. "Questo l'ha impaginato lui. Titoli, sezioni, grafica. Nessun designer, nessun Canva, nessun copia-incolla."</p>
+    <div class="say"><b>Da dire:</b> "Claude scrive HTML meglio di quanto io userò mai Word. Qualsiasi documento vi serva — report, guide, preventivi — questo è il pattern."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">08</span>
+    <h2>Step 5 — Upload su Google Drive</h2>
+    <p>L'agent carica il PDF su Drive nella cartella del brand e stampa il webViewLink. Regola insegnata: dopo ogni upload, l'agent stampa SEMPRE il link — un file senza link è un file invisibile.</p>
+    <p>Apri il link davanti alla camera: il PDF è lì, condivisibile col team o con chiunque. "Dal terminale al cloud, senza aprire Drive."</p>
+    <div class="say"><b>Da dire:</b> "Locale per lavorare, Drive per condividere. L'agent fa il passaggio da solo e ti dà il link."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">09</span>
+    <h2>Step 6 — Notifiche: Telegram + WhatsApp</h2>
+    <p>L'agent manda il messaggio di fine lavoro: su Telegram (bot creato con BotFather, due minuti di setup) arriva "Archivio pronto: N lessons, ecco il PDF" con il documento allegato. Tira fuori il telefono e mostra la notifica arrivare in diretta.</p>
+    <p>Stessa notifica su WhatsApp come secondo canale. Punto didattico: l'output di un agent deve arrivare dove vivi tu — non in un log che non leggerai mai.</p>
+    <div class="say"><b>Da dire:</b> "L'agent ha finito e me l'ha detto sul telefono. Io potevo essere al mare. Questo cambia il rapporto col lavoro."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">10</span>
+    <h2>Step 7 — Push su GitHub</h2>
+    <p>Ultimo anello: l'agent committa l'archivio appena creato e lo pusha sulla repo GitHub. Spieghi in 60 secondi cosa significa: backup versionato, gratis, per sempre. Se il Mac muore domani, l'archivio è salvo.</p>
+    <p>Apri la repo nel browser: il commit è lì, con messaggio chiaro, fatto dall'agent. "Anche il backup è automatico. Non è un task in più — è dentro la pipeline."</p>
+    <div class="say"><b>Da dire:</b> "Tutto quello che costruite deve vivere anche su GitHub. Non si discute. E l'agent lo fa per voi."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">11</span>
+    <h2>Il run completo — un comando, davanti alla camera</h2>
+    <p>Gran finale: cartella pulita, lanci l'agent una volta sola con l'URL del canale. Mentre gira, ricapitoli a voce i 7 step che si stanno eseguendo da soli. Quando arriva la notifica Telegram, pausa drammatica.</p>
+    <p>Recap della potenza mostrata: file system, install di tool, AI pipeline, generazione PDF, cloud, messaging su due canali, git. "Tutto questo è UN agent. E voi adesso sapete leggerne ogni pezzo."</p>
+    <p>Ponte verso la L6: "il materiale è scaricato, trascritto, organizzato. Ma Claude ancora non lo SA — non è memoria, è archivio. Nella prossima lezione lo colleghiamo a Graphify e lo trasformiamo in un brain che risponde con la voce del creator."</p>
+    <div class="say"><b>Da dire:</b> "Un comando. Sette superpoteri. Un archivio perfetto nel vault. Prossima lezione: lo trasformiamo in memoria viva con Graphify."</div>
+  </div>
+
+  <div class="lesson-end">Fine L5 · CTA → L6 Graphify + brain</div>
+</section>
+
+<!-- =================== LEZIONE 6 =================== -->
+<section class="lesson" id="l6">
+  <div class="lesson-tag">Lezione 06 · 35–40 min</div>
+  <h1>Creare l'intera memoria con Graphify: dal canale YouTube a un brain interrogabile</h1>
 
   <div class="point">
     <span class="num">01</span>
@@ -644,8 +741,8 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   <div class="point">
     <span class="num">02</span>
     <h2>Indicizzare il vault</h2>
-    <p>Lancia il comando di index puntando a 02_KNOWLEDGE (la regola dentro/fuori vista in L4). Mostra l'output: scansiona tutti i .md, estrae entità, costruisce nodi, calcola archi. Tempo: tipicamente 1-3 minuti per vault medi.</p>
-    <p>Apri il grafo HTML generato. Mostra come navigarlo: click su nodo, vedi vicini, shortest path tra 2 concetti, zoom su comunità. Bello e funzionale insieme.</p>
+    <p>Lancia il comando di index puntando a 02_KNOWLEDGE (la regola dentro/fuori vista in L4) — dentro ci sono anche le lessons del canale YouTube generate dall'agent nella L5. Mostra l'output: scansiona tutti i .md, estrae entità, costruisce nodi, calcola archi. Tempo: tipicamente 1-3 minuti per vault medi.</p>
+    <p>Apri il grafo HTML generato. Mostra come navigarlo: click su nodo, vedi vicini, shortest path tra 2 concetti, zoom su comunità. Indica i nodi nati dalle lessons del canale: "questo lo ha scaricato l'agent ieri, oggi è un concetto nel grafo".</p>
     <div class="say"><b>Da dire:</b> "Una sola indicizzazione e vedi tutto il tuo cervello in 3D. La prima volta che lo apri ti emoziona."</div>
   </div>
 
@@ -677,29 +774,20 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <span class="num">06</span>
     <h2>Cos'è un brain — un argomento + le sue fonti + le sue regole</h2>
     <p>Apri Brains/ nel vault. Mostra le sottocartelle (anonimizzate o no a tua scelta). "Un brain è una persona finta che vive nel vault. Ha un nome, una voce, fonti, regole. Lo interroghi e ti risponde come fosse quel personaggio."</p>
-    <p>Esempi: Brain Marketing (= esperto di acquisition), Brain Nutrition (= dietologo), Brain Legal (= avvocato base). Ogni brain copre un dominio.</p>
+    <p>Esempi: Brain Marketing (= esperto di acquisition), Brain Nutrition (= dietologo), Brain Legal (= avvocato base). Ogni brain copre un dominio. E il materiale del canale YouTube della L5? È il primo candidato perfetto.</p>
     <div class="say"><b>Da dire:</b> "Un brain non è un prompt. È una persona finta che vive nel vault. Ha mood, memoria, regole, opinioni."</div>
   </div>
 
   <div class="point">
     <span class="num">07</span>
     <h2>Le fonti — documenti del tuo brand, libri, corsi, video</h2>
-    <p>Apri la cartella sources/ di un brain esempio. Mostra dentro: PDF, DOCX, MD, transcript di video, screenshot di chat, post Twitter, articoli. Tutto va dentro.</p>
+    <p>Apri la cartella sources/ di un brain esempio. Mostra dentro: PDF, DOCX, MD, transcript di video, screenshot di chat, post Twitter, articoli. Tutto va dentro. Per il canale YouTube le sources le ha già raccolte l'agent della L5.</p>
     <p>Regola: solo materiale che vuoi che il brain "abbia letto". Niente spazzatura. Se hai 50 PDF di un guru, mettili dentro. Se hai 10 video tradotti in markdown, dentro. È il libro di testo del personaggio.</p>
     <div class="say"><b>Da dire:</b> "Quello che metti in sources/ è quello che lui ha studiato. Quello che non metti, non sa."</div>
   </div>
 
   <div class="point">
     <span class="num">08</span>
-    <h2>La pipeline — fonte → estrazione → strutturazione</h2>
-    <p>Mostra la pipeline: PDF → tool di OCR o estrattore → testo markdown → spezzato in lessons → indicizzato nel brain. È il processo che trasforma rumore grezzo in conoscenza strutturata.</p>
-    <p>Per video: yt-dlp + Whisper (audio→testo) → Claude (testo→lessons IT). Ti ho preparato uno script che fa tutta la catena. Output finale: cartella di lessons pulite, una per video.</p>
-    <p>Per PDF lunghi: Claude legge → spezza per capitolo → ogni capitolo diventa una lesson. Niente copia-incolla manuale.</p>
-    <div class="say"><b>Da dire:</b> "Fonte grezza non si interroga. La pipeline trasforma il grezzo in interrogabile."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">09</span>
     <h2>Struttura cartella Brains/NomeArgomento/</h2>
     <p>Apri Brains/Hormozi/ (o un brain tuo). Mostra le 4-5 cartelle standard: sources/ (grezzo), lessons/ (estratto), wiki/ (sintesi a forma di pagina interna), CLAUDE.md (voice contract), SKILL.md (come si invoca).</p>
     <p>Spiega l'ADR-003: tutti i miei brain seguono la stessa struttura. Una volta che impari uno, sai farne 9. La forma è standard, il contenuto è specifico.</p>
@@ -707,16 +795,16 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">10</span>
+    <span class="num">09</span>
     <h2>Le lessons — come spezzare le fonti in unità interrogabili</h2>
-    <p>Apri lessons/ di un brain. Mostra 5 file. Una lesson = un concetto, un esempio, una regola pratica. Lunghezza tipica 200-400 parole. Più breve = poco contenuto. Più lungo = perdi focus.</p>
+    <p>Apri lessons/ di un brain. Mostra 5 file. Una lesson = un concetto, un esempio, una regola pratica. Lunghezza tipica 200-400 parole. Più breve = poco contenuto. Più lungo = perdi focus. Quelle del canale YouTube le ha già scritte l'agent della L5 — esattamente in questo formato.</p>
     <p>Naming: <code>NN_titolo-lesson.md</code> con ordine logico (non cronologico). La gerarchia te la dai tu — Claude impara la struttura dall'index della cartella.</p>
     <p>Ogni lesson finisce con "Take-away" — la frase secca che vuoi che il brain ripeta quando interrogato.</p>
     <div class="say"><b>Da dire:</b> "Una lesson = una pillola. Più pillole = brain più forte."</div>
   </div>
 
   <div class="point">
-    <span class="num">11</span>
+    <span class="num">10</span>
     <h2>La wiki interna del brain</h2>
     <p>Apri wiki/ del brain. Mostra 5-10 file: glossario, frameworks, cheat-sheet, decisioni note. È la "manualistica" che il brain consulta quando gli serve sintesi.</p>
     <p>Differenza con lessons: lesson = pillola di insegnamento. Wiki = pagina di riferimento rapido. Quando il brain risponde, attinge da entrambe.</p>
@@ -725,16 +813,16 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">12</span>
+    <span class="num">11</span>
     <h2>Voice contract — come parla il brain, cosa dice, cosa NON dice</h2>
     <p>Apri CLAUDE.md del brain. Mostra le sezioni: voice (tono, registro, lingua), do (cosa dice sempre), don't (cosa non dice mai), examples (3-5 risposte campione).</p>
     <p>Esempio Hormozi-brain: voce diretta, frasi corte, no hedge, parla di money e leverage. Non dice "dipende" — sceglie e motiva. Esempio: "Aumenti i prezzi del 30%. Chi non compra non era cliente tuo."</p>
-    <p>Senza voice contract il brain risponde generico Claude. Con voice contract risponde "in persona".</p>
+    <p>Per il canale YouTube il voice contract si genera da solo: Claude analizza come parla il creator nei transcript e scrive il CLAUDE.md (voce, do/don't, esempi). Senza voice contract il brain risponde generico Claude. Con voice contract risponde "in persona".</p>
     <div class="say"><b>Da dire:</b> "Senza voice contract è Claude. Con voice contract è il personaggio. La differenza la senti dalla prima riga."</div>
   </div>
 
   <div class="point">
-    <span class="num">13</span>
+    <span class="num">12</span>
     <h2>La skill /nome-brain</h2>
     <p>Apri SKILL.md di un brain. Mostra come si attiva: <code>/hormozi</code>, <code>/zakaria</code>, ecc. Dietro le quinte la skill: carica il CLAUDE.md del brain, lo applica come voice, mette il brain in "modalità persona".</p>
     <p>Mostra demo dal vivo: <code>/hormozi come triplo i prezzi?</code> → risposta secca in stile. <code>/sarah quale hook funziona meglio per skincare?</code> → risposta in stile Sarah.</p>
@@ -742,7 +830,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">14</span>
+    <span class="num">13</span>
     <h2>Q&A volanti vs decision-grade</h2>
     <p>Spiega i 2 modi di usare un brain. Volante = risposta breve (5-10 righe), per allineamenti rapidi durante il lavoro. Decision-grade = output strutturato (decisione + alternative + reasoning + rischi), quando devi prendere decisioni che costano soldi.</p>
     <p>Mostra esempio volante: "/hormozi quanto sconto sul black friday?" → risposta in 4 righe. Mostra esempio decision-grade: stesso brand, stessa domanda, ma "decision-grade" attivato → output di 1 pagina strutturato.</p>
@@ -751,9 +839,17 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
+    <span class="num">14</span>
+    <h2>Build + test — il brain del canale YouTube risponde "in persona"</h2>
+    <p>Momento clou: assembli il brain del canale. Le sources/ e le lessons/ le ha già preparate l'agent della L5. Dici a Claude: "genera wiki, voice contract e skill per Brains/NomeCanale/". 5 minuti e la struttura ADR-003 è completa.</p>
+    <p>Test live: <code>/nomebrain</code> e fai una domanda al brain appena nato. Risponde con la voce del creator, citando le sue lessons. Poi re-index Graphify: il brain entra nel grafo, i suoi concetti si collegano al resto del vault. Cerchio chiuso.</p>
+    <div class="say"><b>Da dire:</b> "Ieri era un canale YouTube. Oggi è un esperto che vive nel mio vault, parla con la sua voce e si collega a tutto il resto della mia memoria."</div>
+  </div>
+
+  <div class="point">
     <span class="num">15</span>
-    <h2>Esempio pratico — costruire il Brain Marketing dai file forniti</h2>
-    <p>Annuncio: "Adesso lo costruiamo insieme. Brain Marketing = Creative Strategist." Apri una cartella vuota Brains/Marketing/. Lancia uno script che ti ho preparato: scaffold delle cartelle, CLAUDE.md template, sources/ vuoto.</p>
+    <h2>Secondo brain — costruire il Brain Marketing dai file forniti</h2>
+    <p>Annuncio: "Adesso il metodo lo applichiamo al tuo business. Secondo brain: Brain Marketing = Creative Strategist." Apri una cartella vuota Brains/Marketing/. Lancia uno script che ti ho preparato: scaffold delle cartelle, CLAUDE.md template, sources/ vuoto.</p>
     <p>Carichi nei sources/ 3 documenti tuoi (esempio): un PDF di marketing che ami, le tue customer-voice notes, i tuoi top-ad screenshot con commento. Hai dato in pasto al brain il materiale base.</p>
     <p>Lanci la pipeline: estrazione → lessons → wiki. 5-10 minuti, ed è già operativo.</p>
     <div class="say"><b>Da dire:</b> "Da zero a brain operativo in 15 minuti, se hai i materiali pronti. Niente magia. Solo pipeline."</div>
@@ -789,107 +885,8 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <h2>Test — input prodotto, output 3 angle + 3 hook + script video</h2>
     <p>Test live: prendi un prodotto vero di un tuo brand. Lanci la skill. Aspetti 30 secondi. Output.</p>
     <p>Leggi gli output a voce alta. Commenta: "Questo angle ha senso perché…", "Questo hook lo girerei perché…". Mostra anche un'ipotesi non perfetta: "Questa direi di scartarla perché…".</p>
-    <p>Lezione meta: il brain non è infallibile. È un partner di brainstorming velocissimo. Tu sei ancora il direttore creativo.</p>
+    <p>Lezione meta: il brain non è infallibile. È un partner di brainstorming velocissimo. Tu sei ancora il direttore creativo. Chiusura: "Memoria completa: archivio, grafo, brain. Adesso facciamo lavorare tutto questo sul vostro store — prossima lezione, Shopify."</p>
     <div class="say"><b>Da dire:</b> "30 secondi e ho 6 ipotesi creative concrete. Una vale. Le altre cinque mi spingono a pensare. Costo: zero."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">20</span>
-    <h2>Brain = sa, Agent = fa — anatomia di un agent</h2>
-    <p>Chiusura ponte: il brain risponde quando lo chiami, ma non fa niente da solo. L'agent invece lavora anche mentre dormi. Schema dei 4 componenti: input (cosa riceve), ragionamento (cosa decide), output (cosa restituisce), memoria (cosa ricorda dalla volta prima).</p>
-    <p>Esempio: DailyReport. Input = ordini Shopify del giorno. Ragionamento = aggregare per prodotto, calcolare margini. Output = messaggio Telegram. Memoria = stato del giorno precedente. 4 componenti, sempre tutti e 4 — mancano due, non è un agent, è uno script.</p>
-    <p>Anticipa la prossima lezione: "la pipeline che ha costruito questo brain — scaricato, trascritto, strutturato da sola — È un agent. Nella prossima lezione lo costruiamo insieme, pezzo per pezzo, davanti alla camera."</p>
-    <div class="say"><b>Da dire:</b> "Brain = sa. Agent = fa. Il sistema completo è agent che usano brain. E adesso ne costruiamo uno."</div>
-  </div>
-
-  <div class="lesson-end">Fine L5 · CTA → L6 build live del primo agent</div>
-</section>
-
-<!-- =================== LEZIONE 6 =================== -->
-<section class="lesson" id="l6">
-  <div class="lesson-tag">Lezione 06 · 30–35 min</div>
-  <h1>Build live del primo agent: da un canale YouTube a un brain completo, con tutta la potenza di Claude</h1>
-
-  <div class="point">
-    <span class="num">01</span>
-    <h2>Il piano — un comando, sette superpoteri</h2>
-    <p>Annuncio: "Oggi costruiamo il primo agent insieme, da zero, in diretta. Si chiama BrainBuilder. Gli dai un canale YouTube e lui ti costruisce un brain completo nel vault. E mentre lo fa, vi mostro tutto quello che Claude Code sa fare su un computer."</p>
-    <p>Mostra lo schema della catena completa: YouTube → audio → trascrizione → lessons → brain → PDF → Drive → Telegram → WhatsApp → GitHub. Un input, nove output. "Questa è la potenza di cui parlavo nella Lezione 1. Adesso la vedete tutta in fila."</p>
-    <div class="say"><b>Da dire:</b> "Un comando solo. E alla fine avrete: un esperto interrogabile, un PDF, un file su Drive, un messaggio sul telefono e un backup su GitHub. Tutto da solo."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">02</span>
-    <h2>La spec — scrivere cosa deve fare PRIMA di costruire</h2>
-    <p>Apri un file vuoto SPEC.md. Scrivi insieme allo studente la spec in italiano semplice: input (URL canale o lista video), output (cartella Brains/Nome/ completa + notifiche), vincoli (niente video sopra 1 ora, lessons da 200-400 parole).</p>
-    <p>Regola d'oro ripetuta: mai codice prima della spec. La spec è il contratto. Claude la legge e sa esattamente cosa costruire — e tu sai esattamente cosa verificare alla fine.</p>
-    <div class="say"><b>Da dire:</b> "Dieci righe di italiano valgono più di cento righe di codice scritto a caso. Prima pensi, poi costruisci."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">03</span>
-    <h2>Step 1 — Scaricare i video (yt-dlp)</h2>
-    <p>Dici a Claude: "installa yt-dlp e scarica l'audio di questi 3 video". Mostra che Claude installa il tool da solo, lancia il download, e i file .mp3 appaiono nella cartella sources/ del brain.</p>
-    <p>Punto didattico: non hai aperto un browser, non hai cliccato niente. Hai descritto il risultato e Claude ha scelto il tool, l'ha installato e l'ha usato. Questa è la differenza tra usare un computer e dirigere un computer.</p>
-    <div class="say"><b>Da dire:</b> "Io non ho scaricato niente. Ho detto cosa volevo. Lui ha fatto. Memorizzate questa sensazione."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">04</span>
-    <h2>Step 2 — Trascrivere (Whisper)</h2>
-    <p>Claude lancia Whisper sugli audio: da .mp3 a .txt. Mentre gira (1-2 minuti a video), spieghi cosa sta succedendo: un modello AI locale che trasforma il parlato in testo, gratis, sul tuo computer.</p>
-    <p>Apri un transcript appena generato. Mostra che è testo grezzo: niente punteggiatura perfetta, ripetizioni, intercalari. "Questo è il grezzo. Non si interroga. Adesso lo raffiniamo."</p>
-    <div class="say"><b>Da dire:</b> "Audio → testo, gratis, in locale. Qualsiasi video, qualsiasi podcast, qualsiasi vocale diventa testo lavorabile."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">05</span>
-    <h2>Step 3 — Da transcript a lessons (Claude)</h2>
-    <p>Il cuore della pipeline: Claude legge ogni transcript e lo spezza in lessons da 200-400 parole, una per concetto, con take-away finale. Mostra il prompt che fa il lavoro — è dentro l'agent, lo studente lo riusa così com'è.</p>
-    <p>Apri lessons/ e leggi una lesson a voce alta. Confronta col transcript grezzo: stesso contenuto, forma completamente diversa. "Questo adesso è interrogabile."</p>
-    <p>Poi il voice contract: Claude analizza come parla il personaggio nei transcript e genera il CLAUDE.md del brain (voce, do/don't, esempi). Da quel momento il brain risponde "in persona".</p>
-    <div class="say"><b>Da dire:</b> "Il grezzo diventa pillole. Le pillole diventano un esperto. E l'esperto ha pure la voce dell'originale."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">06</span>
-    <h2>Step 4 — Il PDF riassunto (Chrome headless)</h2>
-    <p>L'agent genera un PDF di presentazione del brain: chi è il personaggio, quante lessons, gli argomenti coperti, i 10 take-away migliori. Come lo fa: genera una pagina HTML con lo stile del corso, poi Chrome headless la stampa in PDF. Un comando.</p>
-    <p>Apri il PDF appena creato. "Questo l'ha impaginato lui. Titoli, sezioni, grafica. Nessun designer, nessun Canva, nessun copia-incolla."</p>
-    <div class="say"><b>Da dire:</b> "Claude scrive HTML meglio di quanto io userò mai Word. Qualsiasi documento vi serva — report, guide, preventivi — questo è il pattern."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">07</span>
-    <h2>Step 5 — Upload su Google Drive</h2>
-    <p>L'agent carica il PDF su Drive nella cartella del brand e stampa il webViewLink. Regola insegnata: dopo ogni upload, l'agent stampa SEMPRE il link — un file senza link è un file invisibile.</p>
-    <p>Apri il link davanti alla camera: il PDF è lì, condivisibile col team o con chiunque. "Dal terminale al cloud, senza aprire Drive."</p>
-    <div class="say"><b>Da dire:</b> "Locale per lavorare, Drive per condividere. L'agent fa il passaggio da solo e ti dà il link."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">08</span>
-    <h2>Step 6 — Notifiche: Telegram + WhatsApp</h2>
-    <p>L'agent manda il messaggio di fine lavoro: su Telegram (bot creato con BotFather, due minuti di setup) arriva "Brain pronto: N lessons, ecco il PDF" con il documento allegato. Tira fuori il telefono e mostra la notifica arrivare in diretta.</p>
-    <p>Stessa notifica su WhatsApp come secondo canale. Punto didattico: l'output di un agent deve arrivare dove vivi tu — non in un log che non leggerai mai.</p>
-    <div class="say"><b>Da dire:</b> "L'agent ha finito e me l'ha detto sul telefono. Io potevo essere al mare. Questo cambia il rapporto col lavoro."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">09</span>
-    <h2>Step 7 — Push su GitHub</h2>
-    <p>Ultimo anello: l'agent committa il brain appena creato e lo pusha sulla repo GitHub. Spieghi in 60 secondi cosa significa: backup versionato, gratis, per sempre. Se il Mac muore domani, il brain è salvo.</p>
-    <p>Apri la repo nel browser: il commit è lì, con messaggio chiaro, fatto dall'agent. "Anche il backup è automatico. Non è un task in più — è dentro la pipeline."</p>
-    <div class="say"><b>Da dire:</b> "Tutto quello che costruite deve vivere anche su GitHub. Non si discute. E l'agent lo fa per voi."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">10</span>
-    <h2>Il run completo — un comando, davanti alla camera</h2>
-    <p>Gran finale: cartella pulita, lanci l'agent una volta sola con l'URL del canale. Mentre gira, ricapitoli a voce i 7 step che si stanno eseguendo da soli. Quando arriva la notifica Telegram, pausa drammatica.</p>
-    <p>Poi il test finale: <code>/nomebrain</code> e fai una domanda al brain appena nato. Risponde con la voce del personaggio, citando le sue lessons. Cerchio chiuso.</p>
-    <p>Recap della potenza mostrata: file system, install di tool, AI pipeline, generazione PDF, cloud, messaging su due canali, git. "Tutto questo è UN agent. E voi adesso sapete leggerne ogni pezzo."</p>
-    <div class="say"><b>Da dire:</b> "Un comando. Sette superpoteri. Un esperto nuovo nel vault. Adesso lo facciamo lavorare sul vostro store — prossima lezione, Shopify."</div>
   </div>
 
   <div class="lesson-end">Fine L6 · CTA → L7 Shopify setup</div>
