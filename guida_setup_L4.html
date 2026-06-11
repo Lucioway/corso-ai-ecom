@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Guida Setup — Memoria persistente + Graphify</title>
+<title>Guida Setup — La memoria del sistema</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
@@ -101,20 +101,16 @@ pre .o{color:#fff}
     <div class="ghostnum">04</div>
     <div class="kicker">Corso AI + Ecommerce · Lezione 04</div>
     <h1>La memoria del sistema.<br>Setup completo.</h1>
-    <p class="lead">Memoria persistente + Graphify su un Claude appena installato. Copia, incolla, verifica. Alla fine Claude ricorda tutto e il tuo vault è un grafo interrogabile.</p>
+    <p class="lead">Memoria persistente su un Claude appena installato. Copia, incolla, verifica. Alla fine Claude ricorda tutto tra una sessione e l'altra — e sai già cosa entrerà nel grafo.</p>
     <div class="toc">
       <div><b>01</b> La mappa — memoria + grafo</div>
       <div><b>02</b> Verifica la memoria automatica</div>
       <div><b>03</b> I 4 tipi di memoria</div>
       <div><b>04</b> Forza la prima memoria</div>
-      <div><b>05</b> Installa Graphify — 3 comandi</div>
-      <div><b>06</b> Indicizza il vault</div>
-      <div><b>07</b> Collega il grafo a Claude (MCP)</div>
-      <div><b>08</b> Interroga il grafo — i 3 test</div>
-      <div><b>09</b> Cosa indicizzare e cosa no</div>
-      <div><b>10</b> Checklist finale</div>
+      <div><b>05</b> Cosa indicizzare e cosa no</div>
+      <div><b>06</b> Checklist finale</div>
     </div>
-    <div class="meta"><span>Guida d'installazione</span><span>Mac + Windows (WSL2)</span><span>~15 min</span></div>
+    <div class="meta"><span>Guida d'installazione</span><span>Mac + Windows (WSL2)</span><span>~10 min</span></div>
   </section>
 
   <!-- 01 -->
@@ -170,67 +166,7 @@ pre .o{color:#fff}
 
   <!-- 05 -->
   <div class="sec-wrap">
-    <div class="sec-tag">05 · Graphify</div>
-    <h2 class="sec">Installa Graphify — 3 comandi</h2>
-    <p class="body">Graphify si installa con <b>uv</b> (il gestore pacchetti Python veloce). Se non hai uv, il primo blocco lo installa.</p>
-    <pre><span class="c"># 0. Solo se non hai uv (una volta sola)</span>
-<span class="o">curl -LsSf https://astral.sh/uv/install.sh | sh</span>
-
-<span class="c"># 1. Installa il tool</span>
-<span class="o">uv tool install graphifyy</span>
-
-<span class="c"># 2. Verifica</span>
-<span class="o">graphify --help</span></pre>
-    <div class="note">Esce la schermata di help = installato. <b>Attenzione al nome:</b> il pacchetto è <code>graphifyy</code> (doppia y), il comando è <code>graphify</code> (singola).</div>
-  </div>
-
-  <!-- 06 -->
-  <div class="sec-wrap">
-    <div class="sec-tag">06 · Indicizzazione</div>
-    <h2 class="sec">Indicizza il vault</h2>
-    <p class="body">Punta Graphify alla cartella della conoscenza — <b>non</b> a tutto il vault (vedi sezione 09). Per un vault medio ci mette 1–3 minuti.</p>
-    <pre><span class="c"># Indicizza la cartella knowledge del tuo vault</span>
-<span class="o">graphify ~/Documents/IlTuoVault/02_KNOWLEDGE</span>
-
-<span class="c"># Output: si crea la cartella graphify-out/ con dentro</span>
-<span class="c">#   graph.json   → il grafo (nodi + archi)</span>
-<span class="c">#   graph.html   → la visualizzazione interattiva</span>
-
-<span class="c"># Apri il grafo nel browser</span>
-<span class="o">open ~/Documents/IlTuoVault/02_KNOWLEDGE/graphify-out/graph.html</span></pre>
-    <div class="note">La prima apertura è il momento "wow": <b>il tuo cervello visto da fuori</b>. Click su un nodo = vedi i vicini. Le comunità di nodi = i tuoi temi ricorrenti.</div>
-  </div>
-
-  <!-- 07 -->
-  <div class="sec-wrap">
-    <div class="sec-tag">07 · MCP</div>
-    <h2 class="sec">Collega il grafo a Claude</h2>
-    <p class="body">Il grafo nel browser è bello, ma il valore vero è quando <b>Claude lo interroga da solo</b>. Si collega via MCP con un comando:</p>
-    <pre><span class="c"># Sostituisci il path con il TUO percorso reale</span>
-<span class="o">claude mcp add graphify-vault -- python -m graphify.serve ~/Documents/IlTuoVault/02_KNOWLEDGE/graphify-out/graph.json</span>
-
-<span class="c"># Verifica che il server sia registrato</span>
-<span class="o">claude mcp list</span></pre>
-    <div class="note">Da questo momento, in ogni sessione Claude ha i tool del grafo: <code>query_graph</code>, <code>get_neighbors</code>, <code>shortest_path</code>, <code>god_nodes</code>. Non devi chiamarli tu — li usa lui quando serve.</div>
-  </div>
-
-  <!-- 08 -->
-  <div class="sec-wrap">
-    <div class="sec-tag">08 · Verifica</div>
-    <h2 class="sec">Interroga il grafo — i 3 test</h2>
-    <p class="body">Nuova sessione <code>claude</code>, tre domande. Se rispondono tutte, il sistema è in piedi.</p>
-    <table class="tbl">
-      <tr><th>Test</th><th>Chiedi</th><th>Risposta attesa</th></tr>
-      <tr><td><b>01 · god nodes</b></td><td>"quali sono i concetti più collegati del mio grafo?"</td><td>Lista dei nodi con più connessioni — i tuoi temi centrali</td></tr>
-      <tr><td><b>02 · vicini</b></td><td>"cosa è collegato a [un tuo concetto]?"</td><td>I nodi adiacenti, con il tipo di relazione</td></tr>
-      <tr><td><b>03 · percorso</b></td><td>"come si collegano [concetto A] e [concetto B]?"</td><td>Il percorso più corto tra i due, nodo per nodo</td></tr>
-    </table>
-    <div class="note">Il test 03 è quello che cambia il modo di lavorare: <b>connessioni tra idee che non sapevi di avere</b> — su carta non le avresti mai viste.</div>
-  </div>
-
-  <!-- 09 -->
-  <div class="sec-wrap">
-    <div class="sec-tag">09 · Selezione</div>
+    <div class="sec-tag">05 · Selezione</div>
     <h2 class="sec">Cosa indicizzare e cosa no</h2>
     <p class="body">Indicizzare tutto = grafo rumoroso e inutile. La regola: <b>dentro la conoscenza, fuori il materiale grezzo</b>.</p>
     <table class="tbl">
@@ -242,25 +178,22 @@ pre .o{color:#fff}
     <div class="note"><b>Criterio in una frase:</b> se è conoscenza scritta da te o per te → dentro. Se è materiale grezzo o log automatico → fuori.</div>
   </div>
 
-  <!-- 10 -->
+  <!-- 06 -->
   <div class="sec-wrap">
-    <div class="sec-tag">10 · Checklist</div>
+    <div class="sec-tag">06 · Checklist</div>
     <h2 class="sec">Checklist finale</h2>
-    <p class="body">Non passare alla Lezione 5 senza tutte e 6 le spunte verdi.</p>
+    <p class="body">Non passare alla Lezione 5 senza tutte e 3 le spunte verdi.</p>
     <div class="check">
       <div class="ci"><div class="bx"></div><div class="ct"><b>Memoria automatica verificata</b><small>Claude risponde con il percorso del suo MEMORY.md</small></div></div>
       <div class="ci"><div class="bx"></div><div class="ct"><b>Prima memoria forzata e persistente</b><small>chiudi sessione → riapri → "cosa ti ricordi di me?" risponde giusto</small></div></div>
-      <div class="ci"><div class="bx"></div><div class="ct"><b>Graphify installato</b><small><code>graphify --help</code> risponde</small></div></div>
-      <div class="ci"><div class="bx"></div><div class="ct"><b>Vault indicizzato</b><small><code>graphify-out/graph.html</code> si apre e mostra il grafo</small></div></div>
-      <div class="ci"><div class="bx"></div><div class="ct"><b>MCP collegato</b><small><code>claude mcp list</code> mostra graphify-vault</small></div></div>
-      <div class="ci"><div class="bx"></div><div class="ct"><b>I 3 test del grafo passati</b><small>god nodes · vicini · shortest path — tutti rispondono</small></div></div>
+      <div class="ci"><div class="bx"></div><div class="ct"><b>Lista "dentro/fuori" pronta</b><small>sai già quali cartelle del tuo vault entreranno nel grafo in Lezione 5</small></div></div>
     </div>
   </div>
 
   <!-- End -->
   <div class="endline">
-    <h2>Memoria attiva. Ora i cervelli.</h2>
-    <p class="body">Claude ricorda, il vault è un grafo. Nella prossima lezione costruiamo il primo brain interrogabile. &nbsp;·&nbsp; Corso AI + Ecommerce · Lezione 04 → 05</p>
+    <h2>Memoria attiva. Ora il grafo.</h2>
+    <p class="body">Claude ricorda tra le sessioni e sai cosa entrerà nel grafo. Nella prossima lezione installiamo Graphify, indicizziamo il vault e lo interroghiamo. &nbsp;·&nbsp; Corso AI + Ecommerce · Lezione 04 → 05</p>
   </div>
 
 </div>
