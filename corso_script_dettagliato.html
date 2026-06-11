@@ -649,14 +649,6 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <div class="say"><b>Da dire:</b> "Più non è meglio. Indicizza solo ciò che ha senso semantico. Il rumore degrada il segnale."</div>
   </div>
 
-  <div class="point">
-    <span class="num">08</span>
-    <h2>Refresh giornaliero</h2>
-    <p>Apri il launchd / cron. Mostra il job che gira ogni notte alle 03:00 e fa il re-index. Output: stats di delta (nuovi nodi, nuovi archi, nodi rimossi).</p>
-    <p>Frequenza giusta: giornaliero se modifichi tanto, settimanale se modifichi poco. Mai manuale — l'oblio è il nemico. Schedula e dimentica.</p>
-    <div class="say"><b>Da dire:</b> "Una volta scheduled, Graphify si aggiorna da solo. Tu lo apri quando ti serve, ed è sempre fresco."</div>
-  </div>
-
   <div class="lesson-end">Fine L4 · CTA → L5 brain + agent</div>
 </section>
 
@@ -667,6 +659,22 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
 
   <div class="point">
     <span class="num">01</span>
+    <h2>Warm-up — refresh giornaliero del grafo</h2>
+    <p>Riprendi il grafo della L4. Il vault cresce ogni giorno: il grafo deve seguirlo da solo. Mostra il job launchd / cron che gira ogni notte alle 03:00 e fa il re-index. Output: stats di delta (nuovi nodi, nuovi archi, nodi rimossi).</p>
+    <p>Mostra come si crea: lo detti a Claude. "Schedula un refresh giornaliero del mio grafo alle 03:00, comando graphify --refresh, usa launchd, log su file." Lui crea il file, lo carica, lo testa. Frequenza giusta: giornaliero se modifichi tanto, settimanale se poco. Mai manuale.</p>
+    <div class="say"><b>Da dire:</b> "Una volta scheduled, Graphify si aggiorna da solo. Tu lo apri quando ti serve, ed è sempre fresco."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02</span>
+    <h2>Troubleshooting memoria + grafo</h2>
+    <p>I 6 errori che vedrai davvero. command not found: uv → PATH, riapri il terminale. command not found: graphify → uv tool update-shell. Indicizzazione lentissima → stai puntando a una cartella con PDF/media, punta solo a 02_KNOWLEDGE. MCP non in lista → path del graph.json sbagliato, verifica con ls e ripeti claude mcp add. Claude non ricorda tra sessioni → cartella diversa = progetto diverso, riapri nella stessa cartella. Grafo vuoto → Graphify legge markdown, converti i file in .md.</p>
+    <p>Regola d'oro che vale per tutto il corso: qualunque errore, copia il testo esatto e incollalo a Claude in chat. Descrivi cosa stavi facendo. Nel 90% dei casi te lo risolve al primo colpo.</p>
+    <div class="say"><b>Da dire:</b> "Non memorizzare i fix. Memorizza il metodo: errore esatto, incollato a Claude, contesto. Lui ripara, tu impari."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">03</span>
     <h2>Cos'è un brain — un argomento + le sue fonti + le sue regole</h2>
     <p>Apri Brains/ nel vault. Mostra le sottocartelle (anonimizzate o no a tua scelta). "Un brain è una persona finta che vive nel vault. Ha un nome, una voce, fonti, regole. Lo interroghi e ti risponde come fosse quel personaggio."</p>
     <p>Esempi: Brain Marketing (= esperto di acquisition), Brain Nutrition (= dietologo), Brain Legal (= avvocato base). Ogni brain copre un dominio.</p>
@@ -674,7 +682,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">02</span>
+    <span class="num">04</span>
     <h2>Le fonti — documenti del tuo brand, libri, corsi, video</h2>
     <p>Apri la cartella sources/ di un brain esempio. Mostra dentro: PDF, DOCX, MD, transcript di video, screenshot di chat, post Twitter, articoli. Tutto va dentro.</p>
     <p>Regola: solo materiale che vuoi che il brain "abbia letto". Niente spazzatura. Se hai 50 PDF di un guru, mettili dentro. Se hai 10 video tradotti in markdown, dentro. È il libro di testo del personaggio.</p>
@@ -682,7 +690,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">03</span>
+    <span class="num">05</span>
     <h2>La pipeline — fonte → estrazione → strutturazione</h2>
     <p>Mostra la pipeline: PDF → tool di OCR o estrattore → testo markdown → spezzato in lessons → indicizzato nel brain. È il processo che trasforma rumore grezzo in conoscenza strutturata.</p>
     <p>Per video: yt-dlp + Whisper (audio→testo) → Claude (testo→lessons IT). Ti ho preparato uno script che fa tutta la catena. Output finale: cartella di lessons pulite, una per video.</p>
@@ -691,7 +699,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">04</span>
+    <span class="num">06</span>
     <h2>Struttura cartella Brains/NomeArgomento/</h2>
     <p>Apri Brains/Hormozi/ (o un brain tuo). Mostra le 4-5 cartelle standard: sources/ (grezzo), lessons/ (estratto), wiki/ (sintesi a forma di pagina interna), CLAUDE.md (voice contract), SKILL.md (come si invoca).</p>
     <p>Spiega l'ADR-003: tutti i miei brain seguono la stessa struttura. Una volta che impari uno, sai farne 9. La forma è standard, il contenuto è specifico.</p>
@@ -699,7 +707,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">05</span>
+    <span class="num">07</span>
     <h2>Le lessons — come spezzare le fonti in unità interrogabili</h2>
     <p>Apri lessons/ di un brain. Mostra 5 file. Una lesson = un concetto, un esempio, una regola pratica. Lunghezza tipica 200-400 parole. Più breve = poco contenuto. Più lungo = perdi focus.</p>
     <p>Naming: <code>NN_titolo-lesson.md</code> con ordine logico (non cronologico). La gerarchia te la dai tu — Claude impara la struttura dall'index della cartella.</p>
@@ -708,7 +716,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">06</span>
+    <span class="num">08</span>
     <h2>La wiki interna del brain</h2>
     <p>Apri wiki/ del brain. Mostra 5-10 file: glossario, frameworks, cheat-sheet, decisioni note. È la "manualistica" che il brain consulta quando gli serve sintesi.</p>
     <p>Differenza con lessons: lesson = pillola di insegnamento. Wiki = pagina di riferimento rapido. Quando il brain risponde, attinge da entrambe.</p>
@@ -717,7 +725,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">07</span>
+    <span class="num">09</span>
     <h2>Voice contract — come parla il brain, cosa dice, cosa NON dice</h2>
     <p>Apri CLAUDE.md del brain. Mostra le sezioni: voice (tono, registro, lingua), do (cosa dice sempre), don't (cosa non dice mai), examples (3-5 risposte campione).</p>
     <p>Esempio Hormozi-brain: voce diretta, frasi corte, no hedge, parla di money e leverage. Non dice "dipende" — sceglie e motiva. Esempio: "Aumenti i prezzi del 30%. Chi non compra non era cliente tuo."</p>
@@ -726,7 +734,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">08</span>
+    <span class="num">10</span>
     <h2>La skill /nome-brain</h2>
     <p>Apri SKILL.md di un brain. Mostra come si attiva: <code>/hormozi</code>, <code>/zakaria</code>, ecc. Dietro le quinte la skill: carica il CLAUDE.md del brain, lo applica come voice, mette il brain in "modalità persona".</p>
     <p>Mostra demo dal vivo: <code>/hormozi come triplo i prezzi?</code> → risposta secca in stile. <code>/sarah quale hook funziona meglio per skincare?</code> → risposta in stile Sarah.</p>
@@ -734,7 +742,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">09</span>
+    <span class="num">11</span>
     <h2>Q&A volanti vs decision-grade</h2>
     <p>Spiega i 2 modi di usare un brain. Volante = risposta breve (5-10 righe), per allineamenti rapidi durante il lavoro. Decision-grade = output strutturato (decisione + alternative + reasoning + rischi), quando devi prendere decisioni che costano soldi.</p>
     <p>Mostra esempio volante: "/hormozi quanto sconto sul black friday?" → risposta in 4 righe. Mostra esempio decision-grade: stesso brand, stessa domanda, ma "decision-grade" attivato → output di 1 pagina strutturato.</p>
@@ -743,7 +751,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">10</span>
+    <span class="num">12</span>
     <h2>Esempio pratico — costruire il Brain Marketing dai file forniti</h2>
     <p>Annuncio: "Adesso lo costruiamo insieme. Brain Marketing = Creative Strategist." Apri una cartella vuota Brains/Marketing/. Lancia uno script che ti ho preparato: scaffold delle cartelle, CLAUDE.md template, sources/ vuoto.</p>
     <p>Carichi nei sources/ 3 documenti tuoi (esempio): un PDF di marketing che ami, le tue customer-voice notes, i tuoi top-ad screenshot con commento. Hai dato in pasto al brain il materiale base.</p>
@@ -752,7 +760,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">11</span>
+    <span class="num">13</span>
     <h2>Strutturare hook, angle, copy, offer</h2>
     <p>Mostra l'organizzazione del brain marketing: 4 sotto-tag per le lessons (hook, angle, copy, offer). Quando interroghi puoi dire "/creative quale hook funziona per shapewear?" e lui pesca solo dal sotto-tag hook.</p>
     <p>Mini-spiegazione di ognuno: hook = i primi 3 secondi. Angle = la storia/promessa. Copy = il testo del corpo. Offer = lo scambio (prezzo + bonus + garanzia).</p>
@@ -760,7 +768,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">12</span>
+    <span class="num">14</span>
     <h2>Voice contract del Creative Strategist</h2>
     <p>Apri CLAUDE.md del brain Marketing. Voice: senior creative + direct-response copywriter, parla in italiano se brief in italiano altrimenti inglese. Cita sempre la fonte (quale lesson, quale ad reference). Non inventa numeri di benchmark — se non li ha, dice "non li ho".</p>
     <p>Esempi do/don't concreti. Do: "Hook A vince perché il primo frame interrompe il pattern di shapewear (fonte: Sarah lesson 03)." Don't: "Hook A è migliore per varie ragioni." (vago, niente fonte).</p>
@@ -768,7 +776,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">13</span>
+    <span class="num">15</span>
     <h2>Build della skill /creative-strategist</h2>
     <p>Apri la skill /creative-strategist. Mostra la SKILL.md: descrizione, contesto da caricare (CLAUDE.md brain + ultimi top ads del brand), output format (3 angle + 3 hook + 1 script video).</p>
     <p>Demo: <code>/creative-strategist prodotto: Bronzata tan cream</code>. Mentre gira, mostra che pesca dalle lessons del brain + dai top ads salvati nel vault.</p>
@@ -777,7 +785,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">14</span>
+    <span class="num">16</span>
     <h2>Test — input prodotto, output 3 angle + 3 hook + script video</h2>
     <p>Test live: prendi un prodotto vero di un tuo brand. Lanci la skill. Aspetti 30 secondi. Output.</p>
     <p>Leggi gli output a voce alta. Commenta: "Questo angle ha senso perché…", "Questo hook lo girerei perché…". Mostra anche un'ipotesi non perfetta: "Questa direi di scartarla perché…".</p>
@@ -786,7 +794,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">15</span>
+    <span class="num">17</span>
     <h2>Brain = sa, Agent = fa — anatomia di un agent</h2>
     <p>Chiusura ponte: il brain risponde quando lo chiami, ma non fa niente da solo. L'agent invece lavora anche mentre dormi. Schema dei 4 componenti: input (cosa riceve), ragionamento (cosa decide), output (cosa restituisce), memoria (cosa ricorda dalla volta prima).</p>
     <p>Esempio: DailyReport. Input = ordini Shopify del giorno. Ragionamento = aggregare per prodotto, calcolare margini. Output = messaggio Telegram. Memoria = stato del giorno precedente. 4 componenti, sempre tutti e 4 — mancano due, non è un agent, è uno script.</p>
