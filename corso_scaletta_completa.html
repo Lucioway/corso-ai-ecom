@@ -141,75 +141,81 @@ h1{font-family:var(--display);font-weight:500;font-size:clamp(32px,4.5vw,48px);l
 </div>
 
 <div class="lesson">
-  <h2>Lezione 7 — Shopify dal terminale — setup: app custom, token, primi comandi</h2>
+  <h2>Lezione 7 — Shopify dentro Claude Code: setup + l'agent che gestisce lo store</h2>
   <ol>
     <li>Perché collegare Shopify a Claude</li>
-    <li>Connettere Shopify — app custom, token, permessi</li>
-    <li>Il primo comando — leggere lo store dal terminale</li>
-    <li>Theme CLI — il tema come cartella di file</li>
-    <li>La regola sacra — dev theme separato</li>
+    <li>Step 1 — Connettere Shopify: app custom, token, permessi</li>
+    <li>Step 2 — Il primo comando: leggere lo store dal terminale</li>
+    <li>Step 3 — Theme CLI: il tema come cartella di file</li>
+    <li>Step 4 — La regola sacra: dev theme separato</li>
+    <li>Step 5 — Build dell'agent Shopify con la agent factory (backend + frontend)</li>
     <li>Checklist di fine setup</li>
   </ol>
 </div>
 
 <div class="lesson">
-  <h2>Lezione 8 — Shopify dal terminale — replica 1:1: ricostruiamo la product page di uno store di riferimento, sezione per sezione</h2>
+  <h2>Lezione 8 — L'agent Shopify al lavoro: backend nella pratica + replica della product page</h2>
   <ol>
-    <li>Lo store di riferimento — anatomia della PDP che converte</li>
-    <li>Step 1 — Estrarre la struttura: Claude legge la pagina</li>
-    <li>Step 2 — Caricare il prodotto con Claude</li>
-    <li>Step 3 — Le sezioni alte: buy box, badges, benefits</li>
-    <li>Step 4 — Le sezioni di prova: reviews, before/after, comparison table</li>
-    <li>Step 5 — Le sezioni basse: FAQ accordion + social proof</li>
-    <li>Deploy: dev → live + cache busting</li>
-    <li>Esercizio — replica la PDP del tuo riferimento</li>
+    <li>Il piano della lezione — prima il backend, poi il frontend</li>
+    <li>Backend 1 — creare un prodotto</li>
+    <li>Backend 2 — inventario e prezzi</li>
+    <li>Backend 3 — settings e operazioni varie</li>
+    <li>Frontend — lo store di riferimento: anatomia della PDP che converte</li>
+    <li>Replica step 1 — estrarre la struttura</li>
+    <li>Replica step 2 — costruire le sezioni, una alla volta</li>
+    <li>Replica step 3 — assemblare + deploy dev → live</li>
+    <li>Esercizio — backend + replica sul tuo store</li>
   </ol>
 </div>
 
 <div class="lesson">
-  <h2>Lezione 9 — L'agent per il tuo ecommerce: costruirlo bene e farlo girare da solo</h2>
+  <h2>Lezione 9 — L'agent contabile: Shopify + fatture fornitore → report giornaliero, CSV e Drive</h2>
   <ol>
-    <li>Differenza tra agent e tool</li>
-    <li>AgentFactory — il meta-agent che ne costruisce altri</li>
-    <li>SDD applicato — Spec, Plan, Build, Verify</li>
-    <li>Sub-agent e isolamento del contesto</li>
-    <li>Hook — far partire l'agent da solo</li>
-    <li>MCP — collegare a Shopify, Drive, Telegram</li>
-    <li>Skill custom /comando</li>
-    <li>launchd / cron — schedulare l'esecuzione</li>
-    <li>Gli output — Telegram, Drive, email</li>
-    <li>Logging + error handling</li>
-    <li>Build live — l'agent del tuo store, da zero a deploy</li>
+    <li>Cosa costruiamo — il contabile che non dorme</li>
+    <li>Le 5 metriche che contano</li>
+    <li>Hard rules — niente stime, niente overwrite</li>
+    <li>Le due fonti — ordini Shopify + invoice del fornitore</li>
+    <li>Build con la agent factory — la spec del contabile</li>
+    <li>Il report — Telegram o WhatsApp, 30 secondi di lettura</li>
+    <li>Il CSV giornaliero + la cartella Drive ordinata</li>
+    <li>Schedulazione + log — ogni mattina, e se si rompe lo dice</li>
+    <li>La prova dal vivo — run completo davanti alla camera</li>
   </ol>
 </div>
 
 <div class="lesson">
-  <h2>Lezione 10 — Dashboard, deploy e contabilità: dall'agent al report delle 06:00 fino a LiveKPI sul tuo dominio</h2>
+  <h2>Lezione 10 — La dashboard dell'agent contabile: i numeri in diretta nel browser</h2>
   <ol>
     <li>Quando serve un frontend</li>
     <li>Stack minimo — HTML, JS, CSS, niente framework</li>
-    <li>Fetch dati e render</li>
-    <li>Deploy — locale o Render</li>
-    <li>Contabilità — le 5 metriche che contano</li>
-    <li>Hard rules — no IVA scorporo, no estimate, no overwrite</li>
-    <li>Pull dati — ordini Shopify + COGS reali da XLSX</li>
-    <li>Profit e BE ROAS</li>
-    <li>DailyReport alle 06:00 + alert soglia</li>
-    <li>LiveKPI — la cassa in diretta nel browser</li>
-    <li>Esercizio finale — il tuo LiveKPI sul tuo dominio</li>
+    <li>L'architettura — l'agent serve i dati, la pagina li mostra</li>
+    <li>Build live — le card della contabilità (+ BE ROAS)</li>
+    <li>Deploy — locale gratis, o online per il team</li>
+    <li>Esercizio finale — il sistema contabile completo</li>
   </ol>
 </div>
 
 <div class="lesson">
-  <h2>Bonus — Agent Marketing: come usarlo, GrowthGuide e analisi competitor con Meta Scraper</h2>
+  <h2>Bonus 1 — Brain Marketing: il Creative Strategist che scrive le tue ADV</h2>
   <ol>
-    <li>L'agent marketing pre-configurato</li>
-    <li>Quali documenti inserire — brand voice, prodotti, customer voice, top ads</li>
-    <li>Come si interroga l'agent (esempi reali)</li>
-    <li>GrowthGuide — la dashboard del loop di test ads</li>
-    <li>Meta Scraper — installare e lanciare lo scrape</li>
-    <li>Analisi pratica di un ad competitor (hook, angle, copy, offer)</li>
-    <li>Quando l'agent ha ragione e quando no</li>
+    <li>Cos'è un brain — il metodo della L6, applicato al marketing</li>
+    <li>Le fonti — i documenti di marketing da dargli in pasto</li>
+    <li>Build del brain — sources → lessons → wiki (tag hook/angle/copy/offer)</li>
+    <li>Il voice contract — chi è il Creative Strategist</li>
+    <li>La skill /creative-strategist</li>
+    <li>Al lavoro 1 — il copy per le ADV</li>
+    <li>Al lavoro 2 — gli script delle ADV</li>
+    <li>Al lavoro 3 — il brief</li>
+    <li>Strutturare ADV vincenti — il loop</li>
+  </ol>
+</div>
+
+<div class="lesson">
+  <h2>Bonus 2 — I file del corso: tutto quello che vi consegno</h2>
+  <ol>
+    <li>La lista dei file [da rivedere insieme]</li>
+    <li>L'ordine consigliato — da dove ripartire</li>
+    <li>Chiusura del corso</li>
   </ol>
 </div>
 
