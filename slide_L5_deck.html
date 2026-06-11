@@ -186,15 +186,15 @@ h1.huge{font-size:200px;line-height:.96}
   h1.huge{font-size:64px !important;line-height:1 !important;letter-spacing:-.03em !important}
   .sub{font-size:15px !important;line-height:1.5 !important;max-width:none !important}
   .slide:first-child,
-  .slide[data-i="1"]{
+  .slide[data-i="0"]{
     min-height:calc(100vh - 110px) !important;
     display:flex !important;flex-direction:column !important;justify-content:center !important;
     padding:48px 22px !important;
   }
   .slide:first-child .content,
-  .slide[data-i="2"] .content{margin-top:0 !important}
+  .slide[data-i="1"] .content{margin-top:0 !important}
   .slide:first-child .sub,
-  .slide[data-i="3"] .sub{font-size:17px !important;margin-top:18px !important}
+  .slide[data-i="2"] .sub{font-size:17px !important;margin-top:18px !important}
   .split,.pieces,.g6,.triplet,.quad,.tcards,.diag-row,.check{
     display:block !important;grid-template-columns:none !important;
     gap:0 !important;max-width:none !important;margin-top:14px !important;
@@ -259,14 +259,14 @@ h1.huge{font-size:200px;line-height:.96}
 </style>
 </head>
 <body>
-<div class="hud" id="hud">01 / 15 · ← →</div>
+<div class="hud" id="hud">01 / 16 · ← →</div>
 <div class="progress"><div class="bar" id="bar"></div></div>
 <button class="dl" onclick="window.print()">↓ Download PDF</button>
 
 <div class="stage" id="stage">
 
 <!-- 01 · Apertura -->
-<section class="slide active" data-i="0">
+<section class="slide active" data-i="3">
   <div class="tag">AI per Ecommerce · <b>Lezione 05</b></div>
   <div class="ghost">05</div>
   <div class="kanji">代理人</div>
@@ -280,7 +280,7 @@ h1.huge{font-size:200px;line-height:.96}
 </section>
 
 <!-- 02 · Perché questo agent -->
-<section class="slide" data-i="1">
+<section class="slide" data-i="4">
   <div class="tag">Perché · <b>questo agent</b></div>
   <div class="ghost" style="font-size:420px">?</div>
   <div class="content">
@@ -296,7 +296,7 @@ h1.huge{font-size:200px;line-height:.96}
 </section>
 
 <!-- 03 · Way-stack install -->
-<section class="slide" data-i="2">
+<section class="slide" data-i="5">
   <div class="tag">Way-stack · <b>install</b></div>
   <div class="ghost" style="font-size:380px;top:160px">3</div>
   <div class="content" style="bottom:auto;top:220px">
@@ -312,26 +312,43 @@ h1.huge{font-size:200px;line-height:.96}
   <div class="strip"><span>Way-stack</span><span>github.com/Lucioway/way-stack</span></div>
 </section>
 
+<!-- · Vocabolario -->
+<section class="slide" data-i="6">
+  <div class="tag">Vocabolario · <b>tre parole</b></div>
+  <div class="ghost" style="font-size:380px;top:160px">A</div>
+  <div class="content">
+    <div class="eyebrow">Semplice: tre parole, tre cose.</div>
+    <h1 class="title" style="font-size:92px;margin-bottom:34px">Plugin. Skill. Comando.</h1>
+    <div class="triplet reveal">
+      <div class="tcard"><div class="tl-label">Plugin</div><div class="tname">Un'app per Claude</div><div class="tdesc">Un pacchetto di capacità in più che installi dentro Claude. Come un'app sul telefono: la metti, e Claude sa fare cose nuove.</div></div>
+      <div class="tcard"><div class="tl-label">Skill</div><div class="tname">Una ricetta</div><div class="tdesc">Una procedura che Claude sa seguire passo passo. Tu chiedi, lui usa il metodo giusto — senza che glielo spieghi ogni volta.</div></div>
+      <div class="tcard"><div class="tl-label">Comando</div><div class="tname">Una scorciatoia</div><div class="tdesc">Inizia con /. Scrivi /agent-spec e parte la procedura intera. Un tasto, un lavoro.</div></div>
+    </div>
+  </div>
+  <div class="strip"><span>Vocabolario</span><span>Plugin · Skill · Comando</span></div>
+</section>
+
 <!-- 04 · Tour pezzi chiave -->
-<section class="slide" data-i="3">
+<section class="slide" data-i="7">
   <div class="tag">Way-stack · <b>i pezzi</b></div>
   <div class="content">
     <div class="eyebrow">Quello che useremo oggi, step per step.</div>
     <h1 class="title" style="font-size:92px;margin-bottom:34px">Cosa useremo oggi.</h1>
     <div class="triplet reveal" style="gap:28px;margin-top:32px">
-      <div class="tcard" style="padding:30px 26px"><div class="tl-label">Plugin</div><div class="tname" style="font-size:32px">Superpowers</div><div class="tdesc" style="font-size:16px">Brainstorming, TDD, debugging. Le discipline di lavoro: come si pensa prima di scrivere codice.</div></div>
-      <div class="tcard" style="padding:30px 26px"><div class="tl-label">Comandi</div><div class="tname" style="font-size:32px">Agent factory</div><div class="tdesc" style="font-size:16px">create-agent + /agent-spec → tasks → execute → verify. La catena che trasforma un'idea in un agent.</div></div>
-      <div class="tcard" style="padding:30px 26px"><div class="tl-label">Plugin + grafica</div><div class="tname" style="font-size:32px">Frontend-design + SHIN-EN</div><div class="tdesc" style="font-size:16px">Grafica di livello senza designer. SHIN-EN è la mia grafica — la usate anche voi, gratis.</div></div>
-      <div class="tcard" style="padding:30px 26px"><div class="tl-label">Skill</div><div class="tname" style="font-size:32px">Vault skills</div><div class="tdesc" style="font-size:16px">vault-ingest, vault-query, vault-lint. Come il materiale entra ordinato nella base di conoscenza.</div></div>
-      <div class="tcard" style="padding:30px 26px"><div class="tl-label">Plugin</div><div class="tname" style="font-size:32px">Code-review</div><div class="tdesc" style="font-size:16px">Review multi-agent prima di chiudere. Mai fidarsi del primo run.</div></div>
-      <div class="tcard" style="padding:30px 26px"><div class="tl-label">Plugin</div><div class="tname" style="font-size:32px">Ralph-loop</div><div class="tdesc" style="font-size:16px">Run autonomi: l'agent itera da solo finché il lavoro non è completo. Lo useremo più avanti.</div></div>
+      <div class="tcard" style="padding:30px 26px"><div class="tl-label">Plugin</div><div class="tname" style="font-size:32px">Superpowers</div><div class="tdesc" style="font-size:16px">Insegna a Claude un metodo: prima le domande, poi il piano, poi il codice. Mai costruire a caso.</div></div>
+      <div class="tcard" style="padding:30px 26px"><div class="tl-label">Comandi</div><div class="tname" style="font-size:32px">Agent factory</div><div class="tdesc" style="font-size:16px">La catena di montaggio degli agent: idea → spec → tasks → build → verifica. Da un'idea a un agent finito.</div></div>
+      <div class="tcard" style="padding:30px 26px"><div class="tl-label">Plugin + grafica</div><div class="tname" style="font-size:32px">Frontend-design + SHIN-EN</div><div class="tdesc" style="font-size:16px">Pagine e PDF belli senza designer. SHIN-EN è la mia grafica: bianco, nero, pulita. Ve la regalo.</div></div>
+      <div class="tcard" style="padding:30px 26px"><div class="tl-label">Skill</div><div class="tname" style="font-size:32px">Vault skills</div><div class="tdesc" style="font-size:16px">Il bibliotecario della vostra libreria: mette dentro (ingest), cerca (query), tiene in ordine (lint).</div></div>
+      <div class="tcard" style="padding:30px 26px"><div class="tl-label">Plugin</div><div class="tname" style="font-size:32px">Code-review</div><div class="tdesc" style="font-size:16px">Più revisori AI controllano il codice insieme, prima di usarlo. Trovano gli errori che non vedi.</div></div>
+      <div class="tcard" style="padding:30px 26px"><div class="tl-label">Plugin</div><div class="tname" style="font-size:32px">Ralph-loop</div><div class="tdesc" style="font-size:16px">Claude ripete il lavoro da solo finché la lista non è finita. Per i lavori lunghi. Lo useremo più avanti.</div></div>
+    </div>
     </div>
   </div>
   <div class="strip"><span>Way-stack</span><span>6 pezzi chiave</span></div>
 </section>
 
 <!-- 05 · Step 1/7 Brainstorming -->
-<section class="slide" data-i="4">
+<section class="slide" data-i="8">
   <div class="tag">Step <b>1 / 7</b> · Brainstorming</div>
   <div class="ghost" style="font-size:480px;top:140px;right:180px">1</div>
   <div class="content" style="bottom:auto;top:220px">
@@ -348,7 +365,7 @@ h1.huge{font-size:200px;line-height:.96}
 </section>
 
 <!-- 06 · Step 2/7 Spec -->
-<section class="slide" data-i="5">
+<section class="slide" data-i="9">
   <div class="tag">Step <b>2 / 7</b> · La spec</div>
   <div class="ghost" style="font-size:480px;top:140px;right:180px">2</div>
   <div class="content" style="bottom:auto;top:220px">
@@ -365,7 +382,7 @@ h1.huge{font-size:200px;line-height:.96}
 </section>
 
 <!-- 07 · Step 3/7 Download -->
-<section class="slide" data-i="6">
+<section class="slide" data-i="10">
   <div class="tag">Step <b>3 / 7</b> · Download</div>
   <div class="ghost" style="font-size:480px;top:140px;right:180px">3</div>
   <div class="content" style="bottom:auto;top:220px">
@@ -382,7 +399,7 @@ h1.huge{font-size:200px;line-height:.96}
 </section>
 
 <!-- 08 · Step 4/7 Whisper -->
-<section class="slide" data-i="7">
+<section class="slide" data-i="11">
   <div class="tag">Step <b>4 / 7</b> · Transcript</div>
   <div class="ghost" style="font-size:480px;top:140px;right:180px">4</div>
   <div class="content" style="bottom:auto;top:220px">
@@ -399,7 +416,7 @@ h1.huge{font-size:200px;line-height:.96}
 </section>
 
 <!-- 09 · Step 5/7 Lessons -->
-<section class="slide" data-i="8">
+<section class="slide" data-i="12">
   <div class="tag">Step <b>5 / 7</b> · Lessons</div>
   <div class="ghost" style="font-size:480px;top:140px;right:180px">5</div>
   <div class="content" style="bottom:auto;top:220px">
@@ -416,7 +433,7 @@ h1.huge{font-size:200px;line-height:.96}
 </section>
 
 <!-- 10 · Step 6/7 PDF SHIN-EN -->
-<section class="slide" data-i="9">
+<section class="slide" data-i="13">
   <div class="tag">Step <b>6 / 7</b> · PDF</div>
   <div class="ghost" style="font-size:480px;top:140px;right:180px">6</div>
   <div class="content" style="bottom:auto;top:220px">
@@ -433,7 +450,7 @@ h1.huge{font-size:200px;line-height:.96}
 </section>
 
 <!-- 11 · Step 7/7 Drive + Telegram -->
-<section class="slide" data-i="10">
+<section class="slide" data-i="14">
   <div class="tag">Step <b>7 / 7</b> · Consegna</div>
   <div class="ghost" style="font-size:480px;top:140px;right:180px">7</div>
   <div class="content" style="bottom:auto;top:220px">
@@ -450,7 +467,7 @@ h1.huge{font-size:200px;line-height:.96}
 </section>
 
 <!-- 12 · Verify -->
-<section class="slide" data-i="11">
+<section class="slide" data-i="15">
   <div class="tag">Verifica · <b>prima di chiudere</b></div>
   <div class="ghost" style="font-size:420px">✓</div>
   <div class="content" style="bottom:auto;top:220px">
@@ -467,7 +484,7 @@ h1.huge{font-size:200px;line-height:.96}
 </section>
 
 <!-- 13 · Run completo -->
-<section class="slide" data-i="12">
+<section class="slide" data-i="16">
   <div class="tag">Run · <b>completo</b></div>
   <div class="content">
     <div class="eyebrow">Tutto insieme, un comando.</div>
@@ -490,7 +507,7 @@ h1.huge{font-size:200px;line-height:.96}
 </section>
 
 <!-- 14 · Automazione giornaliera -->
-<section class="slide" data-i="13">
+<section class="slide" data-i="17">
   <div class="tag">Automazione · <b>ogni giorno</b></div>
   <div class="ghost" style="font-size:380px;top:160px">∞</div>
   <div class="content" style="bottom:auto;top:220px">
@@ -508,7 +525,7 @@ h1.huge{font-size:200px;line-height:.96}
 </section>
 
 <!-- 15 · Chiusura -->
-<section class="slide" data-i="14">
+<section class="slide" data-i="18">
   <div class="tag">Prossima lezione · <b>la memoria</b></div>
   <div class="ghost">06</div>
   <div class="content">
