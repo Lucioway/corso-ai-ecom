@@ -154,13 +154,13 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <li><a href="#l1">AI sta sostituendo il lavoro</a></li>
     <li><a href="#l2">Claude Code</a></li>
     <li><a href="#l3">Setup pratico</a></li>
-    <li><a href="#l5">Memoria + Graphify</a></li>
-    <li><a href="#l6">Creare un brain</a></li>
-    <li><a href="#l7">Primo agent</a></li>
-    <li><a href="#l8">Agent da solo</a></li>
-    <li><a href="#l9">Interfaccia visiva</a></li>
-    <li><a href="#l10">Shopify dal terminale</a></li>
-    <li><a href="#l11">Contabilità + LiveKPI</a></li>
+    <li><a href="#l4">Memoria + Graphify</a></li>
+    <li><a href="#l5">Brain + cos'è un agent</a></li>
+    <li><a href="#l6">Primo agent — build live</a></li>
+    <li><a href="#l7">Shopify — setup</a></li>
+    <li><a href="#l8">Shopify — utilizzo</a></li>
+    <li><a href="#l9">Agent ecommerce</a></li>
+    <li><a href="#l10">Dashboard + contabilità</a></li>
     <li class="bonus"><a href="#bonus">Agent Marketing</a></li>
   </ol>
 </aside>
@@ -168,7 +168,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
 <div>
 <div class="topbar">
   <span>AI Operator · <b>Script Dettagliato</b></span>
-  <span><b>v1</b> · 2026-06-09</span>
+  <span><b>v2</b> · 2026-06-11</span>
 </div>
 
 <main class="main">
@@ -278,12 +278,12 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   <div class="point">
     <span class="num">11</span>
     <h2>Anteprima delle 4 parti + bonus</h2>
-    <p>Slide con le 4 parti del corso. Commento veloce, una riga a parte: Parte 1 — Fondamenta (L3 setup pratico, L4 vault, L5 memoria + Graphify). Senza queste niente regge.</p>
-    <p>Parte 2 — I cervelli (L6 creare un brain, esempio Brain Marketing → Creative Strategist). Impari a costruire un esperto interrogabile partendo dai tuoi documenti.</p>
-    <p>Parte 3 — Costruire i tool (L7 agent, L8 farlo girare da solo, L9 frontend). Qui diventi autonomo. Dopo questa parte costruisci qualsiasi cosa.</p>
-    <p>Parte 4 — Applicato all'ecom (L10 Shopify, L11 contabilità + LiveKPI). Shopify dal terminale, contabilità che si fa da sola, dashboard live nel browser.</p>
+    <p>Slide con le 4 parti del corso. Commento veloce, una riga a parte: Parte 1 — Fondamenta (L3 setup pratico, L4 memoria + Graphify). Senza queste niente regge.</p>
+    <p>Parte 2 — Cervelli e agent (L5 creare un brain + cos'è un agent, L6 build live del primo agent davanti alla camera). Impari a costruire un esperto interrogabile e il tuo primo agent.</p>
+    <p>Parte 3 — Shopify dal terminale (L7 setup, L8 utilizzo: prodotti, PDP, tema). Qui l'admin lo apri solo per controllare, non per lavorare.</p>
+    <p>Parte 4 — Il sistema completo (L9 agent ecommerce schedulato, L10 dashboard + deploy + contabilità + LiveKPI). Il business che si gestisce da solo, numeri live nel browser.</p>
     <p>Bonus — Agent Marketing pre-configurato, GrowthGuide, Meta Scraper per analisi competitor. Le 10 cose specifiche del mio brand marketing che hanno fatto i numeri.</p>
-    <div class="say"><b>Da dire:</b> "11 lezioni più un bonus. Una alla volta, ognuna ti lascia con qualcosa di concreto che funziona sul tuo Mac alla fine del video."</div>
+    <div class="say"><b>Da dire:</b> "10 lezioni più un bonus. Una alla volta, ognuna ti lascia con qualcosa di concreto che funziona sul tuo Mac alla fine del video."</div>
   </div>
 
   <div class="point">
@@ -430,7 +430,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <h2>Il vault locale — dove vivono i progetti</h2>
     <p>Apri Finder, vai in ~/Documents/Lucio_AI/. "Questo è il mio vault. Una sola cartella. Dentro c'è tutto: progetti, brain, agent, knowledge, sessioni."</p>
     <p>Spiega perché tutto in una cartella sola: Claude la vede unitariamente, può fare query cross-progetto, Graphify lo indicizza tutto insieme. Il vault è il cervello esterno.</p>
-    <p>Anticipa la L4 dove costruirete il vault da zero seguendo la struttura PARA (prima però, in L3, installiamo tutto da zero).</p>
+    <p>Anticipa la L4 dove diamo a Claude memoria persistente e il grafo Graphify (prima però, in L3, installiamo tutto da zero).</p>
     <div class="say"><b>Da dire:</b> "Una cartella sola. Mai sparpagliare. Se è in 5 posti diversi, Claude non lo vede mai bene."</div>
   </div>
 
@@ -447,7 +447,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <h2>Memoria persistente — MEMORY.md</h2>
     <p>Apri ~/.claude/projects/.../memory/MEMORY.md. "Questo è il diario di Claude. Si ricorda di te tra una sessione e l'altra. Profilo, preferenze, decisioni, contesto progetti."</p>
     <p>Mostra 3-4 righe del tuo MEMORY.md. "Qui c'è scritto che parlo in caveman, che preferisco link cliccabili, che il mio brand X è di tipo Y." Lui rilegge questo a ogni sessione.</p>
-    <p>Anticipa L5 — sulla memoria approfondita e Graphify, che è il livello sopra (grafo di concetti, non file di note).</p>
+    <p>Anticipa L4 — sulla memoria approfondita e Graphify, che è il livello sopra (grafo di concetti, non file di note).</p>
     <div class="say"><b>Da dire:</b> "Senza MEMORY.md ogni sessione è zero. Con MEMORY.md la quinta sessione comincia da dove finiva la quarta."</div>
   </div>
 
@@ -550,7 +550,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <h2>Step 5 — Verifica che tutto comunichi</h2>
     <p>Test live di fine setup. In Antigravity, terminale integrato. <code>claude</code>. Chiedigli: "elenca i plugin installati". Deve rispondere con way-stack visibile.</p>
     <p>Secondo test: chiedi "che modello stai usando?". Deve rispondere con il nome del modello Anthropic corrente. Terzo test: chiedi "mostrami il CLAUDE.md attivo". Deve leggerlo e riassumertelo.</p>
-    <p>"Se tutti e tre i test passano — sei pronto. Da L4 in poi entriamo dentro il vault e iniziamo a costruire."</p>
+    <p>"Se tutti e tre i test passano — sei pronto. Dalla L4 in poi diamo memoria al sistema e iniziamo a costruire."</p>
     <div class="say"><b>Da dire:</b> "Tre check rapidi. Se passano sei in pista. Se no, ricontrolla l'auth della CLI prima di tutto."</div>
   </div>
 
@@ -577,18 +577,18 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   <div class="point">
     <span class="num">09</span>
     <h2>Esercizio — fai il setup ora, prima di L4</h2>
-    <p>"Adesso pausa il video. Fai i 5 step. Quando torni, in L4 entriamo nel vault e iniziamo a metterci dentro la conoscenza. Senza la CLI installata, L4 non parte."</p>
+    <p>"Adesso pausa il video. Fai i 5 step. Quando torni, in L4 diamo a Claude una memoria che non dimentica nulla. Senza la CLI installata, L4 non parte."</p>
     <p>Checklist a schermo: ☐ Homebrew + Node installati · ☐ Claude Code CLI globale + login fatto · ☐ Antigravity installato e CLI parte dal terminale integrato · ☐ Claude Code Desktop installato e loggato · ☐ way-stack installato via /plugin · ☐ 3 test di verifica passati.</p>
     <p>"Quando tutte le 6 spunte sono verdi, riapri il corso e vai a L4."</p>
     <div class="say"><b>Da dire:</b> "Setup fatto = sei un costruttore. Non sei più uno spettatore. Da L4 in poi si lavora sul tuo sistema."</div>
   </div>
 
-  <div class="lesson-end">Fine L3 · CTA → L5 memoria + Graphify</div>
+  <div class="lesson-end">Fine L3 · CTA → L4 memoria + Graphify</div>
 </section>
 
-<!-- =================== LEZIONE 5 =================== -->
-<section class="lesson" id="l5">
-  <div class="lesson-tag">Lezione 05 · 15–18 min</div>
+<!-- =================== LEZIONE 4 =================== -->
+<section class="lesson" id="l4">
+  <div class="lesson-tag">Lezione 04 · 15–18 min</div>
   <h1>Far ricordare e collegare tutto a Claude: memoria persistente + grafo Graphify</h1>
 
   <div class="point">
@@ -657,13 +657,13 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <div class="say"><b>Da dire:</b> "Una volta scheduled, Graphify si aggiorna da solo. Tu lo apri quando ti serve, ed è sempre fresco."</div>
   </div>
 
-  <div class="lesson-end">Fine L5 · CTA → L6 brain</div>
+  <div class="lesson-end">Fine L4 · CTA → L5 brain + agent</div>
 </section>
 
-<!-- =================== LEZIONE 6 =================== -->
-<section class="lesson" id="l6">
-  <div class="lesson-tag">Lezione 06 · 25–30 min</div>
-  <h1>Creare un brain: trasformare i tuoi documenti in un esperto interrogabile</h1>
+<!-- =================== LEZIONE 5 =================== -->
+<section class="lesson" id="l5">
+  <div class="lesson-tag">Lezione 05 · 30–35 min</div>
+  <h1>Creare un brain + cos'è un agent: dai tuoi documenti a un esperto interrogabile</h1>
 
   <div class="point">
     <span class="num">01</span>
@@ -785,20 +785,235 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <div class="say"><b>Da dire:</b> "30 secondi e ho 6 ipotesi creative concrete. Una vale. Le altre cinque mi spingono a pensare. Costo: zero."</div>
   </div>
 
-  <div class="lesson-end">Fine L6 · CTA → L7 agent</div>
+  <div class="point">
+    <span class="num">15</span>
+    <h2>Brain = sa, Agent = fa — anatomia di un agent</h2>
+    <p>Chiusura ponte: il brain risponde quando lo chiami, ma non fa niente da solo. L'agent invece lavora anche mentre dormi. Schema dei 4 componenti: input (cosa riceve), ragionamento (cosa decide), output (cosa restituisce), memoria (cosa ricorda dalla volta prima).</p>
+    <p>Esempio: DailyReport. Input = ordini Shopify del giorno. Ragionamento = aggregare per prodotto, calcolare margini. Output = messaggio Telegram. Memoria = stato del giorno precedente. 4 componenti, sempre tutti e 4 — mancano due, non è un agent, è uno script.</p>
+    <p>Anticipa la prossima lezione: "la pipeline che ha costruito questo brain — scaricato, trascritto, strutturato da sola — È un agent. Nella prossima lezione lo costruiamo insieme, pezzo per pezzo, davanti alla camera."</p>
+    <div class="say"><b>Da dire:</b> "Brain = sa. Agent = fa. Il sistema completo è agent che usano brain. E adesso ne costruiamo uno."</div>
+  </div>
+
+  <div class="lesson-end">Fine L5 · CTA → L6 build live del primo agent</div>
+</section>
+
+<!-- =================== LEZIONE 6 =================== -->
+<section class="lesson" id="l6">
+  <div class="lesson-tag">Lezione 06 · 30–35 min</div>
+  <h1>Build live del primo agent: da un canale YouTube a un brain completo, con tutta la potenza di Claude</h1>
+
+  <div class="point">
+    <span class="num">01</span>
+    <h2>Il piano — un comando, sette superpoteri</h2>
+    <p>Annuncio: "Oggi costruiamo il primo agent insieme, da zero, in diretta. Si chiama BrainBuilder. Gli dai un canale YouTube e lui ti costruisce un brain completo nel vault. E mentre lo fa, vi mostro tutto quello che Claude Code sa fare su un computer."</p>
+    <p>Mostra lo schema della catena completa: YouTube → audio → trascrizione → lessons → brain → PDF → Drive → Telegram → WhatsApp → GitHub. Un input, nove output. "Questa è la potenza di cui parlavo nella Lezione 1. Adesso la vedete tutta in fila."</p>
+    <div class="say"><b>Da dire:</b> "Un comando solo. E alla fine avrete: un esperto interrogabile, un PDF, un file su Drive, un messaggio sul telefono e un backup su GitHub. Tutto da solo."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02</span>
+    <h2>La spec — scrivere cosa deve fare PRIMA di costruire</h2>
+    <p>Apri un file vuoto SPEC.md. Scrivi insieme allo studente la spec in italiano semplice: input (URL canale o lista video), output (cartella Brains/Nome/ completa + notifiche), vincoli (niente video sopra 1 ora, lessons da 200-400 parole).</p>
+    <p>Regola d'oro ripetuta: mai codice prima della spec. La spec è il contratto. Claude la legge e sa esattamente cosa costruire — e tu sai esattamente cosa verificare alla fine.</p>
+    <div class="say"><b>Da dire:</b> "Dieci righe di italiano valgono più di cento righe di codice scritto a caso. Prima pensi, poi costruisci."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">03</span>
+    <h2>Step 1 — Scaricare i video (yt-dlp)</h2>
+    <p>Dici a Claude: "installa yt-dlp e scarica l'audio di questi 3 video". Mostra che Claude installa il tool da solo, lancia il download, e i file .mp3 appaiono nella cartella sources/ del brain.</p>
+    <p>Punto didattico: non hai aperto un browser, non hai cliccato niente. Hai descritto il risultato e Claude ha scelto il tool, l'ha installato e l'ha usato. Questa è la differenza tra usare un computer e dirigere un computer.</p>
+    <div class="say"><b>Da dire:</b> "Io non ho scaricato niente. Ho detto cosa volevo. Lui ha fatto. Memorizzate questa sensazione."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">04</span>
+    <h2>Step 2 — Trascrivere (Whisper)</h2>
+    <p>Claude lancia Whisper sugli audio: da .mp3 a .txt. Mentre gira (1-2 minuti a video), spieghi cosa sta succedendo: un modello AI locale che trasforma il parlato in testo, gratis, sul tuo computer.</p>
+    <p>Apri un transcript appena generato. Mostra che è testo grezzo: niente punteggiatura perfetta, ripetizioni, intercalari. "Questo è il grezzo. Non si interroga. Adesso lo raffiniamo."</p>
+    <div class="say"><b>Da dire:</b> "Audio → testo, gratis, in locale. Qualsiasi video, qualsiasi podcast, qualsiasi vocale diventa testo lavorabile."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">05</span>
+    <h2>Step 3 — Da transcript a lessons (Claude)</h2>
+    <p>Il cuore della pipeline: Claude legge ogni transcript e lo spezza in lessons da 200-400 parole, una per concetto, con take-away finale. Mostra il prompt che fa il lavoro — è dentro l'agent, lo studente lo riusa così com'è.</p>
+    <p>Apri lessons/ e leggi una lesson a voce alta. Confronta col transcript grezzo: stesso contenuto, forma completamente diversa. "Questo adesso è interrogabile."</p>
+    <p>Poi il voice contract: Claude analizza come parla il personaggio nei transcript e genera il CLAUDE.md del brain (voce, do/don't, esempi). Da quel momento il brain risponde "in persona".</p>
+    <div class="say"><b>Da dire:</b> "Il grezzo diventa pillole. Le pillole diventano un esperto. E l'esperto ha pure la voce dell'originale."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">06</span>
+    <h2>Step 4 — Il PDF riassunto (Chrome headless)</h2>
+    <p>L'agent genera un PDF di presentazione del brain: chi è il personaggio, quante lessons, gli argomenti coperti, i 10 take-away migliori. Come lo fa: genera una pagina HTML con lo stile del corso, poi Chrome headless la stampa in PDF. Un comando.</p>
+    <p>Apri il PDF appena creato. "Questo l'ha impaginato lui. Titoli, sezioni, grafica. Nessun designer, nessun Canva, nessun copia-incolla."</p>
+    <div class="say"><b>Da dire:</b> "Claude scrive HTML meglio di quanto io userò mai Word. Qualsiasi documento vi serva — report, guide, preventivi — questo è il pattern."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">07</span>
+    <h2>Step 5 — Upload su Google Drive</h2>
+    <p>L'agent carica il PDF su Drive nella cartella del brand e stampa il webViewLink. Regola insegnata: dopo ogni upload, l'agent stampa SEMPRE il link — un file senza link è un file invisibile.</p>
+    <p>Apri il link davanti alla camera: il PDF è lì, condivisibile col team o con chiunque. "Dal terminale al cloud, senza aprire Drive."</p>
+    <div class="say"><b>Da dire:</b> "Locale per lavorare, Drive per condividere. L'agent fa il passaggio da solo e ti dà il link."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">08</span>
+    <h2>Step 6 — Notifiche: Telegram + WhatsApp</h2>
+    <p>L'agent manda il messaggio di fine lavoro: su Telegram (bot creato con BotFather, due minuti di setup) arriva "Brain pronto: N lessons, ecco il PDF" con il documento allegato. Tira fuori il telefono e mostra la notifica arrivare in diretta.</p>
+    <p>Stessa notifica su WhatsApp come secondo canale. Punto didattico: l'output di un agent deve arrivare dove vivi tu — non in un log che non leggerai mai.</p>
+    <div class="say"><b>Da dire:</b> "L'agent ha finito e me l'ha detto sul telefono. Io potevo essere al mare. Questo cambia il rapporto col lavoro."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">09</span>
+    <h2>Step 7 — Push su GitHub</h2>
+    <p>Ultimo anello: l'agent committa il brain appena creato e lo pusha sulla repo GitHub. Spieghi in 60 secondi cosa significa: backup versionato, gratis, per sempre. Se il Mac muore domani, il brain è salvo.</p>
+    <p>Apri la repo nel browser: il commit è lì, con messaggio chiaro, fatto dall'agent. "Anche il backup è automatico. Non è un task in più — è dentro la pipeline."</p>
+    <div class="say"><b>Da dire:</b> "Tutto quello che costruite deve vivere anche su GitHub. Non si discute. E l'agent lo fa per voi."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">10</span>
+    <h2>Il run completo — un comando, davanti alla camera</h2>
+    <p>Gran finale: cartella pulita, lanci l'agent una volta sola con l'URL del canale. Mentre gira, ricapitoli a voce i 7 step che si stanno eseguendo da soli. Quando arriva la notifica Telegram, pausa drammatica.</p>
+    <p>Poi il test finale: <code>/nomebrain</code> e fai una domanda al brain appena nato. Risponde con la voce del personaggio, citando le sue lessons. Cerchio chiuso.</p>
+    <p>Recap della potenza mostrata: file system, install di tool, AI pipeline, generazione PDF, cloud, messaging su due canali, git. "Tutto questo è UN agent. E voi adesso sapete leggerne ogni pezzo."</p>
+    <div class="say"><b>Da dire:</b> "Un comando. Sette superpoteri. Un esperto nuovo nel vault. Adesso lo facciamo lavorare sul vostro store — prossima lezione, Shopify."</div>
+  </div>
+
+  <div class="lesson-end">Fine L6 · CTA → L7 Shopify setup</div>
 </section>
 
 <!-- =================== LEZIONE 7 =================== -->
 <section class="lesson" id="l7">
-  <div class="lesson-tag">Lezione 07 · 20–25 min</div>
-  <h1>Creare il tuo primo agent: automatizzare un task ripetitivo del tuo business</h1>
+  <div class="lesson-tag">Lezione 07 · 15–18 min</div>
+  <h1>Shopify dal terminale — setup: app custom, token, primi comandi</h1>
 
   <div class="point">
     <span class="num">01</span>
-    <h2>Anatomia di un agent — input, ragionamento, output, memoria</h2>
-    <p>Disegna o mostra schema: input (cosa riceve), ragionamento (cosa decide), output (cosa restituisce), memoria (cosa ricorda dalla volta prima). 4 componenti, sempre tutti e 4.</p>
-    <p>Esempio: DailyReport. Input = ordini Shopify del giorno. Ragionamento = aggregare per prodotto, calcolare margini, confrontare con BE ROAS. Output = messaggio Telegram. Memoria = log dello stato giorno precedente.</p>
-    <div class="say"><b>Da dire:</b> "4 componenti. Mancano due — non è un agent, è uno script. Un agent è un'entità che pensa e ricorda."</div>
+    <h2>Perché collegare Shopify a Claude</h2>
+    <p>Frame della lezione: tutto quello che fai nell'admin Shopify a mano — caricare prodotti, modificare il tema, leggere gli ordini — Claude lo può fare via API. Più veloce, ripetibile, senza errori di click.</p>
+    <p>Anticipa cosa vedranno nella prossima lezione: prodotto caricato da un Word in 3 minuti, PDP competitor clonata, tema modificato da terminale. "Oggi prepariamo le chiavi. Domani apriamo le porte."</p>
+    <div class="say"><b>Da dire:</b> "L'admin Shopify è fatto per le mani. L'API è fatta per gli agent. Da oggi lavorate con la seconda."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02</span>
+    <h2>Connettere Shopify — app custom, token, permessi</h2>
+    <p>Vai in admin Shopify → Apps → Develop apps → Create. Configura permessi (read/write products, themes, orders). Genera Admin API access token. Salvalo in .env nel tuo progetto.</p>
+    <p>Importante: token rotation. Imposta promemoria a 6 mesi per ruotarlo. Token leaked = drama. Mettilo nel calendario.</p>
+    <p>Mostra struttura .env: SHOPIFY_STORE, SHOPIFY_TOKEN. Niente più password in script.</p>
+    <div class="say"><b>Da dire:</b> "App custom, token in .env, scadenza in calendario. Tre cose. Non più."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">03</span>
+    <h2>Il primo comando — leggere lo store dal terminale</h2>
+    <p>Demo immediata: dal terminale chiedi a Claude "dammi gli ultimi 5 ordini dello store". Lui chiama GET /orders.json col token, e i dati arrivano in chat. Primo momento "funziona davvero".</p>
+    <p>Secondo comando: "quanti prodotti attivi ho e quali sono i 3 più recenti?". Mostra che ogni domanda sull'admin adesso è una frase in italiano. Niente più navigare menu.</p>
+    <div class="say"><b>Da dire:</b> "Avete appena letto il vostro store senza aprirlo. Da qui in poi l'admin lo aprite solo per controllare, non per lavorare."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">04</span>
+    <h2>Theme CLI — il tema come cartella di file</h2>
+    <p>Installa Shopify CLI. Mostra i 3 comandi del tema: <code>shopify theme pull</code> (scarichi il tema in locale), <code>shopify theme dev</code> (anteprima live mentre modifichi), <code>shopify theme push</code> (carichi le modifiche).</p>
+    <p>Concetto chiave: il tema è solo una cartella di file Liquid. Una volta in locale, Claude li legge e li modifica come qualsiasi altro file. Il tema smette di essere una scatola nera.</p>
+    <div class="say"><b>Da dire:</b> "Pull, dev, push. Il tema diventa una cartella sul tuo computer. E tutto quello che è un file, Claude lo sa modificare."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">05</span>
+    <h2>La regola sacra — dev theme separato</h2>
+    <p>Prima di chiudere il setup, la regola di sicurezza: si lavora SEMPRE su un dev theme duplicato, mai sul live. Crea il duplicato in admin (Themes → Duplicate), modifiche e preview sul dev, push su live solo dopo approvazione.</p>
+    <p>Spiega il perché con un esempio: un errore di Liquid sul live = store rotto davanti ai clienti che stanno comprando. Sul dev = nessuno se ne accorge, sistemi con calma.</p>
+    <div class="say"><b>Da dire:</b> "Dev theme è sacro. Live è produzione. Mai mischiare. Mai."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">06</span>
+    <h2>Checklist di fine setup</h2>
+    <p>Ricapitola la checklist: app custom creata, token in .env, primo comando ordini funzionante, Shopify CLI installata, dev theme duplicato. 5 spunte e il setup è completo.</p>
+    <p>Esercizio per lo studente: replica le 5 spunte sul suo store prima della prossima lezione. Tempo: 20 minuti. "Senza queste 5 spunte, la prossima lezione non parte."</p>
+    <div class="say"><b>Da dire:</b> "Venti minuti di setup oggi. Anni di lavoro risparmiato da domani. Pausa il video e fallo adesso."</div>
+  </div>
+
+  <div class="lesson-end">Fine L7 · CTA → L8 Shopify utilizzo</div>
+</section>
+
+<!-- =================== LEZIONE 8 =================== -->
+<section class="lesson" id="l8">
+  <div class="lesson-tag">Lezione 08 · 18–22 min</div>
+  <h1>Shopify dal terminale — utilizzo: caricare prodotti, clonare PDP, modificare il tema</h1>
+
+  <div class="point">
+    <span class="num">01</span>
+    <h2>Caricare prodotti da Word + foto</h2>
+    <p>Mostra ProductPusher. Input: cartella con file Word (descrizione + titolo + prezzo strutturato) + cartella immagini. Output: prodotto draft su Shopify, link admin stampato in chat.</p>
+    <p>Demo dal vivo: carichi un Word di prova, lanci /product-pusher, in 3 minuti il prodotto è online (in draft). Aprilo nell'admin per mostrare il risultato.</p>
+    <p>Sotto il cofano: Claude legge il Word, mappa i campi (titolo, body, prezzo, variants), API Shopify create product, upload immagini. Tutto in chiamate REST.</p>
+    <div class="say"><b>Da dire:</b> "Da 40 minuti manuali a 3 minuti automatici. Per ogni prodotto. Per sempre. Fai il conto sui prodotti che carichi all'anno."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02</span>
+    <h2>Clonare PDP competitor</h2>
+    <p>ProductCloner: dai un URL competitor, l'agent scrappa la PDP (titolo, immagini, descrizione, varianti, prezzo), riadatta, crea draft sul tuo Shopify.</p>
+    <p>Caso d'uso: prodotto che fa numeri da un competitor, vuoi testarlo. In 5 minuti hai la PDP draft pronta. Polish manuale, push live.</p>
+    <p>Nota: rispetta le policy. Cloni la struttura, riscrivi i testi col tuo brand voice — niente plagio.</p>
+    <div class="say"><b>Da dire:</b> "Cloni la struttura, non il copy. La struttura è informazione. Il copy è il tuo brand."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">03</span>
+    <h2>Modificare il tema da terminale</h2>
+    <p>Riprendi il dev theme della lezione setup. Demo: chiedi a Claude di aggiungere una sezione custom (esempio: trust badges) al tema. Lui scrive il file Liquid, push sul dev, ti dà l'URL preview.</p>
+    <p>Guardi la preview, chiedi un aggiustamento ("più piccoli i badge, sfondo chiaro"), Claude modifica e ri-pusha. Iterazione in minuti, non in giornate da freelancer.</p>
+    <div class="say"><b>Da dire:</b> "Quello che prima era un preventivo da 300 euro e una settimana di attesa, adesso è una frase in italiano e due minuti di attesa."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">04</span>
+    <h2>Deploy automatico del tema</h2>
+    <p>Pattern reale: script bash <code>deploy-section.sh</code> che fa push del file modificato sul dev theme, ti dà l'URL preview. Quando vuoi push live, env var <code>FORCE_LIVE=1</code>.</p>
+    <p>Salvaguardia: warning a video se stai per fare push live. "Stai per pushare su LIVE. Conferma." Una digitazione in più che salva la cantonata.</p>
+    <div class="say"><b>Da dire:</b> "Deploy live deve sempre fare un po' paura. Se non fa paura, hai disattivato la salvaguardia. Riattivala."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">05</span>
+    <h2>Polish PDP — modifiche chirurgiche</h2>
+    <p>ProductPusher mode "polish": modifiche surgical alla PDP esistente. Aggiungi carosello reviews, slider, metafield related products. Senza ricreare il prodotto.</p>
+    <p>Vantaggio: tieni traffico/SEO della PDP esistente, ma migliori la conversion rate. Iterazione rapida.</p>
+    <p>Demo: prendi una PDP che converte male, aggiungi il blocco reviews carousel, vedi il diff su dev, push live.</p>
+    <div class="say"><b>Da dire:</b> "Mai ricreare per migliorare. Modifiche chirurgiche sulla cosa che già funziona."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">06</span>
+    <h2>Cache busting trick</h2>
+    <p>Problema: dopo push su live, gli utenti vecchi vedono ancora il vecchio HTML cachato per minuti. Soluzione: fire un secondo PUT vuoto sull'asset → invalida la cache CDN Shopify.</p>
+    <p>Mostra il pattern: deploy.sh → first PUT (vero contenuto) → wait 2 sec → second PUT touch (timestamp only). Storefront aggiornato per tutti in 5 secondi invece di 10 minuti.</p>
+    <div class="say"><b>Da dire:</b> "Senza cache bust, gli utenti vedono il vecchio per 10 minuti. Una PUT vuota = problema risolto. Trick da $0."</div>
+  </div>
+
+  <div class="lesson-end">Fine L8 · CTA → L9 agent ecommerce + schedulazione</div>
+</section>
+
+<!-- =================== LEZIONE 9 =================== -->
+<section class="lesson" id="l9">
+  <div class="lesson-tag">Lezione 09 · 30–35 min</div>
+  <h1>L'agent per il tuo ecommerce: costruirlo bene e farlo girare da solo</h1>
+
+  <div class="point">
+    <span class="num">01</span>
+    <h2>Differenza tra agent e tool</h2>
+    <p>Spiega: agent = entità che ragiona. Tool = procedura deterministica. Un agent può usare tool. Un tool non usa agent. La differenza non è snobismo — è chi prende decisioni.</p>
+    <p>Esempio: il tool "send-telegram" prende un testo e lo manda. Niente decisioni. L'agent DailyReport decide cosa scrivere nel testo, e poi usa il tool send-telegram.</p>
+    <div class="say"><b>Da dire:</b> "Agent decide, tool esegue. Quando costruisci, chiediti sempre: serve un cervello o solo un braccio?"</div>
   </div>
 
   <div class="point">
@@ -813,7 +1028,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <span class="num">03</span>
     <h2>SDD applicato — Spec, Plan, Build, Verify</h2>
     <p>Spiega le 4 fasi SDD (Spec-Driven Development). Spec = scrivi cosa deve fare l'agent, in italiano, niente codice. Plan = AgentFactory scrive il piano implementativo. Build = generazione codice. Verify = test e correzioni.</p>
-    <p>Vantaggio: salti la "panic coding". Prima pensi, poi scrivi. Sembra lento, è 3x più veloce sul totale.</p>
+    <p>Vantaggio: salti la "panic coding". Prima pensi, poi scrivi. Sembra lento, è 3x più veloce sul totale. Richiama la spec di BrainBuilder in L6 — stesso metodo, ogni volta.</p>
     <div class="say"><b>Da dire:</b> "Mai codice prima di spec. Mai build prima di plan. Se salti i passi, lo paghi col triplo in debug."</div>
   </div>
 
@@ -851,103 +1066,47 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
 
   <div class="point">
     <span class="num">08</span>
-    <h2>Esercizio — il tuo primo agent in produzione</h2>
-    <p>Esercizio guidato: identifica un task ripetitivo del tuo business (15 minuti la settimana, esempio raccogliere screenshot competitor, rispondere a 5 email standard, generare report fornitore).</p>
-    <p>Apri AgentFactory. Descrivi il task. Segui le 4 fasi. Tempo target: 1-2 ore per il primo agent. Da lì in poi 30 minuti per i successivi (perché hai già scaffold e pattern).</p>
-    <p>Quando l'agent gira la prima volta in produzione = hai sostituito te stesso per quella fetta di tempo. Permanentemente.</p>
-    <div class="say"><b>Da dire:</b> "Il primo agent è il più difficile. Il secondo è metà tempo. Il decimo lo fai in pigiama."</div>
-  </div>
-
-  <div class="lesson-end">Fine L7 · CTA → L8 schedulazione</div>
-</section>
-
-<!-- =================== LEZIONE 8 =================== -->
-<section class="lesson" id="l8">
-  <div class="lesson-tag">Lezione 08 · 18–22 min</div>
-  <h1>Far girare l'agent da solo: schedulazione, output Telegram/Drive, deploy come tool</h1>
-
-  <div class="point">
-    <span class="num">01</span>
-    <h2>Differenza tra agent e tool</h2>
-    <p>Spiega: agent = entità che ragiona. Tool = procedura deterministica. Un agent può usare tool. Un tool non usa agent. La differenza non è snobismo — è chi prende decisioni.</p>
-    <p>Esempio: il tool "send-telegram" prende un testo e lo manda. Niente decisioni. L'agent DailyReport decide cosa scrivere nel testo, e poi usa il tool send-telegram.</p>
-    <div class="say"><b>Da dire:</b> "Agent decide, tool esegue. Quando costruisci, chiediti sempre: serve un cervello o solo un braccio?"</div>
-  </div>
-
-  <div class="point">
-    <span class="num">02</span>
     <h2>launchd / cron — schedulare l'esecuzione</h2>
     <p>Mostra il launchd di macOS. Apri un plist tuo (esempio quello di DailyReport). Spiega: chiave Label, ProgramArguments, StartCalendarInterval (cron-like).</p>
-    <p>Esempio reale: DailyReport parte ogni mattina alle 06:00. plist in ~/Library/LaunchAgents/, comando launchctl load per attivarlo.</p>
-    <p>Alternativa più semplice: cron. <code>crontab -e</code> e aggiungi una riga. Funziona, ma su macOS launchd è più affidabile su sleep/wake.</p>
+    <p>Esempio reale: DailyReport parte ogni mattina alle 06:00. plist in ~/Library/LaunchAgents/, comando launchctl load per attivarlo. Alternativa più semplice: cron. <code>crontab -e</code> e aggiungi una riga. Funziona, ma su macOS launchd è più affidabile su sleep/wake.</p>
+    <p>Pattern dei ritmi: agent giornaliero produce delta giornaliero, settimanale aggrega i 7 giorni, mensile aggrega i 4 settimanali. Tre ritmi, una sola fonte dati. Composizione, non duplicazione.</p>
     <div class="say"><b>Da dire:</b> "launchd su Mac. Cron sui server Linux. Una volta scheduled, non ci pensi più."</div>
   </div>
 
   <div class="point">
-    <span class="num">03</span>
-    <h2>Report giornalieri e settimanali</h2>
-    <p>Pattern: agent che gira giornaliero produce delta giornaliero. Settimanale aggrega i 7 giorni. Mensile aggrega i 4 settimanali. Pattern composito = costo basso, valore alto.</p>
-    <p>Esempio reale: DailyReport (06:00 ogni giorno), WeeklyReport (08:00 lunedì), MonthlyReport (08:00 primo del mese). Tre agent, una pipeline.</p>
-    <div class="say"><b>Da dire:</b> "Daily, weekly, monthly. Tre ritmi, una sola fonte dati. Composizione, non duplicazione."</div>
+    <span class="num">09</span>
+    <h2>Gli output — Telegram, Drive, email</h2>
+    <p>Telegram per te: bot via BotFather, token in .env, gruppo dedicato al brand — tutti i report in un solo gruppo, cronologia gratis. Output veloce = Telegram.</p>
+    <p>Drive per gli output strutturati (PDF, XLSX, report formali): genera file localmente, upload, e l'agent stampa SEMPRE il webViewLink. Senza link, l'output è invisibile.</p>
+    <p>Email solo verso terzi (fornitori, clienti, contabili) con send programmatico. Mai per comunicare con te stesso — quello è Telegram.</p>
+    <div class="say"><b>Da dire:</b> "Telegram per te, Drive per i documenti, email per il mondo fuori. Tre canali, tre usi, mai mischiare."</div>
   </div>
 
   <div class="point">
-    <span class="num">04</span>
-    <h2>Output su Telegram</h2>
-    <p>Crea il bot in Telegram (BotFather), prendi il token, salvalo in keychain o .env. Mostra il tool send-telegram nel tuo vault. È un wrapper sopra l'API Telegram.</p>
-    <p>Output: agent → genera messaggio → tool send-telegram con chatId → ricevi sul cellulare. Latency: 1-2 secondi.</p>
-    <p>Trick: gruppo Telegram dedicato al brand. Tutti i report in un solo gruppo, ordinati cronologicamente. Cronologia gratis.</p>
-    <div class="say"><b>Da dire:</b> "Telegram è la mia inbox di lavoro. Email = posta cartacea ormai. Telegram = sistema nervoso."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">05</span>
-    <h2>Output su Drive</h2>
-    <p>Per output strutturati (PDF, XLSX, report formali): genera file localmente, upload via MCP Drive. Mostra il pattern: l'agent salva in cartella tmp/, poi upload, poi printa il webViewLink in chat.</p>
-    <p>Regola d'oro: dopo ogni upload su Drive, l'agent stampa il webViewLink. Sempre. Senza link, l'output è invisibile.</p>
-    <div class="say"><b>Da dire:</b> "Output strutturato = Drive. Output veloce = Telegram. Mai mischiare."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">06</span>
-    <h2>Output via email</h2>
-    <p>Quando email: comunicazioni con terzi (fornitori, clienti, contabili). Usa il tool GmailSender (lucioway@gmail.com con app password in keychain). Send programmatico.</p>
-    <p>Esempio: agent fornitore raccoglie il nuovo restock, formatta in tabella, email al fornitore con CC al magazzino. Tutto da terminale.</p>
-    <div class="say"><b>Da dire:</b> "Email solo per comunicare fuori. Mai per comunicare con te stesso — quello è Telegram."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">07</span>
-    <h2>Logging base</h2>
-    <p>Ogni agent deve loggare: ora di start, ora di end, esito (ok/error), summary. Log file in <agent>/logs/YYYY-MM-DD.log. Append-only.</p>
-    <p>Senza log non sai mai perché un agent ha fallito. Con log, in 10 secondi vedi dove si è rotto.</p>
-    <div class="say"><b>Da dire:</b> "Senza log, gli agent muoiono nel silenzio. Con log, hanno la scatola nera."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">08</span>
-    <h2>Error handling base</h2>
-    <p>Pattern minimo: try/except attorno alla logica principale, log dell'errore, notifica Telegram se è errore "bloccante". Niente fantasia — robusto e leggibile.</p>
-    <p>Antipattern: silent fail. Mai. Se un agent fallisce, deve dirtelo immediatamente. Silent = fiducia distrutta.</p>
+    <span class="num">10</span>
+    <h2>Logging + error handling</h2>
+    <p>Ogni agent deve loggare: ora di start, ora di end, esito (ok/error), summary. Log file in logs/YYYY-MM-DD.log, append-only. Senza log non sai mai perché un agent ha fallito. Con log, in 10 secondi vedi dove si è rotto.</p>
+    <p>Error handling minimo: try/except attorno alla logica principale, log dell'errore, notifica Telegram se è errore bloccante. Antipattern assoluto: silent fail. Se un agent fallisce, deve dirtelo immediatamente.</p>
     <div class="say"><b>Da dire:</b> "Quando un agent fallisce, deve urlare. Mai morire in silenzio. Mai."</div>
   </div>
 
   <div class="point">
-    <span class="num">09</span>
-    <h2>Esempio live — tool report fornitore da zero a deploy</h2>
-    <p>Esercizio dal vivo: costruisci un mini agent che ogni lunedì alle 09:00 prende un XLSX di restock fornitore da Drive, calcola valore totale, invia su Telegram. 4 step: spec → build → schedule → test.</p>
+    <span class="num">11</span>
+    <h2>Build live — l'agent del tuo store, da zero a deploy</h2>
+    <p>Build dal vivo: un mini agent che ogni lunedì alle 09:00 prende un XLSX di restock fornitore da Drive, calcola valore totale, invia su Telegram. 4 step: spec → build → schedule → test.</p>
     <p>Mostra il file plist scheduling, il run manuale per testare, l'output finale che arriva sul tuo gruppo Telegram. End-to-end in 25 minuti.</p>
     <p>Quando arriva il messaggio Telegram in live durante la lezione, fai una pausa drammatica. È il momento "ah ecco". La sostituzione di te stesso, davanti a tutti.</p>
-    <div class="say"><b>Da dire:</b> "Visto? Lunedì prossimo alle 9 sul cellulare arriva da solo. Per sempre. Per gli anni a venire. Senza che io faccia mai più niente."</div>
+    <p>Esercizio per lo studente: identifica un task ripetitivo del suo business (raccogliere screenshot competitor, 5 email standard, report fornitore) e replica le 4 fasi. Il primo agent richiede 1-2 ore. Dal secondo in poi, 30 minuti.</p>
+    <div class="say"><b>Da dire:</b> "Visto? Lunedì prossimo alle 9 sul cellulare arriva da solo. Per sempre. Senza che io faccia mai più niente."</div>
   </div>
 
-  <div class="lesson-end">Fine L8 · CTA → L9 frontend</div>
+  <div class="lesson-end">Fine L9 · CTA → L10 frontend + contabilità</div>
 </section>
 
-<!-- =================== LEZIONE 9 =================== -->
-<section class="lesson" id="l9">
-  <div class="lesson-tag">Lezione 09 · 18–22 min</div>
-  <h1>Dare un'interfaccia visiva al tuo agent: dashboard in browser + deploy online</h1>
+<!-- =================== LEZIONE 10 =================== -->
+<section class="lesson" id="l10">
+  <div class="lesson-tag">Lezione 10 · 35–40 min</div>
+  <h1>Dashboard, deploy e contabilità: dall'agent al report delle 06:00 fino a LiveKPI sul tuo dominio</h1>
 
   <div class="point">
     <span class="num">01</span>
@@ -961,248 +1120,86 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <span class="num">02</span>
     <h2>Stack minimo — HTML, JS, CSS, niente framework</h2>
     <p>Mostra LiveKPI: una pagina HTML, un file JS, un CSS. Niente React, niente Next, niente build step. Apri il file, è plain HTML.</p>
-    <p>Perché: build step = complessità in più. Per dashboard interne, plain HTML è 10x più veloce da costruire e modificare. Quando serve React, lo sai senza dubbi.</p>
+    <p>Design system riusato su tutti i tool: palette, 3 font, spacing scale, micro-interazioni. Decidi una volta com'è bello, riusalo sempre. La coerenza è valore visibile.</p>
     <div class="say"><b>Da dire:</b> "Plain HTML finché regge. Quando non regge più, allora React. Mai prima."</div>
   </div>
 
   <div class="point">
     <span class="num">03</span>
-    <h2>Design system base</h2>
-    <p>Apri il tuo design system SHIN-EN (LUCIO_UI). Mostra le 5 cose: palette monocroma, 3 font (Space Grotesk display, Inter body, JetBrains Mono mono), spacing scale (4/8/16/24/48), border-radius coerente, micro-interazioni (hover, focus).</p>
-    <p>Riusi sempre lo stesso design system su tutti i tuoi tool. Vantaggio: coerenza visiva, riconoscibilità del brand, zero "che colore uso?" all'inizio di ogni progetto.</p>
-    <div class="say"><b>Da dire:</b> "Decidi una volta come è bello, riusalo sempre. La coerenza è valore visibile."</div>
+    <h2>Fetch dati e render</h2>
+    <p>Pattern: l'agent espone un endpoint JSON (FastAPI o Flask sul Mac). Il frontend fa <code>fetch('/api/data')</code> ogni N secondi e aggiorna i numeri nel DOM. Niente WebSocket per cose semplici — polling è abbastanza.</p>
+    <p>Trick UX: transizioni di numeri (counter animato). Quando il fatturato sale, vedi i numeri girare. Effetto cassa di Las Vegas, gratis.</p>
+    <div class="say"><b>Da dire:</b> "Polling per i numeri. Il numero che gira è dopamina. La pagina diventa il tuo posto."</div>
   </div>
 
   <div class="point">
     <span class="num">04</span>
-    <h2>Fetch dati dall'agent</h2>
-    <p>Pattern: l'agent espone un endpoint JSON (FastAPI o Flask sul Mac). Il frontend fa <code>fetch('/api/data')</code> ogni N secondi. Niente WebSocket per cose semplici — polling è abbastanza.</p>
-    <p>Esempio LiveKPI: backend Python su porta 8787, frontend chiama /api/kpi ogni 30 secondi, mostra i numeri aggiornati. 40 righe di codice in tutto.</p>
-    <div class="say"><b>Da dire:</b> "Polling per i numeri. WebSocket solo se ti serve sub-secondo. Per la cassa, 30 secondi va benissimo."</div>
+    <h2>Deploy — locale o Render</h2>
+    <p>Per dashboard solo tue: gira sul Mac, accedi da localhost, zero costi. Launchd job che fa partire il server all'avvio = "sempre lì".</p>
+    <p>Quando deve vederla qualcun altro o tu da fuori casa: Render. Push su GitHub, Web Service da repo, env vars, build automatico. Dominio Cloudflare CNAME → Render. Costo: $7/mese a service.</p>
+    <p>Accesso protetto: cookie session auth semplice, una password condivisa col team. Niente OAuth, niente complessità.</p>
+    <div class="say"><b>Da dire:</b> "Se sei solo tu, locale e gratis. Se serve al team, Render e dominio. 5 minuti dal commit alla produzione."</div>
   </div>
 
   <div class="point">
     <span class="num">05</span>
-    <h2>Render in browser</h2>
-    <p>Mostra il render lato JS: ricevi JSON → aggiorni i numeri nel DOM. Una funzione render(data), una set di selector. Niente framework, niente virtual DOM, niente complessità.</p>
-    <p>Trick UX: transizioni di numeri (CSS o piccola libreria di counter). Quando il fatturato sale, vedi i numeri girare. Effetto cassa di Las Vegas, gratis.</p>
-    <div class="say"><b>Da dire:</b> "Il numero che gira è dopamina. La dopamina ti tiene su quella pagina. La pagina diventa il tuo posto."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">06</span>
-    <h2>Deploy locale</h2>
-    <p>Per dashboard solo tue: gira sul Mac, accedi da localhost. Zero costi, zero deploy. Esempio: PCMonitor su porta 8765, basta che il Mac sia acceso.</p>
-    <p>Trick: launchd job che fa partire il server all'avvio del Mac. Da quel momento è "sempre lì". Browser → bookmark → numero.</p>
-    <div class="say"><b>Da dire:</b> "Se sei solo tu, locale basta. Inutile pagare Render per qualcosa che vede solo te."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">07</span>
-    <h2>Deploy online su Render</h2>
-    <p>Quando deploy online: deve essere accessibile da qualcun altro o da te quando sei fuori casa. Apri render.com, crea un service, collega il GitHub, configura env vars, deploy.</p>
-    <p>Esempio reale: LiveKPI Leishape live su livekpi.ls-agents.com. Dominio Cloudflare + CNAME a Render. Risultato pulito e professionale.</p>
-    <p>Costo: piano Starter $7/mese a service. Soldi ben spesi se la dashboard la usi davvero.</p>
-    <div class="say"><b>Da dire:</b> "Render è la mia hosting standard. Push su GitHub, lui rebuilda. 5 minuti dal commit alla produzione."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">08</span>
-    <h2>Cookie auth e accesso protetto</h2>
-    <p>Per dashboard pubbliche con dati sensibili: cookie session auth semplice. Una password condivisa, set-cookie HttpOnly, middleware che blocca se assente.</p>
-    <p>Esempio reale: GrowthGuide ha cookie auth, una sola password per tutto il team Bronzata. Niente OAuth, niente account, niente complessità. Funziona, è sicuro abbastanza per dashboard interne.</p>
-    <div class="say"><b>Da dire:</b> "Auth semplice. Niente complessità di OAuth se serve solo a te e al tuo team. Una password e cookie."</div>
-  </div>
-
-  <div class="lesson-end">Fine L9 · CTA → L10 Shopify</div>
-</section>
-
-<!-- =================== LEZIONE 10 =================== -->
-<section class="lesson" id="l10">
-  <div class="lesson-tag">Lezione 10 · 18–22 min</div>
-  <h1>Controllare Shopify dal terminale: caricare prodotti, clonare PDP, modificare il tema</h1>
-
-  <div class="point">
-    <span class="num">01</span>
-    <h2>Connettere Shopify — app custom, token, permessi</h2>
-    <p>Vai in admin Shopify → Apps → Develop apps → Create. Configura permessi (read/write products, themes, orders). Genera Admin API access token. Salvalo in .env nel tuo progetto.</p>
-    <p>Importante: token rotation. Imposta promemoria a 6 mesi per ruotarlo. Token leaked = drama. Mettilo nel calendario.</p>
-    <p>Mostra struttura .env: SHOPIFY_STORE, SHOPIFY_TOKEN. Niente più password in script.</p>
-    <div class="say"><b>Da dire:</b> "App custom, token in .env, scadenza in calendario. Tre cose. Non più."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">02</span>
-    <h2>Caricare prodotti da Word + foto</h2>
-    <p>Mostra ProductPusher. Input: cartella con file Word (descrizione + titolo + prezzo strutturato) + cartella immagini. Output: prodotto draft su Shopify, link admin stampato in chat.</p>
-    <p>Demo dal vivo: carichi un Word di prova, lanci /product-pusher, in 3 minuti il prodotto è online (in draft). Aprilo nell'admin per mostrare il risultato.</p>
-    <p>Sotto il cofano: Claude legge il Word, mappa i campi (titolo, body, prezzo, variants), API Shopify create product, upload immagini. Tutto in chiamate REST.</p>
-    <div class="say"><b>Da dire:</b> "Da 40 minuti manuali a 3 minuti automatici. Per ogni prodotto. Per sempre. Fai il conto sui prodotti che carichi all'anno."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">03</span>
-    <h2>Clonare PDP competitor</h2>
-    <p>ProductCloner: dai un URL competitor, l'agent scrappa la PDP (titolo, immagini, descrizione, varianti, prezzo), riadatta, crea draft sul tuo Shopify.</p>
-    <p>Caso d'uso: prodotto che fa numeri da un competitor, vuoi testarlo. In 5 minuti hai la PDP draft pronta. Polish manuale, push live.</p>
-    <p>Nota: rispetta le policy. Cloni la struttura, riscrivi i testi col tuo brand voice — niente plagio.</p>
-    <div class="say"><b>Da dire:</b> "Cloni la struttura, non il copy. La struttura è informazione. Il copy è il tuo brand."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">04</span>
-    <h2>Modificare il tema da terminale</h2>
-    <p>Tema Shopify = cartella di file Liquid. Puoi pullarli localmente, editarli, push back. Mostra Theme CLI di Shopify (<code>shopify theme dev/pull/push</code>).</p>
-    <p>Pattern: dev theme separato. Modifiche su dev. Quando approvi, push su live. Mai modifica diretta su live.</p>
-    <p>Demo: aggiungi una sezione custom (esempio: trust badges), preview su URL dev, decidi che ti piace, push live in 1 comando.</p>
-    <div class="say"><b>Da dire:</b> "Dev theme è sacro. Live è produzione. Mai mischiare. Mai."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">05</span>
-    <h2>Deploy automatico del tema</h2>
-    <p>Pattern reale: script bash <code>deploy-section.sh</code> che fa push del file modificato sul dev theme, ti dà l'URL preview. Quando vuoi push live, env var <code>FORCE_LIVE=1</code>.</p>
-    <p>Salvaguardia: warning a video se stai per fare push live. "Stai per pushare su LIVE. Conferma." Una digitazione in più che salva la cantonata.</p>
-    <div class="say"><b>Da dire:</b> "Deploy live deve sempre fare un po' paura. Se non fa paura, hai disattivato la salvaguardia. Riattivala."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">06</span>
-    <h2>Polish PDP — modifiche chirurgiche</h2>
-    <p>ProductPusher mode "polish": modifiche surgical alla PDP esistente. Aggiungi carosello reviews, slider, metafield related products. Senza ricreare il prodotto.</p>
-    <p>Vantaggio: tieni traffico/SEO della PDP esistente, ma migliori la conversion rate. Iterazione rapida.</p>
-    <p>Demo: prendi una PDP che converte male, aggiungi il blocco reviews carousel, vedi il diff su dev, push live.</p>
-    <div class="say"><b>Da dire:</b> "Mai ricreare per migliorare. Modifiche chirurgiche sulla cosa che già funziona."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">07</span>
-    <h2>Cache busting trick</h2>
-    <p>Problema: dopo push su live, gli utenti vecchi vedono ancora il vecchio HTML cachato per minuti. Soluzione: fire un secondo PUT vuoto sull'asset → invalida la cache CDN Shopify.</p>
-    <p>Mostra il pattern: deploy.sh → first PUT (vero contenuto) → wait 2 sec → second PUT touch (timestamp only). Storefront aggiornato per tutti in 5 secondi invece di 10 minuti.</p>
-    <div class="say"><b>Da dire:</b> "Senza cache bust, gli utenti vedono il vecchio per 10 minuti. Una PUT vuota = problema risolto. Trick da $0."</div>
-  </div>
-
-  <div class="lesson-end">Fine L10 · CTA → L11 contabilità</div>
-</section>
-
-<!-- =================== LEZIONE 11 =================== -->
-<section class="lesson" id="l11">
-  <div class="lesson-tag">Lezione 11 · 30–35 min</div>
-  <h1>Contabilità del tuo store + LiveKPI: dai dati al report alle 06:00, fino alla dashboard live</h1>
-
-  <div class="point">
-    <span class="num">01</span>
-    <h2>Cosa misurare — revenue, COGS, GW, net, BE ROAS</h2>
-    <p>Definiamo le 5 metriche che contano. Revenue = quanto incassa (lordo). COGS = costo del venduto (prodotti reali). GW = Gross profit = revenue − COGS. Net = GW − ads spend − fees. BE ROAS = revenue / ads spend al punto di breakeven.</p>
-    <p>Mostra esempio numerico: revenue €10.000, COGS €3.000, ads €4.000, fees €500. GW = €7.000. Net = €2.500. BE ROAS = €4.000 / margine = qualcosa intorno a 1.5x.</p>
-    <p>Importante: tutte da revenue LORDO, no scorporo IVA (vedi feedback dedicato). Coerenza prima di tutto.</p>
+    <h2>Contabilità — le 5 metriche che contano</h2>
+    <p>Definiamo le 5 metriche. Revenue = quanto incassa (lordo). COGS = costo del venduto. GW = Gross profit = revenue − COGS. Net = GW − ads spend − fees. BE ROAS = la soglia di ROAS al punto di breakeven.</p>
+    <p>Esempio numerico: revenue €10.000, COGS €3.000, ads €4.000, fees €500. GW = €7.000. Net = €2.500.</p>
     <div class="say"><b>Da dire:</b> "Se non sai questi 5 numeri ogni mattina, stai giocando senza vedere lo scoreboard."</div>
   </div>
 
   <div class="point">
-    <span class="num">02</span>
+    <span class="num">06</span>
     <h2>Hard rules — no IVA scorporo, no estimate, no overwrite</h2>
     <p>Tre regole non negoziabili. Uno: niente scorporo IVA nei calcoli di margine ads (revenue lordo Shopify). Due: niente stime — se manca il dato, card vuota. Mai inventare metriche.</p>
-    <p>Tre: niente overwrite di CSV/XLSX esistenti su Drive o locale. Test re-runs → cartella /TEST/ + prefisso TEST_. Si fa una volta, si rispetta sempre.</p>
-    <p>Perché: questi tre errori sono i killer della fiducia nei dati. Se uno solo è violato, butti via tutta la dashboard.</p>
+    <p>Tre: niente overwrite di CSV/XLSX esistenti su Drive o locale. Test re-runs → cartella /TEST/ + prefisso TEST_. Questi tre errori sono i killer della fiducia nei dati: uno solo violato e butti via tutta la dashboard.</p>
     <div class="say"><b>Da dire:</b> "Niente scorporo, niente stime, niente overwrite. Tre cose. Non negoziabili."</div>
   </div>
 
   <div class="point">
-    <span class="num">03</span>
-    <h2>Pull dati ordini da Shopify</h2>
-    <p>API Shopify GET /orders.json. Filtri importanti: <code>processed_at</code> (data effettiva pagamento, non created_at), status financial = paid. Paginazione gestita.</p>
-    <p>Mostra esempio Python: 30 righe per estrarre tutti gli ordini del giorno. JSON in memoria, parse delle line_items, aggregazione.</p>
-    <div class="say"><b>Da dire:</b> "processed_at, non created_at. Created può essere ieri, processed è oggi. Per il fatturato conta processed."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">04</span>
-    <h2>Integrazione COGS reali da XLSX fornitore</h2>
-    <p>Il fornitore ti dà un XLSX con costo unitario per SKU. Mostra il foglio Excel reale (anonimizzato). L'agent fa: leggi XLSX, costruisci dict SKU→cost, per ogni line_item dell'ordine moltiplica qty × cost.</p>
-    <p>HARD RULE: se manca COGS per uno SKU → STOP + notifica Lucio. MAI fallback a matrici % o medie. Dato mancante = card vuota, niente trucchi.</p>
-    <div class="say"><b>Da dire:</b> "Niente COGS reale = report bloccato. Mai stimare. Se non c'è il dato, c'è il vuoto. Punto."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">05</span>
-    <h2>Calcolo profit e BE ROAS</h2>
-    <p>Formule esplicite. Per ogni ordine: profit = revenue − cogs − shipping_paid_by_us − fees_payment. Aggregato giorno = somma dei profit ordine.</p>
-    <p>BE ROAS = la soglia di ROAS sotto la quale stai bruciando soldi. Calcolata come revenue / margine. Sopra BE ROAS = sei in profit. Sotto = sei in perdita.</p>
-    <p>Mostra in dashboard: BE ROAS oggi a 1.78x. ROAS effettivo a 2.4x. Differenza positiva = stai sopra il break-even.</p>
-    <div class="say"><b>Da dire:</b> "BE ROAS è la linea di galleggiamento. Sopra = navighi. Sotto = affoghi. Visivamente, una riga sul grafico."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">06</span>
-    <h2>DailyReport — il report Telegram alle 06:00</h2>
-    <p>Schedule launchd 06:00. L'agent: pull ordini, calcola margini, formatta messaggio. Output Telegram al gruppo del brand.</p>
-    <p>Formato messaggio: titolo data, revenue, ordini, AOV, COGS, GW, ads spend, net, ROAS, BE ROAS, top 5 prodotti. Tutto in un messaggio scrollabile, lettura 30 secondi.</p>
-    <p>Bonus: emoji semafori 🟢/🔴 sui KPI. Sopra target verde, sotto target rosso. Lettura istantanea senza leggere i numeri.</p>
-    <div class="say"><b>Da dire:</b> "Alle 6 ho letto il giorno prima. Alle 6 e mezzo ho già preso le decisioni. Alle 7 sono operativo."</div>
-  </div>
-
-  <div class="point">
     <span class="num">07</span>
-    <h2>Alert Telegram su soglia net</h2>
-    <p>Agent aggiuntivo: se net giornaliero scende sotto X € → alert push Telegram immediato. Non aspetta le 6 — appena chiude il giorno fiscale, spara.</p>
-    <p>Setup: soglia in config, controllo schedule 23:55. Output: "ALERT: net oggi €XYZ, sotto soglia €ABC. Ads spend €X, ROAS Yx."</p>
-    <p>Soglia personalizzata per brand. Mai stessa per tutti — devi conoscere il tuo break-even.</p>
-    <div class="say"><b>Da dire:</b> "Il giorno andato male te lo dico io alle 23:55. Non lo scopri a fine settimana."</div>
+    <h2>Pull dati — ordini Shopify + COGS reali da XLSX</h2>
+    <p>API Shopify GET /orders.json. Filtri importanti: <code>processed_at</code> (data effettiva pagamento, non created_at), status financial = paid. 30 righe di Python per estrarre tutti gli ordini del giorno.</p>
+    <p>COGS: il fornitore ti dà un XLSX con costo unitario per SKU. L'agent legge l'XLSX, costruisce dict SKU→cost, per ogni line_item moltiplica qty × cost.</p>
+    <p>HARD RULE: se manca COGS per uno SKU → STOP + notifica. MAI fallback a matrici % o medie. Dato mancante = card vuota, niente trucchi.</p>
+    <div class="say"><b>Da dire:</b> "processed_at, non created_at. E niente COGS reale = report bloccato. Mai stimare."</div>
   </div>
 
   <div class="point">
     <span class="num">08</span>
-    <h2>LiveKPI — dashboard fatturato in tempo reale nel browser</h2>
-    <p>Step up: il report giornaliero arriva alle 06. Ma in giornata vuoi vedere i numeri salire in tempo reale. LiveKPI = dashboard browser, polling ogni 30 secondi, mostra revenue/ordini/AOV/BE ROAS aggiornati.</p>
-    <p>Mostra il tuo LiveKPI live (Bronzata o Leishape, quello che oggi vola). Indica i numeri che cambiano. Le 5 card principali con sparkline accanto.</p>
-    <div class="say"><b>Da dire:</b> "Il browser sempre aperto su un secondo monitor. Quando arriva un ordine, lo vedo entrare. È la cassa in diretta."</div>
+    <h2>Profit e BE ROAS</h2>
+    <p>Formule esplicite. Per ogni ordine: profit = revenue − cogs − shipping − fees. Aggregato giorno = somma dei profit ordine.</p>
+    <p>BE ROAS = la soglia di ROAS sotto la quale stai bruciando soldi. Mostra in dashboard: BE ROAS oggi a 1.78x, ROAS effettivo a 2.4x. Differenza positiva = sei sopra il break-even.</p>
+    <div class="say"><b>Da dire:</b> "BE ROAS è la linea di galleggiamento. Sopra = navighi. Sotto = affoghi. Visivamente, una riga sul grafico."</div>
   </div>
 
   <div class="point">
     <span class="num">09</span>
-    <h2>Architettura — agent dati + frontend</h2>
-    <p>Disegno: backend FastAPI sul Mac/server (porta 8787), legge dati cached + chiama Shopify ogni 30s. Frontend HTML che fa fetch /api/kpi ogni 30s e re-renderizza.</p>
-    <p>Cache layer: il dato non si pulla da Shopify a ogni request del frontend (rate limit). Si pulla dal backend al massimo ogni 30s, si serve da cache.</p>
-    <p>Vantaggi: scala, è veloce, non pesta i rate limit Shopify.</p>
-    <div class="say"><b>Da dire:</b> "Backend è la centralina. Frontend è il cruscotto. La centralina lavora, il cruscotto mostra."</div>
+    <h2>DailyReport alle 06:00 + alert soglia</h2>
+    <p>Schedule launchd 06:00. L'agent: pull ordini, calcola margini, formatta messaggio Telegram al gruppo del brand. Formato: data, revenue, ordini, AOV, COGS, GW, ads spend, net, ROAS, BE ROAS, top 5 prodotti. Lettura 30 secondi, emoji semaforo 🟢/🔴 sui KPI.</p>
+    <p>Alert aggiuntivo: se net giornaliero scende sotto soglia → push Telegram immediato alle 23:55. "Il giorno andato male te lo dico io. Non lo scopri a fine settimana."</p>
+    <div class="say"><b>Da dire:</b> "Alle 6 ho letto il giorno prima. Alle 6 e mezzo ho già preso le decisioni. Alle 7 sono operativo."</div>
   </div>
 
   <div class="point">
     <span class="num">10</span>
-    <h2>Card revenue, ordini, AOV, BE ROAS in live polling</h2>
-    <p>Mostra le 4 card. Revenue grande in alto (numero protagonista). Ordini sotto. AOV calcolato (revenue/ordini). BE ROAS calcolato dal margine giornaliero.</p>
-    <p>Effetto visivo: contatore che gira (CountUp.js o piccola animazione). Quando arriva un ordine vedi salire revenue + 1 ordine. È la cosa che ti tiene incollato.</p>
-    <div class="say"><b>Da dire:</b> "Quando vedi il contatore salire, vuoi capire quale prodotto ha venduto. Diventi più presente nel tuo brand."</div>
+    <h2>LiveKPI — la cassa in diretta nel browser</h2>
+    <p>Step up: il report arriva alle 06, ma in giornata vuoi vedere i numeri salire in tempo reale. LiveKPI = dashboard browser, polling ogni 30 secondi: revenue, ordini, AOV, BE ROAS aggiornati. Mostra il tuo LiveKPI live.</p>
+    <p>Architettura: backend FastAPI (porta 8787) che pulla Shopify al massimo ogni 30s e serve da cache (rate limit salvi); frontend che fa fetch /api/kpi e re-renderizza. Backend = centralina, frontend = cruscotto.</p>
+    <p>Card: revenue grande in alto (numero protagonista), ordini, AOV, BE ROAS. Contatore animato: quando arriva un ordine, lo vedi entrare. Responsive: 4 col desktop, 1 col mobile — il KPI in tasca tutto il giorno.</p>
+    <div class="say"><b>Da dire:</b> "Il browser sempre aperto su un secondo monitor. Quando arriva un ordine, lo vedo entrare. È la cassa in diretta."</div>
   </div>
 
   <div class="point">
     <span class="num">11</span>
-    <h2>Stile dashboard e responsive</h2>
-    <p>Design system SHIN-EN applicato. Mostra il file CSS: variabili (colori, font, spacing), poi grid di card responsive (4 col desktop, 2 col tablet, 1 col mobile).</p>
-    <p>Trick: cellulare in tasca = tutta la giornata il KPI è a portata di click. Apri Safari, bookmark, controllo lampo a semaforo.</p>
-    <div class="say"><b>Da dire:</b> "Una dashboard non responsive è una dashboard che non porti con te. E quella che non porti con te, non guardi mai."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">12</span>
-    <h2>Deploy su Render + dominio custom + cookie auth</h2>
-    <p>Setup: push su GitHub, Render Web Service da repo, env vars (Shopify token), build automatico. Dominio: Cloudflare CNAME → Render. Cookie session per accesso protetto.</p>
-    <p>Esempio: LiveKPI Leishape su livekpi.ls-agents.com. Login con password condivisa al team. Tutti vedono lo stesso numero in tempo reale.</p>
-    <div class="say"><b>Da dire:</b> "Quando il team vede gli stessi numeri tuoi, lavora con la tua stessa testa. È quasi più importante questo dei numeri stessi."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">13</span>
-    <h2>Esercizio — il tuo LiveKPI live sul tuo brand</h2>
-    <p>Esercizio finale del corso "core". Setup completo: connetti Shopify, configura COGS, lancia DailyReport, builda LiveKPI, deploy su Render, dominio.</p>
-    <p>Tempo target: una giornata di lavoro per la prima volta. Da quel momento, ogni mattina alle 6 hai il report e ogni momento del giorno hai la dashboard live.</p>
-    <p>Quando hai LiveKPI live sul tuo dominio, hai costruito il primo pezzo del sistema "che gira mentre dormi". Bonvenuto dall'altra parte.</p>
+    <h2>Esercizio finale — il tuo LiveKPI sul tuo dominio</h2>
+    <p>Esercizio finale del corso "core". Setup completo: connetti Shopify, configura COGS, lancia DailyReport, builda LiveKPI, deploy su Render, dominio custom, cookie auth per il team.</p>
+    <p>Tempo target: una giornata di lavoro la prima volta. Da quel momento, ogni mattina alle 6 hai il report e ogni momento del giorno hai la dashboard live. Quando il team vede gli stessi numeri tuoi, lavora con la tua stessa testa.</p>
     <div class="say"><b>Da dire:</b> "Quando LiveKPI sale per la prima volta sul tuo dominio, sei dall'altra parte. Sei costruttore. Sei dirigente del tuo sistema."</div>
   </div>
 
-  <div class="lesson-end">Fine L11 · CTA → BONUS Agent Marketing</div>
+  <div class="lesson-end">Fine L10 · CTA → BONUS Agent Marketing</div>
 </section>
 
 <!-- =================== BONUS =================== -->

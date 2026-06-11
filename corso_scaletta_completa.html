@@ -109,7 +109,7 @@ h1{font-family:var(--display);font-weight:500;font-size:clamp(32px,4.5vw,48px);l
 </div>
 
 <div class="lesson">
-  <h2>Lezione 5 — Creare un brain: trasformare i tuoi documenti in un esperto interrogabile (esempio: Brain Marketing → Creative Strategist)</h2>
+  <h2>Lezione 5 — Creare un brain + cos'è un agent: dai tuoi documenti a un esperto interrogabile (esempio: Brain Marketing → Creative Strategist)</h2>
   <ol>
     <li>Cos'è un brain — un argomento + le sue fonti + le sue regole</li>
     <li>Le fonti — documenti del tuo brand, libri, corsi, video</li>
@@ -125,56 +125,41 @@ h1{font-family:var(--display);font-weight:500;font-size:clamp(32px,4.5vw,48px);l
     <li>Voice contract del Creative Strategist</li>
     <li>Build della skill /creative-strategist</li>
     <li>Test — input prodotto, output 3 angle + 3 hook + script video</li>
+    <li>Brain = sa, Agent = fa — anatomia di un agent (input, ragionamento, output, memoria)</li>
   </ol>
 </div>
 
 <div class="lesson">
-  <h2>Lezione 6 — Creare il tuo primo agent: automatizzare un task ripetitivo del tuo business</h2>
+  <h2>Lezione 6 — Build live del primo agent: da un canale YouTube a un brain completo, con tutta la potenza di Claude</h2>
   <ol>
-    <li>Anatomia di un agent — input, ragionamento, output, memoria</li>
-    <li>AgentFactory — il meta-agent che ne costruisce altri</li>
-    <li>SDD applicato — Spec, Plan, Build, Verify</li>
-    <li>Sub-agent e isolamento del contesto</li>
-    <li>Hook — far partire l'agent da solo</li>
-    <li>MCP — collegare a Shopify, Drive, Telegram</li>
-    <li>Skill custom /comando</li>
-    <li>Esercizio — il tuo primo agent in produzione</li>
+    <li>Il piano — un comando, sette superpoteri</li>
+    <li>La spec — scrivere cosa deve fare PRIMA di costruire</li>
+    <li>Step 1 — Scaricare i video (yt-dlp)</li>
+    <li>Step 2 — Trascrivere (Whisper)</li>
+    <li>Step 3 — Da transcript a lessons (Claude)</li>
+    <li>Step 4 — Il PDF riassunto (Chrome headless)</li>
+    <li>Step 5 — Upload su Google Drive</li>
+    <li>Step 6 — Notifiche: Telegram + WhatsApp</li>
+    <li>Step 7 — Push su GitHub</li>
+    <li>Il run completo — un comando, davanti alla camera</li>
   </ol>
 </div>
 
 <div class="lesson">
-  <h2>Lezione 7 — Far girare l'agent da solo: schedulazione, output Telegram/Drive, deploy come tool</h2>
+  <h2>Lezione 7 — Shopify dal terminale — setup: app custom, token, primi comandi</h2>
   <ol>
-    <li>Differenza tra agent e tool</li>
-    <li>launchd / cron — schedulare l'esecuzione</li>
-    <li>Report giornalieri e settimanali</li>
-    <li>Output su Telegram</li>
-    <li>Output su Drive</li>
-    <li>Output via email</li>
-    <li>Logging base</li>
-    <li>Error handling base</li>
-    <li>Esempio live — tool report fornitore da zero a deploy</li>
-  </ol>
-</div>
-
-<div class="lesson">
-  <h2>Lezione 8 — Dare un'interfaccia visiva al tuo agent: dashboard in browser + deploy online</h2>
-  <ol>
-    <li>Quando serve un frontend</li>
-    <li>Stack minimo — HTML, JS, CSS, niente framework</li>
-    <li>Design system base</li>
-    <li>Fetch dati dall'agent</li>
-    <li>Render in browser</li>
-    <li>Deploy locale</li>
-    <li>Deploy online su Render</li>
-    <li>Cookie auth e accesso protetto</li>
-  </ol>
-</div>
-
-<div class="lesson">
-  <h2>Lezione 9 — Controllare Shopify dal terminale: caricare prodotti, clonare PDP, modificare il tema</h2>
-  <ol>
+    <li>Perché collegare Shopify a Claude</li>
     <li>Connettere Shopify — app custom, token, permessi</li>
+    <li>Il primo comando — leggere lo store dal terminale</li>
+    <li>Theme CLI — il tema come cartella di file</li>
+    <li>La regola sacra — dev theme separato</li>
+    <li>Checklist di fine setup</li>
+  </ol>
+</div>
+
+<div class="lesson">
+  <h2>Lezione 8 — Shopify dal terminale — utilizzo: caricare prodotti, clonare PDP, modificare il tema</h2>
+  <ol>
     <li>Caricare prodotti da Word + foto</li>
     <li>Clonare PDP competitor</li>
     <li>Modificare il tema da terminale</li>
@@ -185,21 +170,36 @@ h1{font-family:var(--display);font-weight:500;font-size:clamp(32px,4.5vw,48px);l
 </div>
 
 <div class="lesson">
-  <h2>Lezione 10 — Contabilità del tuo store + LiveKPI: dai dati al report alle 06:00, fino alla dashboard live nel browser</h2>
+  <h2>Lezione 9 — L'agent per il tuo ecommerce: costruirlo bene e farlo girare da solo</h2>
   <ol>
-    <li>Cosa misurare — revenue, COGS, GW, net, BE ROAS</li>
+    <li>Differenza tra agent e tool</li>
+    <li>AgentFactory — il meta-agent che ne costruisce altri</li>
+    <li>SDD applicato — Spec, Plan, Build, Verify</li>
+    <li>Sub-agent e isolamento del contesto</li>
+    <li>Hook — far partire l'agent da solo</li>
+    <li>MCP — collegare a Shopify, Drive, Telegram</li>
+    <li>Skill custom /comando</li>
+    <li>launchd / cron — schedulare l'esecuzione</li>
+    <li>Gli output — Telegram, Drive, email</li>
+    <li>Logging + error handling</li>
+    <li>Build live — l'agent del tuo store, da zero a deploy</li>
+  </ol>
+</div>
+
+<div class="lesson">
+  <h2>Lezione 10 — Dashboard, deploy e contabilità: dall'agent al report delle 06:00 fino a LiveKPI sul tuo dominio</h2>
+  <ol>
+    <li>Quando serve un frontend</li>
+    <li>Stack minimo — HTML, JS, CSS, niente framework</li>
+    <li>Fetch dati e render</li>
+    <li>Deploy — locale o Render</li>
+    <li>Contabilità — le 5 metriche che contano</li>
     <li>Hard rules — no IVA scorporo, no estimate, no overwrite</li>
-    <li>Pull dati ordini da Shopify</li>
-    <li>Integrazione COGS reali da XLSX fornitore</li>
-    <li>Calcolo profit e BE ROAS</li>
-    <li>DailyReport — il report Telegram alle 06:00</li>
-    <li>Alert Telegram su soglia net</li>
-    <li>LiveKPI — dashboard fatturato in tempo reale nel browser</li>
-    <li>Architettura — agent dati + frontend</li>
-    <li>Card revenue, ordini, AOV, BE ROAS in live polling</li>
-    <li>Stile dashboard e responsive</li>
-    <li>Deploy su Render + dominio custom + cookie auth</li>
-    <li>Esercizio — il tuo LiveKPI live sul tuo brand</li>
+    <li>Pull dati — ordini Shopify + COGS reali da XLSX</li>
+    <li>Profit e BE ROAS</li>
+    <li>DailyReport alle 06:00 + alert soglia</li>
+    <li>LiveKPI — la cassa in diretta nel browser</li>
+    <li>Esercizio finale — il tuo LiveKPI sul tuo dominio</li>
   </ol>
 </div>
 
