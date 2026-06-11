@@ -631,62 +631,53 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
 <!-- =================== LEZIONE 5 =================== -->
 <section class="lesson" id="l5">
   <div class="lesson-tag">Lezione 05 · 35–40 min</div>
-  <h1>Build live del primo agent col way-stack: skill, plugin e capacità agentiche da un canale YouTube</h1>
+  <h1>Build live del primo agent: la agent factory del way-stack, step by step</h1>
 
   <div class="point">
     <span class="num">01</span>
     <h2>Perché questo agent — un build, tutto il sistema</h2>
-    <p>Frame della lezione: finora hai parlato CON Claude. Un agent è Claude che lavora DA SOLO. E il primo agent lo strutturiamo apposta così, perché un solo build ci fa toccare tre cose: tutte le capacità agentiche (terminale, file, tool esterni, API), le skill e i plugin del way-stack visti nel dettaglio mentre lavorano, e il materiale che produce — che nella Lezione 6 diventa la memoria con Graphify.</p>
-    <p>Mostra la catena: YouTube → audio → trascrizione → lessons nel vault → PDF → Drive → Telegram. "Non è un esempio a caso. Ogni step usa un pezzo diverso del sistema. E niente va sprecato: l'output di oggi è l'input della prossima lezione."</p>
-    <div class="say"><b>Da dire:</b> "Un build solo, e alla fine avete visto tutto: capacità agentiche, skill, plugin, e il materiale pronto per diventare memoria."</div>
+    <p>Frame della lezione: finora hai parlato CON Claude. Un agent è Claude che lavora DA SOLO. Il primo agent lo strutturiamo apposta così, perché un solo build ci fa toccare tutto: le capacità agentiche (terminale, file, tool esterni, API), tutti i pezzi del way-stack che abbiamo installato nella lezione scorsa visti mentre lavorano, e il materiale che produce — che nella Lezione 6 diventa la memoria con Graphify.</p>
+    <p>Mostra la catena: YouTube → audio → trascrizione → lessons nel vault → PDF → Drive → Telegram. "Non è un esempio a caso. Ogni step usa un pezzo diverso del way-stack. E niente va sprecato: l'output di oggi è l'input della prossima lezione."</p>
+    <div class="say"><b>Da dire:</b> "Un build solo, e alla fine avete visto lavorare ogni pezzo del way-stack. Step by step, adesso."</div>
   </div>
 
   <div class="point">
     <span class="num">02</span>
-    <h2>Way-stack — il mio stack, install in 3 comandi</h2>
-    <p>Presentazione del way-stack: lo stack completo che uso ogni giorno, open source su GitHub (Lucioway/way-stack). Tre comandi e ti arriva tutto configurato: l'orchestrator che decide quale strumento usare, il vault, 5 plugin, le design skills, i comandi agent.</p>
-    <p>Lancia i 3 comandi in diretta: /plugin marketplace add Lucioway/way-stack → /plugin install way-stack → /stack-bootstrap. Mentre installa, spieghi il concetto: "non dovete costruire il setup pezzo per pezzo come ho fatto io in due anni — ve lo regalo già montato."</p>
-    <p>Prima di andare avanti, tre parole spiegate semplici — le useremo per tutto il corso. <b>Plugin</b>: un pacchetto di capacità in più che installi dentro Claude, come un'app sul telefono — la metti e Claude sa fare cose nuove. <b>Skill</b>: una ricetta che Claude sa seguire passo passo — tu chiedi, lui usa il metodo giusto senza che glielo spieghi ogni volta. <b>Comando</b>: una scorciatoia che inizia con / — scrivi /agent-spec e parte tutta la procedura, un tasto un lavoro.</p>
-    <div class="say"><b>Da dire:</b> "Questo è il mio stack. Ve lo regalo. Tre comandi e avete lo stesso identico setup che vedete in tutto il corso."</div>
+    <h2>Step 1 — Prima cosa: andiamo a creare l'agent (brainstorming, plugin Superpowers)</h2>
+    <p>Si annuncia il piano: "creiamo l'agent del tool YouTube". Ma prima del prompt grande, si chiarisce l'idea. Qui entra il primo pezzo del way-stack: <b>Superpowers</b>. <b>Cos'è Superpowers:</b> un plugin che insegna a Claude un metodo di lavoro — prima fa le domande, poi scrive il piano, poi costruisce, poi controlla. Senza, parte a scrivere codice a caso come uno studente che non ha letto la consegna.</p>
+    <p>Dici a Claude: "Brainstorm: voglio un agent che da un canale YouTube mi crea un archivio ordinato nel vault. Aiutami a definirlo." La skill brainstorming prende il controllo e ti intervista: quanti video? solo audio? che formato per le lessons? dove ti notifico? Le tue risposte diventano i requisiti.</p>
+    <div class="say"><b>Da dire:</b> "Non si parte mai dal codice. Si parte dalle domande. Claude vi intervista finché l'idea non è chiara."</div>
   </div>
 
   <div class="point">
     <span class="num">03</span>
-    <h2>Tour dei pezzi chiave — cosa useremo oggi</h2>
-    <p>Tour dei 6 pezzi che il build tocca, spiegati semplici. <b>Superpowers</b> (plugin): insegna a Claude un metodo di lavoro — prima fa le domande, poi scrive il piano, poi costruisce, poi controlla. Senza, parte a scrivere codice a caso come uno studente che non ha letto la consegna. <b>Agent factory</b> (comandi): la catena di montaggio degli agent — /agent-spec scrive il contratto, poi tasks (la lista dei lavori), execute (li fa), verify (controlla). Entra un'idea, esce un agent finito.</p>
-    <p><b>Frontend-design + SHIN-EN</b> (plugin + grafica): fa uscire pagine e PDF belli senza pagare un designer. SHIN-EN è la mia grafica — bianco e nero, scritte grandi, zero decorazioni inutili. La vedete in queste slide, nei miei PDF, nei miei tool. È nel way-stack: la usate anche voi, gratis. <b>Vault skills</b> (skill): il bibliotecario della vostra libreria — vault-ingest mette dentro i file nuovi e li ordina, vault-query trova le risposte quando cerchi, vault-lint tiene tutto pulito e segnala il disordine.</p>
-    <p><b>Code-review</b> (plugin): prima di usare il codice, lo fa controllare da più revisori AI insieme — uno cerca i bug, uno i problemi di sicurezza, uno le cose scritte male. Trovano gli errori che a occhio non vedi. <b>Ralph-loop</b> (plugin): fa ripetere il lavoro a Claude da solo, un pezzo alla volta, finché la lista non è finita — per i lavori lunghi tipo "sistemami tutte e 100 le pagine". Oggi lo nominiamo, lo useremo più avanti.</p>
-    <div class="say"><b>Da dire:</b> "Sei pezzi. Non ve li spiego in teoria: li vedete lavorare adesso, uno per step."</div>
+    <h2>Step 2 — La agent factory: il prompt completo (/agent-spec)</h2>
+    <p>Secondo pezzo del way-stack: la <b>agent factory</b>. <b>Cos'è la agent factory:</b> la catena di montaggio degli agent. Cinque comandi in fila: <code>/agent-spec</code> (scrive il contratto), <code>/agent-tasks</code> (la lista dei lavori), <code>/agent-execute</code> (li esegue), <code>/agent-verify</code> (controlla), <code>/agent-ship</code> (consegna). Entra un'idea, esce un agent finito.</p>
+    <p>Lanci <code>/agent-spec</code> e gli dai tutto quanto in un prompt: "Voglio un agent che, dato l'URL di un canale YouTube: 1) scarica tutti i video in solo audio, 2) li trascrive con Whisper, 3) trasforma ogni trascrizione in lessons da 200-400 parole dentro il vault, una per concetto con take-away finale, 4) genera un PDF di presentazione dell'archivio in grafica SHIN-EN, 5) lo carica su Drive, 6) mi manda notifica Telegram col PDF allegato. Vincoli: niente video sopra 1 ora, tutto in italiano."</p>
+    <p>Il comando genera SPEC.md: input, output, vincoli, in italiano semplice. Regola d'oro: mai codice prima della spec. La spec è il contratto — Claude sa cosa costruire, tu sai cosa verificare alla fine.</p>
+    <div class="say"><b>Da dire:</b> "Un prompt, tutto dentro. Dieci righe di italiano valgono più di cento righe di codice scritto a caso."</div>
   </div>
 
   <div class="point">
     <span class="num">04</span>
-    <h2>Step 1 — Definire l'agent (skill brainstorming)</h2>
-    <p>Si parte dalla skill brainstorming dei superpowers: dici a Claude "Brainstorm: voglio un agent che da un canale YouTube mi crea un archivio ordinato nel vault. Aiutami a definirlo." La skill prende il controllo e fa le domande giuste: quanti video? solo audio? che formato per le lessons? dove notifico?</p>
-    <p>Punto didattico: non è chat libera, è una skill con un metodo. Le risposte diventano i requisiti. "Claude vi intervista finché l'idea non è chiara. Voi rispondete, lui struttura."</p>
-    <div class="say"><b>Da dire:</b> "Prima skill in azione: brainstorming. Non si parte mai dal codice. Si parte dalle domande."</div>
+    <h2>Step 3 — /agent-tasks + /agent-execute: Claude costruisce da solo</h2>
+    <p>Lanci <code>/agent-tasks</code>: la spec diventa una lista di lavori numerati — scarica, trascrivi, organizza, impagina, carica, notifica. Mostri la lista a schermo: "questa è la to-do list dell'agent, l'ha scritta lui dalla spec".</p>
+    <p>Poi <code>/agent-execute</code>: Claude esegue i task uno alla volta, e ogni task completato è un salvataggio (un commit) — se qualcosa va storto, torni indietro di un passo, non ricominci da zero. Da qui in poi tu guardi e commenti: i prossimi step della lezione sono i task che l'agent sta eseguendo da solo.</p>
+    <div class="say"><b>Da dire:</b> "Spec → tasks → execute. Da questo momento il lavoro lo fa lui. Noi guardiamo dentro ogni pezzo."</div>
   </div>
 
   <div class="point">
     <span class="num">05</span>
-    <h2>Step 2 — Scrivere SPEC.md (/agent-spec)</h2>
-    <p>Dal brainstorm alla spec col comando /agent-spec della agent factory: genera SPEC.md in italiano semplice — input (URL canale), output (cartella nel vault con sources/ + lessons/ + PDF + notifica), vincoli (niente video sopra 1 ora, lessons da 200-400 parole).</p>
-    <p>Regola d'oro ripetuta: mai codice prima della spec. La spec è il contratto. Claude la legge e sa esattamente cosa costruire — e tu sai esattamente cosa verificare alla fine.</p>
-    <div class="say"><b>Da dire:</b> "Dieci righe di italiano valgono più di cento righe di codice scritto a caso. Prima pensi, poi costruisci."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">06</span>
-    <h2>Step 3 — Scaricare i video (yt-dlp)</h2>
+    <h2>Step 4 — Scaricare i video (yt-dlp, il terminale)</h2>
     <p><b>Cos'è yt-dlp:</b> un programma gratuito che scarica video e audio da YouTube (e da mille altri siti). Lo usa mezzo internet, si comanda solo da terminale — perfetto per un agent.</p>
-    <p>Prima capacità agentica pura: il terminale. Dici a Claude: "scarica tutti i video del canale in sources/, solo audio, con yt-dlp". Claude installa il tool da solo se manca, lancia il download, e i file .mp3 appaiono in sources/.</p>
+    <p>Prima capacità agentica pura: il terminale. Il task dice "scarica tutti i video del canale in sources/, solo audio". Claude installa yt-dlp da solo se manca, lancia il download, e i file .mp3 appaiono in sources/.</p>
     <p>Punto didattico: non hai aperto un browser, non hai cliccato niente. Hai descritto il risultato e Claude ha scelto il tool, l'ha installato e l'ha usato. Questa è la differenza tra usare un computer e dirigere un computer.</p>
     <div class="say"><b>Da dire:</b> "Io non ho scaricato niente. Ho detto cosa volevo. Lui ha fatto. Memorizzate questa sensazione."</div>
   </div>
 
   <div class="point">
-    <span class="num">07</span>
-    <h2>Step 4 — Trascrivere (Whisper)</h2>
+    <span class="num">06</span>
+    <h2>Step 5 — Trascrivere (Whisper)</h2>
     <p><b>Cos'è Whisper:</b> un programma AI (fatto da OpenAI, quelli di ChatGPT) che ascolta un audio e scrive parola per parola quello che sente. Uno stenografo instancabile: gratis, gira sul tuo computer, niente abbonamenti.</p>
     <p>Claude lancia Whisper sugli audio: da .mp3 a .txt. Mentre gira (1-2 minuti a video), spieghi cosa sta succedendo: il parlato diventa testo, in locale.</p>
     <p>Apri un transcript appena generato. Mostra che è testo grezzo: niente punteggiatura perfetta, ripetizioni, intercalari. "Questo è il grezzo. Non si interroga. Adesso lo raffiniamo."</p>
@@ -694,56 +685,65 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
   </div>
 
   <div class="point">
-    <span class="num">08</span>
-    <h2>Step 5 — Da transcript a lessons (vault-ingest)</h2>
-    <p><b>Cos'è vault-ingest:</b> la skill-bibliotecario. Prende un file grezzo, lo spezza in pagine ordinate, dà un titolo a ognuna e aggiorna l'indice della libreria. Tu porti il libro, lui lo sistema sullo scaffale giusto.</p>
-    <p>Il cuore della pipeline: Claude legge ogni transcript e lo spezza in lessons da 200-400 parole, una per concetto, con take-away finale, dentro il vault e con l'indice aggiornato. Mostra il prompt che fa il lavoro — lo studente lo riusa così com'è.</p>
+    <span class="num">07</span>
+    <h2>Step 6 — Da transcript a lessons (vault-ingest e le skill del vault)</h2>
+    <p>Terzo pezzo del way-stack: le <b>vault skills</b>, il bibliotecario della vostra libreria. Sono tre. <b>vault-ingest</b>: prende un file grezzo, lo spezza in pagine ordinate, dà un titolo a ognuna e aggiorna l'indice — tu porti il libro, lui lo sistema sullo scaffale giusto. <b>vault-query</b>: trova le risposte quando cerchi qualcosa nel vault. <b>vault-lint</b>: tiene tutto pulito e segnala il disordine. Oggi lavora la prima.</p>
+    <p>Il cuore della pipeline: Claude legge ogni transcript e lo spezza in lessons da 200-400 parole, una per concetto, con take-away finale, dentro il vault e con l'indice aggiornato.</p>
     <p>Apri lessons/ e leggi una lesson a voce alta. Confronta col transcript grezzo: stesso contenuto, forma completamente diversa. "Questo adesso è organizzato. E nella prossima lezione diventa interrogabile con Graphify."</p>
     <div class="say"><b>Da dire:</b> "Il grezzo diventa pillole dentro il vault. Una lesson = un concetto. Questo è il formato che l'AI legge meglio."</div>
   </div>
 
   <div class="point">
-    <span class="num">09</span>
-    <h2>Step 6 — Il PDF con grafica SHIN-EN (frontend-design)</h2>
-    <p><b>Cos'è Chrome headless:</b> Chrome senza finestra. Apre la pagina di nascosto e la stampa in PDF, tutto da terminale, senza che tu veda niente. È il trucco per trasformare qualsiasi pagina web in un documento.</p>
-    <p>L'agent genera il PDF di presentazione dell'archivio: chi è il creator, quante lessons, gli argomenti, i 10 take-away migliori. Qui entra la skill frontend-design + lo stile SHIN-EN: Claude scrive una pagina HTML con la mia grafica, poi Chrome headless la stampa in PDF. Un comando.</p>
-    <p>Apri il PDF appena creato. "Questo l'ha impaginato lui, nello stesso stile di queste slide. Nessun designer, nessun Canva. E la grafica è vostra: è nel way-stack."</p>
+    <span class="num">08</span>
+    <h2>Step 7 — Il PDF in grafica SHIN-EN (plugin frontend-design)</h2>
+    <p>Quarto pezzo del way-stack: il plugin <b>frontend-design</b> + le 7 design skills installate con lo stack. <b>Cos'è frontend-design:</b> il plugin che fa uscire pagine e PDF belli senza pagare un designer — niente grafica "da AI", direzione precisa. E <b>SHIN-EN</b> è la mia grafica: bianco e nero, scritte grandi, zero decorazioni inutili. È nel way-stack — la usate anche voi, gratis.</p>
+    <p><b>Cos'è Chrome headless:</b> Chrome senza finestra. Apre la pagina di nascosto e la stampa in PDF, tutto da terminale. È il trucco per trasformare qualsiasi pagina web in un documento.</p>
+    <p>L'agent genera il PDF di presentazione dell'archivio: chi è il creator, quante lessons, gli argomenti, i 10 take-away migliori. Claude scrive la pagina HTML in SHIN-EN, Chrome headless la stampa in PDF. Apri il PDF: "questo l'ha impaginato lui. Nessun designer, nessun Canva."</p>
     <div class="say"><b>Da dire:</b> "Qualsiasi documento vi serva — report, guide, preventivi — questo è il pattern. E con SHIN-EN esce già bello."</div>
   </div>
 
   <div class="point">
-    <span class="num">10</span>
-    <h2>Step 7 — Drive + notifica Telegram</h2>
+    <span class="num">09</span>
+    <h2>Step 8 — Drive + notifica Telegram (le API esterne)</h2>
     <p><b>Cos'è un'API:</b> la porta di servizio che un sito offre ai programmi. Tu entri da Drive dal browser; un agent entra dall'API, senza click. <b>Cos'è un bot Telegram:</b> un contatto Telegram per i programmi — l'agent gli passa il messaggio, lui te lo recapita. Si crea in 2 minuti con BotFather, gratis.</p>
-    <p>Capacità agentica finale: le API esterne. L'agent carica il PDF su Drive nella cartella giusta e stampa il webViewLink — regola: dopo ogni upload, sempre il link. Poi manda la notifica Telegram: "Archivio pronto: N lessons, ecco il PDF" con documento allegato. Tira fuori il telefono e mostra la notifica arrivare in diretta.</p>
+    <p>Capacità agentica finale: le API esterne. L'agent carica il PDF su Drive nella cartella giusta e stampa il link. Poi manda la notifica Telegram: "Archivio pronto: N lessons, ecco il PDF" con documento allegato. Tira fuori il telefono e mostra la notifica arrivare in diretta.</p>
     <p>Punto didattico: l'output di un agent deve arrivare dove vivi tu — non in un log che non leggerai mai.</p>
     <div class="say"><b>Da dire:</b> "L'agent ha finito e me l'ha detto sul telefono. Io potevo essere al mare. Questo cambia il rapporto col lavoro."</div>
   </div>
 
   <div class="point">
-    <span class="num">11</span>
-    <h2>Verifica — /agent-verify + code-review</h2>
-    <p>Prima di dichiarare l'agent finito, gli ultimi due pezzi del way-stack: /agent-verify controlla che ogni punto della SPEC sia coperto, e il plugin code-review fa la review multi-agent del codice. Mostra una finding vera se esce — è il momento più educativo.</p>
-    <p>Regola insegnata: mai fidarsi del primo run. La verifica non è un extra, è dentro il processo — la spec dice cosa, la verify conferma che c'è.</p>
-    <div class="say"><b>Da dire:</b> "Spec all'inizio, verify alla fine. È un cerchio che si chiude. Tutto quello che sta in mezzo lo può fare l'agent."</div>
+    <span class="num">10</span>
+    <h2>Step 9 — Verifica: /agent-verify + plugin code-review</h2>
+    <p>Si chiude il giro della agent factory: <code>/agent-verify</code> controlla che ogni punto della SPEC sia coperto. Poi l'ultimo pezzo del way-stack di oggi: il plugin <b>code-review</b>. <b>Cos'è code-review:</b> prima di usare il codice, lo fa controllare da più revisori AI insieme — uno cerca i bug, uno i problemi di sicurezza, uno le cose scritte male. Trovano gli errori che a occhio non vedi.</p>
+    <p>Mostra una finding vera se esce — è il momento più educativo. Regola insegnata: mai fidarsi del primo run. La spec dice cosa, la verify conferma che c'è.</p>
+    <div class="say"><b>Da dire:</b> "Spec all'inizio, verify alla fine. È un cerchio che si chiude. Tutto quello che sta in mezzo lo fa l'agent."</div>
   </div>
 
   <div class="point">
-    <span class="num">12</span>
+    <span class="num">11</span>
     <h2>Il run completo — un comando, davanti alla camera</h2>
     <p>Gran finale: cartella pulita, lanci l'agent una volta sola con l'URL del canale. Mentre gira, ricapitoli a voce gli step che si stanno eseguendo da soli. Quando arriva la notifica Telegram, pausa drammatica.</p>
-    <p>Recap della potenza mostrata: skill brainstorming, spec, terminale, install di tool, AI pipeline, vault, PDF in SHIN-EN, cloud, messaging, verify. "Tutto questo è UN agent costruito col way-stack. E voi adesso sapete leggerne ogni pezzo."</p>
+    <p>Recap della potenza mostrata: brainstorming, spec, tasks, execute, terminale, install di tool, AI pipeline, vault, PDF in SHIN-EN, cloud, messaging, verify. "Tutto questo è UN agent costruito con la agent factory. E voi adesso sapete leggerne ogni pezzo."</p>
     <div class="say"><b>Da dire:</b> "Un comando. Tutto il sistema. Un archivio perfetto nel vault. E adesso lo mettiamo in automatico."</div>
   </div>
 
   <div class="point">
-    <span class="num">13</span>
-    <h2>Automazione giornaliera — ogni mattina, da solo</h2>
+    <span class="num">12</span>
+    <h2>Automazione giornaliera — ogni mattina, da solo (launchd)</h2>
     <p><b>Cos'è launchd:</b> la sveglia del Mac. A un orario fisso sveglia un programma e lo fa partire, anche se tu non ci sei (su Linux/Windows si chiama cron / Utilità di pianificazione).</p>
     <p>Ultimo upgrade, il più potente: schedulare l'agent. Dici a Claude: "schedula l'agent ogni mattina alle 7: controlla i video nuovi del canale, aggiorna l'archivio e mandami su Telegram il riassunto in PDF". Claude crea la sveglia da solo — tu non tocchi niente.</p>
     <p>Punto didattico: l'agent diventa incrementale — non riscarica tutto, controlla solo cosa c'è di nuovo, aggiorna lessons e indice, e manda il PDF solo dei contenuti nuovi. Mostra il messaggio Telegram di una mattina vera: "2 video nuovi, ecco il riassunto."</p>
+    <div class="say"><b>Da dire:</b> "Ogni mattina, caffè e PDF. Il canale lo segue lui, voi leggete solo il riassunto. Questo è un agent: lavora anche quando non ci siete."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">13</span>
+    <h2>La mappa completa del way-stack — tutto quello che avete installato</h2>
+    <p>Recap finale di TUTTO quello che è entrato col way-stack, anche i pezzi che oggi non abbiamo toccato. <b>L'orchestrator</b> (il CLAUDE.md principale): il vigile che smista — legge la tua richiesta e decide da solo quale skill o plugin usare. <b>Il vault PARA</b>: la libreria dove vive tutto (l'abbiamo riempito oggi). <b>Gli hook di sessione</b>: il diario automatico — a fine sessione scrivono da soli cosa è stato fatto.</p>
+    <p>I 5 plugin: <b>superpowers</b> (il metodo: domande → piano → build → controllo — usato), <b>frontend-design</b> (grafica — usato), <b>code-review</b> (revisori AI — usato), <b>cli-anything</b> (comanda da terminale i programmi con interfaccia grafica, tipo GIMP o Blender — non usato oggi), <b>ralph-loop</b> (ripete il lavoro da solo, un pezzo alla volta, finché la lista non è finita — per i lavori lunghi tipo "sistemami 100 pagine" — non usato oggi).</p>
+    <p>E poi: la <b>agent factory</b> (i 5 comandi /agent-* — usata tutta), le <b>vault skills</b> (ingest usata, query e lint le vedrete usare sempre), le <b>7 design skills</b> (regole di design che si attivano da sole quando si tocca grafica). "Tutto questo ce l'avete già installato. Oggi l'avete visto lavorare insieme."</p>
     <p>Ponte verso la L6: "il materiale è scaricato, trascritto, organizzato, e si aggiorna da solo ogni giorno. Ma Claude ancora non lo SA — non è memoria, è archivio. Nella prossima lezione lo colleghiamo a Graphify e lo trasformiamo in un brain che risponde con la voce del creator."</p>
-    <div class="say"><b>Da dire:</b> "Ogni mattina, caffè e PDF. Il canale lo segue lui, voi leggete solo il riassunto. Questo è un agent: lavora anche quando non ci siete. Prossima lezione: lo trasformiamo in memoria viva con Graphify."</div>
+    <div class="say"><b>Da dire:</b> "Adesso sapete cosa c'è dentro il way-stack, pezzo per pezzo, e l'avete visto montare un agent vero. Prossima lezione: lo trasformiamo in memoria viva con Graphify."</div>
   </div>
 
   <div class="lesson-end">Fine L5 · CTA → L6 Graphify + brain</div>
