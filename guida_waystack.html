@@ -96,10 +96,12 @@ pre .o{color:#fff}
       <div><b>07</b> Le 7 skill incluse</div>
       <div><b>08</b> Memoria + grafo — claude-mem e graphify</div>
       <div><b>09</b> Design — frontend-design + SHIN-EN + 6 design skills</div>
-      <div><b>10</b> Gli extra — agent monitor, deploy agent, framework opzionali</div>
-      <div><b>11</b> Cheat-sheet — tutti i comandi</div>
+      <div><b>10</b> Gli extra — agent monitor e deploy agent</div>
+      <div><b>11</b> I 3 framework opzionali — GSD, BMAD, gstack</div>
+      <div><b>12</b> I documenti di riferimento — SDD, Mega Prompt, template</div>
+      <div><b>13</b> Cheat-sheet — tutti i comandi</div>
     </div>
-    <div class="meta"><span>Guida way-stack</span><span>github.com/Lucioway/way-stack</span><span>Lettura ~10 min</span></div>
+    <div class="meta"><span>Guida way-stack</span><span>github.com/Lucioway/way-stack</span><span>Lettura ~12 min</span></div>
   </section>
 
   <!-- 01 -->
@@ -211,19 +213,42 @@ pre .o{color:#fff}
   <!-- 10 -->
   <div class="sec-wrap">
     <div class="sec-tag">10 · Gli extra</div>
-    <h2 class="sec">Gli extra — monitor, deploy, framework</h2>
-    <p class="body">Tre cose in più che arrivano col bootstrap, da usare quando cresci:</p>
-    <div class="three">
-      <div class="c"><div class="lbl">controllo</div><div class="nm">Agent monitor</div><div class="ds">Dashboard 3D in tempo reale della tua flotta di agent: chi gira, chi è in errore, ultimi output. Tutto in una pagina.</div></div>
-      <div class="c"><div class="lbl">pubblicazione</div><div class="nm">Deploy agent</div><div class="ds">La versione "da terminale" di deploy-project: scansione → audit sicurezza → test → online. Per pubblicare progetti sul web in un comando.</div></div>
-      <div class="c"><div class="lbl">opzionali</div><div class="nm">3 framework</div><div class="ds">GSD (~70 skill, progetti strutturati), BMAD (metodo agile multi-ruolo), gstack (un team virtuale completo: CEO, ingegneri, QA). Il bootstrap chiede se li vuoi.</div></div>
-    </div>
-    <div class="note"><b>Regola:</b> non serve impararli subito. L'orchestrator sa quando proporli — tu lavora, lui instrada.</div>
+    <h2 class="sec">Gli extra — agent monitor e deploy agent</h2>
+    <p class="body"><b>Agent monitor</b> è la sala di controllo: una dashboard 3D in tempo reale che mostra tutta la tua flotta di agent in una pagina sola. Vedi chi sta girando, chi ha finito, chi è in errore, e gli ultimi output di ognuno. Quando hai un agent solo non serve; quando ne hai cinque che lavorano di notte, è l'unico modo per non perdere il filo. Arriva come template: lo accendi quando la flotta cresce.</p>
+    <p class="body"><b>Deploy agent</b> è l'addetto alla pubblicazione, la versione "da terminale" della skill deploy-project. Il problema che risolve: mettere online un progetto a mano significa dimenticarsi sempre qualcosa — una password lasciata nel codice, un file che non doveva uscire, un test saltato. Il deploy agent fa la trafila completa da solo: <b>scansiona il progetto</b> (capisce cos'è e come va pubblicato) → <b>audit di sicurezza</b> (cerca chiavi, password e dati sensibili prima che finiscano online) → <b>test</b> (verifica che funzioni) → <b>pubblicazione</b> (lo mette sul web e ti dà il link). Un comando, progetto online, senza brutte sorprese.</p>
+    <div class="note"><b>Differenza:</b> deploy-project è la skill che usi dentro Claude ("pubblica questo progetto"); il deploy agent è il template per farne un agent autonomo tuo, che pubblica da solo quando glielo chiedi.</div>
   </div>
 
   <!-- 11 -->
   <div class="sec-wrap">
-    <div class="sec-tag">11 · Cheat-sheet</div>
+    <div class="sec-tag">11 · Framework opzionali</div>
+    <h2 class="sec">I 3 framework — GSD, BMAD, gstack</h2>
+    <p class="body">Un framework è un <b>metodo di lavoro completo</b> per i progetti grandi: non una skill singola, ma un percorso con fasi, controlli e documenti. Il bootstrap ti chiede se installarli — sono opzionali perché per i lavori piccoli bastano i plugin. Quando il progetto cresce, ne scegli <b>uno solo</b> (mai mischiarli) in base a come ti piace lavorare.</p>
+    <div class="steplist">
+      <div class="step"><div class="n">1</div><div class="t"><b>GSD — il metodo del solista organizzato (~70 skill)</b>Per chi lavora da solo su progetti di settimane. Spezza il progetto in fasi e ogni fase segue sempre lo stesso giro: <b>discuti</b> (capisce cosa vuoi davvero) → <b>pianifica</b> (scrive il piano dei lavori) → <b>esegui</b> (un task = un salvataggio, sempre reversibile) → <b>verifica</b> (controlla il risultato contro l'obiettivo, non solo "ho finito i task"). Ogni fase parte con la memoria pulita, così Claude non si confonde nei progetti lunghi. Ha anche la modalità notturna: <code>/gsd-autonomous</code> esegue tutte le fasi rimanenti mentre dormi.</div></div>
+      <div class="step"><div class="n">2</div><div class="t"><b>BMAD — il metodo agile coi documenti (v6, 21 ruoli)</b>Per chi vuole lavorare come una squadra di sviluppo professionale. Claude interpreta i ruoli uno alla volta: l'<b>analista</b> scrive il brief del prodotto, il <b>product manager</b> i requisiti, l'<b>architetto</b> il disegno tecnico, lo <b>scrum master</b> spezza tutto in storie piccole, lo <b>sviluppatore</b> le costruisce una alla volta. La regola: i documenti comandano — prima si scrive cosa fare, poi si fa. Perfetto se ti piace avere tutto nero su bianco prima di partire.</div></div>
+      <div class="step"><div class="n">3</div><div class="t"><b>gstack — l'azienda virtuale completa (~38 skill)</b>Simula un'intera azienda di software: c'è il <b>CEO</b> che giudica l'idea (<code>/office-hours</code> per il brainstorming), gli <b>ingegneri</b> che rivedono il piano, il <b>designer</b> che controlla la grafica, il <b>QA</b> che testa, il responsabile <b>sicurezza</b> (<code>/cso</code>) che fa l'audit, e alla fine <code>/ship</code> per consegnare. Ogni decisione passa da più "persone" con punti di vista diversi. Per prodotti completi dove vuoi il massimo dei controlli.</div></div>
+    </div>
+    <div class="note"><b>Quale scegliere:</b> lavoro piccolo → nessun framework, bastano i plugin. Progetto strutturato da solista → <b>GSD</b>. Ti piacciono documenti e metodo agile → <b>BMAD</b>. Prodotto completo col massimo dei controlli → <b>gstack</b>. E ricorda: l'orchestrator conosce tutti e tre e ti propone quello giusto da solo.</div>
+  </div>
+
+  <!-- 12 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">12 · Riferimenti</div>
+    <h2 class="sec">I documenti di riferimento</h2>
+    <p class="body">Nel repo c'è anche una cartella di <b>documenti di metodo</b>: non si installano, si leggono — e Claude li usa come manuale quando lavora.</p>
+    <table class="tbl">
+      <tr><th>Documento</th><th>Cosa contiene</th></tr>
+      <tr><td><b>SDD framework + Mega Prompt</b></td><td>Il metodo "spec prima del codice" per intero, più il Mega Prompt: la versione leggera per i progetti piccoli — 4 comandi (<code>/plan → /build → /verify → /ship</code>) al posto di un framework completo.</td></tr>
+      <tr><td><b>Agent design principles</b></td><td>Le regole per progettare agent fatti bene: un agent = un lavoro, input e output chiari, mai fidarsi senza verifica.</td></tr>
+      <tr><td><b>Tools setup</b></td><td>La guida agli strumenti esterni che gli agent possono usare e come collegarli.</td></tr>
+      <tr><td><b>Template CLAUDE.md di progetto</b></td><td>Il file di regole pronto da copiare in ogni progetto nuovo: dice a Claude come comportarsi <i>in quel progetto specifico</i> (l'orchestrator decide per tutto il computer, questo per la singola cartella).</td></tr>
+    </table>
+  </div>
+
+  <!-- 13 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">13 · Cheat-sheet</div>
     <h2 class="sec">Tutti i comandi in una tabella</h2>
     <table class="tbl">
       <tr><th>Comando / skill</th><th>Cosa fa</th></tr>
