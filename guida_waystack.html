@@ -90,12 +90,14 @@ pre .o{color:#fff}
       <div><b>01</b> Cos'è il way-stack</div>
       <div><b>02</b> Install in 3 comandi</div>
       <div><b>03</b> Vocabolario — plugin, skill, comando</div>
-      <div><b>04</b> La struttura — orchestrator, vault, hook</div>
-      <div><b>05</b> I 5 plugin</div>
+      <div><b>04</b> Le fondamenta — orchestrator, vault, hook</div>
+      <div><b>05</b> I 6 plugin (+ caveman)</div>
       <div><b>06</b> La agent factory — i 5 comandi</div>
-      <div><b>07</b> Le vault skills — il bibliotecario</div>
-      <div><b>08</b> Design — frontend-design + SHIN-EN</div>
-      <div><b>09</b> Cheat-sheet — tutti i comandi</div>
+      <div><b>07</b> Le 7 skill incluse</div>
+      <div><b>08</b> Memoria + grafo — claude-mem e graphify</div>
+      <div><b>09</b> Design — frontend-design + SHIN-EN + 6 design skills</div>
+      <div><b>10</b> Gli extra — agent monitor, deploy agent, framework opzionali</div>
+      <div><b>11</b> Cheat-sheet — tutti i comandi</div>
     </div>
     <div class="meta"><span>Guida way-stack</span><span>github.com/Lucioway/way-stack</span><span>Lettura ~10 min</span></div>
   </section>
@@ -151,7 +153,7 @@ pre .o{color:#fff}
   <!-- 05 -->
   <div class="sec-wrap">
     <div class="sec-tag">05 · I plugin</div>
-    <h2 class="sec">I 5 plugin</h2>
+    <h2 class="sec">I 6 plugin</h2>
     <table class="tbl">
       <tr><th>Plugin</th><th>Cosa fa, in parole semplici</th><th>Quando lo usi</th></tr>
       <tr><td><b>superpowers</b></td><td>Dà a Claude un metodo di lavoro: prima le domande, poi il piano, poi il build, poi il controllo. Senza, parte a scrivere codice a caso.</td><td>Sempre. Si attiva da solo.</td></tr>
@@ -159,7 +161,9 @@ pre .o{color:#fff}
       <tr><td><b>code-review</b></td><td>Fa controllare il codice da più revisori AI insieme: uno cerca i bug, uno la sicurezza, uno le cose scritte male.</td><td>Prima di usare codice importante.</td></tr>
       <tr><td><b>cli-anything</b></td><td>Comanda da terminale i programmi con interfaccia grafica (GIMP, Blender, LibreOffice…). L'agent li usa senza aprire finestre.</td><td>Quando un agent deve usare un programma "da click".</td></tr>
       <tr><td><b>ralph-loop</b></td><td>Fa ripetere il lavoro a Claude da solo, un pezzo alla volta, finché la lista non è finita.</td><td>Lavori lunghi: "sistemami tutte e 100 le pagine".</td></tr>
+      <tr><td><b>claude-mem</b></td><td>La memoria automatica: a ogni sessione salva da solo cosa è successo e te lo ripresenta la volta dopo. Claude "si ricorda" senza che tu scriva niente.</td><td>Sempre. Lavora in sottofondo.</td></tr>
     </table>
+    <div class="note"><b>Bonus — caveman:</b> un add-on che rende Claude telegrafico: via i giri di parole, restano solo i fatti. Risposte più corte = meno token = meno costi. Si accende e si spegne quando vuoi.</div>
   </div>
 
   <!-- 06 -->
@@ -179,41 +183,73 @@ pre .o{color:#fff}
 
   <!-- 07 -->
   <div class="sec-wrap">
-    <div class="sec-tag">07 · Vault skills</div>
-    <h2 class="sec">Le vault skills — il bibliotecario</h2>
-    <p class="body">Tre skill che tengono in ordine la tua libreria. Tu porti il materiale, loro lo sistemano, lo trovano e lo tengono pulito.</p>
-    <div class="three">
-      <div class="c"><div class="lbl">mette dentro</div><div class="nm">vault-ingest</div><div class="ds">Prende un file grezzo (transcript, PDF, appunti), lo spezza in pagine ordinate, dà un titolo a ognuna e aggiorna l'indice.</div></div>
-      <div class="c"><div class="lbl">trova</div><div class="nm">vault-query</div><div class="ds">Cerca nel vault e ti risponde. "Cosa avevo deciso sul pricing?" — lui pesca la pagina giusta e sintetizza.</div></div>
-      <div class="c"><div class="lbl">pulisce</div><div class="nm">vault-lint</div><div class="ds">Controlla la salute della libreria: pagine orfane, contraddizioni, roba vecchia. Segnala il disordine prima che diventi un problema.</div></div>
-    </div>
+    <div class="sec-tag">07 · Le skill incluse</div>
+    <h2 class="sec">Le 7 skill incluse</h2>
+    <p class="body">Le ricette che arrivano dentro il way-stack. Le prime tre sono <b>il bibliotecario</b> della tua libreria, le altre quattro sono operai specializzati.</p>
+    <table class="tbl">
+      <tr><th>Skill</th><th>Cosa fa, in parole semplici</th></tr>
+      <tr><td><b>vault-ingest</b></td><td>Mette dentro: prende un file grezzo (transcript, PDF, appunti), lo spezza in pagine ordinate, dà un titolo a ognuna e aggiorna l'indice.</td></tr>
+      <tr><td><b>vault-query</b></td><td>Trova: cerca nel vault e ti risponde. "Cosa avevo deciso sul pricing?" — pesca la pagina giusta e sintetizza.</td></tr>
+      <tr><td><b>vault-lint</b></td><td>Pulisce: controlla la salute della libreria — pagine orfane, contraddizioni, roba vecchia. Segnala il disordine.</td></tr>
+      <tr><td><b>create-agent</b></td><td>Il capofficina: quando dici "fammi un agent che…", lui prende in mano la richiesta e la porta dentro la agent factory.</td></tr>
+      <tr><td><b>deploy-project</b></td><td>Mette online: pipeline di 10 passi per pubblicare un progetto sul web (controllo sicurezza in 5 livelli, test, anteprima, produzione).</td></tr>
+      <tr><td><b>shinen-design</b></td><td>La mia grafica SHIN-EN per le dashboard: nero giapponese minimale, un solo foglio di stile, numeri giganti in trasparenza. I tuoi tool escono tutti con la stessa faccia.</td></tr>
+      <tr><td><b>handoff</b></td><td>Il passaggio di consegne: chiudi una sessione lunga e lui prepara il riassunto per la prossima — riparti senza rispiegare niente.</td></tr>
+    </table>
   </div>
 
   <!-- 08 -->
   <div class="sec-wrap">
-    <div class="sec-tag">08 · Design</div>
-    <h2 class="sec">Frontend-design + SHIN-EN + 7 design skills</h2>
-    <p class="body">Il lato visivo dello stack. <b>Frontend-design</b> è il plugin che impagina; <b>SHIN-EN</b> è la mia grafica — bianco e nero, scritte grandi, zero decorazioni inutili. La vedi in queste pagine, nelle slide del corso, nei miei PDF. È nel way-stack: <b>la usi anche tu, gratis</b>.</p>
-    <p class="body">Insieme arrivano <b>7 design skills</b>: regole di design professionale (gerarchia visiva, spazi, colori, usabilità) che si attivano da sole ogni volta che Claude tocca qualcosa di grafico. Risultato: documenti e pagine che escono già belli, senza designer e senza Canva.</p>
-    <div class="note"><b>Il pattern:</b> Claude scrive la pagina HTML in SHIN-EN → Chrome headless (Chrome senza finestra) la stampa in PDF. Report, guide, preventivi: stesso giro per tutto.</div>
+    <div class="sec-tag">08 · Memoria + grafo</div>
+    <h2 class="sec">La memoria — claude-mem e graphify</h2>
+    <p class="body">Due pezzi che lavorano insieme. <b>claude-mem</b> (plugin) è il diario automatico: salva da solo cosa succede in ogni sessione e lo ripresenta la volta dopo — Claude si ricorda di te e del lavoro fatto. <b>graphify</b> è la mappa: con <code>/graphify .</code> trasforma una cartella di file in un grafo — i concetti diventano punti, i collegamenti diventano linee.</p>
+    <p class="body">Una volta costruito, il grafo si interroga direttamente da Claude: "quali sono i concetti più collegati?", "che strada c'è tra retention e bundle?". Risposta in secondi, senza cercare a mano.</p>
+    <div class="note"><b>In breve:</b> claude-mem = il diario (si ricorda). Graphify = la mappa (collega). Servono entrambi — li vediamo all'opera nella lezione sulla memoria.</div>
   </div>
 
   <!-- 09 -->
   <div class="sec-wrap">
-    <div class="sec-tag">09 · Cheat-sheet</div>
+    <div class="sec-tag">09 · Design</div>
+    <h2 class="sec">Frontend-design + SHIN-EN + 6 design skills</h2>
+    <p class="body">Il lato visivo dello stack. <b>Frontend-design</b> è il plugin che impagina; <b>SHIN-EN</b> è la mia grafica — bianco e nero, scritte grandi, zero decorazioni inutili. La vedi in queste pagine, nelle slide del corso, nei miei PDF. È nel way-stack: <b>la usi anche tu, gratis</b>.</p>
+    <p class="body">Insieme arrivano <b>6 design skills</b>: regole di design professionale che si attivano da sole quando Claude tocca qualcosa di grafico — <b>refactoring-ui</b> (sistema gerarchia, spazi e colori), <b>ux-heuristics</b> (controlla l'usabilità), <b>hooked-ux</b> (loop di ritorno e retention), <b>design-sprint</b> (validare un'idea in 5 giorni), <b>ios-hig-design</b> (app iPhone fatte bene), <b>ui-ux-pro-max</b> (design system completi per SaaS e dashboard).</p>
+    <div class="note"><b>Il pattern:</b> Claude scrive la pagina HTML in SHIN-EN → Chrome headless (Chrome senza finestra) la stampa in PDF. Report, guide, preventivi: stesso giro per tutto.</div>
+  </div>
+
+  <!-- 10 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">10 · Gli extra</div>
+    <h2 class="sec">Gli extra — monitor, deploy, framework</h2>
+    <p class="body">Tre cose in più che arrivano col bootstrap, da usare quando cresci:</p>
+    <div class="three">
+      <div class="c"><div class="lbl">controllo</div><div class="nm">Agent monitor</div><div class="ds">Dashboard 3D in tempo reale della tua flotta di agent: chi gira, chi è in errore, ultimi output. Tutto in una pagina.</div></div>
+      <div class="c"><div class="lbl">pubblicazione</div><div class="nm">Deploy agent</div><div class="ds">La versione "da terminale" di deploy-project: scansione → audit sicurezza → test → online. Per pubblicare progetti sul web in un comando.</div></div>
+      <div class="c"><div class="lbl">opzionali</div><div class="nm">3 framework</div><div class="ds">GSD (~70 skill, progetti strutturati), BMAD (metodo agile multi-ruolo), gstack (un team virtuale completo: CEO, ingegneri, QA). Il bootstrap chiede se li vuoi.</div></div>
+    </div>
+    <div class="note"><b>Regola:</b> non serve impararli subito. L'orchestrator sa quando proporli — tu lavora, lui instrada.</div>
+  </div>
+
+  <!-- 11 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">11 · Cheat-sheet</div>
     <h2 class="sec">Tutti i comandi in una tabella</h2>
     <table class="tbl">
-      <tr><th>Comando</th><th>Cosa fa</th></tr>
-      <tr><td><b>/stack-bootstrap</b></td><td>Monta tutto lo stack: orchestrator, vault, skill, comandi.</td></tr>
+      <tr><th>Comando / skill</th><th>Cosa fa</th></tr>
+      <tr><td><b>/stack-bootstrap</b></td><td>Monta tutto lo stack: orchestrator, vault, plugin, skill, comandi.</td></tr>
       <tr><td><b>/stack-verify</b></td><td>Controlla che ogni pezzo dello stack sia al suo posto.</td></tr>
       <tr><td><b>/agent-spec</b></td><td>Scrive il contratto del nuovo agent (cosa entra, cosa esce, regole).</td></tr>
       <tr><td><b>/agent-tasks</b></td><td>Trasforma la spec nella lista dei lavori.</td></tr>
       <tr><td><b>/agent-execute</b></td><td>Esegue i lavori uno alla volta, con salvataggio a ogni passo.</td></tr>
       <tr><td><b>/agent-verify</b></td><td>Controlla che la spec sia coperta al 100%.</td></tr>
       <tr><td><b>/agent-ship</b></td><td>Consegna l'agent finito.</td></tr>
+      <tr><td><b>/graphify .</b></td><td>Costruisce il grafo della cartella in cui sei — concetti e collegamenti.</td></tr>
+      <tr><td><b>create-agent</b></td><td>"Fammi un agent che…" → porta la richiesta dentro la agent factory.</td></tr>
       <tr><td><b>vault-ingest</b></td><td>Mette materiale nuovo nel vault, ordinato e indicizzato.</td></tr>
       <tr><td><b>vault-query</b></td><td>Cerca e risponde dal vault.</td></tr>
       <tr><td><b>vault-lint</b></td><td>Pulizia e salute del vault.</td></tr>
+      <tr><td><b>deploy-project</b></td><td>Mette online un progetto: audit sicurezza + test + pubblicazione.</td></tr>
+      <tr><td><b>shinen-design</b></td><td>Applica la grafica SHIN-EN a tool e dashboard.</td></tr>
+      <tr><td><b>handoff</b></td><td>Riassunto di fine sessione per ripartire senza rispiegare.</td></tr>
     </table>
   </div>
 
