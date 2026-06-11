@@ -276,214 +276,168 @@ h1.huge{font-size:200px;line-height:.96}
     <div class="ghost" style="font-size:560px;top:120px;right:160px">05</div>
     <div class="kanji" style="top:200px;right:140px">代理人</div>
     <div class="content">
-      <div class="eyebrow">Build live · da un canale YouTube al vault</div>
+      <div class="eyebrow">Lezione pratica · build live</div>
       <h1 class="title huge" style="font-size:150px">Il primo agent.</h1>
-      <p class="sub" style="margin-top:24px;font-size:36px">Gestione, download, organizzazione e transcript — costruito dal vivo, un pezzo alla volta.</p>
+      <p class="sub" style="margin-top:24px;font-size:34px">8 step, dal canale YouTube all'archivio nel vault.<br>YouTube → audio → trascrizione → lessons → PDF → Drive → Telegram → GitHub.</p>
     </div>
     <div class="strip"><span>AI PER ECOMMERCE</span><span>Lezione 05 · Primo agent</span></div>
   </section>
 
-  <!-- SLIDE 2 — Anatomia di un agent -->
+  <!-- SLIDE 2 — Step 1: la spec -->
   <section class="slide" data-i="1">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">01 · Anatomia</div>
-    <div class="kanji" style="top:200px;right:140px">解剖</div>
-    <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Finora hai parlato CON Claude. Un agent lavora DA SOLO.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Cos'è un agent — 4 organi.</h1>
-      <div class="quad reveal" style="margin-top:32px">
-        <div class="tcard">
-          <div class="tl-label">Organo · 01</div>
-          <div class="tname">Input</div>
-          <div class="tdesc">Cosa riceve. Es. DailyReport: gli ordini Shopify del giorno.</div>
-        </div>
-        <div class="tcard">
-          <div class="tl-label">Organo · 02</div>
-          <div class="tname">Ragionamento</div>
-          <div class="tdesc">Cosa decide. Aggregare per prodotto, calcolare margini.</div>
-        </div>
-        <div class="tcard">
-          <div class="tl-label">Organo · 03</div>
-          <div class="tname">Output</div>
-          <div class="tdesc">Cosa restituisce. Un messaggio Telegram con il report.</div>
-        </div>
-        <div class="tcard">
-          <div class="tl-label">Organo · 04</div>
-          <div class="tname">Memoria</div>
-          <div class="tdesc">Cosa ricorda dalla volta prima. Lo stato del giorno precedente.</div>
-        </div>
+    <div class="tag">Step <b>1 / 8</b> · La spec</div>
+    <div class="ghost" style="font-size:480px;top:140px;right:180px">1</div>
+    <div class="content" style="bottom:auto;top:220px">
+      <div class="eyebrow">Mai codice prima della spec.</div>
+      <h1 class="title" style="font-size:84px;line-height:1;margin-bottom:18px">Scrivi SPEC.md.</h1>
+      <div class="code reveal" style="font-size:23px;max-width:1560px">
+        <div><span class="c"># 10 righe di italiano. Input, output, vincoli.</span></div>
+        <div><span class="o">Input: URL del canale YouTube (o lista video)</span></div>
+        <div><span class="o">Output: cartella nel vault con sources/ + lessons/ + PDF + notifiche</span></div>
+        <div><span class="o">Vincoli: niente video sopra 1 ora · lessons da 200-400 parole</span></div>
       </div>
-      <p class="sub" style="margin-top:32px;font-size:24px">Sempre tutti e 4. <b style="color:var(--ink)">Ne mancano due? Non è un agent — è uno script.</b></p>
+      <p class="sub" style="margin-top:28px;font-size:25px"><b style="color:var(--ink)">Fatto quando:</b> SPEC.md esiste e Claude l'ha letta.</p>
     </div>
-    <div class="strip"><span>Blocco 01</span><span>Input · Ragionamento · Output · Memoria</span></div>
+    <div class="strip"><span>Step 1</span><span>SPEC.md</span></div>
   </section>
 
-  <!-- SLIDE 3 — Il piano -->
+  <!-- SLIDE 3 — Step 2: scarica i video -->
   <section class="slide" data-i="2">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">02 · Il piano</div>
-    <div class="kanji" style="top:200px;right:140px">計画</div>
-    <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Gli dai un canale YouTube. Lui fa tutto il resto.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Un comando, sette superpoteri.</h1>
-      <div class="code reveal" style="margin-top:32px;max-width:1600px;font-size:24px">
-        <div><span class="c"># la catena completa — un input, nove output</span></div>
-        <div><span class="o">YouTube → audio → trascrizione → lessons → PDF</span></div>
-        <div><span class="o">→ Drive → Telegram → WhatsApp → GitHub</span></div>
+    <div class="tag">Step <b>2 / 8</b> · Download</div>
+    <div class="ghost" style="font-size:480px;top:140px;right:180px">2</div>
+    <div class="content" style="bottom:auto;top:220px">
+      <div class="eyebrow">Zero click, zero browser. Descrivi il risultato.</div>
+      <h1 class="title" style="font-size:84px;line-height:1;margin-bottom:18px">Scarica i video.</h1>
+      <div class="code reveal" style="font-size:23px;max-width:1560px">
+        <div><span class="c"># cosa dici a Claude</span></div>
+        <div><span class="o">"Installa yt-dlp e scarica l'audio di questi 3 video</span></div>
+        <div><span class="o">&nbsp;nella cartella sources/."</span></div>
       </div>
-      <div class="g6 reveal" style="margin-top:32px;max-width:1600px">
-        <div><b class="k">Cosa fa</b>Scarica, trascrive, organizza, riassume, archivia e ti avvisa — da solo.</div>
-        <div><b class="k">Cosa vedi</b>Tutti i superpoteri di Claude Code in fila: file, tool, AI, cloud, messaging, git.</div>
-        <div><b class="k">Cosa ottieni</b>Archivio organizzato, PDF, file su Drive, messaggio sul telefono, backup su GitHub.</div>
-      </div>
-      <p class="sub" style="margin-top:24px;font-size:24px"><b style="color:var(--ink)">Questa è la potenza della Lezione 1.</b> Adesso la vedi tutta in fila.</p>
+      <p class="sub" style="margin-top:28px;font-size:25px"><b style="color:var(--ink)">Fatto quando:</b> gli .mp3 appaiono in sources/.</p>
     </div>
-    <div class="strip"><span>Blocco 02</span><span>La catena</span></div>
+    <div class="strip"><span>Step 2</span><span>yt-dlp</span></div>
   </section>
 
-  <!-- SLIDE 4 — La spec -->
+  <!-- SLIDE 4 — Step 3: trascrivi -->
   <section class="slide" data-i="3">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">03 · La spec</div>
-    <div class="kanji" style="top:200px;right:140px">設計</div>
-    <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Mai codice prima della spec. La spec è il contratto.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Scrivi cosa deve fare. Prima.</h1>
-      <div class="triplet reveal" style="margin-top:36px">
-        <div class="tcard">
-          <div class="tl-label">SPEC.md · 01</div>
-          <div class="tname">Input</div>
-          <div class="tdesc">URL del canale o lista di video. Niente di più.</div>
-        </div>
-        <div class="tcard">
-          <div class="tl-label">SPEC.md · 02</div>
-          <div class="tname">Output</div>
-          <div class="tdesc">Cartella nel vault con sources/ + lessons/ + PDF + notifiche.</div>
-        </div>
-        <div class="tcard">
-          <div class="tl-label">SPEC.md · 03</div>
-          <div class="tname">Vincoli</div>
-          <div class="tdesc">Niente video sopra 1 ora. Lessons da 200–400 parole.</div>
-        </div>
+    <div class="tag">Step <b>3 / 8</b> · Transcript</div>
+    <div class="ghost" style="font-size:480px;top:140px;right:180px">3</div>
+    <div class="content" style="bottom:auto;top:220px">
+      <div class="eyebrow">Audio → testo. Gratis, in locale.</div>
+      <h1 class="title" style="font-size:84px;line-height:1;margin-bottom:18px">Trascrivi con Whisper.</h1>
+      <div class="code reveal" style="font-size:23px;max-width:1560px">
+        <div><span class="c"># cosa dici a Claude</span></div>
+        <div><span class="o">"Trascrivi tutti gli .mp3 di sources/ con Whisper,</span></div>
+        <div><span class="o">&nbsp;un .txt per video."</span></div>
       </div>
-      <p class="sub" style="margin-top:36px;font-size:26px"><b style="color:var(--ink)">Dieci righe di italiano valgono più di cento righe di codice scritto a caso.</b> Prima pensi, poi costruisci.</p>
+      <p class="sub" style="margin-top:28px;font-size:25px"><b style="color:var(--ink)">Fatto quando:</b> ogni video ha il suo transcript .txt. Il testo è grezzo — lo raffiniamo al prossimo step.</p>
     </div>
-    <div class="strip"><span>Blocco 03</span><span>SPEC.md</span></div>
+    <div class="strip"><span>Step 3</span><span>Whisper</span></div>
   </section>
 
-  <!-- SLIDE 5 — Step 1+2: scaricare + trascrivere -->
+  <!-- SLIDE 5 — Step 4: lessons -->
   <section class="slide" data-i="4">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">04 · Step 1–2</div>
-    <div class="kanji" style="top:200px;right:140px">音声</div>
-    <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Non hai aperto un browser. Hai descritto il risultato.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Scaricare. Trascrivere.</h1>
-      <div class="split reveal" style="margin-top:28px">
-        <div class="col">
-          <div class="label">Step 1 · yt-dlp</div>
-          <div class="name" style="font-size:44px">I video.</div>
-          <div class="desc">"Installa yt-dlp e scarica l'audio di questi 3 video." Claude installa il tool, lancia il download, gli .mp3 appaiono in sources/.</div>
-          <div class="points"><span>→ Tool scelto e installato da lui</span><span>→ Zero click, zero browser</span></div>
-        </div>
-        <div class="col win">
-          <div class="label">Step 2 · Whisper</div>
-          <div class="name" style="font-size:44px">Il testo.</div>
-          <div class="desc">Whisper trasforma il parlato in testo: gratis, in locale, sul tuo computer. Output grezzo: ripetizioni, intercalari — ancora da raffinare.</div>
-          <div class="points"><span>→ Qualsiasi video, podcast, vocale</span><span>→ Diventa testo lavorabile</span></div>
-        </div>
+    <div class="tag">Step <b>4 / 8</b> · Lessons</div>
+    <div class="ghost" style="font-size:480px;top:140px;right:180px">4</div>
+    <div class="content" style="bottom:auto;top:220px">
+      <div class="eyebrow">Il cuore della pipeline. Il grezzo diventa pillole.</div>
+      <h1 class="title" style="font-size:84px;line-height:1;margin-bottom:18px">Da transcript a lessons.</h1>
+      <div class="code reveal" style="font-size:23px;max-width:1560px">
+        <div><span class="c"># cosa dici a Claude</span></div>
+        <div><span class="o">"Spezza ogni transcript in lessons da 200-400 parole:</span></div>
+        <div><span class="o">&nbsp;una per concetto, con take-away finale, in lessons/."</span></div>
       </div>
-      <p class="sub" style="margin-top:24px;font-size:24px"><b style="color:var(--ink)">Questa è la differenza tra usare un computer e dirigere un computer.</b></p>
+      <p class="sub" style="margin-top:28px;font-size:25px"><b style="color:var(--ink)">Fatto quando:</b> lessons/ è piena di pillole, una per concetto. Questo è il formato che l'AI legge meglio.</p>
     </div>
-    <div class="strip"><span>Blocco 04</span><span>yt-dlp · Whisper</span></div>
+    <div class="strip"><span>Step 4</span><span>Transcript → Lessons</span></div>
   </section>
 
-  <!-- SLIDE 6 — Step 3: da transcript a lessons -->
+  <!-- SLIDE 6 — Step 5: PDF -->
   <section class="slide" data-i="5">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">05 · Step 3</div>
-    <div class="kanji" style="top:200px;right:140px">精製</div>
-    <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Il cuore della pipeline.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Da transcript a lessons.</h1>
-      <div class="split reveal" style="margin-top:28px">
-        <div class="col">
-          <div class="label">Prima · il grezzo</div>
-          <div class="name" style="font-size:44px">Transcript.</div>
-          <div class="desc">Testo continuo, niente punteggiatura perfetta, ripetizioni, intercalari. Stesso contenuto — ma non si interroga.</div>
-        </div>
-        <div class="col win">
-          <div class="label">Dopo · il raffinato</div>
-          <div class="name" style="font-size:44px">Lessons.</div>
-          <div class="desc">Claude spezza ogni transcript in pillole da 200–400 parole: una per concetto, con take-away finale. Il prompt è dentro l'agent — lo riusi così com'è.</div>
-        </div>
+    <div class="tag">Step <b>5 / 8</b> · PDF</div>
+    <div class="ghost" style="font-size:480px;top:140px;right:180px">5</div>
+    <div class="content" style="bottom:auto;top:220px">
+      <div class="eyebrow">Nessun designer, nessun Canva.</div>
+      <h1 class="title" style="font-size:84px;line-height:1;margin-bottom:18px">Genera il PDF riassunto.</h1>
+      <div class="code reveal" style="font-size:23px;max-width:1560px">
+        <div><span class="c"># cosa dici a Claude</span></div>
+        <div><span class="o">"Crea una pagina HTML di presentazione — creator, numero</span></div>
+        <div><span class="o">&nbsp;lessons, argomenti, 10 take-away — e stampala in PDF</span></div>
+        <div><span class="o">&nbsp;con Chrome headless."</span></div>
       </div>
-      <p class="sub" style="margin-top:24px;font-size:24px"><b style="color:var(--ink)">Il grezzo diventa pillole. Una lesson = un concetto.</b> Il formato che l'AI legge meglio.</p>
+      <p class="sub" style="margin-top:28px;font-size:25px"><b style="color:var(--ink)">Fatto quando:</b> il PDF si apre ed è impaginato bene. Stesso pattern per report, guide, preventivi.</p>
     </div>
-    <div class="strip"><span>Blocco 05</span><span>Transcript → Lessons</span></div>
+    <div class="strip"><span>Step 5</span><span>Chrome headless</span></div>
   </section>
 
-  <!-- SLIDE 7 — Step 4+5: PDF + Drive -->
+  <!-- SLIDE 7 — Step 6: Drive -->
   <section class="slide" data-i="6">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">06 · Step 4–5</div>
-    <div class="kanji" style="top:200px;right:140px">共有</div>
-    <div class="content" style="bottom:auto;top:200px">
+    <div class="tag">Step <b>6 / 8</b> · Drive</div>
+    <div class="ghost" style="font-size:480px;top:140px;right:180px">6</div>
+    <div class="content" style="bottom:auto;top:220px">
       <div class="eyebrow">Locale per lavorare, Drive per condividere.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Il PDF. Il cloud.</h1>
-      <div class="split reveal" style="margin-top:28px">
-        <div class="col">
-          <div class="label">Step 4 · Chrome headless</div>
-          <div class="name" style="font-size:44px">PDF riassunto.</div>
-          <div class="desc">Chi è il creator, quante lessons, gli argomenti, i 10 take-away migliori. Claude scrive l'HTML, Chrome lo stampa in PDF. Un comando.</div>
-          <div class="points"><span>→ Nessun designer, nessun Canva</span><span>→ Pattern per report, guide, preventivi</span></div>
-        </div>
-        <div class="col win">
-          <div class="label">Step 5 · Google Drive</div>
-          <div class="name" style="font-size:44px">Upload + link.</div>
-          <div class="desc">L'agent carica il PDF nella cartella del brand e stampa il link. Regola: dopo ogni upload, SEMPRE il link.</div>
-          <div class="points"><span>→ Un file senza link è invisibile</span><span>→ Dal terminale al cloud</span></div>
-        </div>
+      <h1 class="title" style="font-size:84px;line-height:1;margin-bottom:18px">Carica su Drive.</h1>
+      <div class="code reveal" style="font-size:23px;max-width:1560px">
+        <div><span class="c"># cosa dici a Claude</span></div>
+        <div><span class="o">"Carica il PDF su Drive nella cartella del brand</span></div>
+        <div><span class="o">&nbsp;e stampami il link."</span></div>
       </div>
+      <p class="sub" style="margin-top:28px;font-size:25px"><b style="color:var(--ink)">Fatto quando:</b> hai il link e si apre. Regola: dopo ogni upload, SEMPRE il link — un file senza link è invisibile.</p>
     </div>
-    <div class="strip"><span>Blocco 06</span><span>PDF · Drive</span></div>
+    <div class="strip"><span>Step 6</span><span>Upload + link</span></div>
   </section>
 
-  <!-- SLIDE 8 — Step 6+7: notifiche + GitHub -->
+  <!-- SLIDE 8 — Step 7: notifiche -->
   <section class="slide" data-i="7">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">07 · Step 6–7</div>
-    <div class="kanji" style="top:200px;right:140px">通知</div>
-    <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">L'output deve arrivare dove vivi tu. E il lavoro deve sopravvivere al Mac.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Il telefono. Il backup.</h1>
-      <div class="split reveal" style="margin-top:28px">
-        <div class="col win">
-          <div class="label">Step 6 · Telegram + WhatsApp</div>
-          <div class="name" style="font-size:44px">Notifica.</div>
-          <div class="desc">"Archivio pronto: N lessons, ecco il PDF" — arriva sul telefono, con il documento allegato. Bot creato con BotFather in due minuti.</div>
-          <div class="points"><span>→ Non in un log che non leggerai mai</span><span>→ Potevi essere al mare</span></div>
-        </div>
-        <div class="col">
-          <div class="label">Step 7 · GitHub</div>
-          <div class="name" style="font-size:44px">Push.</div>
-          <div class="desc">L'agent committa l'archivio e lo pusha sulla repo. Backup versionato, gratis, per sempre. Se il Mac muore domani, l'archivio è salvo.</div>
-          <div class="points"><span>→ Non è un task in più</span><span>→ È dentro la pipeline</span></div>
-        </div>
+    <div class="tag">Step <b>7 / 8</b> · Notifiche</div>
+    <div class="ghost" style="font-size:480px;top:140px;right:180px">7</div>
+    <div class="content" style="bottom:auto;top:220px">
+      <div class="eyebrow">L'output deve arrivare dove vivi tu.</div>
+      <h1 class="title" style="font-size:84px;line-height:1;margin-bottom:18px">Notifica sul telefono.</h1>
+      <div class="code reveal" style="font-size:23px;max-width:1560px">
+        <div><span class="c"># cosa dici a Claude (bot Telegram creato con BotFather, 2 min)</span></div>
+        <div><span class="o">"A fine run manda su Telegram 'Archivio pronto: N lessons'</span></div>
+        <div><span class="o">&nbsp;con il PDF allegato. Stessa notifica su WhatsApp."</span></div>
       </div>
+      <p class="sub" style="margin-top:28px;font-size:25px"><b style="color:var(--ink)">Fatto quando:</b> la notifica arriva sul telefono con il PDF. Non in un log che non leggerai mai.</p>
     </div>
-    <div class="strip"><span>Blocco 07</span><span>Telegram · WhatsApp · GitHub</span></div>
+    <div class="strip"><span>Step 7</span><span>Telegram · WhatsApp</span></div>
   </section>
 
-  <!-- SLIDE 9 — Il run completo -->
+  <!-- SLIDE 9 — Step 8: GitHub -->
   <section class="slide" data-i="8">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">08 · Run completo</div>
+    <div class="tag">Step <b>8 / 8</b> · Backup</div>
+    <div class="ghost" style="font-size:480px;top:140px;right:180px">8</div>
+    <div class="content" style="bottom:auto;top:220px">
+      <div class="eyebrow">Se il Mac muore domani, l'archivio è salvo.</div>
+      <h1 class="title" style="font-size:84px;line-height:1;margin-bottom:18px">Push su GitHub.</h1>
+      <div class="code reveal" style="font-size:23px;max-width:1560px">
+        <div><span class="c"># cosa dici a Claude</span></div>
+        <div><span class="o">"Committa l'archivio con un messaggio chiaro</span></div>
+        <div><span class="o">&nbsp;e pushalo sulla repo."</span></div>
+      </div>
+      <p class="sub" style="margin-top:28px;font-size:25px"><b style="color:var(--ink)">Fatto quando:</b> il commit è visibile sulla repo nel browser. Backup versionato, gratis, per sempre.</p>
+    </div>
+    <div class="strip"><span>Step 8</span><span>GitHub push</span></div>
+  </section>
+
+  <!-- SLIDE 10 — Il run completo -->
+  <section class="slide" data-i="9">
+    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
+    <div class="tag">Finale · Run completo</div>
     <div class="kanji" style="top:200px;right:140px">実行</div>
     <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Cartella pulita. Un solo comando. Davanti alla camera.</div>
-      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Il run completo.</h1>
-      <div class="term reveal" style="margin-top:32px;max-width:1500px">
+      <div class="eyebrow">Cartella pulita. Un solo comando. Tutti gli 8 step da soli.</div>
+      <h1 class="title" style="font-size:84px;line-height:1;margin-bottom:18px">Il run completo.</h1>
+      <div class="term reveal" style="margin-top:28px;max-width:1500px">
         <div class="bar"><i></i><i></i><i></i></div>
         <div class="bd">
           <div><span class="ps">$</span> agent run --channel https://youtube.com/@canale</div>
@@ -491,13 +445,13 @@ h1.huge{font-size:200px;line-height:.96}
           <div><span class="ps">→</span> Drive ✓ · Telegram ✓ · WhatsApp ✓ · GitHub push ✓<span class="ck">▌</span></div>
         </div>
       </div>
-      <p class="sub" style="margin-top:32px;font-size:26px">File system, install di tool, AI pipeline, PDF, cloud, messaging, git. <b style="color:var(--ink)">Tutto questo è UN agent. E adesso sai leggerne ogni pezzo.</b></p>
+      <p class="sub" style="margin-top:28px;font-size:25px">File, tool, AI, PDF, cloud, messaging, git. <b style="color:var(--ink)">Tutto questo è UN agent. E adesso sai leggerne ogni pezzo.</b></p>
     </div>
-    <div class="strip"><span>Blocco 08</span><span>Un comando · 7 superpoteri</span></div>
+    <div class="strip"><span>Run completo</span><span>Un comando · 8 step</span></div>
   </section>
 
-  <!-- SLIDE 10 — Chiusura → L6 -->
-  <section class="slide" data-i="9">
+  <!-- SLIDE 11 — Chiusura → L6 -->
+  <section class="slide" data-i="10">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
     <div class="tag">Chiusura</div>
     <div class="ghost" style="font-size:420px;top:120px;right:140px;opacity:.5">→</div>
@@ -513,7 +467,7 @@ h1.huge{font-size:200px;line-height:.96}
 </div>
 
 <div class="progress" id="prog"></div>
-<div class="hud" id="hud">01 / 10 · ← →</div>
+<div class="hud" id="hud">01 / 11 · ← →</div>
 <button class="dl" onclick="window.print()">↓ Download PDF</button>
 
 <script>
