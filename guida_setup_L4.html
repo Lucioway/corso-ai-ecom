@@ -112,8 +112,7 @@ pre .o{color:#fff}
       <div><b>07</b> Collega il grafo a Claude (MCP)</div>
       <div><b>08</b> Interroga il grafo — i 3 test</div>
       <div><b>09</b> Cosa indicizzare e cosa no</div>
-      <div><b>10</b> Refresh giornaliero automatico</div>
-      <div><b>11</b> Checklist finale + troubleshooting</div>
+      <div><b>10</b> Checklist finale</div>
     </div>
     <div class="meta"><span>Guida d'installazione</span><span>Mac + Windows (WSL2)</span><span>~15 min</span></div>
   </section>
@@ -245,20 +244,7 @@ pre .o{color:#fff}
 
   <!-- 10 -->
   <div class="sec-wrap">
-    <div class="sec-tag">10 · Refresh</div>
-    <h2 class="sec">Refresh giornaliero automatico</h2>
-    <p class="body">Il vault cresce ogni giorno; il grafo deve seguirlo. Niente lavoro manuale: <b>chiedi a Claude di schedulare il refresh</b>, è il suo mestiere.</p>
-    <pre><span class="c"># In sessione claude, detta questo:</span>
-<span class="o">› schedula un refresh giornaliero del mio grafo Graphify alle 03:00:
-  comando "graphify ~/Documents/IlTuoVault/02_KNOWLEDGE --refresh",
-  su Mac usa launchd, log su file</span></pre>
-    <p class="body">Claude crea il file di scheduling, lo carica e lo testa. Il <code>--refresh</code> è incrementale: riprocessa solo i file cambiati, pochi secondi invece di minuti.</p>
-    <div class="note"><b>Risultato:</b> ogni mattina il grafo riflette il vault di ieri sera. Tu non tocchi niente.</div>
-  </div>
-
-  <!-- 11 -->
-  <div class="sec-wrap">
-    <div class="sec-tag">11 · Checklist</div>
+    <div class="sec-tag">10 · Checklist</div>
     <h2 class="sec">Checklist finale</h2>
     <p class="body">Non passare alla Lezione 5 senza tutte e 6 le spunte verdi.</p>
     <div class="check">
@@ -269,22 +255,6 @@ pre .o{color:#fff}
       <div class="ci"><div class="bx"></div><div class="ct"><b>MCP collegato</b><small><code>claude mcp list</code> mostra graphify-vault</small></div></div>
       <div class="ci"><div class="bx"></div><div class="ct"><b>I 3 test del grafo passati</b><small>god nodes · vicini · shortest path — tutti rispondono</small></div></div>
     </div>
-  </div>
-
-  <!-- Troubleshooting -->
-  <div class="sec-wrap">
-    <div class="sec-tag">Troubleshooting</div>
-    <h2 class="sec">Se qualcosa si rompe</h2>
-    <table class="tbl">
-      <tr><th>Sintomo</th><th>Causa probabile</th><th>Fix</th></tr>
-      <tr><td><b>command not found: uv</b></td><td>uv non nel PATH</td><td>Chiudi e riapri il terminale; rilancia l'installer uv e segui le righe finali</td></tr>
-      <tr><td><b>command not found: graphify</b></td><td>Tool uv non nel PATH</td><td><code>uv tool update-shell</code>, poi riapri il terminale</td></tr>
-      <tr><td><b>Indicizzazione lentissima</b></td><td>Cartella troppo grande (PDF, media)</td><td>Punta solo a 02_KNOWLEDGE, non a tutto il vault</td></tr>
-      <tr><td><b>MCP non appare in claude mcp list</b></td><td>Path del graph.json sbagliato</td><td>Verifica che il file esista: <code>ls &lt;path&gt;/graphify-out/graph.json</code>, poi ripeti <code>claude mcp add</code></td></tr>
-      <tr><td><b>Claude non ricorda tra sessioni</b></td><td>Cartella diversa = progetto diverso</td><td>La memoria è per-progetto: riapri <code>claude</code> nella <b>stessa cartella</b></td></tr>
-      <tr><td><b>Grafo vuoto o quasi</b></td><td>File non in formato .md</td><td>Graphify legge markdown: converti o sposta i .md nella cartella indicizzata</td></tr>
-    </table>
-    <div class="note"><b>Regola d'oro:</b> qualunque errore — copia il testo <b>esatto</b> e incollalo a Claude in chat. Descrivi cosa stavi facendo. Nel 90% dei casi te lo risolve al primo colpo.</div>
   </div>
 
   <!-- End -->
