@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>L6 · Deck — Il grafo del knowledge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;
+  --ink:#0a0a0a;
+  --fog:#4a4a4a;
+  --silt:#8a8a8a;
+  --hair:#ececec;
+  --ghost:#f3f3f3;
+  --accent:#0a0a0a;
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --body:"Inter",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --jp:"Noto Sans JP",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--body);color:var(--ink)}
+
+.stage{width:1920px;height:1080px;background:var(--bg);position:relative;transform-origin:center;overflow:hidden}
+@media (max-aspect-ratio: 16/9){.stage{transform:scale(calc(100vw / 1920))}}
+@media (min-aspect-ratio: 16/9){.stage{transform:scale(calc(100vh / 1080))}}
+
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .5s ease, visibility .5s;padding:140px 160px}
+.slide.active{opacity:1;visibility:visible}
+
+.frame{position:absolute;width:48px;height:48px;border-color:var(--ink);border-style:solid;border-width:0;opacity:0;transition:opacity 1s .3s}
+.active .frame{opacity:1}
+.frame.tl{top:80px;left:80px;border-top-width:1px;border-left-width:1px}
+.frame.tr{top:80px;right:80px;border-top-width:1px;border-right-width:1px}
+.frame.bl{bottom:80px;left:80px;border-bottom-width:1px;border-left-width:1px}
+.frame.br{bottom:80px;right:80px;border-bottom-width:1px;border-right-width:1px}
+
+.ghost{position:absolute;font-family:var(--display);font-weight:700;color:var(--ghost);z-index:0;pointer-events:none;letter-spacing:-.05em;line-height:1;font-size:480px;top:140px;right:200px;opacity:0;transform:translateX(40px);transition:opacity 1.2s .2s, transform 1.2s .2s}
+.active .ghost{opacity:1;transform:translateX(0)}
+
+.tag{position:absolute;top:160px;left:160px;font-family:var(--mono);font-size:16px;letter-spacing:.36em;text-transform:uppercase;color:var(--silt);z-index:3}
+.tag b{color:var(--ink);font-weight:500}
+
+.strip{position:absolute;bottom:60px;left:160px;right:160px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:14px;letter-spacing:.28em;text-transform:uppercase;color:var(--silt);border-top:1px solid var(--hair);padding-top:18px;z-index:3}
+.strip span b{color:var(--ink);font-weight:500}
+
+.kanji{position:absolute;font-family:var(--jp);font-weight:400;color:var(--silt);z-index:2;writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:.4em;font-size:22px;opacity:0;transition:opacity 1s .4s}
+.active .kanji{opacity:.6}
+
+.content{position:absolute;left:160px;bottom:200px;right:240px;z-index:2}
+
+.eyebrow{font-family:var(--mono);font-size:15px;letter-spacing:.32em;text-transform:uppercase;color:var(--silt);margin-bottom:14px;opacity:0;transform:translateY(20px);transition:opacity .8s .4s, transform .8s .4s}
+.active .eyebrow{opacity:1;transform:translateY(0)}
+
+h1.title{font-family:var(--display);font-weight:500;font-size:104px;line-height:1.02;letter-spacing:-.025em;color:var(--ink);margin:0 0 32px;max-width:1500px;opacity:0;transform:translateY(28px);transition:opacity .9s .6s, transform .9s .6s}
+.active h1.title{opacity:1;transform:translateY(0)}
+h1.big{font-size:148px;line-height:.98}
+h1.huge{font-size:200px;line-height:.96}
+
+.sub{font-family:var(--display);font-weight:400;font-size:32px;line-height:1.3;color:var(--fog);max-width:1300px;letter-spacing:-.005em;opacity:0;transform:translateY(20px);transition:opacity .9s .8s, transform .9s .8s}
+.active .sub{opacity:1;transform:translateY(0)}
+
+.reveal>*{opacity:0;transform:translateY(20px);transition:opacity .7s, transform .7s}
+.active .reveal>*{opacity:1;transform:translateY(0)}
+.active .reveal>*:nth-child(1){transition-delay:.5s}
+.active .reveal>*:nth-child(2){transition-delay:.7s}
+.active .reveal>*:nth-child(3){transition-delay:.9s}
+.active .reveal>*:nth-child(4){transition-delay:1.1s}
+.active .reveal>*:nth-child(5){transition-delay:1.3s}
+.active .reveal>*:nth-child(6){transition-delay:1.5s}
+
+/* Split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1600px;margin-top:32px}
+.col{border:1px solid var(--hair);background:#fafafa;padding:48px 40px;min-height:420px;border-radius:2px;position:relative}
+.col .label{font-family:var(--mono);font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:var(--silt);margin-bottom:24px}
+.col .name{font-family:var(--display);font-weight:600;font-size:56px;line-height:1;letter-spacing:-.02em;margin-bottom:28px}
+.col .name b{font-weight:500;color:var(--silt)}
+.col .desc{font-family:var(--body);font-size:20px;line-height:1.4;color:var(--fog);margin-bottom:24px}
+.col .points{font-family:var(--mono);font-size:16px;color:var(--ink);line-height:1.8}
+.col .points span{display:block}
+.col.win{border-color:var(--ink);background:#fff}
+
+/* Piece cards */
+.pieces{display:grid;grid-template-columns:repeat(3,1fr);gap:32px 40px;max-width:1600px;margin-top:48px}
+.piece{border-top:2px solid var(--ink);padding-top:24px}
+.piece .pi{font-family:var(--mono);font-size:13px;letter-spacing:.32em;color:var(--silt);margin-bottom:12px}
+.piece .pn{font-family:var(--display);font-weight:500;font-size:38px;letter-spacing:-.015em;margin-bottom:10px;line-height:1.1}
+.piece .pd{font-family:var(--body);font-size:18px;color:var(--fog);line-height:1.4}
+
+/* Code blocks */
+.code{font-family:var(--mono);font-size:22px;background:#0a0a0a;color:#e6e6e6;padding:32px 36px;border-radius:4px;line-height:1.7;max-width:1400px;margin-top:32px}
+.code .c{color:#7a7a7a}
+.code .o{color:#fff}
+
+/* Big single concept */
+.concept{display:flex;align-items:baseline;gap:48px;margin-top:24px}
+.concept .num{font-family:var(--display);font-weight:600;font-size:240px;line-height:.9;letter-spacing:-.04em;color:var(--ink)}
+.concept .txt{font-family:var(--display);font-weight:500;font-size:48px;line-height:1.15;letter-spacing:-.015em;color:var(--ink);max-width:1100px}
+.concept .txt small{display:block;font-weight:400;font-size:26px;color:var(--fog);margin-top:12px}
+
+/* Triplet */
+.triplet{display:grid;grid-template-columns:repeat(3,1fr);gap:64px;max-width:1600px;margin-top:48px}
+.tcard{border:1px solid var(--hair);background:#fafafa;padding:40px 32px;border-radius:2px}
+.tcard .tl-label{font-family:var(--mono);font-size:13px;letter-spacing:.3em;color:var(--silt);margin-bottom:18px}
+.tcard .tname{font-family:var(--display);font-weight:500;font-size:42px;line-height:1.1;letter-spacing:-.015em;margin-bottom:14px}
+.tcard .tdesc{font-family:var(--body);font-size:18px;color:var(--fog);line-height:1.4}
+
+/* Quad */
+.quad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;max-width:1640px;margin-top:40px}
+.quad .tcard{padding:32px 26px}
+.quad .tname{font-size:34px}
+.quad .tdesc{font-size:16px}
+
+/* Checklist */
+.check{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 60px;max-width:1500px;margin-top:40px}
+.check .ci{display:flex;align-items:flex-start;gap:20px;border-top:1px solid var(--hair);padding-top:18px}
+.check .bx{flex:0 0 auto;width:30px;height:30px;border:2px solid var(--ink);margin-top:4px;position:relative}
+.check .ci .ct{font-family:var(--display);font-weight:500;font-size:28px;line-height:1.2;letter-spacing:-.01em}
+.check .ci .ct small{display:block;font-family:var(--body);font-weight:400;font-size:17px;color:var(--fog);margin-top:6px;letter-spacing:0}
+
+/* Progress bar */
+.progress{position:fixed;bottom:0;left:0;height:3px;background:var(--ink);z-index:100;transition:width .4s ease;width:0}
+.hud{position:fixed;top:12px;right:16px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:#fff;z-index:100;background:rgba(0,0,0,.4);padding:6px 10px;border-radius:2px}
+
+/* Step reveal helper */
+.rule{opacity:0;filter:blur(10px);transition:opacity .6s ease, filter .6s ease, transform .6s ease;transform:translateY(8px)}
+.rule.revealed{opacity:1;filter:blur(0);transform:translateY(0)}
+
+/* Download */
+.dl{position:fixed;bottom:12px;left:16px;font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#fff;background:rgba(10,10,10,.5);padding:6px 12px;border-radius:2px;z-index:100;text-decoration:none;cursor:pointer;border:none}
+.dl:hover{background:rgba(10,10,10,.85)}
+
+.rotate-prompt{display:none}
+
+/* Mobile portrait — vertical reading view */
+@media (max-width:900px){
+  html,body{
+    width:100% !important;height:auto !important;
+    overflow-y:auto !important;overflow-x:hidden !important;
+    display:block !important;
+  }
+  .stage{
+    width:100% !important;height:auto !important;
+    transform:none !important;
+    display:block !important;
+    overflow:visible !important;
+  }
+  .slide{
+    position:relative !important;inset:auto !important;
+    width:100% !important;height:auto !important;min-height:auto !important;
+    opacity:1 !important;visibility:visible !important;
+    transition:none !important;animation:none !important;
+    display:block !important;
+    padding:48px 22px 36px !important;
+    border-bottom:1px solid var(--hair);
+  }
+  .slide *{
+    opacity:1 !important;transform:none !important;filter:none !important;
+    transition:none !important;animation:none !important;
+  }
+  .frame,.ghost,.kanji{display:none !important}
+  .tag{
+    position:relative !important;top:auto !important;left:auto !important;right:auto !important;
+    font-size:10px !important;letter-spacing:.28em !important;margin-bottom:18px !important;
+    display:block;
+  }
+  .content{
+    position:relative !important;left:auto !important;right:auto !important;
+    bottom:auto !important;top:auto !important;
+    max-width:none !important;width:100% !important;
+  }
+  .strip{
+    position:relative !important;left:auto !important;right:auto !important;bottom:auto !important;
+    font-size:10px !important;letter-spacing:.18em !important;
+    margin-top:28px !important;padding-top:14px !important;
+    flex-wrap:wrap;gap:10px;
+  }
+  .eyebrow{font-size:10px !important;letter-spacing:.28em !important;margin-bottom:10px !important}
+  h1.title{font-size:28px !important;line-height:1.15 !important;margin:0 0 14px !important;max-width:none !important}
+  h1.title.big{font-size:48px !important;line-height:1.05 !important}
+  h1.title.huge{font-size:64px !important;line-height:1 !important;letter-spacing:-.03em !important}
+  h1.big{font-size:48px !important;line-height:1.05 !important}
+  h1.huge{font-size:64px !important;line-height:1 !important;letter-spacing:-.03em !important}
+  .sub{font-size:15px !important;line-height:1.5 !important;max-width:none !important}
+  .slide:first-child,
+  .slide[data-i="1"]{
+    min-height:calc(100vh - 110px) !important;
+    display:flex !important;flex-direction:column !important;justify-content:center !important;
+    padding:48px 22px !important;
+  }
+  .slide:first-child .content,
+  .slide[data-i="2"] .content{margin-top:0 !important}
+  .slide:first-child .sub,
+  .slide[data-i="3"] .sub{font-size:17px !important;margin-top:18px !important}
+  .split,.pieces,.g6,.triplet,.quad,.tcards,.diag-row,.check{
+    display:block !important;grid-template-columns:none !important;
+    gap:0 !important;max-width:none !important;margin-top:14px !important;
+  }
+  .split>*,.pieces>*,.g6>*,.triplet>*,.quad>*,.tcards>*,.diag-row>*,.check>*{
+    margin:0 0 14px 0 !important;max-width:none !important;
+  }
+  .col{padding:18px !important;min-height:auto !important}
+  .col .name{font-size:22px !important;margin-bottom:14px !important}
+  .col .desc{font-size:14px !important;margin-bottom:14px !important}
+  .col .points{font-size:13px !important;line-height:1.6 !important}
+  .piece{padding-top:14px !important}
+  .piece .pn{font-size:22px !important}
+  .piece .pd{font-size:14px !important;line-height:1.45 !important}
+  .g6>div{font-size:13px !important;line-height:1.5 !important}
+  .check .ci .ct{font-size:18px !important}
+  .check .ci .ct small{font-size:13px !important}
+  .check .bx{width:20px !important;height:20px !important}
+  .code{
+    font-size:11px !important;padding:14px !important;line-height:1.55 !important;
+    max-width:none !important;margin-top:14px !important;
+    overflow-x:auto;word-break:break-word;
+  }
+  .concept{display:block !important;margin-top:14px !important}
+  .concept .num{font-size:80px !important;line-height:1 !important;display:block;margin-bottom:8px}
+  svg{max-width:100% !important;height:auto !important;width:100% !important}
+  .brw,.term{transform:none !important;max-width:100% !important;font-size:11px !important;padding:12px !important}
+  .progress,.hud{display:none !important}
+  .dl{
+    position:fixed !important;bottom:10px !important;left:10px !important;
+    font-size:10px !important;letter-spacing:.18em !important;padding:6px 10px !important;
+    background:rgba(10,10,10,.85) !important;
+  }
+}
+
+/* Print */
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{background:#fff !important;overflow:visible !important;display:block !important;width:1920px !important;height:auto !important;margin:0 !important;padding:0 !important}
+  .stage{transform:none !important;width:1920px !important;height:auto !important;display:block !important;position:relative !important;overflow:visible !important}
+  .slide{position:relative !important;inset:auto !important;width:1920px !important;height:1080px !important;opacity:1 !important;visibility:visible !important;transition:none !important;display:block !important;page-break-after:always;break-after:page;page-break-inside:avoid;break-inside:avoid;overflow:hidden}
+  .slide *,.slide .reveal>*{opacity:1 !important;transform:none !important;filter:none !important;transition:none !important;animation:none !important}
+  .progress,.hud,.dl{display:none !important}
+}
+
+/* G6 explainer */
+.g6{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;max-width:1500px;margin:8px 0 16px;border-top:1px solid var(--ink);border-bottom:1px solid var(--hair);padding:12px 0}
+.g6>div{font-family:var(--body);font-size:17px;line-height:1.45;color:var(--fog)}
+.g6>div b.k{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink);margin-bottom:6px;font-weight:500}
+
+/* Terminal mockup */
+.term{background:#0a0a0a;border-radius:6px;padding:0;font-family:var(--mono);color:#e6e6e6;font-size:18px;line-height:1.6;overflow:hidden;border:1px solid #222}
+.term .bar{background:#1a1a1a;padding:10px 16px;display:flex;gap:8px;border-bottom:1px solid #2a2a2a}
+.term .bar i{width:12px;height:12px;border-radius:50%;background:#3a3a3a;display:block}
+.term .bar i:nth-child(1){background:#ff5f57}
+.term .bar i:nth-child(2){background:#febc2e}
+.term .bar i:nth-child(3){background:#28c840}
+.term .bd{padding:24px 28px}
+.term .ps{color:#7a7a7a}
+.term .ck{color:#fff;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+</style>
+</head>
+<body>
+
+<div class="rotate-prompt">
+  <div class="ico"></div>
+  <div class="eyebrow">Slide deck · L6</div>
+  <h2>Ruota il telefono in orizzontale.</h2>
+  <p>Le slide sono pensate per essere viste landscape. Ruota lo schermo per leggerle bene.</p>
+</div>
+
+<div class="stage">
+
+  <!-- SLIDE 1 — Apertura L6 -->
+  <section class="slide active" data-i="1">
+    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
+    <div class="tag">AI PER ECOMMERCE · Lezione <b>06</b></div>
+    <div class="ghost" style="font-size:560px;top:120px;right:160px">06</div>
+    <div class="kanji" style="top:200px;right:140px">地図</div>
+    <div class="content">
+      <div class="eyebrow">Graphify · da transcript a brain interrogabile</div>
+      <h1 class="title huge" style="font-size:150px">Il grafo del knowledge.</h1>
+      <p class="sub" style="margin-top:24px;font-size:36px">I video di Hormozi diventano una mappa di concetti. Tu chiedi, lei risponde.</p>
+    </div>
+    <div class="strip"><span>AI PER ECOMMERCE</span><span>Lezione 06 · Graphify</span></div>
+  </section>
+
+  <!-- SLIDE 2 — Cos'è Graphify -->
+  <section class="slide" data-i="2">
+    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
+    <div class="tag">01 · Cos'è</div>
+    <div class="kanji" style="top:200px;right:140px">図譜</div>
+    <div class="content" style="bottom:auto;top:200px">
+      <div class="eyebrow">github.com/safishamsi/graphify · open source · gira in locale</div>
+      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Cos'è Graphify.</h1>
+      <div class="g6 reveal">
+        <div><b class="k">Cos'è</b>Un tool open source che legge i tuoi file markdown e ne disegna la mappa.</div>
+        <div><b class="k">A cosa serve</b>Claude interroga la mappa invece di rileggere tutti i file: risposte in secondi.</div>
+        <div><b class="k">Come si usa</b>Installi, punti una cartella, apri il grafo nel browser. Tre comandi.</div>
+      </div>
+      <div class="triplet reveal" style="margin-top:32px">
+        <div class="tcard">
+          <div class="tl-label">Elemento · 01</div>
+          <div class="tname">Nodo</div>
+          <div class="tdesc">Un concetto trovato nei tuoi file. Ogni puntino della mappa: "pricing", "offerta", "garanzia".</div>
+        </div>
+        <div class="tcard">
+          <div class="tl-label">Elemento · 02</div>
+          <div class="tname">Arco</div>
+          <div class="tdesc">Un collegamento tra due concetti. Ogni linea: "pricing si lega a valore percepito".</div>
+        </div>
+        <div class="tcard">
+          <div class="tl-label">Elemento · 03</div>
+          <div class="tname">Mappa</div>
+          <div class="tdesc">Il grafo completo: navigabile nel browser, interrogabile da Claude via MCP.</div>
+        </div>
+      </div>
+      <p class="sub" style="margin-top:28px;font-size:24px">I tuoi file sono un libro senza indice. <b style="color:var(--ink)">Graphify costruisce l'indice intelligente.</b></p>
+    </div>
+    <div class="strip"><span>Blocco 01</span><span>Nodi · archi · mappa</span></div>
+  </section>
+
+  <!-- SLIDE 3 — Perché un grafo: 3 benefici -->
+  <section class="slide" data-i="3">
+    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
+    <div class="tag">02 · Perché</div>
+    <div class="kanji" style="top:200px;right:140px">理由</div>
+    <div class="content" style="bottom:auto;top:200px">
+      <div class="eyebrow">L'idea di Karpathy: non documenti, una rete di concetti.</div>
+      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Elenco = cerchi tu. Mappa = chiedi e basta.</h1>
+      <div class="triplet reveal" style="margin-top:40px">
+        <div class="tcard">
+          <div class="tl-label">Beneficio · 01</div>
+          <div class="tname">Risparmio token</div>
+          <div class="tdesc">Claude legge 3 nodi invece di 300 file. Risposte più veloci, contesto pulito, costo a una frazione.</div>
+        </div>
+        <div class="tcard">
+          <div class="tl-label">Beneficio · 02</div>
+          <div class="tname">Collegamenti nascosti</div>
+          <div class="tdesc">Il grafo vede relazioni tra documenti lontani — anche quelle che tu non ricordavi di aver letto.</div>
+        </div>
+        <div class="tcard">
+          <div class="tl-label">Beneficio · 03</div>
+          <div class="tname">Risposte citate</div>
+          <div class="tdesc">Ogni nodo punta al file sorgente. Claude ti dice da quale video viene l'informazione. Verificabile.</div>
+        </div>
+      </div>
+      <p class="sub" style="margin-top:32px;font-size:24px"><b style="color:var(--ink)">Più i concetti si incrociano, più la mappa diventa ricca.</b> Hormozi è il caso perfetto.</p>
+    </div>
+    <div class="strip"><span>Blocco 02</span><span>3 benefici del grafo</span></div>
+  </section>
+
+  <!-- SLIDE 4 — La timeline -->
+  <section class="slide" data-i="4">
+    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
+    <div class="tag">03 · Il percorso</div>
+    <div class="kanji" style="top:200px;right:140px">変換</div>
+    <div class="content" style="bottom:auto;top:200px">
+      <div class="eyebrow">Da playlist YouTube a esperto interrogabile. In automatico.</div>
+      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Due giorni fa erano video.</h1>
+      <div class="triplet reveal" style="margin-top:40px">
+        <div class="tcard">
+          <div class="tl-label">2 giorni fa</div>
+          <div class="tname">Video YouTube</div>
+          <div class="tdesc">Il canale di Hormozi: centinaia di video, conoscenza sparsa, non interrogabile.</div>
+        </div>
+        <div class="tcard">
+          <div class="tl-label">Ieri · agent L5</div>
+          <div class="tname">Transcript nel vault</div>
+          <div class="tdesc">L'agent scarica e trascrive da solo: <code style="font-family:var(--mono)">Brains/Hormozi/</code> piena di markdown.</div>
+        </div>
+        <div class="tcard" style="border-color:var(--ink);background:#fff">
+          <div class="tl-label">Oggi · Graphify</div>
+          <div class="tname">Grafo interrogabile</div>
+          <div class="tdesc">Concetti collegati, mappa nel browser, Claude risponde in secondi citando le fonti.</div>
+        </div>
+      </div>
+      <p class="sub" style="margin-top:32px;font-size:24px">Transcript → grafo → MCP → domande. <b style="color:var(--ink)">Il metodo vale per qualsiasi fonte.</b></p>
+    </div>
+    <div class="strip"><span>Blocco 03</span><span>Video → vault → grafo</span></div>
+  </section>
+
+  <!-- SLIDE 5 — Install + build -->
+  <section class="slide" data-i="5">
+    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
+    <div class="tag">04 · Setup</div>
+    <div class="kanji" style="top:200px;right:140px">設置</div>
+    <div class="content" style="bottom:auto;top:200px">
+      <div class="eyebrow">Nessuna configurazione. Nessun server. Nessun abbonamento.</div>
+      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">3 comandi e il grafo nasce.</h1>
+      <div class="code reveal" style="margin-top:32px">
+        <div><span class="c"># 1 — uv, il gestore pacchetti (se manca)</span></div>
+        <div><span class="o">curl -LsSf https://astral.sh/uv/install.sh | sh</span></div>
+        <div>&nbsp;</div>
+        <div><span class="c"># 2 — installa Graphify (pacchetto: doppia y!)</span></div>
+        <div><span class="o">uv tool install graphifyy</span></div>
+        <div>&nbsp;</div>
+        <div><span class="c"># 3 — verifica (comando: una y sola)</span></div>
+        <div><span class="o">graphify --help</span></div>
+      </div>
+      <p class="sub" style="margin-top:28px;font-size:24px">Poi in Claude Code: <i>"costruisci il grafo della cartella Brains/Hormozi"</i> — <b style="color:var(--ink)">1–3 minuti su un canale intero.</b></p>
+    </div>
+    <div class="strip"><span>Blocco 04</span><span>Install · build</span></div>
+  </section>
+
+  <!-- SLIDE 6 — Le 3 query -->
+  <section class="slide" data-i="6">
+    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
+    <div class="tag">05 · Interrogazione</div>
+    <div class="kanji" style="top:200px;right:140px">質問</div>
+    <div class="content" style="bottom:auto;top:200px">
+      <div class="eyebrow">claude mcp add graphify-hormozi — la presa di corrente della L4.</div>
+      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Tre test, dal facile al difficile.</h1>
+      <div class="triplet reveal" style="margin-top:40px">
+        <div class="tcard">
+          <div class="tl-label">Query · 01</div>
+          <div class="tname">I god-node</div>
+          <div class="tdesc">"Quali sono i concetti più collegati?" → offer, value, pricing. I pilastri del suo pensiero, trovati matematicamente.</div>
+        </div>
+        <div class="tcard">
+          <div class="tl-label">Query · 02</div>
+          <div class="tname">Il percorso</div>
+          <div class="tdesc">"Che collegamento c'è tra pricing e garanzia?" → il path in 2-3 salti. Nessuna ricerca per parola chiave può farlo.</div>
+        </div>
+        <div class="tcard">
+          <div class="tl-label">Query · 03</div>
+          <div class="tname">La domanda secca</div>
+          <div class="tdesc">"Cosa dice Hormozi sugli sconti?" → risposta in secondi, con i file citati. Apri la fonte e verifichi.</div>
+        </div>
+      </div>
+      <p class="sub" style="margin-top:32px;font-size:24px">Per rispondere ha letto 3 nodi, non 300 file. <b style="color:var(--ink)">Questo è il motivo per cui si costruisce il grafo.</b></p>
+    </div>
+    <div class="strip"><span>Blocco 05</span><span>God-node · path · domanda</span></div>
+  </section>
+
+  <!-- SLIDE 7 — Due modi d'uso -->
+  <section class="slide" data-i="7">
+    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
+    <div class="tag">06 · Strategia</div>
+    <div class="kanji" style="top:200px;right:140px">二式</div>
+    <div class="content" style="bottom:auto;top:200px">
+      <div class="eyebrow">Come si usa nella vita vera.</div>
+      <h1 class="title" style="font-size:76px;line-height:1;margin-bottom:14px">Due modi d'uso.</h1>
+      <div class="split reveal" style="margin-top:24px">
+        <div class="col">
+          <div class="label">Modo 1 · il sistema</div>
+          <div class="name" style="font-size:44px">Grafo del vault.</div>
+          <div class="desc">Punti Graphify sulle cartelle importanti — decisioni, pattern, knowledge — e Claude ha la mappa di tutto il tuo sistema.</div>
+          <div class="points"><span>→ Solo il segnale: niente PDF pesanti</span><span>→ Niente sessioni automatiche — rumore</span></div>
+        </div>
+        <div class="col win">
+          <div class="label">Modo 2 · gli esperti</div>
+          <div class="name" style="font-size:44px">Sottografi = brain.</div>
+          <div class="desc">Un grafo dedicato per ogni knowledge: Hormozi oggi, il brain marketing nel Bonus. Esperti isolati, interrogabili, economici.</div>
+          <div class="points"><span>→ Ogni brain risponde sulla sua materia</span><span>→ Replicabile per qualsiasi fonte</span></div>
+        </div>
+      </div>
+      <p class="sub" style="margin-top:24px;font-size:24px"><b style="color:var(--ink)">Un grafo per il vault, un sottografo per ogni esperto.</b> Hormozi è il primo brain.</p>
+    </div>
+    <div class="strip"><span>Blocco 06</span><span>Vault · brain</span></div>
+  </section>
+
+  <!-- SLIDE 8 — Chiusura → L7 -->
+  <section class="slide" data-i="8">
+    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
+    <div class="tag">Chiusura</div>
+    <div class="ghost" style="font-size:420px;top:120px;right:140px;opacity:.5">→</div>
+    <div class="kanji" style="top:220px;right:120px">次へ</div>
+    <div class="content" style="bottom:auto;top:240px;right:340px">
+      <div class="eyebrow">Prossima lezione · Shopify dal terminale</div>
+      <h1 class="title" style="font-size:128px;line-height:.98;margin-bottom:32px">Il primo brain è vivo.<br>Ora il vostro store.</h1>
+      <p class="sub" style="font-size:28px;max-width:1200px">Transcript → grafo → MCP → domande: il metodo è vostro. Nella prossima lezione colleghiamo Claude a Shopify: setup completo e il primo agent che gestisce il negozio.</p>
+    </div>
+    <div class="strip"><span>Fine L6</span><span>CTA · 30 sec</span><span>→ L7 Shopify setup</span></div>
+  </section>
+
+</div>
+
+<div class="progress" id="prog"></div>
+<div class="hud" id="hud">01 / 06 · ← →</div>
+<button class="dl" onclick="window.print()">↓ Download PDF</button>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prog = document.getElementById('prog');
+const hud = document.getElementById('hud');
+let i = 0;
+let step = 0;
+
+function applySteps(slide, s){
+  const rules = slide.querySelectorAll('[data-step]');
+  rules.forEach(r => {
+    const sn = parseInt(r.dataset.step, 10);
+    r.classList.toggle('revealed', sn <= s);
+  });
+}
+
+function show(n, s){
+  n = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach((sl, k) => sl.classList.toggle('active', k === n));
+  i = n;
+  step = s || 0;
+  const cur = slides[i];
+  if (cur.dataset.steps) applySteps(cur, step);
+  prog.style.width = ((i + 1) / slides.length * 100) + '%';
+  hud.textContent = String(i + 1).padStart(2,'0') + ' / ' + String(slides.length).padStart(2,'0') + ' · ← →';
+}
+
+function advance(){
+  const cur = slides[i];
+  const maxStep = parseInt(cur.dataset.steps || '0', 10);
+  if (maxStep && step < maxStep) { step++; applySteps(cur, step); return; }
+  show(i + 1, 0);
+}
+
+function retreat(){
+  const cur = slides[i];
+  if (step > 0) { step--; applySteps(cur, step); return; }
+  const prev = slides[i - 1];
+  if (prev && prev.dataset.steps) show(i - 1, parseInt(prev.dataset.steps, 10));
+  else show(i - 1, 0);
+}
+
+document.addEventListener('keydown', (e) => {
+  if (['ArrowRight','PageDown',' '].includes(e.key)) { e.preventDefault(); advance(); }
+  else if (['ArrowLeft','PageUp'].includes(e.key)) { e.preventDefault(); retreat(); }
+  else if (e.key === 'Home') show(0, 0);
+  else if (e.key === 'End') show(slides.length - 1, 0);
+  else if (e.key === 'f' || e.key === 'F') {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+});
+
+// Touch swipe (mobile)
+let touchStartX = 0, touchStartY = 0, touchStartT = 0;
+document.addEventListener('touchstart', (e) => {
+  const t = e.changedTouches[0];
+  touchStartX = t.clientX; touchStartY = t.clientY; touchStartT = Date.now();
+}, {passive:true});
+document.addEventListener('touchend', (e) => {
+  const t = e.changedTouches[0];
+  const dx = t.clientX - touchStartX;
+  const dy = t.clientY - touchStartY;
+  const dt = Date.now() - touchStartT;
+  if (dt > 600) return;
+  if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+  if (dx < 0) advance(); else retreat();
+}, {passive:true});
+
+show(0, 0);
+</script>
+
+</body>
+</html>
