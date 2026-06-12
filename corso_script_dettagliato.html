@@ -1048,78 +1048,99 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
 
 <!-- =================== LEZIONE 9 =================== -->
 <section class="lesson" id="l9">
-  <div class="lesson-tag">Lezione 09 · 30–35 min</div>
-  <h1>L'agent contabile: Shopify + fatture fornitore → report giornaliero, CSV e Drive</h1>
+  <div class="lesson-tag">Lezione 09 · 35–40 min</div>
+  <h1>L'agent contabile: backend collegato a Shopify → CSV giornaliero + report Telegram</h1>
 
   <div class="point">
     <span class="num">01</span>
-    <h2>Cosa costruiamo — il contabile che non dorme</h2>
-    <p>Frame: terzo agent del corso, il più "da soldi". Vede gli ordini Shopify, vede le fatture del fornitore (l'invoice coi costi reali), incrocia i due, e ogni giorno: ti manda il report su Telegram o WhatsApp, scrive il CSV del giorno, e archivia tutto in una cartella Drive ordinata. La contabilità giornaliera sparisce dalla tua lista.</p>
-    <p>Punto chiave: non è un report di "fatturato". È un report di <b>profitto</b> — quanto ti è rimasto in tasca davvero, ogni sera.</p>
-    <div class="say"><b>Da dire:</b> "Il fatturato è vanità, il profitto è verità. Questo agent vi dice la verità ogni mattina."</div>
+    <h2>Apertura — il contabile che non dorme</h2>
+    <p><b>A schermo:</b> terminale pulito + admin Shopify in un'altra finestra. Eventualmente uno screenshot di un report Telegram vero (numeri offuscati).</p>
+    <div class="say"><b>Da dire:</b> "Oggi costruiamo il terzo agent del corso, e per me è il più importante di tutti: l'agent contabile. Cosa fa? Ogni giorno, da solo, legge gli ordini del vostro store Shopify, incrocia i costi reali del fornitore, calcola quanto avete guadagnato davvero, scrive un file CSV con tutta la giornata, lo archivia in una cartella Drive ordinata, e vi manda il riassunto su Telegram. Ogni mattina, quando vi svegliate, il messaggio è già lì."</div>
+    <div class="say"><b>Da dire:</b> "E attenzione a una cosa: questo non è un report di fatturato. È un report di <b>profitto</b>. Quanto vi è rimasto in tasca davvero, ogni sera. Perché il fatturato è vanità, il profitto è verità. E questo agent vi dice la verità ogni mattina."</div>
   </div>
 
   <div class="point">
     <span class="num">02</span>
     <h2>Le 5 metriche che contano</h2>
-    <p>Definiamo le 5 metriche. Revenue = quanto incassa (lordo). COGS = costo del venduto (quello che paghi al fornitore). GW = Gross profit = revenue − COGS. Net = GW − ads spend − fees. BE ROAS = la soglia di ROAS al punto di breakeven.</p>
-    <p>Esempio numerico a schermo: revenue €10.000, COGS €3.000, ads €4.000, fees €500. GW = €7.000. Net = €2.500.</p>
-    <div class="say"><b>Da dire:</b> "Se non sai questi 5 numeri ogni mattina, stai giocando senza vedere lo scoreboard."</div>
+    <p><b>A schermo:</b> le 5 metriche scritte una sotto l'altra, poi l'esempio numerico.</p>
+    <ul>
+      <li><b>Revenue</b> — quanto incassa lo store (lordo)</li>
+      <li><b>COGS</b> — costo del venduto, quello che pagate al fornitore</li>
+      <li><b>Gross profit (GW)</b> — revenue − COGS</li>
+      <li><b>Net</b> — GW − spesa pubblicitaria − fees (commissioni di pagamento)</li>
+      <li><b>BE ROAS</b> — la soglia di ROAS sotto la quale state perdendo soldi</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Prima di costruire, definiamo cosa misuriamo. Cinque numeri, sempre gli stessi. Revenue: quanto è entrato. COGS: quanto vi costa la merce venduta. Gross profit: la differenza tra i due. Net: quello che resta dopo aver pagato anche le ads e le commissioni. E BE ROAS: il ritorno pubblicitario minimo per non andare in perdita — sopra quella soglia guadagnate, sotto state bruciando soldi."</div>
+    <div class="say"><b>Da dire:</b> "Esempio con numeri tondi: oggi lo store ha incassato 10.000 euro. La merce venduta vi è costata 3.000. Avete speso 4.000 di pubblicità e 500 di commissioni. Gross profit: 7.000. Net: 2.500. Ecco — 2.500 è il numero vero della giornata. Se non conoscete questi cinque numeri ogni mattina, state giocando una partita senza vedere il punteggio."</div>
   </div>
 
   <div class="point">
     <span class="num">03</span>
     <h2>Hard rules — niente stime, niente overwrite</h2>
-    <p>Le regole non negoziabili che finiranno scritte nella spec. Uno: niente stime — se manca un dato, la casella resta vuota e l'agent lo segnala. Mai inventare metriche. Due: se manca il costo di uno SKU nella fattura fornitore → STOP + notifica. Mai fallback a percentuali o medie.</p>
-    <p>Tre: niente overwrite di CSV esistenti su Drive o in locale — ogni giorno il suo file, i test in cartella /TEST/ con prefisso TEST_. Questi tre errori sono i killer della fiducia nei dati: uno solo violato e butti via tutto il sistema.</p>
-    <div class="say"><b>Da dire:</b> "Niente stime, niente fallback, niente overwrite. Tre cose. Il giorno che l'agent inventa un numero, smettete di credergli per sempre."</div>
+    <p><b>A schermo:</b> le tre regole scritte grandi, una alla volta.</p>
+    <ul>
+      <li><b>Regola 1 — Niente stime.</b> Se manca un dato, la casella resta vuota e l'agent lo segnala. Mai inventare.</li>
+      <li><b>Regola 2 — STOP se manca un costo.</b> SKU senza costo nella fattura fornitore → l'agent si ferma e notifica. Mai percentuali o medie come ripiego.</li>
+      <li><b>Regola 3 — Mai sovrascrivere.</b> Ogni giorno il suo file. I test vanno in una cartella /TEST/ con prefisso TEST_.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Prima del codice, le regole. Tre regole non negoziabili, che poi scriveremo dentro la spec dell'agent. Uno: niente stime. Se un dato manca, la casella resta vuota e l'agent lo dice — non lo inventa mai. Due: se nella fattura del fornitore manca il costo di un prodotto, l'agent si ferma e mi avvisa. Niente 'metto una percentuale media', niente ripieghi. Tre: mai sovrascrivere un file esistente — ogni giorno scrive il suo file, e i test finiscono in una cartella separata con un prefisso TEST."</div>
+    <div class="say"><b>Da dire:</b> "Perché sono così rigido su questo? Perché questi tre errori sono i killer della fiducia nei dati. Il giorno che scoprite che l'agent ha inventato un numero, smettete di credergli per sempre. E un report di cui non vi fidate non vale niente. Niente stime, niente ripieghi, niente sovrascritture. Tre cose."</div>
   </div>
 
   <div class="point">
     <span class="num">04</span>
-    <h2>Le due fonti — ordini Shopify + invoice del fornitore</h2>
-    <p>Fonte 1: gli ordini Shopify via API (il token della L7). Dettaglio tecnico che vale oro: filtrare per <code>processed_at</code> (data effettiva del pagamento), non per data di creazione — sennò i numeri non tornano mai con l'admin.</p>
-    <p>Fonte 2: l'invoice del fornitore — il CSV/XLSX coi costi unitari per SKU. L'agent lo legge, costruisce la tabella SKU → costo, e per ogni riga d'ordine moltiplica quantità × costo. COGS reali, non stimati.</p>
-    <div class="say"><b>Da dire:</b> "Shopify dice quanto è entrato. La fattura del fornitore dice quanto è uscito. L'agent incrocia i due e ti dice quanto è rimasto."</div>
+    <h2>Le due fonti — ordini Shopify + fattura del fornitore</h2>
+    <p><b>A schermo:</b> schema a due colonne: a sinistra l'admin Shopify (ordini), a destra il CSV/XLSX della fattura fornitore con le colonne SKU e costo.</p>
+    <div class="say"><b>Da dire:</b> "L'agent lavora con due fonti. Fonte numero uno: gli ordini Shopify, via API — col token che abbiamo creato nella lezione 7. E qui c'è un dettaglio tecnico che vale oro: gli ordini vanno filtrati per <b>processed_at</b>, la data effettiva del pagamento — non per la data di creazione. Se sbagliate questo filtro, i vostri numeri non torneranno mai con quelli che vedete nell'admin di Shopify. È l'errore numero uno di chi costruisce report sugli ordini."</div>
+    <div class="say"><b>Da dire:</b> "Fonte numero due: la fattura del fornitore. Il file CSV o Excel coi costi unitari per ogni SKU — per ogni codice prodotto. L'agent lo legge, costruisce la tabella prodotto-per-prodotto col suo costo, e per ogni riga d'ordine moltiplica quantità per costo. Così i COGS sono reali, non stimati. Shopify dice quanto è entrato. La fattura del fornitore dice quanto è uscito. L'agent incrocia i due e vi dice quanto è rimasto."</div>
   </div>
 
   <div class="point">
     <span class="num">05</span>
-    <h2>Build con la agent factory — la spec del contabile</h2>
-    <p>Terzo giro di factory, ormai è routine. <code>/agent-spec</code>: "Voglio un agent che ogni giorno: 1) legge gli ordini Shopify del giorno (processed_at), 2) legge i costi dalla fattura fornitore, 3) calcola revenue, COGS, GW, net e BE ROAS, 4) scrive il CSV del giorno, 5) lo archivia su Drive in cartelle anno/mese, 6) mi manda il riassunto su Telegram. Hard rules: niente stime, STOP se manca un costo, mai sovrascrivere file esistenti."</p>
-    <p>Poi tasks → execute → verify. Sottolinea: le hard rules del punto 03 sono DENTRO la spec — l'agent nasce già con le regole, non gliele ricordi ogni volta.</p>
-    <div class="say"><b>Da dire:</b> "Le regole si scrivono nella spec, una volta. Da lì in poi l'agent le rispetta sempre. Anche alle 6 di mattina. Anche a Natale."</div>
+    <h2>Build con la agent factory — la spec dettata per intero</h2>
+    <p><b>A schermo:</b> terminale, <code>/agent-spec</code>, detti la spec a voce per intero.</p>
+    <div class="say"><b>Da dire:</b> "E adesso costruiamolo. Terzo giro di agent factory — ormai per voi è routine: spec, tasks, execute, verify. Lancio /agent-spec e detto: voglio un agent che ogni giorno, uno, legge gli ordini Shopify del giorno filtrando per processed_at; due, legge i costi dalla fattura fornitore; tre, calcola revenue, COGS, gross profit, net e BE ROAS; quattro, scrive il CSV del giorno; cinque, lo archivia su Drive in cartelle anno slash mese; sei, mi manda il riassunto su Telegram. Hard rules: niente stime, STOP se manca un costo, mai sovrascrivere file esistenti."</div>
+    <div class="say"><b>Da dire:</b> "Notate il punto chiave: le tre regole di prima sono DENTRO la spec. L'agent nasce già con le regole — non gliele dovete ricordare ogni volta. Le regole si scrivono una volta, nella spec. Da lì in poi l'agent le rispetta sempre. Anche alle sei di mattina. Anche a Natale."</div>
+    <p>Poi <code>/agent-tasks</code> → <code>/agent-execute</code> → <code>/agent-verify</code>, in timelapse o tagliato. Mostra la skill finale attiva.</p>
+    <div class="say"><b>Da dire:</b> "Tasks, execute, verify — il giro che conoscete. Qualche minuto dopo: l'agent contabile esiste. Adesso vediamolo lavorare."</div>
   </div>
 
   <div class="point">
     <span class="num">06</span>
-    <h2>Il report — Telegram o WhatsApp, 30 secondi di lettura</h2>
-    <p><b>Cos'è un bot Telegram:</b> un contatto Telegram per i programmi — si crea gratis in 2 minuti con BotFather (visto in L5). Il formato del report: data, revenue, ordini, AOV, COGS, GW, ads spend, net, BE ROAS, top 5 prodotti. Emoji semaforo 🟢/🔴 sui KPI. Lettura: 30 secondi.</p>
-    <p>Alternativa WhatsApp per chi vive lì: stesso messaggio, canale diverso. Il principio non cambia: l'output di un agent deve arrivare <b>dove vivi tu</b>, non in un file che non aprirai mai.</p>
-    <div class="say"><b>Da dire:</b> "Alle 6 ho letto il giorno prima. Alle 6 e mezzo ho già preso le decisioni. Alle 7 sono operativo."</div>
+    <h2>Il CSV giornaliero + la cartella Drive ordinata</h2>
+    <p><b>A schermo:</b> il CSV aperto (una riga per ordine + riga totali), poi la cartella Drive <code>Contabilità/2026/06-Giugno/</code> che si popola.</p>
+    <div class="say"><b>Da dire:</b> "Primo output: il CSV del giorno. Una riga per ogni ordine con tutti i numeri — prodotti, quantità, revenue, costo — più la riga finale coi totali. Nome del file fisso: anno-mese-giorno underscore report punto csv. Questa è la vostra contabilità, giorno per giorno, già pronta per il commercialista."</div>
+    <div class="say"><b>Da dire:</b> "E l'archivio si organizza da solo: l'agent carica il file su Drive in Contabilità, anno, mese — e se le cartelle non esistono, le crea lui. A fine anno avete 365 file, già divisi per mese, già su Drive. Il commercialista vi ama. E voi non avete mai aperto Excel. Ultima regola di igiene: l'agent stampa sempre il link al file in chat — un output senza link è un output invisibile."</div>
   </div>
 
   <div class="point">
     <span class="num">07</span>
-    <h2>Il CSV giornaliero + la cartella Drive ordinata</h2>
-    <p>Oltre al messaggio, ogni giorno l'agent scrive il CSV: una riga per ordine con tutti i numeri, più la riga dei totali. Naming fisso: <code>YYYY-MM-DD_report.csv</code>. È la tua contabilità giorno per giorno, pronta per il commercialista.</p>
-    <p>L'archivio su Drive si organizza da solo: <code>Contabilità/2026/06-Giugno/</code> — l'agent crea le cartelle che mancano e carica il file nel posto giusto. E stampa SEMPRE il link al file in chat: senza link, l'output è invisibile.</p>
-    <div class="say"><b>Da dire:</b> "Fine anno: 365 CSV, già divisi per mese, già su Drive. Il commercialista vi ama. E voi non avete mai aperto Excel."</div>
+    <h2>Il report Telegram — 30 secondi di lettura ogni mattina</h2>
+    <p><b>A schermo:</b> il messaggio Telegram vero sul telefono, formato completo.</p>
+    <ul>
+      <li>Data · Revenue · Ordini · AOV</li>
+      <li>COGS · Gross profit · Ads spend · Net</li>
+      <li>BE ROAS soglia vs effettivo, con semaforo 🟢/🔴</li>
+      <li>Top 5 prodotti del giorno</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Secondo output: il messaggio. Il bot Telegram lo conoscete già dalla lezione 5 — si crea gratis in due minuti con BotFather, è un contatto Telegram per i vostri programmi. Il formato del report: data, revenue, numero ordini, carrello medio, COGS, gross profit, spesa ads, net. Poi il BE ROAS: soglia contro effettivo, con l'emoji semaforo — verde se siete sopra, rosso se siete sotto. E i top 5 prodotti del giorno. Tutto in un messaggio: trenta secondi di lettura."</div>
+    <div class="say"><b>Da dire:</b> "Chi vive su WhatsApp può ricevere lo stesso messaggio lì — cambia il canale, non il principio. E il principio è questo: l'output di un agent deve arrivare dove vivete voi, non in un file che non aprirete mai. La mia routine: alle 6 leggo il giorno prima, alle 6 e mezza ho già preso le decisioni, alle 7 sono operativo."</div>
   </div>
 
   <div class="point">
     <span class="num">08</span>
-    <h2>Schedulazione + log — ogni mattina, e se si rompe lo dice</h2>
-    <p>Sveglia launchd alle 06:00 (il pattern della L5): l'agent parte da solo ogni mattina. E le due regole di affidabilità: ogni run scrive un log (start, end, esito), e se qualcosa va storto — Shopify non risponde, manca la fattura — l'agent NON muore in silenzio: ti manda il messaggio d'errore su Telegram.</p>
-    <div class="say"><b>Da dire:</b> "Quando un agent fallisce, deve urlare. Mai morire in silenzio. Mai."</div>
+    <h2>Schedulazione + log — ogni mattina alle 06:00, e se si rompe urla</h2>
+    <p><b>A schermo:</b> il file launchd (richiamo L5) + il file di log con start/end/esito.</p>
+    <div class="say"><b>Da dire:</b> "Ultimo pezzo: la sveglia. Stesso pattern della lezione 5: launchd, ore 6 del mattino, l'agent parte da solo. E due regole di affidabilità. Primo: ogni esecuzione scrive un log — quando è partito, quando ha finito, com'è andata. Secondo, e questo è fondamentale: se qualcosa va storto — Shopify non risponde, manca la fattura del fornitore — l'agent NON muore in silenzio. Vi manda il messaggio di errore su Telegram, con scritto cosa si è rotto."</div>
+    <div class="say"><b>Da dire:</b> "Regola d'oro per ogni agent che girerà da solo nella vostra vita: quando un agent fallisce, deve urlare. Mai morire in silenzio. Mai. Perché un report che non arriva e nessuno se ne accorge è peggio di un report sbagliato."</div>
   </div>
 
   <div class="point">
     <span class="num">09</span>
     <h2>La prova dal vivo — run completo davanti alla camera</h2>
-    <p>Gran finale: lanci l'agent manualmente sul giorno precedente. Davanti alla camera: legge gli ordini, incrocia i costi, calcola, scrive il CSV, lo carica su Drive (mostra la cartella che si popola), e... notifica sul telefono. Apri il messaggio, leggi i numeri a voce.</p>
-    <p>Chiusura + ponte: "i numeri arrivano sul telefono ogni mattina. Ma nella prossima lezione li mettiamo anche in diretta, nel browser: la dashboard della contabilità."</p>
-    <div class="say"><b>Da dire:</b> "Questo report a un contabile costa 200 euro al mese. Il vostro lo fa ogni notte, gratis, senza ferie."</div>
+    <p><b>A schermo:</b> run manuale sul giorno precedente: terminale → CSV → Drive → notifica sul telefono, in sequenza.</p>
+    <div class="say"><b>Da dire:</b> "E adesso la prova, tutta davanti alla camera. Lancio l'agent a mano sul giorno di ieri. Guardate: legge gli ordini... incrocia i costi della fattura... calcola le cinque metriche... scrive il CSV... lo carica su Drive — vedete la cartella che si popola... e adesso... eccola. La notifica sul telefono. Apro il messaggio: revenue, ordini, carrello medio, costi, profitto, semaforo verde. Tutto qui, in trenta secondi."</div>
+    <div class="say"><b>Da dire (chiusura + CTA):</b> "Questo report, fatto da un contabile, vi costa 200 euro al mese. Il vostro lo fa ogni notte, gratis, senza ferie. Ma c'è un pezzo che manca: questi numeri arrivano una volta al giorno, la mattina. Nella prossima lezione li mettiamo in diretta: costruiamo la dashboard — la pagina nel browser dove vedete la cassa salire DURANTE il giorno, ordine dopo ordine. Vi faccio vedere la mia, quella che guardo dieci volte al giorno. Ci vediamo nella lezione 10."</div>
   </div>
 
   <div class="lesson-end">Fine L9 · CTA → L10 dashboard contabilità</div>
@@ -1127,54 +1148,63 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
 
 <!-- =================== LEZIONE 10 =================== -->
 <section class="lesson" id="l10">
-  <div class="lesson-tag">Lezione 10 · 25–30 min</div>
-  <h1>La dashboard dell'agent contabile: i numeri in diretta nel browser</h1>
+  <div class="lesson-tag">Lezione 10 · 30–35 min</div>
+  <h1>La dashboard dell'agent contabile: i numeri in diretta nel browser + deploy online</h1>
 
   <div class="point">
     <span class="num">01</span>
-    <h2>Quando serve un frontend</h2>
-    <p>Non sempre. Regola: frontend quando devi consultare dati visivamente o quando il sistema deve essere usato da qualcuno che non sta in terminale (collaboratori, team). Se sei solo tu e sono numeri rapidi → il Telegram della L9 basta.</p>
-    <p>Per la contabilità il frontend ha senso: vuoi vedere i numeri salire DURANTE il giorno, non solo il riassunto della mattina dopo.</p>
-    <div class="say"><b>Da dire:</b> "Frontend non è bellezza. Frontend è 'lo guardo dieci volte al giorno' o 'serve a qualcun altro'. La cassa in diretta vale entrambe."</div>
+    <h2>Apertura — quando serve un frontend</h2>
+    <p><b>A schermo:</b> il messaggio Telegram della L9 accanto a un browser vuoto.</p>
+    <div class="say"><b>Da dire:</b> "L'agent contabile c'è: report ogni mattina, CSV su Drive. Oggi gli costruiamo la faccia: la dashboard. Ma prima, una domanda onesta: quando serve davvero un frontend? Non sempre. La regola: serve quando dovete consultare i dati visivamente, tante volte al giorno — o quando il sistema deve usarlo qualcuno che non sta nel terminale: un collaboratore, il team. Se siete solo voi e vi bastano i numeri della mattina, il Telegram della lezione 9 è sufficiente."</div>
+    <div class="say"><b>Da dire:</b> "Per la contabilità però il frontend ha senso eccome: volete vedere i numeri salire DURANTE il giorno, ordine dopo ordine — non solo il riassunto del giorno dopo. Frontend non è bellezza. Frontend è 'lo guardo dieci volte al giorno' oppure 'serve a qualcun altro'. La cassa in diretta vale entrambe le cose."</div>
   </div>
 
   <div class="point">
     <span class="num">02</span>
-    <h2>Stack minimo — HTML, JS, CSS, niente framework</h2>
-    <p>La dashboard è tre file: una pagina HTML, un file JS, un CSS. Niente React, niente build step. Aprila: è plain HTML, qualsiasi cosa lì dentro Claude la sa scrivere e modificare.</p>
-    <p>Grafica: SHIN-EN del way-stack (la skill shinen-design) — la dashboard esce già con la faccia giusta, coerente con tutti gli altri tool.</p>
-    <div class="say"><b>Da dire:</b> "Plain HTML finché regge. Quando non regge più, allora i framework. Mai prima. E con SHIN-EN esce già bella."</div>
+    <h2>Il modello — vi mostro il mio LiveKPI</h2>
+    <p><b>A schermo:</b> il TUO LiveKPI vero, aperto nel browser (numeri sensibili offuscati se serve). Scroll lento: card revenue, ordini, AOV, costi, net, BE ROAS.</p>
+    <div class="say"><b>Da dire:</b> "Prima di costruire, vi faccio vedere il punto d'arrivo. Questo è il mio LiveKPI — la dashboard che uso ogni giorno sui miei store, costruita esattamente col metodo di questa lezione. Guardate: in alto il numero protagonista, la revenue del giorno, grande. Sotto le card: ordini, carrello medio, costi, profitto netto. E la riga del BE ROAS: la soglia di breakeven contro il ROAS effettivo — verde sopra, rosso sotto. Si aggiorna da sola, ogni trenta secondi. Questa pagina è aperta sul mio telefono e sul mio Mac tutto il giorno."</div>
+    <div class="say"><b>Da dire:</b> "E non è un prodotto che ho comprato: è una pagina HTML scritta dall'agent. Oggi costruite la vostra, identica nella sostanza, col vostro stile."</div>
   </div>
 
   <div class="point">
     <span class="num">03</span>
-    <h2>L'architettura — l'agent serve i dati, la pagina li mostra</h2>
-    <p>Pattern semplice: l'agent contabile della L9 espone un piccolo endpoint JSON sul Mac (i numeri del giorno, sempre freschi). La pagina fa <code>fetch('/api/kpi')</code> ogni 30 secondi e aggiorna i numeri a schermo. L'agent fa da centralina (chiama Shopify lui, al massimo ogni 30s — così non sfori i limiti API), la pagina fa da cruscotto.</p>
-    <div class="say"><b>Da dire:</b> "Backend = centralina. Frontend = cruscotto. La pagina non parla mai con Shopify direttamente — parla con l'agent."</div>
+    <h2>Stack minimo — HTML, JS, CSS, niente framework</h2>
+    <p><b>A schermo:</b> la cartella del progetto: tre file. Apri l'HTML nell'editor: è leggibile.</p>
+    <div class="say"><b>Da dire:</b> "Lo stack: tre file. Una pagina HTML, un file JavaScript, un foglio di stile CSS. Niente React, niente framework, niente passaggi di build. Perché? Perché qualsiasi cosa dentro un file HTML semplice, Claude la sa scrivere e modificare al primo colpo — e voi la potete capire leggendola. Plain HTML finché regge. Quando non regge più, allora i framework. Mai prima."</div>
+    <div class="say"><b>Da dire:</b> "Per la grafica usiamo SHIN-EN, lo stile del way-stack — la skill shinen-design che avete già installato. Così la dashboard esce già con la faccia giusta, scura, pulita, coerente con tutti gli altri tool del corso. Niente dashboard brutte."</div>
   </div>
 
   <div class="point">
     <span class="num">04</span>
-    <h2>Build live — le card della contabilità</h2>
-    <p>Costruisci la dashboard con Claude davanti alla camera. Le card: revenue del giorno grande in alto (il numero protagonista), poi ordini, AOV, COGS, GW, net. E la riga BE ROAS: soglia di breakeven vs ROAS effettivo — sopra la linea navighi, sotto affoghi.</p>
-    <p>Trick UX: il contatore animato. Quando arriva un ordine, il numero gira e sale. Effetto cassa di Las Vegas, gratis. Responsive: 4 colonne desktop, 1 colonna mobile — il KPI in tasca tutto il giorno.</p>
-    <div class="say"><b>Da dire:</b> "Quando arriva un ordine, lo vedo entrare. Il numero che gira è dopamina. La pagina diventa il tuo posto."</div>
+    <h2>L'architettura — backend centralina, frontend cruscotto</h2>
+    <p><b>A schermo:</b> schema a tre blocchi: Shopify → agent (endpoint <code>/api/kpi</code>) → pagina browser. Poi il JSON vero nel browser.</p>
+    <div class="say"><b>Da dire:</b> "L'architettura è un pattern che vi riportate a casa per sempre. L'agent contabile della lezione 9 espone un piccolo indirizzo sul vostro Mac — un endpoint — che risponde con i numeri del giorno in formato JSON, sempre freschi. La pagina HTML chiama quell'indirizzo ogni trenta secondi con una fetch, prende i numeri, e li scrive a schermo."</div>
+    <div class="say"><b>Da dire:</b> "Memorizzate la frase: backend uguale centralina, frontend uguale cruscotto. La pagina non parla MAI con Shopify direttamente — parla solo con l'agent. È l'agent che chiama Shopify, al massimo una volta ogni trenta secondi, così non sforate mai i limiti dell'API. Un solo punto che parla col mondo esterno, mille pagine che possono leggerlo."</div>
   </div>
 
   <div class="point">
     <span class="num">05</span>
-    <h2>Deploy — locale gratis, o online per il team</h2>
-    <p>Per te solo: gira sul Mac, accedi da localhost, zero costi. Una sveglia launchd fa partire il server all'avvio = "sempre lì".</p>
-    <p>Quando deve vederla qualcun altro o tu da fuori casa: Render. Push su GitHub, Web Service dal repo, build automatico, ~$7/mese. Dominio tuo via Cloudflare. Accesso protetto: una password condivisa col team, niente complessità.</p>
-    <div class="say"><b>Da dire:</b> "Se sei solo tu, locale e gratis. Se serve al team, online col tuo dominio. 5 minuti dal commit alla produzione."</div>
+    <h2>Build live — le card della contabilità</h2>
+    <p><b>A schermo:</b> costruzione con Claude davanti alla camera: dal prompt alla pagina che si riempie di numeri veri.</p>
+    <div class="say"><b>Da dire:</b> "Costruiamo. Dico a Claude: crea la dashboard della contabilità, stile SHIN-EN. Revenue del giorno grande in alto — il numero protagonista. Sotto, le card: ordini, carrello medio, COGS, gross profit, net. E la riga del BE ROAS: soglia contro effettivo, verde sopra, rosso sotto — sopra la linea navighi, sotto affoghi. Si collega all'endpoint dell'agent e si aggiorna ogni trenta secondi."</div>
+    <div class="say"><b>Da dire:</b> "E vi regalo il trucco che fa la differenza: il contatore animato. Quando arriva un ordine, il numero non cambia secco — gira e sale, come una slot machine. Effetto cassa di Las Vegas, gratis. Sembra una sciocchezza, ma è il motivo per cui questa pagina la guarderete davvero: quando arriva un ordine, lo VEDETE entrare. Ultima richiesta a Claude: responsive — quattro colonne sul desktop, una colonna sul telefono. Il KPI in tasca, tutto il giorno."</div>
   </div>
 
   <div class="point">
     <span class="num">06</span>
+    <h2>Deploy online — da localhost al tuo dominio</h2>
+    <p><b>A schermo:</b> prima localhost, poi il giro Render: push GitHub → Web Service → URL pubblico → dominio Cloudflare.</p>
+    <div class="say"><b>Da dire:</b> "La dashboard gira sul Mac: la aprite su localhost, costo zero. Con una sveglia launchd il server parte da solo all'avvio — è 'sempre lì'. Per molti di voi questo basta. Ma se la dashboard deve vederla qualcun altro — un socio, il team — o voi da fuori casa, la portiamo online. E ci vogliono cinque minuti."</div>
+    <div class="say"><b>Da dire:</b> "Il giro: push del codice su GitHub. Poi Render — un servizio che prende il vostro repository e lo mette online: create un Web Service, gli puntate il repo, build automatico, e vi dà un indirizzo pubblico. Costo: circa 7 dollari al mese. Poi, se volete il vostro dominio — tipo kpi punto vostrobrand punto com — lo collegate via Cloudflare in due minuti. E ultima cosa, la sicurezza: questi sono i VOSTRI numeri — metteteci una password. Una password condivisa col team basta: niente sistemi complicati. Il mio LiveKPI che vi ho mostrato all'inizio gira esattamente così: Render, dominio mio, password."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">07</span>
     <h2>Esercizio finale — il sistema contabile completo</h2>
-    <p>Esercizio finale del blocco ecommerce: il sistema completo. Agent contabile (L9) + dashboard (L10): connetti Shopify, configura i costi fornitore, schedula il report delle 06:00, builda la dashboard, deploy.</p>
-    <p>Tempo target: una giornata la prima volta. Da quel momento: report ogni mattina, CSV ogni giorno su Drive, numeri in diretta nel browser. Quando il team vede gli stessi numeri tuoi, lavora con la tua stessa testa.</p>
-    <div class="say"><b>Da dire:</b> "Report alle 6, archivio su Drive, cassa in diretta nel browser. Questa è contabilità da dirigente, costruita in due lezioni."</div>
+    <p><b>A schermo:</b> ricapitolo del sistema L9+L10 in uno schema unico: Shopify + fattura → agent → CSV/Drive/Telegram + dashboard online.</p>
+    <div class="say"><b>Da dire:</b> "Esercizio finale del blocco ecommerce, il più ambizioso del corso: il sistema completo. Lezione 9 più lezione 10. Collegate Shopify, configurate i costi del fornitore, schedulate il report delle 6, costruite la dashboard, e fate il deploy online. Tempo target: una giornata, la prima volta. Da quel momento in poi: report ogni mattina su Telegram, CSV ogni giorno su Drive, e la cassa in diretta nel browser — sul vostro dominio."</div>
+    <div class="say"><b>Da dire (chiusura + CTA):</b> "Report alle 6, archivio su Drive, cassa in diretta nel browser. Questa è contabilità da dirigente, costruita in due lezioni. E quando il team vede gli stessi numeri vostri, lavora con la vostra stessa testa. Il blocco ecommerce finisce qui — ma il corso no: nei bonus vi faccio vedere il Brain Marketing, il Creative Strategist che scrive le vostre ADV. Ci vediamo lì."</div>
   </div>
 
   <div class="lesson-end">Fine L10 · CTA → BONUS Brain Marketing</div>

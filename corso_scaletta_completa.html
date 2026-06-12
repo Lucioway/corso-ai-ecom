@@ -168,28 +168,29 @@ h1{font-family:var(--display);font-weight:500;font-size:clamp(32px,4.5vw,48px);l
 </div>
 
 <div class="lesson">
-  <h2>Lezione 9 — L'agent contabile: Shopify + fatture fornitore → report giornaliero, CSV e Drive</h2>
+  <h2>Lezione 9 — L'agent contabile: backend collegato a Shopify → CSV giornaliero + report Telegram</h2>
   <ol>
-    <li>Cosa costruiamo — il contabile che non dorme</li>
+    <li>Apertura — il contabile che non dorme</li>
     <li>Le 5 metriche che contano</li>
     <li>Hard rules — niente stime, niente overwrite</li>
-    <li>Le due fonti — ordini Shopify + invoice del fornitore</li>
-    <li>Build con la agent factory — la spec del contabile</li>
-    <li>Il report — Telegram o WhatsApp, 30 secondi di lettura</li>
+    <li>Le due fonti — ordini Shopify (processed_at) + fattura del fornitore</li>
+    <li>Build con la agent factory — la spec dettata per intero</li>
     <li>Il CSV giornaliero + la cartella Drive ordinata</li>
-    <li>Schedulazione + log — ogni mattina, e se si rompe lo dice</li>
+    <li>Il report Telegram — 30 secondi di lettura ogni mattina</li>
+    <li>Schedulazione 06:00 + log — mai morire in silenzio</li>
     <li>La prova dal vivo — run completo davanti alla camera</li>
   </ol>
 </div>
 
 <div class="lesson">
-  <h2>Lezione 10 — La dashboard dell'agent contabile: i numeri in diretta nel browser</h2>
+  <h2>Lezione 10 — La dashboard dell'agent contabile: i numeri in diretta nel browser + deploy online</h2>
   <ol>
-    <li>Quando serve un frontend</li>
-    <li>Stack minimo — HTML, JS, CSS, niente framework</li>
-    <li>L'architettura — l'agent serve i dati, la pagina li mostra</li>
-    <li>Build live — le card della contabilità (+ BE ROAS)</li>
-    <li>Deploy — locale gratis, o online per il team</li>
+    <li>Apertura — quando serve un frontend</li>
+    <li>Il modello — vi mostro il mio LiveKPI</li>
+    <li>Stack minimo — HTML, JS, CSS, niente framework (+ SHIN-EN)</li>
+    <li>L'architettura — backend centralina, frontend cruscotto</li>
+    <li>Build live — le card della contabilità (+ BE ROAS, counter animato)</li>
+    <li>Deploy online — GitHub → Render → dominio Cloudflare + password</li>
     <li>Esercizio finale — il sistema contabile completo</li>
   </ol>
 </div>
