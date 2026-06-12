@@ -156,7 +156,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
     <li><a href="#l3">Setup pratico</a></li>
     <li><a href="#l4">Memoria + Graphify</a></li>
     <li><a href="#l5">Primo agent — agent factory</a></li>
-    <li><a href="#l6">Knowledge Hormozi + Graphify</a></li>
+    <li><a href="#l6">Graphify — il grafo del knowledge</a></li>
     <li><a href="#l7">Shopify — setup + agent</a></li>
     <li><a href="#l8">Shopify — backend + replica PDP</a></li>
     <li><a href="#l9">Agent contabile</a></li>
@@ -752,96 +752,62 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
 
 <!-- =================== LEZIONE 6 =================== -->
 <section class="lesson" id="l6">
-  <div class="lesson-tag">Lezione 06 · 25–30 min</div>
-  <h1>Il knowledge di Hormozi: da transcript a grafo interrogabile, step by step</h1>
+  <div class="lesson-tag">Lezione 06 · 15–20 min</div>
+  <h1>Graphify: il grafo del knowledge — i transcript di Hormozi diventano un brain interrogabile</h1>
 
   <div class="point">
     <span class="num">01</span>
-    <h2>Cosa costruiamo oggi — cartella, database, grafo</h2>
-    <p>Frame della lezione: nella L5 l'agent ha scaricato e trascritto tutto il canale YouTube di Hormozi. Oggi quei transcript diventano un <b>knowledge vero</b>: una cartella ordinata, un database di lessons interrogabile, e un grafo che collega tutti i concetti. Da zero, davanti alla camera.</p>
-    <p>La differenza chiave da spiegare subito: un mucchio di transcript è un <b>archivio</b> (ci devi cercare tu dentro). Un knowledge è <b>memoria</b> (chiedi, e lui risponde). Oggi facciamo il passaggio.</p>
-    <div class="say"><b>Da dire:</b> "Ieri avevamo file. Oggi costruiamo un cervello. Stesso materiale, valore completamente diverso."</div>
+    <h2>Cos'è Graphify — apri il GitHub e spiegalo semplice</h2>
+    <p>Apri a schermo il repo: <code>github.com/safishamsi/graphify</code>. Spiegazione in 3 frasi: Graphify legge i tuoi file markdown, estrae i <b>concetti</b> (i nodi, i puntini) e i <b>collegamenti</b> tra loro (gli archi, le linee). Risultato: una mappa navigabile nel browser + un canale MCP con cui Claude può interrogare la mappa direttamente.</p>
+    <p>Analogia da usare: i tuoi file sono un libro senza indice. Graphify costruisce l'indice ragionato: non solo "dove sta scritto X", ma "X è collegato a Y e Z".</p>
+    <div class="say"><b>Da dire:</b> "Open source, gratis, gira in locale. Legge i tuoi file e ne disegna la mappa. Tutto qui."</div>
   </div>
 
   <div class="point">
     <span class="num">02</span>
-    <h2>Il punto di partenza — i transcript dell'agent della L5</h2>
-    <p>Apri la cartella prodotta dall'agent della lezione 5: tutti i video del canale Hormozi trascritti in markdown, uno per file. Mostra 2-3 file dentro: titolo del video, transcript pulito.</p>
-    <p>Punto didattico: questo è materiale <b>grezzo</b>. Un transcript di 20 minuti parla di 5 argomenti diversi mescolati — non puoi interrogarlo bene così com'è. Serve spezzarlo.</p>
-    <div class="say"><b>Da dire:</b> "L'agent ci ha dato la materia prima. Adesso la raffiniamo."</div>
+    <h2>Perché un grafo — l'idea di Karpathy, elenco vs mappa</h2>
+    <p>Riprendi la teoria della L4 in 60 secondi: un elenco di file dice <i>cosa hai</i>; una mappa dice <i>come le cose si collegano</i>. Il beneficio pratico per Claude: invece di rileggere centinaia di file ogni volta (token bruciati, contesto pieno), <b>salta dritto al nodo giusto e ai suoi vicini</b>.</p>
+    <p>I 3 benefici da elencare: 1) <b>risparmio token</b> — Claude legge 3 nodi invece di 300 file; 2) <b>collegamenti che non ricordavi</b> — il grafo vede relazioni tra documenti lontani; 3) <b>risposte citate</b> — ogni nodo punta al file sorgente.</p>
+    <div class="say"><b>Da dire:</b> "Elenco = cerchi tu. Mappa = chiedi e basta. E paghi una frazione dei token."</div>
   </div>
 
   <div class="point">
     <span class="num">03</span>
-    <h2>Step 1 — la cartella: la struttura standard del knowledge</h2>
-    <p>Crei la casa del knowledge: <code>Brains/Hormozi/</code> dentro il vault. Tre sottocartelle + un indice: <b>sources/</b> (i transcript grezzi dell'agent — non si toccano mai), <b>lessons/</b> (le pillole estratte — il vero database), <b>wiki/</b> (le pagine di sintesi) e <b>index.md</b> (il catalogo di tutto).</p>
-    <p>Regola insegnata: <b>grezzo e raffinato sempre separati</b>. Le sources sono la prova; le lessons sono il prodotto. Se domani vuoi rifare le lessons con un metodo migliore, le sources sono ancora lì intatte.</p>
-    <div class="say"><b>Da dire:</b> "Stessa struttura per qualsiasi knowledge: sources, lessons, wiki, index. La impari una volta, la replichi all'infinito."</div>
+    <h2>Il punto di partenza — i transcript di Hormozi nel vault</h2>
+    <p>Mostra la cartella prodotta dall'agent della L5: <code>Brains/Hormozi/</code> con i transcript del canale YouTube in markdown. Materiale perfetto per il grafo: tanti file, tanti concetti che si ripetono e si incrociano (offer, pricing, garanzie, acquisizione…).</p>
+    <div class="say"><b>Da dire:</b> "Due giorni fa erano video su YouTube. Ora sono file nel vault. Tra cinque minuti sono un grafo."</div>
   </div>
 
   <div class="point">
     <span class="num">04</span>
-    <h2>Step 2 — vault-ingest: dai transcript alle lessons</h2>
-    <p>Qui entra la skill <b>vault-ingest</b> del way-stack (il bibliotecario). Dici a Claude: "ingerisci i transcript di sources/ e spezzali in lessons". Lui legge ogni transcript, individua i concetti, e scrive una lesson per concetto in lessons/.</p>
-    <p>Regole della lesson da mostrare a schermo: <b>una lesson = un concetto</b>, 200-400 parole, naming <code>NN_titolo-lesson.md</code> in ordine logico, e chiusura sempre con il <b>Take-away</b> — la frase secca da ricordare. Mostra 2 lessons appena nate: una su pricing, una su offer.</p>
-    <p>Lancia l'ingest su tutto il canale e lascia girare: mentre lavora, spieghi che da 1 transcript escono in media 3-5 lessons.</p>
-    <div class="say"><b>Da dire:</b> "Una lesson = una pillola. Un video da 20 minuti diventa 4 pillole da 30 secondi. Questo è il database."</div>
+    <h2>Install + build — 3 comandi e il grafo nasce</h2>
+    <p>Install in 3 comandi: uv (se manca), <code>uv tool install graphifyy</code> (occhio: pacchetto con doppia y, comando <code>graphify</code> con una sola), verifica con <code>graphify --help</code>.</p>
+    <p>Poi lanci la build puntando a <code>Brains/Hormozi/</code>. Mostra l'output mentre gira: scansiona i file, estrae i nodi, calcola gli archi. 1-3 minuti su un canale intero.</p>
+    <div class="say"><b>Da dire:</b> "Tre comandi per installare, uno per costruire. Nessuna configurazione, nessun server, nessun abbonamento."</div>
   </div>
 
   <div class="point">
     <span class="num">05</span>
-    <h2>Step 3 — index.md: il catalogo del database</h2>
-    <p>L'ingest aggiorna anche <b>index.md</b>: l'elenco di tutte le lessons, raggruppate per tema (pricing, offer, acquisizione, mindset…). È l'indice del libro: Claude lo legge per primo e da lì salta alla lesson giusta.</p>
-    <p>Test immediato con <b>vault-query</b>: "cosa dice Hormozi sul prezzo?" — Claude passa dall'index, pesca le 3 lessons giuste, sintetizza e cita i file. Prima risposta del knowledge appena nato.</p>
-    <div class="say"><b>Da dire:</b> "Index = il database ha un indice. Query = il database risponde. E vi cita sempre la fonte."</div>
+    <h2>Il grafo dal vivo — il momento "wow"</h2>
+    <p>Apri il grafo HTML nel browser e naviga in silenzio per qualche secondo: zoom out (tutto il canale visto dall'alto), poi click su un nodo grosso — "pricing" o "offer" — e mostra i vicini che si accendono. Indica le comunità di colore: i temi del canale raggruppati da soli.</p>
+    <p>Punto chiave da sottolineare: <b>nessuno ha disegnato questa mappa a mano</b>. È emersa dai contenuti.</p>
+    <div class="say"><b>Da dire:</b> "Questo è il cervello di Hormozi visto dall'alto. Ogni puntino un concetto, ogni linea un collegamento. Generato da solo."</div>
   </div>
 
   <div class="point">
     <span class="num">06</span>
-    <h2>Step 4 — install Graphify in 3 comandi</h2>
-    <p>Riprendi la teoria della L4 (elenco vs mappa). Ora si costruisce la mappa. I 3 comandi: install di uv (se manca), <code>uv tool install graphifyy</code>, verifica con <code>graphify --help</code>. 5 minuti netti.</p>
-    <p>Attenzione al nome: il pacchetto è graphifyy (doppia y), il comando è graphify (singola). Mostra l'help a schermo = installato.</p>
-    <div class="say"><b>Da dire:</b> "Tre comandi. Cinque minuti. Da questo momento il knowledge può diventare un grafo."</div>
+    <h2>Test di interrogazione — Claude parla col grafo</h2>
+    <p>Colleghi il grafo a Claude via MCP (<code>claude mcp add graphify-hormozi …</code> — la presa di corrente della L4). Poi 2-3 query dal vivo:</p>
+    <p>1) "Quali sono i concetti più collegati del knowledge?" — escono i god-node (offer, value, pricing). 2) "Che collegamento c'è tra pricing e garanzia?" — il path in 2-3 salti. 3) Una domanda secca: "cosa dice Hormozi sugli sconti?" — risposta in secondi, con i file citati, senza rileggere il canale.</p>
+    <div class="say"><b>Da dire:</b> "Guardate i token: per rispondere ha letto tre nodi, non trecento file. Questo è il risparmio del grafo."</div>
   </div>
 
   <div class="point">
     <span class="num">07</span>
-    <h2>Step 5 — costruire il grafo del knowledge</h2>
-    <p>Lanci <code>/graphify</code> puntando a <code>Brains/Hormozi/</code>. Mostra l'output: scansiona le lessons, estrae i concetti (nodi), calcola i collegamenti (archi). 1-3 minuti.</p>
-    <p>Apri il grafo HTML generato — il momento "wow" della lezione. Naviga dal vivo: click su un nodo ("pricing"), vedi i vicini, zoom sulle comunità di concetti. Indica un nodo e ricorda: "questo era un video YouTube due giorni fa. Oggi è un concetto collegato ad altri venti".</p>
-    <div class="say"><b>Da dire:</b> "Questo è il canale di Hormozi visto dall'alto. Ogni puntino un concetto, ogni linea un collegamento. Nessuno l'ha disegnato a mano."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">08</span>
-    <h2>Step 6 — collegare il grafo a Claude e interrogarlo</h2>
-    <p>Colleghi il grafo a Claude via MCP (<code>claude mcp add graphify-hormozi …</code>) — la presa di corrente vista in L4. Da qui Claude interroga il grafo direttamente.</p>
-    <p>Demo dal vivo, 3 domande: "quali sono i concetti più collegati del knowledge?" (i god-node: offer, value, pricing…), "che strada c'è tra pricing e garanzia?" (il path, 2-3 hop), "cosa dice Hormozi sugli sconti?" (risposta con lessons citate). Risposta in secondi, zero ricerca a mano.</p>
-    <div class="say"><b>Da dire:</b> "Smetti di cercare. Inizi a chiedere. Il grafo sa anche i collegamenti che tu non ricordavi di aver letto."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">09</span>
-    <h2>Step 7 — il knowledge si aggiorna da solo</h2>
-    <p>Chiusura del cerchio con la L5: l'agent ogni mattina scarica i video nuovi del canale. Aggiungi l'ultimo anello: dopo l'ingest dei nuovi transcript, re-index del grafo. Lo detti a Claude: "schedula ogni notte il refresh del grafo Hormozi" — lui crea la sveglia launchd da solo.</p>
-    <p>Risultato: Hormozi pubblica un video → l'agent lo scarica e trascrive → le lessons nuove entrano nel database → il grafo si aggiorna. <b>Tutto senza di te.</b></p>
-    <div class="say"><b>Da dire:</b> "Hormozi lavora per il mio knowledge. Lui pubblica, il sistema impara. Io chiedo e basta."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">10</span>
-    <h2>Troubleshooting — i 6 errori che vedrai davvero</h2>
-    <p>command not found: uv → PATH, riapri il terminale. command not found: graphify → uv tool update-shell. Indicizzazione lentissima → stai puntando a una cartella con PDF/media, punta solo alle lessons. MCP non in lista → path del graph.json sbagliato, verifica con ls e ripeti claude mcp add. Claude non ricorda tra sessioni → cartella diversa = progetto diverso, riapri nella stessa cartella. Grafo vuoto → Graphify legge markdown, converti i file in .md.</p>
-    <p>Regola d'oro che vale per tutto il corso: qualunque errore, copia il testo esatto e incollalo a Claude in chat. Descrivi cosa stavi facendo. Nel 90% dei casi te lo risolve al primo colpo.</p>
-    <div class="say"><b>Da dire:</b> "Non memorizzare i fix. Memorizza il metodo: errore esatto, incollato a Claude, contesto. Lui ripara, tu impari."</div>
-  </div>
-
-  <div class="point">
-    <span class="num">11</span>
-    <h2>Test finale + ponte verso Shopify</h2>
-    <p>Gran finale: 3 domande vere al knowledge davanti alla camera. Una facile ("cosa dice Hormozi sulla garanzia?"), una trasversale ("collega pricing e acquisizione"), una operativa ("come strutturo l'offerta del mio prodotto secondo Hormozi?"). Leggi le risposte e commenta: cita le lessons, segue i collegamenti del grafo.</p>
-    <p>Recap del metodo in una riga: transcript → cartella → lessons → index → grafo → query. Lo stesso identico giro vale per qualsiasi fonte: un altro canale, un corso, i documenti del tuo brand. Ponte L7: "il knowledge è vivo. Adesso lo mettiamo al lavoro sul vostro store — prossima lezione, Shopify dal terminale."</p>
-    <div class="say"><b>Da dire:</b> "Da un canale YouTube a un esperto interrogabile nel mio vault. Materiale: gratis. Metodo: sempre lo stesso. Prossima fermata: il vostro store."</div>
+    <h2>Come usarlo davvero — il vault intero o i sottografi (i brain)</h2>
+    <p>Chiudi con i due modi d'uso. <b>Modo 1 — grafo del vault:</b> lo punti sulle cartelle con i dati più importanti da tenere in memoria (decisioni, pattern, knowledge) e Claude ha la mappa di tutto il tuo sistema. <b>Modo 2 — sottografi:</b> un grafo dedicato per ogni knowledge — come Hormozi oggi. Ogni sottografo è un <b>brain</b>: un esperto interrogabile, isolato, economico.</p>
+    <p>Recap del metodo in una riga: transcript → grafo → MCP → domande. Vale per qualsiasi fonte: un altro canale, un corso, i documenti del tuo brand (ci torniamo nel Bonus, col brain marketing). Ponte L7: "il knowledge è pronto. Adesso colleghiamo il vostro store: Shopify dal terminale."</p>
+    <div class="say"><b>Da dire:</b> "Un grafo per il vault, un sottografo per ogni esperto. Hormozi è il primo brain. Prossima fermata: il vostro store."</div>
   </div>
 
   <div class="lesson-end">Fine L6 · CTA → L7 Shopify setup</div>
