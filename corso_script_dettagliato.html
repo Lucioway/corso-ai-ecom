@@ -846,65 +846,88 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
 
 <!-- =================== LEZIONE 7 =================== -->
 <section class="lesson" id="l7">
-  <div class="lesson-tag">Lezione 07 · 25–30 min</div>
-  <h1>Shopify dentro Claude Code: setup + l'agent che gestisce lo store</h1>
+  <div class="lesson-tag">Lezione 07 · 30–35 min</div>
+  <h1>Shopify dentro Claude Code: setup, app dev con gli scopes, e l'agent frontend + backend</h1>
 
   <div class="point">
     <span class="num">01</span>
-    <h2>Perché collegare Shopify a Claude</h2>
-    <p>Frame della lezione: tutto quello che fai nell'admin Shopify a mano — caricare prodotti, modificare l'inventario, toccare il tema, leggere gli ordini — Claude lo può fare via API. Più veloce, ripetibile, senza errori di click.</p>
-    <p>Il piano in 2 lezioni: oggi prepariamo le chiavi E costruiamo l'agent Shopify con la agent factory. Nella prossima lo mettiamo al lavoro sul serio: backend (prodotti, inventario, settings) e frontend (replica di una product page intera).</p>
-    <div class="say"><b>Da dire:</b> "L'admin Shopify è fatto per le mani. L'API è fatta per gli agent. Da oggi lavorate con la seconda."</div>
+    <h2>Apertura — perché collegare Shopify a Claude</h2>
+    <p><b>A schermo:</b> admin Shopify aperto da un lato, terminale con Claude Code dall'altro.</p>
+    <div class="say"><b>Da dire:</b> "Tutto quello che fate nell'admin Shopify a mano — caricare prodotti, cambiare prezzi, modificare l'inventario, toccare il tema, leggere gli ordini — Claude lo può fare al posto vostro, via API. Più veloce, ripetibile, senza errori di click. L'admin Shopify è fatto per le mani. L'API è fatta per gli agent. Da oggi lavorate con la seconda. Il piano di oggi: prima il setup — creiamo l'app dev e le chiavi di accesso — poi costruiamo l'agent che gestisce lo store, sia lato backend che lato frontend. Nella prossima lezione lo mettiamo al lavoro sul serio: modifiche vere e replica completa di una product page."</div>
   </div>
 
   <div class="point">
     <span class="num">02</span>
-    <h2>Step 1 — Connettere Shopify: app custom, token, permessi</h2>
-    <p><b>Cos'è un'app custom:</b> la porta di servizio del tuo store. La crei in 2 minuti dall'admin e ti dà la chiave (il token) con cui i programmi entrano al posto tuo.</p>
-    <p>Vai in admin Shopify → Apps → Develop apps → Create. Configura permessi (read/write products, themes, orders, inventory). Genera Admin API access token. Salvalo in .env nel tuo progetto: SHOPIFY_STORE, SHOPIFY_TOKEN. Niente più password dentro gli script.</p>
-    <p>Importante: token rotation. Promemoria a 6 mesi per ruotarlo. Token leaked = drama. Mettilo nel calendario.</p>
-    <div class="say"><b>Da dire:</b> "App custom, token in .env, scadenza in calendario. Tre cose. Non più."</div>
+    <h2>Step 1 — L'app dev: creazione e scopes</h2>
+    <p><b>A schermo:</b> admin Shopify → Settings → Apps and sales channels → Develop apps → Create an app. Fai tutto il giro dal vivo.</p>
+    <div class="say"><b>Da dire:</b> "Prima cosa: l'app custom — o app dev. Cos'è? È la porta di servizio del vostro store. La create in due minuti dall'admin e vi dà la chiave con cui i programmi entrano al posto vostro. Senza app, niente API. Andiamo: Settings, Apps, Develop apps, Create an app. Nome: la chiamo claude-store-agent, così so subito a cosa serve."</div>
+    <p>Poi la parte importante: gli <b>scopes</b>. Vai in Configuration → Admin API integration e spiega cosa stai spuntando.</p>
+    <div class="say"><b>Da dire:</b> "Adesso gli scopes. Cos'è uno scope? È un permesso: dice all'app cosa può toccare e cosa no. Read vuol dire solo leggere, write vuol dire anche modificare. La regola è una: dai solo i permessi che ti servono — si chiama principio del minimo privilegio. Per il nostro agent ne servono quattro coppie: <b>products</b> read e write — per creare e modificare prodotti; <b>inventory</b> read e write — per le giacenze; <b>orders</b> in sola lettura — gli ordini li leggiamo, non li tocchiamo; e <b>themes</b> read e write — per il lato frontend, il tema. Tutto il resto lo lasciate spento. Se un domani serve altro, tornate qui e aggiungete."</div>
+    <p>Salva la configurazione e installa l'app sullo store.</p>
   </div>
 
   <div class="point">
     <span class="num">03</span>
-    <h2>Step 2 — Il primo comando: leggere lo store dal terminale</h2>
-    <p>Demo immediata: dal terminale chiedi a Claude "dammi gli ultimi 5 ordini dello store". Lui chiama l'API col token, e i dati arrivano in chat. Primo momento "funziona davvero".</p>
-    <p>Secondo comando: "quanti prodotti attivi ho e quali sono i 3 più recenti?". Ogni domanda sull'admin adesso è una frase in italiano. Niente più navigare menu.</p>
-    <div class="say"><b>Da dire:</b> "Avete appena letto il vostro store senza aprirlo. Da qui in poi l'admin lo aprite solo per controllare, non per lavorare."</div>
+    <h2>Step 2 — Il token: generalo e mettilo al sicuro</h2>
+    <p><b>A schermo:</b> tab API credentials → Install app → Reveal token once. Poi il terminale col file .env.</p>
+    <div class="say"><b>Da dire:</b> "Installata l'app, Shopify genera l'Admin API access token: la chiave vera e propria. Attenzione: ve la mostra UNA volta sola. La copiate subito e la mettete in un file .env dentro la cartella del progetto — due righe: SHOPIFY_STORE con l'indirizzo del negozio, e SHOPIFY_TOKEN con la chiave. Mai dentro gli script, mai in chat pubbliche, mai su GitHub. Il .env resta sul vostro computer e basta."</div>
+    <p>Mostra il file .env nel progetto (token offuscato a video):</p>
+    <ul>
+      <li><code>SHOPIFY_STORE=tuostore.myshopify.com</code></li>
+      <li><code>SHOPIFY_TOKEN=shpat_••••••••••••</code></li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Ultima cosa sul token: la rotazione. Mettete un promemoria a sei mesi per rigenerarlo. Un token che gira da anni è un rischio inutile. App custom, token in .env, scadenza in calendario: tre cose, non più."</div>
   </div>
 
   <div class="point">
     <span class="num">04</span>
-    <h2>Step 3 — Theme CLI: il tema come cartella di file</h2>
-    <p>Installa Shopify CLI. I 3 comandi del tema: <code>shopify theme pull</code> (scarichi il tema in locale), <code>shopify theme dev</code> (anteprima live mentre modifichi), <code>shopify theme push</code> (carichi le modifiche).</p>
-    <p>Concetto chiave: il tema è solo una cartella di file Liquid. Una volta in locale, Claude li legge e li modifica come qualsiasi altro file. Il tema smette di essere una scatola nera. Questo è il lato <b>frontend</b> dell'agent.</p>
-    <div class="say"><b>Da dire:</b> "Pull, dev, push. Il tema diventa una cartella sul tuo computer. E tutto quello che è un file, Claude lo sa modificare."</div>
+    <h2>Step 3 — Il primo comando: leggere lo store dal terminale</h2>
+    <p><b>A schermo:</b> Claude Code nel progetto. Detti la richiesta in italiano e mostri la risposta.</p>
+    <div class="say"><b>Da dire:</b> "Momento della verità. Apro Claude Code nella cartella del progetto e gli chiedo, in italiano: dammi gli ultimi cinque ordini dello store. Guardate: legge il .env, chiama l'API di Shopify col token, e gli ordini arrivano in chat. Numero, data, totale, cliente. Avete appena letto il vostro store senza aprirlo."</div>
+    <p>Secondo comando di prova: <i>"quanti prodotti attivi ho e quali sono i 3 più recenti?"</i> — risposta in chat.</p>
+    <div class="say"><b>Da dire:</b> "Ogni domanda sull'admin adesso è una frase in italiano. Niente più menu da navigare. Da qui in poi l'admin lo aprite per controllare, non per lavorare."</div>
   </div>
 
   <div class="point">
     <span class="num">05</span>
-    <h2>Step 4 — La regola sacra: dev theme separato</h2>
-    <p>Prima di costruire l'agent, la regola di sicurezza: si lavora SEMPRE su un dev theme duplicato, mai sul live. Crea il duplicato in admin (Themes → Duplicate), modifiche e preview sul dev, push su live solo dopo approvazione.</p>
-    <p>Il perché con un esempio: un errore di Liquid sul live = store rotto davanti ai clienti che stanno comprando. Sul dev = nessuno se ne accorge, sistemi con calma. Questa regola finirà SCRITTA dentro l'agent.</p>
-    <div class="say"><b>Da dire:</b> "Dev theme è sacro. Live è produzione. Mai mischiare. Mai."</div>
+    <h2>Step 4 — Theme CLI: il tema diventa una cartella di file</h2>
+    <p><b>A schermo:</b> terminale. Installi Shopify CLI e lanci il pull del tema.</p>
+    <div class="say"><b>Da dire:</b> "Passiamo al lato frontend: il tema. Shopify ha una CLI ufficiale — un programma da terminale — che vi serve per una cosa sola ma fondamentale: trasformare il tema in una cartella di file sul vostro computer. I comandi sono tre. <b>shopify theme pull</b>: scarica il tema in locale. <b>shopify theme dev</b>: apre un'anteprima live che si aggiorna mentre modificate. <b>shopify theme push</b>: carica le modifiche sullo store."</div>
+    <p>Lancia <code>shopify theme pull</code> e apri la cartella scaricata: sections/, templates/, assets/, snippets/.</p>
+    <div class="say"><b>Da dire:</b> "Guardate cosa è successo: il tema non è più una scatola nera dentro l'admin. È una cartella di file — file Liquid, che è il linguaggio dei temi Shopify. E qui scatta il punto chiave di tutto il corso: tutto quello che è un file, Claude lo sa leggere e modificare. Pull, dev, push. Ricordatevi questi tre."</div>
   </div>
 
   <div class="point">
     <span class="num">06</span>
-    <h2>Step 5 — Build dell'agent Shopify con la agent factory</h2>
-    <p>Il pezzo nuovo della lezione: stesso metodo della L5, nuovo agent. Lanci <code>/agent-spec</code> e detti il contratto: "Voglio un agent che gestisce il mio store Shopify. Lato backend: crea e modifica prodotti, aggiorna inventario e prezzi, legge ordini, tocca i settings. Lato frontend: scarica il tema, crea e modifica sezioni, fa il deploy. Vincoli: lavora sempre sul dev theme, mai sul live senza conferma esplicita; ogni modifica stampata in chat con link admin; mai cancellare niente senza chiedere."</p>
-    <p>Poi il giro completo già visto: <code>/agent-tasks</code> → <code>/agent-execute</code> → <code>/agent-verify</code>. Mentre gira, ricordi agli studenti: "questo l'avete già visto fare nella L5 con YouTube. Stesso metodo, dominio diverso. La factory è sempre la stessa."</p>
-    <p>Risultato: la skill <code>/shopify-agent</code> — la porta d'ingresso unica per tutto quello che faremo nella prossima lezione.</p>
-    <div class="say"><b>Da dire:</b> "Secondo agent della vostra vita, e l'avete già visto nascere due volte. Spec, tasks, execute, verify. Il metodo non cambia mai. Cambia solo cosa gli fate fare."</div>
+    <h2>Step 5 — La regola sacra: dev theme separato</h2>
+    <p><b>A schermo:</b> admin → Online Store → Themes → Duplicate sul tema live.</p>
+    <div class="say"><b>Da dire:</b> "Prima di costruire l'agent, la regola di sicurezza più importante di tutto il blocco Shopify: non si lavora MAI sul tema live. Mai. Si duplica il tema — Themes, Duplicate, due click — e tutte le modifiche vanno sul duplicato, il dev theme. Perché? Esempio concreto: un errore di sintassi nel Liquid sul tema live significa store rotto davanti ai clienti che stanno comprando in quel momento. Lo stesso errore sul dev theme non lo vede nessuno: lo sistemate con calma e poi pubblicate. Dev theme è sacro. Live è produzione. Mai mischiare. E questa regola adesso la scriviamo DENTRO l'agent, così non dipende dalla vostra memoria."</div>
   </div>
 
   <div class="point">
     <span class="num">07</span>
-    <h2>Checklist di fine setup</h2>
-    <p>Ricapitola: app custom creata, token in .env, primo comando ordini funzionante, Shopify CLI installata, dev theme duplicato, agent Shopify creato e verificato. 6 spunte e siete pronti.</p>
-    <p>Esercizio per lo studente: replica le 6 spunte sul suo store prima della prossima lezione. Tempo: 30-40 minuti. "Senza queste spunte, la prossima lezione non parte."</p>
-    <div class="say"><b>Da dire:</b> "Mezz'ora di setup oggi. Anni di lavoro risparmiato da domani. Pausa il video e fallo adesso."</div>
+    <h2>Step 6 — Build dell'agent Shopify con la agent factory</h2>
+    <p><b>A schermo:</b> Claude Code, lanci <code>/agent-spec</code> e detti il contratto a voce, per intero.</p>
+    <div class="say"><b>Da dire:</b> "E ora il pezzo grosso: costruiamo l'agent. Stesso identico metodo della lezione 5 — la agent factory — cambia solo il dominio. Lancio /agent-spec e detto il contratto: Voglio un agent che gestisce il mio store Shopify. Lato backend: crea e modifica prodotti, aggiorna inventario e prezzi, legge gli ordini, tocca i settings. Lato frontend: scarica il tema, crea e modifica sezioni, fa il deploy. Vincoli: lavora sempre sul dev theme, mai sul live senza la mia conferma esplicita; ogni modifica viene stampata in chat con il link all'admin; e non cancella mai niente senza chiedere."</div>
+    <p>Poi il giro completo già visto in L5: <code>/agent-tasks</code> → <code>/agent-execute</code> → <code>/agent-verify</code>. Mentre la factory lavora, commenti.</p>
+    <div class="say"><b>Da dire:</b> "Mentre costruisce, notate una cosa: questo giro l'avete già visto nella lezione 5 con YouTube. Spec, tasks, execute, verify. Il metodo non cambia mai — cambia solo cosa gli fate fare. Questo è il secondo agent della vostra vita, e ne avete già visto nascere due."</div>
+    <p>Risultato finale: la skill <code>/shopify-agent</code> — la porta d'ingresso unica per tutto quello che faremo nella prossima lezione.</p>
+    <div class="say"><b>Da dire:</b> "Da adesso esiste il comando /shopify-agent. Backend e frontend del negozio, una skill sola. Nella prossima lezione la mettiamo sotto torchio."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">08</span>
+    <h2>Checklist di fine setup + esercizio</h2>
+    <p><b>A schermo:</b> slide o lista con le 6 spunte.</p>
+    <ul>
+      <li>App custom creata con gli scopes giusti (products, inventory, orders read, themes)</li>
+      <li>Token salvato in .env (e promemoria rotazione a 6 mesi)</li>
+      <li>Primo comando funzionante — "dammi gli ultimi 5 ordini"</li>
+      <li>Shopify CLI installata + theme pull fatto</li>
+      <li>Dev theme duplicato</li>
+      <li>Agent Shopify creato e verificato — skill <code>/shopify-agent</code> attiva</li>
+    </ul>
+    <div class="say"><b>Da dire (chiusura + CTA):</b> "Sei spunte. Replicatele sul vostro store prima della prossima lezione — ci vogliono trenta-quaranta minuti. Senza queste spunte, la prossima lezione non parte: perché nella lezione 8 l'agent lavora sul serio. Creiamo un prodotto da un file Word, cambiamo inventario e prezzi a voce, e poi la parte che aspettate tutti: repliciamo una product page intera di uno store che converte, sezione per sezione. Mezz'ora di setup oggi, anni di lavoro risparmiato da domani. Pausa il video e fallo adesso. Ci vediamo nella lezione 8."</div>
   </div>
 
   <div class="lesson-end">Fine L7 · CTA → L8 l'agent al lavoro</div>
@@ -912,79 +935,112 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-wei
 
 <!-- =================== LEZIONE 8 =================== -->
 <section class="lesson" id="l8">
-  <div class="lesson-tag">Lezione 08 · 35–40 min</div>
-  <h1>L'agent Shopify al lavoro: backend nella pratica + replica della product page</h1>
+  <div class="lesson-tag">Lezione 08 · 40–45 min</div>
+  <h1>L'agent Shopify al lavoro: backend nella pratica, replica della product page, modifiche custom</h1>
 
   <div class="point">
     <span class="num">01</span>
-    <h2>Il piano della lezione — prima il backend, poi il frontend</h2>
-    <p>Frame: l'agent c'è, oggi lavora. Prima parte = <b>backend</b>: creare un prodotto, modificare l'inventario, toccare i settings — le operazioni che fai ogni settimana nell'admin, fatte a voce. Seconda parte = <b>frontend</b>: replica 1:1 della product page di uno store di riferimento, sezione per sezione.</p>
-    <div class="say"><b>Da dire:</b> "Oggi zero teoria. Solo lavoro vero sullo store, davanti alla camera. Prima la sostanza, poi la vetrina."</div>
+    <h2>Apertura — il piano: prima il backend, poi il frontend</h2>
+    <p><b>A schermo:</b> terminale pronto con <code>/shopify-agent</code>, admin Shopify in un'altra finestra.</p>
+    <div class="say"><b>Da dire:</b> "L'agent c'è — l'abbiamo costruito nella scorsa lezione. Oggi lavora. Zero teoria, solo operazioni vere sullo store, davanti alla camera. Prima parte: il backend — creiamo un prodotto, tocchiamo inventario e prezzi, facciamo le operazioni che fate ogni settimana nell'admin, ma a voce. Seconda parte: il frontend — repliciamo una product page intera di uno store di riferimento, sezione per sezione. E in chiusura vi faccio vedere come fare qualsiasi modifica custom al tema, sempre a voce. Prima la sostanza, poi la vetrina."</div>
   </div>
 
   <div class="point">
     <span class="num">02</span>
-    <h2>Backend 1 — creare un prodotto</h2>
-    <p>Prima operazione: <code>/shopify-agent crea un prodotto</code> dandogli un file Word (titolo, descrizione, prezzo, varianti) + una cartella di immagini. L'agent legge il Word, mappa i campi, crea il prodotto in draft via API, carica le immagini, stampa il link admin in chat.</p>
-    <p>Apri il link: prodotto completo, varianti giuste, prezzi a scalare se è un bundle. Da 40 minuti manuali a 3 minuti. Punto didattico: il draft. L'agent crea sempre in draft — la pubblicazione la decidi tu.</p>
-    <div class="say"><b>Da dire:</b> "Da Word a prodotto pronto in 3 minuti. E le varianti le ha fatte giuste al primo colpo."</div>
+    <h2>Backend 1 — creare un prodotto da un file Word</h2>
+    <p><b>A schermo:</b> il file Word del prodotto (titolo, descrizione, prezzo, varianti) + cartella immagini. Poi il comando.</p>
+    <div class="say"><b>Da dire:</b> "Prima operazione: creare un prodotto. Ho un file Word con titolo, descrizione, prezzi e varianti, e una cartella di immagini. Dico all'agent: crea il prodotto da questo Word con queste immagini. Guardate cosa fa: legge il Word, mappa i campi, crea il prodotto via API, carica le immagini, e mi stampa il link all'admin in chat."</div>
+    <p>Apri il link admin: prodotto completo, varianti giuste, prezzi a scalare se è un bundle.</p>
+    <div class="say"><b>Da dire:</b> "Da Word a prodotto pronto in tre minuti — a mano sono quaranta. E notate il dettaglio: l'ha creato in <b>draft</b>, bozza. L'agent crea sempre in bozza: la pubblicazione la decido io. È uno dei vincoli che abbiamo scritto nella spec."</div>
   </div>
 
   <div class="point">
     <span class="num">03</span>
-    <h2>Backend 2 — inventario e prezzi</h2>
-    <p>Seconda operazione: l'inventario. "Quanti pezzi ho della taglia M?" → risposta. "Porta la taglia M a 50 pezzi" → fatto, link in chat. "Alza del 10% il prezzo di tutte le varianti di questo prodotto" → fatto, tabella prima/dopo in chat.</p>
-    <p>Punto didattico: le operazioni in blocco. A mano, cambiare 20 prezzi = 20 click-form-salva. Con l'agent = una frase. È qui che l'API umilia l'admin.</p>
-    <div class="say"><b>Da dire:</b> "Venti varianti aggiornate con una frase. Questo lavoro a mano vi costava la pausa pranzo."</div>
+    <h2>Backend 2 — inventario e prezzi a voce</h2>
+    <p><b>A schermo:</b> tre comandi in sequenza, con le risposte in chat e la verifica nell'admin.</p>
+    <ul>
+      <li><i>"Quanti pezzi ho della taglia M?"</i> → risposta immediata</li>
+      <li><i>"Porta la taglia M a 50 pezzi"</i> → fatto, link in chat</li>
+      <li><i>"Alza del 10% il prezzo di tutte le varianti di questo prodotto"</i> → fatto, tabella prima/dopo in chat</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Fermiamoci sull'ultima: venti varianti aggiornate con una frase. A mano sono venti volte click, form, salva — vi costava la pausa pranzo. Questo è il punto dove l'API umilia l'admin: le operazioni in blocco. Tutto quello che è ripetitivo, l'agent lo fa in una passata."</div>
   </div>
 
   <div class="point">
     <span class="num">04</span>
     <h2>Backend 3 — settings e operazioni varie</h2>
-    <p>Carrellata veloce delle altre operazioni backend: creare uno sconto, aggiungere tag ai prodotti, spostare prodotti in una collezione, leggere gli ordini del giorno con totale, controllare le giacenze basse ("quali prodotti sotto i 10 pezzi?").</p>
-    <p>Messaggio: non devi ricordare i comandi — non esistono comandi. Descrivi l'operazione in italiano, l'agent traduce in chiamate API. L'unico limite sono i permessi del token (quelli scelti nella L7).</p>
-    <div class="say"><b>Da dire:</b> "Tutto quello che si fa nei settings di Shopify, si chiede in italiano. Il menu non lo navigate più voi — lo naviga lui."</div>
+    <p><b>A schermo:</b> carrellata veloce, un comando dopo l'altro.</p>
+    <ul>
+      <li>"Crea uno sconto del 15% valido fino a domenica"</li>
+      <li>"Aggiungi il tag estate-2026 a questi prodotti"</li>
+      <li>"Sposta questi tre prodotti nella collezione Bestseller"</li>
+      <li>"Dammi gli ordini di oggi col totale"</li>
+      <li>"Quali prodotti sono sotto i 10 pezzi di giacenza?"</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Il messaggio è uno: non dovete ricordare nessun comando — perché i comandi non esistono. Descrivete l'operazione in italiano e l'agent la traduce in chiamate API. L'unico limite sono gli scopes del token: quelli che abbiamo scelto nella lezione 7. Il menu dell'admin non lo navigate più voi — lo naviga lui."</div>
   </div>
 
   <div class="point">
     <span class="num">05</span>
     <h2>Frontend — lo store di riferimento: anatomia della PDP che converte</h2>
-    <p>Cambio di parte: il frontend. Apri lo store di riferimento e scrolla la product page completa davanti alla camera, sezione per sezione, nominando ogni blocco: buy box con bundle e prezzi, badges di fiducia, reviews, benefits, before/after, comparison table vs competitor, FAQ, social proof.</p>
-    <p>Messaggio: questa pagina non è "bella". È una macchina di conversione con ~12 sezioni, ognuna con un lavoro preciso. Adesso la ricostruiamo identica con l'agent.</p>
-    <div class="say"><b>Da dire:</b> "Una PDP che converte non è design. È una sequenza di obiezioni gestite. E ogni sezione è un file che l'agent sa scrivere."</div>
+    <p><b>A schermo:</b> la product page dello store di riferimento, scroll lento e completo, nominando ogni sezione.</p>
+    <div class="say"><b>Da dire:</b> "Cambio di parte: il frontend. Questo è lo store di riferimento — uno store che converte, non uno store bello. Scrolliamo la product page insieme e diamo un nome a ogni blocco: in alto la buy box con bundle e prezzi; i badges di fiducia; le reviews; i benefits; il before/after; la comparison table contro i competitor; le FAQ; la social proof. Una dozzina di sezioni, e ognuna ha un lavoro preciso: gestire un'obiezione del cliente. Una PDP che converte non è design — è una sequenza di obiezioni gestite. E ogni sezione è un file che l'agent sa scrivere. Adesso la ricostruiamo identica."</div>
   </div>
 
   <div class="point">
     <span class="num">06</span>
     <h2>Replica step 1 — estrarre la struttura</h2>
-    <p>Dai all'agent l'URL della PDP di riferimento. Lui legge la pagina e produce la mappa: lista ordinata delle sezioni, per ognuna contenuto, layout (colonne, slider, accordion), elementi (immagini, stelle, tabelle). Questa mappa è la spec della replica.</p>
-    <p>Regola etica/legale chiarita subito: si replica la STRUTTURA (l'informazione), si riscrive il COPY col proprio brand voice e si usano le PROPRIE immagini. Niente plagio, niente foto rubate.</p>
-    <div class="say"><b>Da dire:</b> "La struttura è informazione, e l'informazione non ha copyright. Il copy e le foto sì. Cloni la prima, rifai i secondi."</div>
+    <p><b>A schermo:</b> dai all'agent l'URL della PDP di riferimento; mostra la mappa che produce.</p>
+    <div class="say"><b>Da dire:</b> "Primo passo della replica: do all'agent l'indirizzo della pagina di riferimento e gli chiedo la mappa. Lui legge la pagina e mi produce la spec: lista ordinata delle sezioni, e per ognuna il contenuto, il layout — colonne, slider, accordion — e gli elementi: immagini, stelle, tabelle. Questa mappa è il progetto della nostra replica."</div>
+    <div class="say"><b>Da dire (regola etica):</b> "E qui la regola, chiara subito: si replica la STRUTTURA — che è informazione, e l'informazione non ha copyright. Il copy si riscrive col proprio brand voice, e le foto sono le PROPRIE. Niente plagio, niente foto rubate. Cloni la struttura, rifai il resto."</div>
   </div>
 
   <div class="point">
     <span class="num">07</span>
     <h2>Replica step 2 — costruire le sezioni, una alla volta</h2>
-    <p>Il workflow per ogni sezione: descrivi il blocco di riferimento → l'agent scrive il file Liquid (schema + blocchi configurabili) → push sul dev theme → URL preview → confronto side-by-side col riferimento → aggiustamenti a voce ("più piccoli i badge, sfondo chiaro") → ri-push. Iterazione in minuti.</p>
-    <p>Costruisci in ordine: le sezioni alte (buy box, badges, benefits), poi le tre che vendono davvero (reviews slider, before/after con timeline, comparison table noi-vs-loro), poi le basse (FAQ accordion, social proof con numeri REALI — mai inventati).</p>
-    <p>Ognuna nasce come sezione riusabile coi blocchi: il contenuto lo cambi dall'editor tema, il layout è fisso. Le costruisci una volta, le riusi su ogni prodotto futuro.</p>
-    <div class="say"><b>Da dire:</b> "Una sezione = un file. Reviews, before/after, comparison: il 70% della conversione vive in tre sezioni. E adesso le avete come blocchi riusabili, per sempre."</div>
+    <p><b>A schermo:</b> il workflow completo su una sezione (es. reviews slider), poi accelerato sulle altre.</p>
+    <p>Il giro per ogni sezione, da mostrare per intero almeno una volta:</p>
+    <ul>
+      <li>Descrivi il blocco di riferimento all'agent</li>
+      <li>L'agent scrive il file Liquid — sezione con schema e blocchi configurabili</li>
+      <li>Push sul dev theme → URL di preview in chat</li>
+      <li>Confronto side-by-side col riferimento</li>
+      <li>Aggiustamenti a voce: "più piccoli i badge", "sfondo chiaro" → ri-push</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Iterazione in minuti, non in giornate. E costruiamo in ordine: prima le sezioni alte — buy box, badges, benefits. Poi le tre che vendono davvero: reviews slider, before/after, comparison table noi-contro-loro — il settanta per cento della conversione vive in queste tre. Poi le basse: FAQ accordion e social proof — con numeri VERI, mai inventati. Ogni sezione nasce coi blocchi configurabili: il contenuto lo cambiate dall'editor del tema, il layout resta fisso. Le costruite una volta, le riusate su ogni prodotto futuro. Una sezione = un file, per sempre vostro."</div>
   </div>
 
   <div class="point">
     <span class="num">08</span>
-    <h2>Replica step 3 — assemblare + deploy dev → live</h2>
-    <p>Assembli la pagina nell'editor: ordini le sezioni nella stessa sequenza del riferimento, scroll completo del risultato accanto all'originale. Replica 1:1 della struttura, contenuto 100% tuo.</p>
-    <p>Deploy con rete di sicurezza: push sul dev theme e URL preview sempre; push su live solo con conferma esplicita + warning a video. E il trucco cache: dopo il push live, un secondo "tocco" sull'asset invalida la cache Shopify — gli utenti vedono il nuovo in 5 secondi invece di 10 minuti.</p>
-    <div class="say"><b>Da dire:</b> "Scrolla le due pagine affiancate. Stessa macchina, motore tuo. Questo è clonare bene."</div>
+    <h2>Le modifiche custom — qualsiasi cosa del tema, a voce</h2>
+    <p><b>A schermo:</b> tre modifiche custom dal vivo su sezioni esistenti del tema.</p>
+    <div class="say"><b>Da dire:</b> "Prima di assemblare la pagina, la parte che vi libera per sempre dal cercare 'come si modifica X su Shopify': le modifiche custom. Il tema è una cartella di file, l'agent li conosce — quindi QUALSIASI modifica si chiede a voce. Tre esempi dal vivo."</div>
+    <ul>
+      <li><b>Modifica 1 — stile:</b> "Cambia il colore del bottone Aggiungi al carrello in nero, testo bianco" → l'agent trova il file giusto, modifica, push sul dev, preview in chat.</li>
+      <li><b>Modifica 2 — elemento nuovo:</b> "Aggiungi un badge 'Spedizione gratis sopra 50€' sotto il prezzo" → nuovo snippet, incluso nella sezione, preview.</li>
+      <li><b>Modifica 3 — da screenshot:</b> incolli lo screenshot di un dettaglio che ti piace di un altro store → "fammi questo sulla mia pagina" → l'agent lo replica.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Il metodo è sempre lo stesso: descrivi la modifica — o incolli uno screenshot — l'agent tocca i file, push sul dev theme, tu controlli la preview. Se non ti piace, lo dici e corregge. Non vi serve sapere il Liquid: vi serve saper descrivere cosa volete."</div>
   </div>
 
   <div class="point">
     <span class="num">09</span>
+    <h2>Assemblare la pagina + deploy dev → live</h2>
+    <p><b>A schermo:</b> editor del tema: ordini le sezioni nella sequenza del riferimento. Poi le due pagine affiancate. Poi il push live.</p>
+    <div class="say"><b>Da dire:</b> "Assembliamo: nell'editor del tema metto le sezioni nello stesso ordine del riferimento. E ora guardate le due pagine affiancate: stessa struttura, stessa macchina di conversione — ma contenuto cento per cento nostro. Questo è clonare bene."</div>
+    <div class="say"><b>Da dire (deploy):</b> "Il deploy, con la rete di sicurezza: il push va sempre sul dev theme con l'URL di preview. Sul live si va solo con conferma esplicita — l'agent me lo chiede, è un vincolo della spec. E un trucco da bottega: dopo il push live, Shopify tiene la cache per qualche minuto — un secondo 'tocco' sull'asset la invalida, e i clienti vedono la pagina nuova in cinque secondi invece che in dieci minuti."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">10</span>
     <h2>Esercizio — backend + replica sul tuo store</h2>
-    <p>Esercizio doppio. Backend: crea un prodotto da Word con l'agent, modifica l'inventario di 3 varianti, crea uno sconto. Frontend: scegli UNO store di riferimento nella tua nicchia (uno che converte, non uno bello), estrai la mappa delle sezioni, ricostruisci le 3 sezioni di prova sul dev theme.</p>
-    <p>Tempo target: mezza giornata la prima volta. Le sezioni che costruisci oggi sono blocchi riusabili su ogni prodotto che lancerai dopo.</p>
-    <div class="say"><b>Da dire:</b> "Non partire mai da pagina bianca. Parti da chi sta già convertendo, replica la struttura, metti il tuo motore dentro."</div>
+    <p><b>A schermo:</b> slide con l'esercizio doppio.</p>
+    <ul>
+      <li><b>Backend:</b> crea un prodotto da Word con l'agent, modifica l'inventario di 3 varianti, crea uno sconto.</li>
+      <li><b>Frontend:</b> scegli UNO store di riferimento nella tua nicchia (uno che converte, non uno bello), estrai la mappa delle sezioni, ricostruisci 3 sezioni sul dev theme.</li>
+      <li><b>Custom:</b> fai una modifica custom a voce — un colore, un badge, un dettaglio da screenshot.</li>
+    </ul>
+    <div class="say"><b>Da dire (chiusura + CTA):</b> "Tempo target: mezza giornata la prima volta. E ricordatevi la regola d'oro: non partite mai da pagina bianca — partite da chi sta già convertendo, replicate la struttura, metteteci il vostro motore dentro. Le sezioni che costruite oggi sono blocchi riusabili su ogni prodotto che lancerete. Prossima lezione, cambio di reparto: i soldi. Costruiamo l'agent contabile — quello che ogni mattina vi dice quanto avete guadagnato davvero. Ci vediamo nella lezione 9."</div>
   </div>
 
   <div class="lesson-end">Fine L8 · CTA → L9 agent contabilità</div>
