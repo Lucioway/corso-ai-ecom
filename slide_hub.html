@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Slide · Corso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0a; --panel:#111; --ink:#f5f5f5; --fog:#9a9a9a; --silt:#5a5a5a; --hair:#1f1f1f; --accent:#fff;
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;background:var(--bg);color:var(--ink);overflow:hidden;font-family:var(--mono)}
+.app{display:flex;flex-direction:column;height:100vh}
+.subtabs{display:flex;gap:0;padding:0 18px;background:var(--panel);border-bottom:1px solid var(--hair);overflow-x:auto}
+.stab{flex:0 0 auto;padding:14px 20px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--silt);
+  background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s ease;white-space:nowrap}
+.stab:hover{color:var(--fog)}
+.stab.active{color:var(--ink);border-bottom-color:var(--accent)}
+.stab .n{font-size:10px;color:var(--silt);margin-right:7px;letter-spacing:.2em}
+.frame{flex:1;position:relative;background:#fff;overflow:auto;-webkit-overflow-scrolling:touch}
+.frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:none}
+.frame iframe.active{display:block}
+@media (max-width:900px){
+  .frame iframe.active{position:relative;width:100%;height:calc(100vh - 49px);min-height:calc(100vh - 49px)}
+}
+@media (max-width:640px){
+  .subtabs{padding:0 8px;scrollbar-width:none}
+  .subtabs::-webkit-scrollbar{display:none}
+  .stab{padding:13px 14px;font-size:11px;letter-spacing:.14em}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="subtabs" id="subtabs">
+    <button class="stab active" data-target="s-l1"><span class="n">L01</span>AI per Ecom</button>
+    <button class="stab"          data-target="s-l2"><span class="n">L02</span>Claude Code</button>
+    <button class="stab"          data-target="s-l3"><span class="n">L03</span>Setup pratico</button>
+    <button class="stab"          data-target="s-l4"><span class="n">L04</span>La memoria del sistema</button>
+    <button class="stab"          data-target="s-l5"><span class="n">L05</span>Primo agent · la mappa</button>
+    <button class="stab"          data-target="s-l9"><span class="n">L09</span>Agent contabile · la mappa</button>
+    <button class="stab"          data-target="s-bn"><span class="n">BN1</span>Creative Strategist · la mappa</button>
+  </nav>
+  <div class="frame" id="frame">
+    <iframe id="s-l1" class="active" src="slide_L1_deck.html?v=2" loading="eager"></iframe>
+    <iframe id="s-l2" src="slide_L2_deck.html?v=2" loading="lazy"></iframe>
+    <iframe id="s-l3" src="slide_L3_deck.html?v=4" loading="lazy"></iframe>
+    <iframe id="s-l4" src="slide_L4_deck.html?v=3" loading="lazy"></iframe>
+    <iframe id="s-l5" src="slide_L5_deck.html?v=1" loading="lazy"></iframe>
+    <iframe id="s-l9" src="slide_L9_deck.html?v=1" loading="lazy"></iframe>
+    <iframe id="s-bn" src="slide_bonus_deck.html?v=1" loading="lazy"></iframe>
+  </div>
+</div>
+<script>
+const tabs = document.querySelectorAll('.stab');
+const frames = document.querySelectorAll('#frame iframe');
+function activate(id){
+  tabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
+  frames.forEach(f => f.classList.toggle('active', f.id === id));
+}
+tabs.forEach(t => t.addEventListener('click', () => activate(t.dataset.target)));
+</script>
+</body>
+</html>
