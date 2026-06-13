@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>L5 · Deck — Il primo agent</title>
+<title>L10 · Deck — La dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
@@ -270,93 +270,82 @@ h1.huge{font-size:200px;line-height:.96}
 <div class="stage">
   <section class="slide active" data-i="1">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">AI PER ECOMMERCE · Lezione <b>05</b></div>
-    <div class="ghost" style="font-size:560px;top:120px;right:160px">05</div>
-    <div class="kanji" style="top:200px;right:140px">構築</div>
+    <div class="tag">AI PER ECOMMERCE · Lezione <b>10</b></div>
+    <div class="ghost" style="font-size:520px;top:120px;right:160px">10</div>
+    <div class="kanji" style="top:200px;right:140px">表示</div>
     <div class="content">
-      <div class="eyebrow">Build live del primo agent</div>
-      <h1 class="title huge" style="font-size:150px">Un agent,<br>tutto collegato.</h1>
-      <p class="sub" style="margin-top:24px;font-size:34px">Una sola build tocca terminale, AI, vault, cloud e messaging.</p>
+      <div class="eyebrow">La dashboard in diretta</div>
+      <h1 class="title huge" style="font-size:150px">I numeri<br>in diretta.</h1>
+      <p class="sub" style="margin-top:24px;font-size:34px">La dashboard dell'agent contabile nel browser — e il deploy online.</p>
     </div>
-    <div class="strip"><span>AI PER ECOMMERCE</span><span>Lezione 05 · Primo agent</span></div>
+    <div class="strip"><span>AI PER ECOMMERCE</span><span>Lezione 10 · Dashboard</span></div>
   </section>
   <section class="slide" data-i="2">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">01 · L'idea</div>
-    <div class="kanji" style="top:200px;right:140px">作業</div>
+    <div class="tag">01 · Quando serve</div>
+    <div class="kanji" style="top:200px;right:140px">判断</div>
     <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Finora hai parlato CON Claude. Ora Claude lavora DA SOLO.</div>
-      <h1 class="title" style="font-size:74px;line-height:1;margin-bottom:14px">Cos'è un agent.</h1>
-      <div class="concept reveal"><div class="num">1</div><div class="txt">Un agent è Claude che lavora da solo.<small>Terminale, file, tool esterni, API — mentre tu guardi.</small></div></div><p class="sub" style="margin-top:26px;font-size:24px">Un solo build ci fa vedere ogni capacità agentica al lavoro.</p>
+      <div class="eyebrow">Frontend non è bellezza. È 'lo guardo 10 volte al giorno' o 'serve a qualcun altro'.</div>
+      <h1 class="title" style="font-size:74px;line-height:1;margin-bottom:14px">Quando serve un frontend.</h1>
+      <div class="concept reveal"><div class="num">?</div><div class="txt">Serve quando consulti i dati spesso, o quando lo usa il team.<small>Se sei solo tu e bastano i numeri della mattina, il Telegram della L9 basta. Per la cassa in diretta, il frontend vale.</small></div></div>
     </div>
-    <div class="strip"><span>Blocco 01</span><span>Parli con vs lavora da solo</span></div>
+    <div class="strip"><span>Blocco 01</span><span>10 volte al giorno · o per il team</span></div>
   </section>
   <section class="slide" data-i="3">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">02 · La agent factory</div>
-    <div class="kanji" style="top:200px;right:140px">工場</div>
+    <div class="tag">02 · Il modello + lo stack</div>
+    <div class="kanji" style="top:200px;right:140px">原型</div>
     <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Cinque comandi in fila. Entra un'idea, esce un agent.</div>
-      <h1 class="title" style="font-size:74px;line-height:1;margin-bottom:14px">La catena di montaggio.</h1>
-      <div class="pieces reveal" style="margin-top:44px"><div class="piece"><div class="pi">/agent-spec</div><div class="pn">Il contratto</div><div class="pd">Cosa costruire, input, output, vincoli — in italiano.</div></div><div class="piece"><div class="pi">/agent-tasks</div><div class="pn">La lista</div><div class="pd">La spec diventa lavori numerati, scritti da lui.</div></div><div class="piece"><div class="pi">/agent-execute</div><div class="pn">Costruisce</div><div class="pd">Esegue i task, un commit per task: torni indietro di un passo.</div></div><div class="piece"><div class="pi">/agent-verify</div><div class="pn">Controlla</div><div class="pd">Verifica che ogni punto della spec sia coperto.</div></div><div class="piece"><div class="pi">/agent-ship</div><div class="pn">Consegna</div><div class="pd">L'agent è pronto: diventa una skill.</div></div><div class="piece"><div class="pi">regola d'oro</div><div class="pn">Mai codice prima della spec</div><div class="pd">La spec è il contratto: lui sa cosa fare, tu cosa verificare.</div></div></div>
+      <div class="eyebrow">Ti mostro il mio LiveKPI. Tre file, niente framework.</div>
+      <h1 class="title" style="font-size:74px;line-height:1;margin-bottom:14px">Il mio LiveKPI.</h1>
+      <div class="split reveal" style="margin-top:24px"><div class="col"><div class="label">Il modello</div><div class="name" style="font-size:46px">LiveKPI.</div><div class="desc">La dashboard che uso ogni giorno sui miei store. Revenue grande, card, BE ROAS, aggiornata da sola. Una pagina HTML scritta dall'agent.</div><div class="points"></div></div><div class="col win"><div class="label">Lo stack</div><div class="name" style="font-size:46px">3 file.</div><div class="desc">Una pagina HTML, un JS, un CSS. Niente React, niente build. SHIN-EN del way-stack: esce già con la faccia giusta.</div><div class="points"><span>→ plain HTML finché regge</span><span>→ SHIN-EN = già bella</span></div></div></div>
     </div>
-    <div class="strip"><span>Blocco 02</span><span>spec → tasks → execute → verify → ship</span></div>
+    <div class="strip"><span>Blocco 02</span><span>LiveKPI · HTML/JS/CSS</span></div>
   </section>
   <section class="slide" data-i="4">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">La mappa · come Claude si collega</div>
-    <div class="kanji" style="top:160px;right:120px">連結</div>
-    <div class="content" style="bottom:auto;top:205px;left:120px;right:120px">
-      <div class="eyebrow">Da un URL YouTube a un archivio nel vault — ogni pezzo del way-stack al lavoro</div>
-      <h1 class="title" style="font-size:60px;line-height:1;margin-bottom:20px">Il collegamento di Claude.</h1>
-      <div class="reveal"><svg viewBox="0 0 1640 740" style="width:1480px;max-width:100%;height:auto;display:block;margin:6px auto 0"><defs><marker id="ah" markerWidth="11" markerHeight="11" refX="8" refY="3.2" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8.5,3.2 L0,6.4 Z" fill="#0a0a0a"/></marker><marker id="ahg" markerWidth="11" markerHeight="11" refX="8" refY="3.2" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8.5,3.2 L0,6.4 Z" fill="#8a8a8a"/></marker></defs><rect x="40" y="30" width="870" height="104" rx="16" fill="none" stroke="#c6c6c6" stroke-width="1.5" stroke-dasharray="2 7"/><text x="58" y="56" font-family="JetBrains Mono,monospace" font-size="13" letter-spacing="3" fill="#9a9a9a">AGENT FACTORY · COME SI COSTRUISCE L'AGENT</text><rect x="58" y="68" width="158" height="46" rx="23.0" fill="#fff" stroke="#0a0a0a" stroke-width="2"/><text x="137.0" y="97.0" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="15" fill="#0a0a0a">/agent-spec</text><line x1="216" y1="91" x2="232" y2="91" stroke="#0a0a0a" stroke-width="2" marker-end="url(#ah)"/><rect x="232" y="68" width="158" height="46" rx="23.0" fill="#fff" stroke="#0a0a0a" stroke-width="2"/><text x="311.0" y="97.0" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="15" fill="#0a0a0a">/agent-tasks</text><line x1="390" y1="91" x2="406" y2="91" stroke="#0a0a0a" stroke-width="2" marker-end="url(#ah)"/><rect x="406" y="68" width="158" height="46" rx="23.0" fill="#fff" stroke="#0a0a0a" stroke-width="2"/><text x="485.0" y="97.0" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="15" fill="#0a0a0a">/agent-execute</text><line x1="564" y1="91" x2="580" y2="91" stroke="#0a0a0a" stroke-width="2" marker-end="url(#ah)"/><rect x="580" y="68" width="158" height="46" rx="23.0" fill="#fff" stroke="#0a0a0a" stroke-width="2"/><text x="659.0" y="97.0" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="15" fill="#0a0a0a">/agent-verify</text><line x1="738" y1="91" x2="754" y2="91" stroke="#0a0a0a" stroke-width="2" marker-end="url(#ah)"/><rect x="754" y="68" width="158" height="46" rx="23.0" fill="#fff" stroke="#0a0a0a" stroke-width="2"/><text x="833.0" y="97.0" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="15" fill="#0a0a0a">/agent-ship</text><line x1="475" y1="134" x2="490" y2="196" stroke="#0a0a0a" stroke-width="2" marker-end="url(#ah)"/><text x="560" y="170" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" letter-spacing="2" fill="#8a8a8a">costruisce</text><rect x="300" y="196" width="380" height="120" rx="12" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="2"/><text x="490.0" y="252.0" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="600" font-size="40" fill="#fff">CLAUDE</text><text x="490.0" y="278.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" fill="#c2c2c2">l'agent — lavora da solo</text><rect x="740" y="182" width="300" height="150" rx="16" fill="none" stroke="#c6c6c6" stroke-width="1.5" stroke-dasharray="2 7"/><text x="758" y="208" font-family="JetBrains Mono,monospace" font-size="13" letter-spacing="3" fill="#9a9a9a">PLUGIN ATTIVI</text><rect x="760" y="210" width="260" height="36" rx="18.0" fill="#fff" stroke="#0a0a0a" stroke-width="2"/><text x="890.0" y="234.0" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="15" fill="#0a0a0a">superpowers</text><rect x="760" y="252" width="260" height="36" rx="18.0" fill="#fff" stroke="#0a0a0a" stroke-width="2"/><text x="890.0" y="276.0" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="15" fill="#0a0a0a">frontend-design</text><rect x="760" y="294" width="260" height="36" rx="18.0" fill="#fff" stroke="#0a0a0a" stroke-width="2"/><text x="890.0" y="318.0" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="15" fill="#0a0a0a">code-review</text><line x1="740" y1="257" x2="682" y2="257" stroke="#8a8a8a" stroke-width="2" marker-end="url(#ahg)"/><rect x="30" y="470" width="212" height="98" rx="12" fill="#fafafa" stroke="#0a0a0a" stroke-width="2"/><text x="48" y="497" font-family="JetBrains Mono,monospace" font-size="14" letter-spacing="3" fill="#8f8f8f">01</text><text x="136.0" y="515.0" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="600" font-size="24" fill="#0a0a0a">YouTube</text><text x="136.0" y="541.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" fill="#8a8a8a">URL del canale</text><line x1="242" y1="519.0" x2="260" y2="519.0" stroke="#0a0a0a" stroke-width="2" marker-end="url(#ah)"/><rect x="260" y="470" width="212" height="98" rx="12" fill="#fafafa" stroke="#0a0a0a" stroke-width="2"/><text x="278" y="497" font-family="JetBrains Mono,monospace" font-size="14" letter-spacing="3" fill="#8f8f8f">02</text><text x="366.0" y="515.0" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="600" font-size="24" fill="#0a0a0a">yt-dlp</text><text x="366.0" y="541.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" fill="#8a8a8a">scarica audio</text><line x1="472" y1="519.0" x2="490" y2="519.0" stroke="#0a0a0a" stroke-width="2" marker-end="url(#ah)"/><rect x="490" y="470" width="212" height="98" rx="12" fill="#fafafa" stroke="#0a0a0a" stroke-width="2"/><text x="508" y="497" font-family="JetBrains Mono,monospace" font-size="14" letter-spacing="3" fill="#8f8f8f">03</text><text x="596.0" y="515.0" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="600" font-size="24" fill="#0a0a0a">Whisper</text><text x="596.0" y="541.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" fill="#8a8a8a">audio → testo</text><line x1="702" y1="519.0" x2="720" y2="519.0" stroke="#0a0a0a" stroke-width="2" marker-end="url(#ah)"/><rect x="720" y="470" width="212" height="98" rx="12" fill="#fafafa" stroke="#0a0a0a" stroke-width="2"/><text x="738" y="497" font-family="JetBrains Mono,monospace" font-size="14" letter-spacing="3" fill="#8f8f8f">04</text><text x="826.0" y="515.0" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="600" font-size="24" fill="#0a0a0a">vault-ingest</text><text x="826.0" y="541.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" fill="#8a8a8a">testo → lessons</text><line x1="932" y1="519.0" x2="950" y2="519.0" stroke="#0a0a0a" stroke-width="2" marker-end="url(#ah)"/><rect x="950" y="470" width="212" height="98" rx="12" fill="#fafafa" stroke="#0a0a0a" stroke-width="2"/><text x="968" y="497" font-family="JetBrains Mono,monospace" font-size="14" letter-spacing="3" fill="#8f8f8f">05</text><text x="1056.0" y="515.0" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="600" font-size="24" fill="#0a0a0a">frontend-design</text><text x="1056.0" y="541.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" fill="#8a8a8a">lessons → PDF</text><line x1="1162" y1="519.0" x2="1180" y2="519.0" stroke="#0a0a0a" stroke-width="2" marker-end="url(#ah)"/><rect x="1180" y="470" width="212" height="98" rx="12" fill="#fafafa" stroke="#0a0a0a" stroke-width="2"/><text x="1198" y="497" font-family="JetBrains Mono,monospace" font-size="14" letter-spacing="3" fill="#8f8f8f">06</text><text x="1286.0" y="515.0" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="600" font-size="24" fill="#0a0a0a">Drive</text><text x="1286.0" y="541.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" fill="#8a8a8a">carica + link</text><line x1="1392" y1="519.0" x2="1410" y2="519.0" stroke="#0a0a0a" stroke-width="2" marker-end="url(#ah)"/><rect x="1410" y="470" width="212" height="98" rx="12" fill="#fafafa" stroke="#0a0a0a" stroke-width="2"/><text x="1428" y="497" font-family="JetBrains Mono,monospace" font-size="14" letter-spacing="3" fill="#8f8f8f">07</text><text x="1516.0" y="515.0" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="600" font-size="24" fill="#0a0a0a">Telegram</text><text x="1516.0" y="541.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" fill="#8a8a8a">notifica + PDF</text><text x="40" y="454" text-anchor="start" font-family="JetBrains Mono,monospace" font-size="13" fill="#9a9a9a">INPUT</text><text x="1190" y="454" text-anchor="start" font-family="JetBrains Mono,monospace" font-size="13" fill="#9a9a9a">OUTPUT</text><line x1="490" y1="316" x2="490" y2="464" stroke="#8a8a8a" stroke-width="2" stroke-dasharray="6 7" marker-end="url(#ahg)"/><text x="560" y="400" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" letter-spacing="2" fill="#8a8a8a">esegue ogni step</text><rect x="1130" y="632" width="420" height="86" rx="12" fill="#fafafa" stroke="#0a0a0a" stroke-width="2"/><text x="1340.0" y="671.0" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="600" font-size="26" fill="#0a0a0a">launchd · 07:00</text><text x="1340.0" y="697.0" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" fill="#8a8a8a">ogni mattina, da solo, incrementale</text><path d="M1130 675 L20 675 L20 256 L298 256" fill="none" stroke="#8a8a8a" stroke-width="2" stroke-dasharray="6 7" marker-end="url(#ahg)"/><text x="300" y="240" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" letter-spacing="2" fill="#8a8a8a">sveglia l'agent</text></svg></div>
+    <div class="tag">03 · L'architettura</div>
+    <div class="kanji" style="top:200px;right:140px">配管</div>
+    <div class="content" style="bottom:auto;top:200px">
+      <div class="eyebrow">Backend = centralina. Frontend = cruscotto.</div>
+      <h1 class="title" style="font-size:74px;line-height:1;margin-bottom:14px">Endpoint + fetch.</h1>
+      <div class="g6 reveal"><div><b class="k">L'agent espone</b>Un piccolo endpoint JSON sul Mac coi numeri del giorno, sempre freschi.</div><div><b class="k">La pagina chiama</b>fetch('/api/kpi') ogni 30 secondi e aggiorna i numeri a schermo.</div><div><b class="k">La regola</b>La pagina non parla MAI con Shopify — parla con l'agent. Un solo punto verso il mondo.</div></div>
     </div>
-    <div class="strip"><span>Blocco mappa</span><span>Pipeline + factory + scheduler</span></div>
+    <div class="strip"><span>Blocco 03</span><span>/api/kpi · fetch 30s</span></div>
   </section>
   <section class="slide" data-i="5">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">03 · Le capacità</div>
-    <div class="kanji" style="top:200px;right:140px">能力</div>
+    <div class="tag">04 · Build live</div>
+    <div class="kanji" style="top:200px;right:140px">構築</div>
     <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Un build, tutte le capacità agentiche viste al lavoro.</div>
-      <h1 class="title" style="font-size:74px;line-height:1;margin-bottom:14px">Cosa sa fare un agent.</h1>
-      <div class="quad reveal" style="margin-top:36px"><div class="tcard"><div class="tl-label">Terminale</div><div class="tname">yt-dlp</div><div class="tdesc">Installa il tool da solo e scarica l'audio da YouTube.</div></div><div class="tcard"><div class="tl-label">AI pipeline</div><div class="tname">Whisper</div><div class="tdesc">Audio → testo, gratis, in locale. Niente abbonamenti.</div></div><div class="tcard"><div class="tl-label">Vault</div><div class="tname">vault-ingest</div><div class="tdesc">Il grezzo diventa lessons ordinate: un concetto, una pagina.</div></div><div class="tcard"><div class="tl-label">API esterne</div><div class="tname">Drive + Telegram</div><div class="tdesc">Carica il PDF, manda la notifica dove vivi tu.</div></div></div>
+      <div class="eyebrow">Le card della contabilità, col trucco che le fa guardare.</div>
+      <h1 class="title" style="font-size:74px;line-height:1;margin-bottom:14px">Le card.</h1>
+      <div class="pieces reveal" style="margin-top:44px"><div class="piece"><div class="pi">protagonista</div><div class="pn">Revenue del giorno</div><div class="pd">Il numero grande in alto.</div></div><div class="piece"><div class="pi">le card</div><div class="pn">Ordini, AOV, costi, net</div><div class="pd">I numeri di supporto, sotto.</div></div><div class="piece"><div class="pi">la riga</div><div class="pn">BE ROAS</div><div class="pd">Soglia vs effettivo: sopra navighi, sotto affoghi.</div></div><div class="piece"><div class="pi">il trucco</div><div class="pn">Counter animato</div><div class="pd">Quando arriva un ordine, il numero gira e sale. Effetto Las Vegas.</div></div><div class="piece"><div class="pi">mobile</div><div class="pn">4 col → 1 col</div><div class="pd">Il KPI in tasca tutto il giorno.</div></div><div class="piece"><div class="pi">estetica</div><div class="pn">SHIN-EN</div><div class="pd">Coerente con tutti gli altri tool.</div></div></div>
     </div>
-    <div class="strip"><span>Blocco 03</span><span>Terminale · AI · vault · API</span></div>
+    <div class="strip"><span>Blocco 04</span><span>card + BE ROAS + counter</span></div>
   </section>
   <section class="slide" data-i="6">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">04 · Il way-stack</div>
-    <div class="kanji" style="top:200px;right:140px">道具</div>
+    <div class="tag">05 · Deploy</div>
+    <div class="kanji" style="top:200px;right:140px">公開</div>
     <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">I plugin che hai installato, visti mentre lavorano.</div>
-      <h1 class="title" style="font-size:74px;line-height:1;margin-bottom:14px">I plugin al lavoro.</h1>
-      <div class="triplet reveal" style="margin-top:40px"><div class="tcard"><div class="tl-label">metodo</div><div class="tname">superpowers</div><div class="tdesc">Domande → piano → build → controllo. Non parte a caso.</div></div><div class="tcard"><div class="tl-label">grafica</div><div class="tname">frontend-design</div><div class="tdesc">PDF e pagine belli in SHIN-EN, senza designer.</div></div><div class="tcard"><div class="tl-label">qualità</div><div class="tname">code-review</div><div class="tdesc">Più revisori AI: bug, sicurezza, codice scritto male.</div></div></div><p class="sub" style="margin-top:26px;font-size:24px">E sotto tutto: l'orchestrator che smista, il vault PARA, gli hook di sessione.</p>
+      <div class="eyebrow">Locale gratis, o online per il team.</div>
+      <h1 class="title" style="font-size:74px;line-height:1;margin-bottom:14px">Da localhost al dominio.</h1>
+      <div class="split reveal" style="margin-top:24px"><div class="col"><div class="label">Per te solo</div><div class="name" style="font-size:46px">Locale.</div><div class="desc">Gira sul Mac, accedi da localhost, zero costi. Una sveglia launchd e il server è 'sempre lì'.</div><div class="points"></div></div><div class="col win"><div class="label">Per il team</div><div class="name" style="font-size:46px">Online.</div><div class="desc">Push su GitHub → Render (~$7/mese) → dominio via Cloudflare → password condivisa. Il mio LiveKPI gira così.</div><div class="points"><span>→ 5 min dal commit</span><span>→ col tuo dominio</span></div></div></div>
     </div>
-    <div class="strip"><span>Blocco 04</span><span>5 plugin + factory + vault</span></div>
+    <div class="strip"><span>Blocco 05</span><span>localhost · Render · dominio</span></div>
   </section>
   <section class="slide" data-i="7">
-    <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
-    <div class="tag">05 · Come si usa</div>
-    <div class="kanji" style="top:200px;right:140px">手順</div>
-    <div class="content" style="bottom:auto;top:200px">
-      <div class="eyebrow">Tre mosse e l'agent esiste — e si schedula da solo.</div>
-      <h1 class="title" style="font-size:74px;line-height:1;margin-bottom:14px">Come si costruisce.</h1>
-      <div class="triplet reveal" style="margin-top:40px"><div class="tcard"><div class="tl-label">01</div><div class="tname">Brainstorm</div><div class="tdesc">Claude ti intervista e definisce i requisiti. Mai dal codice.</div></div><div class="tcard"><div class="tl-label">02</div><div class="tname">Agent factory</div><div class="tdesc">spec → tasks → execute → verify → ship. Entra idea, esce agent.</div></div><div class="tcard"><div class="tl-label">03</div><div class="tname">Schedula</div><div class="tdesc">launchd lo lancia ogni mattina: nuovi video → PDF sul telefono.</div></div></div>
-    </div>
-    <div class="strip"><span>Blocco 05</span><span>brainstorm · factory · launchd</span></div>
-  </section>
-  <section class="slide" data-i="8">
     <div class="frame tl"></div><div class="frame tr"></div><div class="frame bl"></div><div class="frame br"></div>
     <div class="tag">Chiusura</div>
     <div class="ghost" style="font-size:420px;top:120px;right:140px;opacity:.5">→</div>
     <div class="kanji" style="top:220px;right:120px">次へ</div>
     <div class="content" style="bottom:auto;top:240px;right:340px">
-      <div class="eyebrow">Prossima lezione · Il grafo del knowledge</div>
-      <h1 class="title" style="font-size:120px;line-height:.98;margin-bottom:32px">Agent vivo.<br>Ora il grafo.</h1>
-      <p class="sub" style="font-size:28px;max-width:1200px">I transcript sono nel vault. Nella prossima lezione diventano un brain interrogabile con Graphify.</p>
+      <div class="eyebrow">Esercizio finale · Il sistema completo</div>
+      <h1 class="title" style="font-size:120px;line-height:.98;margin-bottom:32px">Cassa in diretta.<br>Sistema completo.</h1>
+      <p class="sub" style="font-size:28px;max-width:1200px">Agent contabile (L9) + dashboard (L10): report alle 6, CSV su Drive, numeri in diretta nel browser. Contabilità da dirigente, in due lezioni.</p>
     </div>
-    <div class="strip"><span>Fine L5</span><span>CTA · 30 sec</span><span>→ L6 Graphify</span></div>
+    <div class="strip"><span>Fine L10</span><span>CTA · 30 sec</span><span>→ Bonus Marketing</span></div>
   </section>
 
 </div>
