@@ -212,18 +212,28 @@ pre .o{color:#fff}
 
   <!-- 07 -->
   <div class="sec-wrap">
-    <div class="sec-tag">07 · Deploy</div>
-    <h2 class="sec">Schedulazione + deploy online</h2>
-    <p class="body"><b>Modalità report — schedulazione</b> (scegline una): un <b>cron job del cloud</b> (Render Cron / Railway) che lancia <code>python main.py</code> 1×/giorno alle 16:00 — l'opzione più pulita; oppure <b>launchd/cron</b> in locale; oppure un loop <code>scheduler.py</code> come worker sempre acceso.</p>
-    <p class="body"><b>Modalità live — deploy</b> su Render (o equivalente) come web service:</p>
-<pre><span class="o">type: web · runtime python</span>
-<span class="o">buildCommand: pip install -r requirements.txt</span>
-<span class="o">startCommand: python server.py</span>
-<span class="o">healthCheckPath: /</span>
-<span class="o">disk: /data 1GB (persistente)</span>
-<span class="c"># env: SHOPIFY_*, TRIPLE_WHALE_API_KEY, GOOGLE_SERVICE_ACCOUNT_JSON (inline),</span>
-<span class="c">#      LIVEKPI_USER, LIVEKPI_PASS, GDRIVE_*_FOLDER_ID, DATA_DIR=/data, PORT</span></pre>
-    <div class="note"><b>Cold start:</b> al primo avvio la dashboard scarica lo storico 90 giorni (~10 min, normale). Dopo si aggiorna ogni 2 minuti. Dominio tuo via Cloudflare, accesso protetto da password.</div>
+    <div class="sec-tag">07 · Deploy live su Render</div>
+    <h2 class="sec">Deploy online — la dashboard su Render</h2>
+    <p class="body">La modalità live va messa online come <b>web service</b>. Render prende il tuo repository GitHub e lo tiene acceso H24. Passo-passo:</p>
+    <div class="steplist">
+      <div class="step"><div class="n">1</div><div class="t"><b>Push del codice su GitHub</b>Crea un repo (anche privato) e pusha la cartella dell'agent. Render parte da lì.</div></div>
+      <div class="step"><div class="n">2</div><div class="t"><b>Render → New → Web Service</b>Account su <code>render.com</code>, "New +" → "Web Service", e connetti il repository GitHub.</div></div>
+      <div class="step"><div class="n">3</div><div class="t"><b>Build &amp; Start command</b>Runtime <b>Python 3</b>. Build: <code>pip install -r requirements.txt</code>. Start: <code>python server.py</code>. Health check path: <code>/</code>.</div></div>
+      <div class="step"><div class="n">4</div><div class="t"><b>Disco persistente</b>Aggiungi un <b>Disk</b> da 1 GB montato su <code>/data</code>: serve alla cache (la dashboard è stateful). Senza disco, perdi tutto a ogni restart.</div></div>
+      <div class="step"><div class="n">5</div><div class="t"><b>Variabili d'ambiente</b>Nella tab "Environment" incolla le env (sotto). Il Service Account Google va <b>inline</b> come JSON, non come path.</div></div>
+      <div class="step"><div class="n">6</div><div class="t"><b>Create Web Service → Deploy</b>Render builda e avvia. Primo avvio: <b>cold start ~10 min</b> (scarica lo storico 90 giorni). Poi si aggiorna ogni 2 minuti.</div></div>
+      <div class="step"><div class="n">7</div><div class="t"><b>Dominio + password</b>Dominio tuo (es. <code>kpi.tuobrand.com</code>) via Cloudflare nella tab "Custom Domains". Accesso protetto dal login (<code>LIVEKPI_USER</code> / <code>LIVEKPI_PASS</code>).</div></div>
+    </div>
+<pre><span class="c"># Render → Environment (Web Service / modalità live)</span>
+<span class="o">SHOPIFY_SHOP_URL</span>=tuostore.myshopify.com
+<span class="o">SHOPIFY_API_PASSWORD</span>=shpat_••••
+<span class="o">TRIPLE_WHALE_API_KEY</span>=••••
+<span class="o">GOOGLE_SERVICE_ACCOUNT_JSON</span>={...json inline...}
+<span class="o">GDRIVE_ROOT_FOLDER_ID</span>=••••   <span class="o">GDRIVE_ACCOUNTING_FOLDER_ID</span>=••••
+<span class="o">LIVEKPI_USER</span>=••••   <span class="o">LIVEKPI_PASS</span>=••••
+<span class="o">DATA_DIR</span>=/data   <span class="o">PORT</span>=8787   <span class="o">TZ</span>=Europe/Rome</pre>
+    <p class="body"><b>Modalità report — schedulazione su Render.</b> Stesso repo, secondo servizio: <b>New → Cron Job</b>. Command <code>python main.py</code>, schedule <code>0 16 * * *</code> (16:00), <code>TZ=Europe/Rome</code> nelle env. È l'opzione più pulita: nessun processo sempre acceso, parte una volta e finisce. (Alternative: launchd/cron in locale, o un worker <code>scheduler.py</code>.)</p>
+    <div class="note"><b>Una sola istanza.</b> La modalità live è stateful (cache su <code>/data</code>): NON scalare a più copie. 1 web service + 1 cron job, stessi env. Su un altro cloud (Railway, Fly.io, VPS) il principio è identico: web service Python + disco persistente + porta da <code>PORT</code>.</div>
   </div>
 
   <!-- 08 -->
