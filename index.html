@@ -1,187 +1,443 @@
 <!doctype html>
-<html lang="it">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Corso AI + Ecom · Hub</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lucioway · Skool</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* ============================================================
+   LUCIOWAY OS — Skool 1:1 layout, skinned SHIN-EN (dark, locked brand)
+   Brand fonts are intentional (SHIN-EN locked design system).
+   ============================================================ */
 :root{
-  --bg:#0a0a0a;
-  --panel:#111;
-  --ink:#f5f5f5;
-  --fog:#9a9a9a;
-  --silt:#5a5a5a;
-  --hair:#1f1f1f;
-  --accent:#fff;
-  --display:"Space Grotesk",system-ui,sans-serif;
-  --body:"Inter",system-ui,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --bg:#0a0a0a;--bg2:#0e0e0e;--panel:#121212;--card:#161616;--card2:#1b1b1b;
+  --line:#1f1f1f;--line2:#2a2a2a;--line3:#363636;
+  --ink:#f5f5f5;--fog:#a8a8a8;--dim:#7a7a7a;--mut:#565656;
+  --ok:#4ade80;--okdim:#27341f;--accent:#f5f5f5;
+  --f-d:'Space Grotesk',sans-serif;--f-b:Inter,system-ui,sans-serif;--f-m:'JetBrains Mono',monospace;
+  --nav-h:60px;--max:1180px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{width:100%;height:100%;background:var(--bg);color:var(--ink);font-family:var(--body);overflow:hidden}
+*{margin:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-b);line-height:1.5;font-size:15px}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
 
-.app{display:flex;flex-direction:column;height:100vh}
+/* ===== top nav (Skool app bar) ===== */
+.nav{position:sticky;top:0;z-index:30;background:rgba(10,10,10,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-top{max-width:var(--max);margin:0 auto;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:18px;padding:0 24px}
+.nav-tabs{border-top:1px solid var(--line)}
+.nav-tabs .tabs{max-width:var(--max);margin:0 auto;height:46px;padding:0 18px}
+.glogo{display:flex;align-items:center;gap:11px;flex:none;background:0;border:0;cursor:pointer;padding:0}
+.glogo .av{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#2a2a2a,#101010);border:1px solid var(--line2);
+display:flex;align-items:center;justify-content:center;font-family:var(--f-d);font-weight:700;font-size:15px;color:var(--ink)}
+.glogo .gn{font-family:var(--f-d);font-weight:600;font-size:16px;letter-spacing:-.01em}
+.tabs{display:flex;align-items:center;gap:4px;height:100%;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{position:relative;height:100%;display:flex;align-items:center;padding:0 13px;color:var(--fog);font-size:14px;font-weight:500;
+white-space:nowrap;border:0;background:0;transition:color .12s}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--ink);font-weight:600}
+.tab.on::after{content:"";position:absolute;left:13px;right:13px;bottom:-1px;height:2px;background:var(--ink);border-radius:2px}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:14px;flex:none}
+.icobtn{width:36px;height:36px;border-radius:9px;border:1px solid var(--line2);background:var(--card);color:var(--fog);
+display:flex;align-items:center;justify-content:center;font-size:15px;transition:.12s}
+.icobtn:hover{border-color:var(--line3);color:var(--ink)}
+.me{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#3a3a3a,#171717);border:1px solid var(--line2);
+display:flex;align-items:center;justify-content:center;font-family:var(--f-d);font-weight:700;font-size:13px}
+.usermenu{position:relative}
+.me-btn{background:0;border:0;cursor:pointer;padding:0;display:flex;border-radius:50%}
+.menu{position:absolute;right:0;top:calc(100% + 10px);min-width:220px;background:var(--card);border:1px solid var(--line2);border-radius:14px;padding:6px;box-shadow:0 12px 40px rgba(0,0,0,.5);display:none;z-index:40}
+.menu.open{display:block}
+.um-head{padding:10px 12px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.um-name{font:600 14px var(--f-d)}
+.um-sub{font:11px var(--f-m);color:var(--dim);margin-top:2px}
+.um-item{display:block;width:100%;text-align:left;background:0;border:0;color:var(--ink);font:500 14px var(--f-b);padding:10px 12px;border-radius:9px;cursor:pointer}
+.um-item:hover{background:var(--card2)}
+.um-danger{color:#f87171}
+.notifmenu{position:relative}
+.ndot{position:absolute;top:-5px;right:-5px;background:#f87171;color:#fff;font:700 9px var(--f-m);min-width:16px;height:16px;border-radius:999px;display:none;align-items:center;justify-content:center;padding:0 4px}
+#notif-menu{min-width:320px;max-height:64vh;overflow:auto}
+.notif{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:0;border:0;color:var(--ink);font:13px var(--f-b);padding:10px 12px;border-radius:9px;cursor:pointer}
+.notif:hover{background:var(--card2)}
+.notif.unread{background:rgba(96,165,250,.07)}
+.ntxt{line-height:1.4;min-width:0}
+.ntime{color:var(--dim);font:10px var(--f-m);margin-top:2px}
 
-.bar{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:18px 28px;
-  border-bottom:1px solid var(--hair);
-  background:var(--panel);
-}
-.brand{
-  font-family:var(--display);
-  font-weight:600;
-  font-size:18px;
-  letter-spacing:-.01em;
-}
-.brand b{color:var(--fog);font-weight:400;margin-left:8px}
-.meta{
-  font-family:var(--mono);
-  font-size:11px;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-  color:var(--silt);
-}
+/* ===== page frame ===== */
+.page{max-width:var(--max);margin:0 auto;padding:28px 24px 80px}
+.ph{font-family:var(--f-d);font-weight:600;font-size:26px;letter-spacing:-.02em;margin-bottom:4px}
+.psub{color:var(--dim);font-size:14px;margin-bottom:24px}
 
-.tabs{
-  display:flex;
-  gap:0;
-  padding:0 24px;
-  background:var(--panel);
-  border-bottom:1px solid var(--hair);
-  overflow-x:auto;
-}
-.tab{
-  flex:0 0 auto;
-  padding:18px 22px;
-  font-family:var(--mono);
-  font-size:12px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--silt);
-  background:none;border:none;cursor:pointer;
-  border-bottom:2px solid transparent;
-  transition:all .15s ease;
-  white-space:nowrap;
-}
-.tab:hover{color:var(--fog)}
-.tab.active{
-  color:var(--ink);
-  border-bottom-color:var(--accent);
-}
-.tab .n{
-  display:inline-block;
-  font-size:10px;
-  color:var(--silt);
-  margin-right:8px;
-  letter-spacing:.2em;
-}
+/* ===== classroom: course-card grid (Skool) ===== */
+.courses{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+.course{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;
+transition:border-color .15s,transform .15s}
+.course:hover{border-color:var(--line3);transform:translateY(-2px)}
+.cover{aspect-ratio:16/9;background:
+radial-gradient(120% 120% at 0% 0%,#202020 0%,#0c0c0c 60%),linear-gradient(135deg,#1a1a1a,#0a0a0a);
+position:relative;display:flex;align-items:flex-end;padding:18px;border-bottom:1px solid var(--line)}
+.cover .kx{position:absolute;top:16px;left:18px;font-family:var(--f-m);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim)}
+.cover .ct{font-family:var(--f-d);font-weight:700;font-size:24px;letter-spacing:-.02em;line-height:1.05;max-width:80%}
+.cbody{padding:16px 18px 18px}
+.cbody .cd{color:var(--fog);font-size:13.5px;line-height:1.5;margin-bottom:16px;min-height:40px}
+.pmeta{display:flex;align-items:center;justify-content:space-between;font-family:var(--f-m);font-size:11px;color:var(--dim);margin-bottom:7px}
+.pbar{height:6px;background:var(--line2);border-radius:3px;overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--ok);width:100%;transform:scaleX(0);transform-origin:left;transition:transform .35s}
 
-.frame{
-  flex:1;
-  position:relative;
-  background:#fff;
-  overflow:auto;
-  -webkit-overflow-scrolling:touch;
-}
-.frame iframe{
-  position:absolute;
-  inset:0;
-  width:100%;height:100%;
-  border:0;
-  display:none;
-}
-.frame iframe.active{display:block}
-@media (max-width:900px){
-  .frame iframe.active{
-    position:relative;
-    width:100%;
-    height:calc(100vh - 110px);
-    min-height:calc(100vh - 110px);
-  }
-}
+/* ===== course view (Skool: player left, lessons rail right) ===== */
+.back{display:inline-flex;align-items:center;gap:7px;font-family:var(--f-m);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+color:var(--dim);margin-bottom:18px;background:0;border:0;padding:0}
+.back:hover{color:var(--ink)}
+.cv{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start}
+.vid{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000;border:1px solid var(--line);margin-bottom:22px}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.lt{font-family:var(--f-d);font-weight:600;font-size:27px;letter-spacing:-.02em;line-height:1.12}
+.ld{color:var(--fog);font-size:15.5px;line-height:1.6;margin:14px 0 22px;max-width:640px}
+.mats{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:26px}
+.b{font-family:var(--f-m);font-size:12px;background:transparent;border:1px solid var(--line2);border-radius:18px;padding:8px 15px;color:var(--ink);transition:border-color .15s}
+.b:hover{border-color:var(--ink)}
+.actbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;margin-bottom:28px}
+.complete{font-family:var(--f-d);font-weight:700;font-size:14.5px;border:0;border-radius:11px;padding:13px 26px;background:var(--ok);color:#0a0a0a;transition:opacity .15s}
+.complete:hover{opacity:.9}
+.complete.is-done{background:transparent;color:var(--fog);border:1px solid var(--line2)}
+.nextbtn{margin-left:auto;font-family:var(--f-d);font-weight:600;font-size:14px;border:1px solid var(--line2);background:0;color:var(--ink);border-radius:11px;padding:13px 20px;transition:border-color .15s}
+.nextbtn:hover{border-color:var(--ink)}
 
-.hint{
-  position:fixed;
-  bottom:18px;right:24px;
-  font-family:var(--mono);
-  font-size:10px;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-  color:var(--silt);
-  background:rgba(10,10,10,.75);
-  padding:8px 14px;
-  border:1px solid var(--hair);
-  border-radius:2px;
-  pointer-events:none;
-  z-index:50;
-}
+/* comments (Skool) */
+.cmts h3{font-family:var(--f-d);font-weight:600;font-size:16px;margin-bottom:14px}
+.cbox{display:flex;gap:12px;align-items:flex-start;margin-bottom:18px}
+.cbox .me{flex:none}
+.cbox input{flex:1;background:var(--card);border:1px solid var(--line2);border-radius:24px;padding:11px 16px;color:var(--ink);font-family:var(--f-b);font-size:14px}
+.cbox input::placeholder{color:var(--mut)}
+.cempty{color:var(--mut);font-size:13.5px;font-style:italic;padding:8px 0}
 
-/* Mobile */
-@media (max-width:640px){
-  .bar{padding:12px 16px}
-  .brand{font-size:14px;letter-spacing:-.005em}
-  .brand b{margin-left:4px;font-size:12px}
-  .meta{font-size:9px;letter-spacing:.22em}
-  .tabs{padding:0 8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .tabs::-webkit-scrollbar{display:none}
-  .tab{padding:14px 14px;font-size:11px;letter-spacing:.14em}
-  .tab .n{font-size:9px;margin-right:5px}
+/* right rail: lessons list */
+.rail{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;position:sticky;top:calc(var(--nav-h) + 20px)}
+.rail-h{padding:16px 18px;border-bottom:1px solid var(--line)}
+.rail-h .rt{font-family:var(--f-d);font-weight:600;font-size:15px}
+.rail-h .rp{font-family:var(--f-m);font-size:11px;color:var(--dim);margin:8px 0 6px}
+.rail-list{max-height:62vh;overflow-y:auto;padding:8px}
+.grp{font-family:var(--f-m);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);padding:12px 10px 6px}
+.lz{display:flex;gap:11px;align-items:flex-start;padding:10px;border-radius:10px;cursor:pointer;transition:background .12s}
+.lz:hover{background:var(--card2)}
+.lz.active{background:var(--card2);box-shadow:inset 2px 0 0 var(--ink)}
+.lz .tick{flex:none;width:21px;height:21px;border-radius:50%;border:1.5px solid var(--line3);margin-top:1px;
+display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;transition:.15s}
+.lz.done .tick{background:var(--ok);border-color:var(--ok);color:#0a0a0a;font-weight:800}
+.lz .n{font-family:var(--f-m);font-size:10px;letter-spacing:.16em;color:var(--dim)}
+.lz .t{font-family:var(--f-d);font-weight:500;font-size:13.5px;letter-spacing:-.01em;margin-top:1px;color:var(--fog)}
+.lz.active .t{color:var(--ink)}
+
+/* ===== generic empty states for other tabs ===== */
+.empty{max-width:480px;margin:60px auto;text-align:center}
+.empty .ei{width:60px;height:60px;border-radius:16px;background:var(--card);border:1px solid var(--line2);margin:0 auto 18px;
+display:flex;align-items:center;justify-content:center;font-size:24px}
+.empty h2{font-family:var(--f-d);font-weight:600;font-size:20px;margin-bottom:8px}
+.empty p{color:var(--dim);font-size:14px}
+
+/* ===== members / leaderboard / community ===== */
+.members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.mcard{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.mname{font:600 14px var(--f-d)}.msub{color:var(--dim);font:11px var(--f-m);margin-top:2px}
+.lvlcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:16px}
+.lvlname{font:700 16px var(--f-d)}
+.lvlbar{height:7px;background:var(--line2);border-radius:4px;overflow:hidden;margin:10px 0 8px}
+.lvlbar i{display:block;height:100%;background:var(--ok);width:100%;transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.lvlsub{color:var(--dim);font:12px var(--f-m)}
+.lbtabs{display:flex;gap:4px;margin-bottom:14px}
+.lbtabs button{background:0;border:1px solid var(--line2);color:var(--fog);border-radius:999px;padding:6px 14px;font:500 13px var(--f-b);cursor:pointer}
+.lbtabs button.on{background:var(--ink);color:#0a0a0a;border-color:var(--ink)}
+.lbrow{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+.lbrank{font:700 14px var(--f-m);color:var(--dim);width:24px;text-align:center}
+.lbname{font:600 14px var(--f-d);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lbpts{font:600 12px var(--f-m);color:var(--accent)}
+.composer{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:18px;display:flex;flex-direction:column;gap:10px}
+.composer input,.composer textarea{background:var(--bg2);border:1px solid var(--line2);border-radius:10px;padding:11px 14px;color:var(--ink);font-family:var(--f-b);font-size:14px;width:100%;resize:vertical}
+.composer>div{display:flex;justify-content:flex-end}
+.feed{display:flex;flex-direction:column;gap:12px}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;transition:border-color .15s}
+.pcard:hover{border-color:var(--line3)} .pcard-full{cursor:default}
+.phead{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pauthor{font:600 14px var(--f-d)} .ptime{color:var(--dim);font:11px var(--f-m)}
+.ptitle{font:600 17px var(--f-d);letter-spacing:-.01em;line-height:1.25}
+.pbody{color:var(--fog);font-size:14px;margin-top:6px;line-height:1.5;white-space:pre-wrap}
+.pimg{display:block;max-width:100%;border-radius:12px;margin-top:12px;border:1px solid var(--line)}
+.pmeta2{display:flex;gap:16px;align-items:center;margin-top:12px;color:var(--dim);font:12px var(--f-m)}
+.likebtn{background:0;border:0;cursor:pointer;color:var(--dim);font:12px var(--f-m)}
+.likebtn.on{color:#f87171}
+.cmts2{margin-top:18px;display:flex;flex-direction:column;gap:14px}
+.cmt{display:flex;gap:10px;align-items:flex-start}
+.cmt-a{font:600 12px var(--f-m);color:var(--dim)} .cmt-b{font-size:14px;margin-top:3px;line-height:1.5}
+.cmt-act{display:flex;gap:12px;margin-top:6px;align-items:center}
+.catpill{font:600 10px var(--f-m);letter-spacing:.06em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line2);border-radius:999px;padding:3px 9px;flex:none}
+.selc{background:var(--bg2);border:1px solid var(--line2);border-radius:10px;padding:9px 12px;color:var(--ink);font-family:var(--f-b);font-size:13px}
+.feedbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.fcats{display:flex;gap:6px;flex-wrap:wrap}
+.fcat{background:0;border:1px solid var(--line2);color:var(--fog);border-radius:999px;padding:6px 13px;font:500 13px var(--f-b);cursor:pointer;transition:.12s}
+.fcat:hover{color:var(--ink)} .fcat.on{background:var(--ink);color:#0a0a0a;border-color:var(--ink)}
+.fsort{display:flex;gap:4px}
+.fsort button{background:0;border:0;color:var(--dim);font:600 13px var(--f-m);cursor:pointer;padding:6px 8px;border-radius:8px}
+.fsort button.on{color:var(--ink);background:var(--card2)}
+.minibtn{background:0;border:0;color:var(--dim);font:11px var(--f-m);cursor:pointer;text-decoration:underline;padding:0}
+.minibtn:hover{color:#f87171}
+.profhead{display:flex;align-items:flex-start;gap:20px;padding:8px 0 6px}
+.profname{font:700 24px var(--f-d);letter-spacing:-.02em}
+.profsub{color:var(--dim);font:12px var(--f-m);margin-top:4px}
+.profbio{color:var(--fog);font-size:14px;line-height:1.55;margin-top:10px;max-width:560px}
+.pauthor:hover{text-decoration:underline}
+.composer input[type=datetime-local]{color-scheme:dark}
+.evlist{display:flex;flex-direction:column;gap:12px}
+.evcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.evdate{font:600 12px var(--f-m);color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.evtitle{font:600 18px var(--f-d);margin-top:4px}
+.evdesc{color:var(--fog);font-size:14px;margin-top:6px;line-height:1.5}
+.evmeta{display:flex;gap:10px;align-items:center;margin-top:10px;color:var(--dim);font:12px var(--f-m)}
+.evact{display:flex;gap:12px;align-items:center;margin-top:14px}
+.evact .complete{padding:9px 18px;font-size:13px}
+.evcnt{color:var(--dim);font:12px var(--f-m)}
+.searchov{position:fixed;top:0;left:0;right:0;background:rgba(10,10,10,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:16px 24px 22px;z-index:50;display:none;max-height:84vh;overflow:auto}
+.searchov.open{display:block}
+.searchbox{max-width:var(--max);margin:0 auto;display:flex;gap:10px}
+.searchbox input{flex:1;background:var(--card);border:1px solid var(--line2);border-radius:12px;padding:13px 16px;color:var(--ink);font-family:var(--f-b);font-size:16px}
+#search-results{max-width:var(--max);margin:6px auto 0}
+.sgrp{font:600 11px var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);padding:14px 4px 4px}
+.sres{display:block;width:100%;text-align:left;background:0;border:0;color:var(--ink);font:500 14px var(--f-b);padding:10px 12px;border-radius:9px;cursor:pointer}
+.sres:hover{background:var(--card2)}
+.convlist{display:flex;flex-direction:column;gap:6px}
+.convrow{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;color:var(--ink)}
+.convrow:hover{border-color:var(--line3)}
+.convname{font:600 14px var(--f-d)}
+.convlast{color:var(--dim);font-size:13px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.threadhead{display:flex;align-items:center;gap:12px;padding:8px 0 14px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.thread{display:flex;flex-direction:column;gap:8px;max-height:54vh;overflow:auto;margin-bottom:14px;padding:4px}
+.bubble{max-width:75%;padding:10px 14px;border-radius:14px;font-size:14px;line-height:1.45;white-space:pre-wrap;word-break:break-word}
+.bubble.me{align-self:flex-end;background:var(--ink);color:#0a0a0a;border-bottom-right-radius:4px}
+.bubble.them{align-self:flex-start;background:var(--card2);color:var(--ink);border-bottom-left-radius:4px}
+.admrow{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:8px;max-width:600px}
+
+@media(max-width:920px){
+  .cv{grid-template-columns:1fr}
+  .rail{position:static;order:-1}
+  .rail-list{max-height:none}
 }
-@media (max-width:380px){
-  .meta{display:none}
+@media(max-width:640px){
+  .nav-top{padding:0 14px;gap:10px}.glogo .gn{display:none}
+  .page{padding:20px 14px 64px}.lt{font-size:22px}
 }
-</style>
-</head>
+</style></head>
 <body>
 
-<div class="app">
-
-  <div class="bar">
-    <div class="brand">Corso AI + Ecom <b>con Claude</b></div>
-    <div class="meta">Hub · Lucio</div>
+<nav class="nav">
+  <div class="nav-top">
+    <button class="glogo" onclick="goHome()" title="Home">
+      <div class="av">L</div><div class="gn">Lucioway</div>
+    </button>
+    <div class="nav-r">
+      <button class="icobtn" title="Cerca" onclick="openSearch()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+      <button class="icobtn" title="Messaggi" onclick="goTab('Messaggi')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.6-.8L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg></button>
+      <div class="notifmenu">
+        <button class="icobtn" id="bell" title="Notifiche" onclick="toggleNotifs(event)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="ndot" id="ndot"></span></button>
+        <div class="menu" id="notif-menu"></div>
+      </div>
+      <div class="usermenu">
+        <button class="me-btn" id="me-chip" onclick="toggleUserMenu(event)"><div class="me">LM</div></button>
+        <div class="menu" id="user-menu"></div>
+      </div>
+    </div>
   </div>
+  <div class="nav-tabs"><div class="tabs" id="tabs"></div></div>
+</nav>
 
-  <nav class="tabs" id="tabs">
-    <button class="tab active" data-target="t-scaletta"><span class="n">00</span>Scaletta</button>
-    <button class="tab"          data-target="t-script"><span class="n">01</span>Script</button>
-    <button class="tab"          data-target="t-risorse"><span class="n">↗</span>Risorse</button>
-  </nav>
-
-  <div class="frame" id="frame">
-    <iframe id="t-scaletta" class="active" src="corso_scaletta_completa.html?v=14" loading="eager"></iframe>
-    <iframe id="t-script"   src="corso_script_dettagliato.html?v=15" loading="lazy"></iframe>
-    <iframe id="t-risorse"  src="corso_risorse.html?v=19" loading="lazy"></iframe>
+<div id="search-ov" class="searchov">
+  <div class="searchbox">
+    <input id="search-input" placeholder="Cerca post, membri, corsi, lezioni…" oninput="doSearch(this.value)">
+    <button class="b" onclick="closeSearch()">Chiudi</button>
   </div>
-
+  <div id="search-results"></div>
 </div>
 
-<script>
-const tabs = document.querySelectorAll('.tab');
-const frames = document.querySelectorAll('#frame iframe');
+<div id="app"></div>
 
-function activate(id){
-  tabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
-  frames.forEach(f => f.classList.toggle('active', f.id === id));
-  location.hash = id.replace('t-','');
+<script src="config.js"></script>
+<script src="auth.js"></script>
+<script>
+/* ---------------- data: 13 lezioni, video + risorse locali ---------------- */
+const LESSONS = [
+  {id:"L01",grp:"Corso",t:"AI per Ecommerce",video:"01_AI-per-Ecommerce/01_AI-per-Ecommerce_1.2x.mp4",d:"Intro al corso: perché l'AI cambia l'ecommerce, il principio \u201Csostituisci te stesso\u201D, le 4 regole d'oro e la demo del sistema completo.",mats:[["Slide (.pptx)","01_AI-per-Ecommerce/slide_L1_deck.pptx"]]},
+  {id:"L02",grp:"Corso",t:"Claude Code",video:"02_Claude-Code/02_Claude-Code_1.2x.mp4",d:"Cos'è Claude Code, perché esiste, e tutti i pezzi del sistema: terminale, contesto, sessioni, permessi.",mats:[["Slide (.pptx)","02_Claude-Code/slide_L2_deck.pptx"],["PDF · Installare Claude","02_Claude-Code/guida_installa_claude.pdf"]]},
+  {id:"L03",grp:"Corso",t:"Setup pratico",video:"03_Setup-Pratico/03_Setup-Pratico_1.2x.mp4",d:"Installazione da zero: Claude Code, Antigravity, Claude Desktop e way-stack. Copia, incolla, verifica.",mats:[["Slide (.pptx)","03_Setup-Pratico/slide_L3_deck.pptx"],["PDF · Guida setup","03_Setup-Pratico/guida_setup_L3.pdf"]]},
+  {id:"L04",grp:"Corso",t:"La memoria del sistema",video:"04_Memoria-del-Sistema/04_Memoria-del-Sistema_1.2x.mp4",d:"Memoria persistente: CLAUDE.md, MEMORY.md e i 4 tipi di memoria, Graphify e il grafo del vault.",mats:[["Slide (.pptx)","04_Memoria-del-Sistema/slide_L4_deck.pptx"],["PDF · Guida memoria","04_Memoria-del-Sistema/guida_setup_L4.pdf"]]},
+  {id:"L05",grp:"Corso",t:"Il primo agent",video:"05_Primo-Agent/05_Primo-Agent_1.2x.mp4",d:"Build live con la agent factory del way-stack: da un canale YouTube a un archivio nel vault, con PDF, Drive, Telegram e automazione giornaliera.",mats:[["Slide (.pptx)","05_Primo-Agent/slide_L5_deck.pptx"],["PDF · Il way-stack","05_Primo-Agent/guida_waystack.pdf"]]},
+  {id:"L06",grp:"Corso",t:"Il grafo del knowledge",video:"06_Grafo-Knowledge/06_Grafo-Knowledge_1.2x.mp4",d:"Graphify: i transcript di Hormozi diventano un brain interrogabile — install, build del grafo, query via MCP, vault vs sottografi.",mats:[["Slide (.pptx)","06_Grafo-Knowledge/slide_L6_deck.pptx"],["PDF · Graphify","06_Grafo-Knowledge/guida_graphify_L6.pdf"]]},
+  {id:"L07",grp:"Corso",t:"Shopify dentro Claude",video:"07_Shopify-dentro-Claude/07_Shopify-dentro-Claude_1.2x.mp4",d:"Setup completo: app dev con gli scopes, il token in .env, Theme CLI e l'agent frontend + backend dello store.",mats:[["Slide (.pptx)","07_Shopify-dentro-Claude/slide_L7_deck.pptx"]]},
+  {id:"L08",grp:"Corso",t:"L'agent Shopify al lavoro",video:"08_Agent-Shopify-al-Lavoro/08_Agent-Shopify-al-Lavoro_1.2x.mp4",d:"Backend nella pratica, replica della product page sezione per sezione e modifiche custom a voce, con deploy dev → live.",mats:[]},
+  {id:"L09",grp:"Corso",t:"L'agent contabile",video:"09_Agent-Contabile/09_Agent-Contabile_1.2x.mp4",d:"Backend collegato a Shopify: 5 metriche, hard rules, CSV giornaliero su Drive e report Telegram ogni mattina alle 6.",mats:[["Slide (.pptx)","09_Agent-Contabile/slide_contabilita_deck.pptx"]]},
+  {id:"L10",grp:"Corso",t:"La dashboard in diretta",video:"10_Dashboard-in-Diretta/10_Dashboard-in-Diretta_1.2x.mp4",d:"Lezione pratica: costruiamo l'agent contabile live. I numeri nel browser + report giornaliero, dalle stesse fonti.",mats:[]},
+  {id:"BN1",grp:"Bonus",t:"Il Creative Strategist",video:"11_BONUS_Creative-Strategist/11_BONUS_Creative-Strategist_1.2x.mp4",d:"La mente del marketing dei tuoi brand distillata in un agent — headline, product page, creative, blog, iterazioni e analisi.",mats:[["Slide (.pptx)","11_BONUS_Creative-Strategist/slide_bonus_deck.pptx"],["Pacchetto (.zip)","11_BONUS_Creative-Strategist/CreativeStrategist-Pacchetto.zip"]]},
+  {id:"BN2",grp:"Bonus",t:"Creare caroselli con Claude",video:"12_BONUS_Carousel-Builder/12_BONUS_Carousel-Builder_1.2x.mp4",d:"Dalla fonte al carosello pronto: generare caroselli Instagram con Claude, slide per slide.",mats:[["Carousel Builder (.zip)","12_BONUS_Carousel-Builder/carousel-builder.zip"]]},
+  {id:"BN3",grp:"Bonus",t:"Spiegazione Agent",video:"13_Spiegazione-Agent/13_Spiegazione-Agent_1.5x.mp4",d:"Come funziona un agent end-to-end, con la suite di agent pronta all'uso.",mats:[["AI Agents Suite (.zip)","13_Spiegazione-Agent/AI-Agents-Suite.zip"]]},
+];
+// Bunny Stream video guids per lesson (player = iframe embed)
+const SID = {
+  L01:"75b447b6-1780-47f8-901e-e9e79b1af192", L02:"f1ea0389-25cc-412f-80a4-7b80f614d715",
+  L03:"30995883-41f4-45e6-b683-f18f6f82a42c", L04:"e7e75d04-5d74-4f8c-ad11-b8a6f2d2d281",
+  L05:"cfc3e826-3c3b-45c1-8f2a-b78b26c7501e", L06:"f04c83b0-017c-415f-9522-5feef919e558",
+  L07:"9ed8e3ae-91bf-4834-8c71-6a3acf670f09", L08:"e392e93b-3aa9-45ec-8a34-5667fc398570",
+  L09:"fc6f2451-8da3-4b59-ad24-f633bee61dbb", L10:"27c27d9b-c27a-4515-9351-a31afd44c95b",
+  BN1:"54837a5e-c871-457b-ae48-e2d5bf321ac1", BN2:"5ae344ba-00dd-4d30-b3c1-8e8789c544b3",
+  BN3:"bd5fb32d-0a0f-4b5b-b888-ac63f6080651",
+};
+const lessonById = Object.fromEntries(LESSONS.map(l=>[l.id,l]));
+const COURSES = [
+  { id:"corso-ai", title:"Corso AI + Ecommerce", desc:"Da zero al tuo sistema di agent con Claude.",
+    modules:[
+      {name:"Fondamenta", ids:["L01","L02","L03","L04"]},
+      {name:"Agenti & Sistema", ids:["L05","L06","L07","L08","L09","L10"]},
+      {name:"Bonus", ids:["BN1","BN2","BN3"]},
+    ]},
+];
+const courseLessons = c => c.modules.flatMap(m=>m.ids);
+const courseDoneN = c => courseLessons(c).filter(id=>isDone(id)).length;
+const coursePct = c => { const t=courseLessons(c).length; return t?Math.round(courseDoneN(c)/t*100):0; };
+const TABS = ["Community","Classroom","Calendar","Members","Leaderboard","About"];
+const KEY="lucioway_corso_progress_v1";
+
+let done = {};               // progress, refreshed from LW each render
+let view = "Classroom";        // active tab
+let activeCourseId = null;     // null = course grid; else course id
+let active = LESSONS[0].id;    // active lesson
+const curCourse = () => COURSES.find(c=>c.id===activeCourseId);
+
+const $ = s => document.querySelector(s);
+const esc = s => (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const isDone = id => !!done[id];
+const doneN = () => LESSONS.filter(l=>isDone(l.id)).length;
+const pct = () => Math.round(doneN()/LESSONS.length*100);
+function refreshChip(){ const c=document.getElementById("me-chip"); if(c) c.innerHTML = (window.LW&&LW.profileChipHTML)?LW.profileChipHTML():'<div class="me">LM</div>'; }
+window.__lwRefreshChip = refreshChip;
+
+function renderTabs(){
+  $("#tabs").innerHTML = TABS.map(t=>`<button class="tab ${t===view?'on':''}" onclick="goTab('${t}')">${t}</button>`).join("");
 }
 
-tabs.forEach(t => t.addEventListener('click', () => activate(t.dataset.target)));
+function go(tab){ view=tab; activeCourseId=null; render(); window.scrollTo(0,0); }
+window.__lwGo = go;
+function goTab(tab){ if(window.LW&&LW.clearSub) LW.clearSub(); go(tab); }
+function goHome(){ if(window.LW&&LW.clearSub) LW.clearSub(); go("Classroom"); }
+function openSearch(){ const o=document.getElementById("search-ov"); o.classList.add("open"); const i=document.getElementById("search-input"); i.value=""; document.getElementById("search-results").innerHTML=""; i.focus(); }
+function closeSearch(){ document.getElementById("search-ov").classList.remove("open"); }
+function openLesson(id){ const c=COURSES.find(x=>x.modules.some(m=>m.ids.includes(id))); if(!c) return; closeSearch(); if(window.LW&&LW.clearSub) LW.clearSub(); view="Classroom"; activeCourseId=c.id; active=id; render(); window.scrollTo(0,0); }
+let searchT=null;
+function doSearch(q){
+  clearTimeout(searchT);
+  searchT=setTimeout(async()=>{
+    const box=document.getElementById("search-results");
+    if(!q||q.trim().length<2){ box.innerHTML=""; return; }
+    const ql=q.toLowerCase();
+    const lessons=LESSONS.filter(l=>l.t.toLowerCase().includes(ql)).slice(0,6);
+    const courses=COURSES.filter(c=>c.title.toLowerCase().includes(ql));
+    let posts=[],members=[];
+    if(window.LW&&LW.searchData){ try{ const r=await LW.searchData(q); posts=r.posts; members=r.members; }catch(e){} }
+    let html="";
+    if(members.length){ html+=`<div class="sgrp">Membri</div>`+members.map(m=>`<button class="sres" onclick="closeSearch();LW.openProfile('${m.id}')">${esc(m.full_name||'Membro')}</button>`).join(""); }
+    if(posts.length){ html+=`<div class="sgrp">Post</div>`+posts.map(p=>`<button class="sres" onclick="closeSearch();LW.openPost('${p.id}')">${esc(p.title)}</button>`).join(""); }
+    if(courses.length){ html+=`<div class="sgrp">Corsi</div>`+courses.map(c=>`<button class="sres" onclick="openLesson('${c.modules[0].ids[0]}')">${esc(c.title)}</button>`).join(""); }
+    if(lessons.length){ html+=`<div class="sgrp">Lezioni</div>`+lessons.map(l=>`<button class="sres" onclick="openLesson('${l.id}')">${esc(l.t)}</button>`).join(""); }
+    box.innerHTML=html||`<div class="psub" style="padding:10px 4px">Nessun risultato.</div>`;
+  },220);
+}
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeSearch(); });
+function toggleUserMenu(e){ e.stopPropagation(); const m=document.getElementById("user-menu"); if(!m) return; m.innerHTML=(window.LW&&LW.userMenuItems)?LW.userMenuItems():''; m.classList.toggle("open"); }
+function closeUserMenu(){ const m=document.getElementById("user-menu"); if(m) m.classList.remove("open"); }
+function toggleNotifs(e){ e.stopPropagation(); const m=document.getElementById("notif-menu"); if(!m) return; if(m.classList.contains("open")){ m.classList.remove("open"); return; } closeUserMenu(); m.innerHTML='<div class="um-item" style="color:var(--dim)">Carico…</div>'; m.classList.add("open"); if(window.LW&&LW.notifPanelHTML){ LW.notifPanelHTML().then(h=>{ if(m.classList.contains("open")) m.innerHTML=h; }); LW.markNotifsRead&&LW.markNotifsRead(); } }
+function closeNotifs(){ const m=document.getElementById("notif-menu"); if(m) m.classList.remove("open"); }
+window.__lwRefreshNotif=function(n){ const d=document.getElementById("ndot"); if(!d) return; if(n>0){ d.textContent=n>9?"9+":String(n); d.style.display="flex"; } else d.style.display="none"; };
+document.addEventListener("click", e=>{ if(!e.target.closest(".usermenu")) closeUserMenu(); if(!e.target.closest(".notifmenu")) closeNotifs(); });
+function openCourseById(cid){ activeCourseId=cid; const c=curCourse(); if(c) active=courseLessons(c)[0]; render(); window.scrollTo(0,0); }
+function backToClassroom(){ activeCourseId=null; render(); window.scrollTo(0,0); }
+function selectLesson(id){ active=id; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+function toggleDone(id){ if(window.LW&&LW.progressToggle) LW.progressToggle(id); render(); }
 
-document.addEventListener('keydown', e => {
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-  const map = {'1':'t-scaletta','2':'t-script','3':'t-risorse'};
-  if (map[e.key]) activate(map[e.key]);
-});
+function classroomGrid(){
+  const cards = COURSES.map(c=>`
+    <div class="course" onclick="openCourseById('${c.id}')">
+      <div class="cover"><span class="kx">${courseLessons(c).length} lezioni · ${c.modules.length} moduli</span><div class="ct">${esc(c.title)}</div></div>
+      <div class="cbody">
+        <div class="cd">${esc(c.desc)}</div>
+        <div class="pmeta"><span>${courseDoneN(c)}/${courseLessons(c).length} completate</span><span>${coursePct(c)}%</span></div>
+        <div class="pbar"><i style="transform:scaleX(${coursePct(c)/100})"></i></div>
+      </div>
+    </div>`).join("");
+  return `<div class="ph">Classroom</div><div class="psub">I tuoi corsi.</div><div class="courses">${cards}</div>`;
+}
 
-// deep-link via hash
-const h = location.hash.replace('#','');
-const valid = ['scaletta','script','risorse'];
-if (valid.includes(h)) activate('t-'+h);
+function courseView(){
+  const c = curCourse(); if(!c) return classroomGrid();
+  const ids = courseLessons(c);
+  const l = lessonById[active];
+  const idx = ids.indexOf(active);
+  const nxtId = ids[idx+1]; const nxt = nxtId?lessonById[nxtId]:null;
+  const d = isDone(l.id);
+  const mats = l.mats.map(m=>`<a class="b" href="${esc(m[1])}" download target="_blank">↓ ${esc(m[0])}</a>`).join("");
+  let rail = "";
+  c.modules.forEach(m=>{
+    rail += `<div class="grp">${esc(m.name)}</div>`;
+    m.ids.forEach(id=>{ const x=lessonById[id]; rail += `<div class="lz ${id===active?'active':''} ${isDone(id)?'done':''}" onclick="selectLesson('${id}')"><span class="tick">✓</span><span><div class="n">${id}</div><div class="t">${esc(x.t)}</div></span></div>`; });
+  });
+  return `
+  <button class="back" onclick="backToClassroom()">← Classroom</button>
+  <div class="cv">
+    <div class="cmain">
+      <div class="vid"><iframe src="https://iframe.mediadelivery.net/embed/${(window.LW_CONFIG&&LW_CONFIG.streamLibraryId)||''}/${SID[l.id]||''}?preload=true&responsive=true" loading="lazy" allow="accelerometer;gyroscope;encrypted-media;picture-in-picture;" allowfullscreen></iframe></div>
+      <div class="lt">${esc(l.t)}</div>
+      <div class="ld">${esc(l.d)}</div>
+      ${mats?`<div class="mats">${mats}</div>`:""}
+      <div class="actbar">
+        <button class="complete ${d?'is-done':''}" onclick="toggleDone('${l.id}')">${d?'↺ Segna da rivedere':'✓ Segna completata'}</button>
+        ${nxt?`<button class="nextbtn" onclick="selectLesson('${nxt.id}')">Prossima: ${esc(nxt.t)} →</button>`:`<span class="nextbtn" style="border-color:var(--okdim);color:var(--ok)">★ Corso completato</span>`}
+      </div>
+      <div class="cmts">
+        <h3>Commenti</h3>
+        <div class="cbox"><div class="me">LM</div><input placeholder="Scrivi un commento…"></div>
+        <div class="cempty">Nessun commento ancora. Sii il primo a scrivere.</div>
+      </div>
+    </div>
+    <aside class="rail">
+      <div class="rail-h"><div class="rt">${esc(c.title)}</div>
+        <div class="rp">${courseDoneN(c)}/${ids.length} completate · ${coursePct(c)}%</div>
+        <div class="pbar"><i style="transform:scaleX(${coursePct(c)/100})"></i></div>
+      </div>
+      <div class="rail-list">${rail}</div>
+    </aside>
+  </div>`;
+}
+
+const EMPTY = {
+  Community:["◷","Community","Il feed della community arriva qui. Per ora, vai alla Classroom e inizia il corso."],
+  Calendar:["▦","Calendar","Nessun evento in programma."],
+  Members:["◑","Members","I membri appariranno qui dopo il lancio."],
+  Leaderboard:["▲","Leaderboard","La classifica a punti si attiva quando la community è live."],
+  About:["◍","About","Lucioway — Personal Brand + Infobiz. Costruisci il tuo sistema di agent con Claude."],
+};
+
+function render(){
+  done = (window.LW&&LW.progressGet)?LW.progressGet():{};
+  renderTabs(); refreshChip();
+  let body, mount=null;
+  if(view==="Account"){ body = (window.LW&&LW.renderAccount)?LW.renderAccount():""; }
+  else if(view==="Classroom"){ body = activeCourseId ? courseView() : classroomGrid(); }
+  else if(view==="Members"){ body=`<div class="ph">Members</div><div id="tabmount" class="psub">Carico…</div>`; mount="members"; }
+  else if(view==="Leaderboard"){ body=`<div class="ph">Leaderboard</div><div class="psub">Classifica a punti — i like fanno guadagnare punti.</div><div id="tabmount" class="psub">Carico…</div>`; mount="leaderboard"; }
+  else if(view==="Community"){ body=`<div id="tabmount" class="psub">Carico…</div>`; mount="feed"; }
+  else if(view==="Calendar"){ body=`<div id="tabmount" class="psub">Carico…</div>`; mount="calendar"; }
+  else if(view==="Messaggi"){ body=`<div id="tabmount" class="psub">Carico…</div>`; mount="dm"; }
+  else if(view==="About"){ body=`<div id="tabmount" class="psub">Carico…</div>`; mount="about"; }
+  else if(view==="Admin"){ body=`<div id="tabmount" class="psub">Carico…</div>`; mount="admin"; }
+  else { const e=EMPTY[view]; body = `<div class="empty"><div class="ei">${e[0]}</div><h2>${e[1]}</h2><p>${esc(e[2])}</p></div>`; }
+  $("#app").innerHTML = `<div class="page">${body}</div>`;
+  if(mount && window.LW){ const el=document.getElementById("tabmount"); if(el){ if(mount==="members")LW.mountMembers(el); else if(mount==="leaderboard")LW.mountLeaderboard(el); else if(mount==="feed")LW.mountFeed(el); else if(mount==="calendar")LW.mountCalendar(el); else if(mount==="dm")LW.mountDM(el); else if(mount==="about")LW.mountAbout(el); else if(mount==="admin")LW.mountAdmin(el); } }
+}
+
+// access gate (no-op when Supabase unconfigured → classroom stays open in dev)
+if (window.LW && LW.requireAccess) { LW.requireAccess(render); } else { render(); }
 </script>
-
-</body>
-</html>
+</body></html>
