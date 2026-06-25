@@ -1,0 +1,1296 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Corso AI + Ecom — Script Dettagliato</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;
+  --ink:#0a0a0a;
+  --fog:#3a3a3a;
+  --silt:#7a7a7a;
+  --hair:#e8e8e8;
+  --ghost:#f5f5f5;
+  --accent:#0a0a0a;
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --body:"Inter",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:400;line-height:1.65;font-size:18px;-webkit-font-smoothing:antialiased}
+
+.layout{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+
+/* SIDEBAR */
+.side{
+  position:sticky;top:0;height:100vh;
+  border-right:1px solid var(--hair);
+  padding:32px 24px;overflow-y:auto;
+  background:#fafafa;
+}
+.side h2{font-family:var(--display);font-weight:500;font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--silt);margin-bottom:24px}
+.side ol{list-style:none;counter-reset:lez}
+.side li{counter-increment:lez;margin-bottom:4px}
+.side a{
+  display:block;padding:8px 10px;border-radius:6px;
+  color:var(--fog);text-decoration:none;font-size:14px;line-height:1.4;
+  font-family:var(--display);
+  transition:background .15s,color .15s;
+}
+.side a::before{content:counter(lez,decimal-leading-zero) " ";color:var(--silt);font-family:var(--mono);font-size:12px;margin-right:6px}
+.side a:hover{background:#eee;color:var(--ink)}
+.side a.active{background:var(--ink);color:#fff}
+.side a.active::before{color:#bbb}
+.side .bonus a::before{content:"BN  ";color:var(--silt)}
+
+/* MAIN */
+.main{padding:80px 80px 200px;max-width:980px}
+@media (max-width:1100px){.main{padding:60px 40px 160px}}
+
+.course-title{font-family:var(--display);font-weight:500;font-size:36px;letter-spacing:-.015em;line-height:1.1;margin-bottom:8px}
+.course-sub{font-family:var(--mono);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--silt);margin-bottom:64px}
+
+.lesson{padding-top:80px;border-top:1px solid var(--hair);margin-top:80px}
+.lesson:first-of-type{border-top:none;margin-top:0;padding-top:0}
+.lesson-tag{font-family:var(--mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--silt);margin-bottom:12px}
+.lesson h1{font-family:var(--display);font-weight:500;font-size:36px;letter-spacing:-.015em;line-height:1.15;margin-bottom:48px;max-width:850px}
+
+.point{margin-bottom:56px;padding-left:60px;position:relative}
+.point .num{
+  position:absolute;left:0;top:2px;
+  font-family:var(--mono);font-size:13px;letter-spacing:.05em;
+  color:var(--silt);font-weight:500;
+}
+.point h2{font-family:var(--display);font-weight:500;font-size:22px;letter-spacing:-.005em;line-height:1.3;margin-bottom:16px;color:var(--ink)}
+.point p{color:var(--fog);margin-bottom:14px;font-size:17px}
+.point p:last-child{margin-bottom:0}
+.point ul{margin:14px 0 14px 20px;color:var(--fog)}
+.point li{margin-bottom:6px;font-size:17px}
+.point blockquote{
+  margin:18px 0;padding:14px 22px;
+  border-left:3px solid var(--ink);
+  background:var(--ghost);
+  font-family:var(--display);font-style:italic;font-size:18px;
+  color:var(--ink);
+}
+.point code{font-family:var(--mono);font-size:14px;background:var(--ghost);padding:2px 6px;border-radius:3px;color:var(--ink)}
+.point .say{
+  background:#fff8e6;border-left:3px solid #d4a017;
+  padding:14px 18px;margin:14px 0;border-radius:0 4px 4px 0;
+  font-size:16px;color:#3a2c00;
+}
+.point .say b{color:#1a1400;font-weight:600}
+
+.lesson-end{margin-top:64px;padding:18px 22px;border:1px dashed var(--hair);font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--silt)}
+
+/* TOP BAR */
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);z-index:10;padding:14px 80px;border-bottom:1px solid var(--hair);display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--silt)}
+@media (max-width:1100px){.topbar{padding:14px 40px}}
+.topbar b{color:var(--ink);font-weight:500}
+
+/* Mobile */
+@media (max-width:760px){
+  html,body{font-size:16px}
+  .layout{grid-template-columns:1fr;display:block}
+  .side{
+    position:static;height:auto;
+    border-right:none;border-bottom:1px solid var(--hair);
+    padding:18px 16px;overflow:visible;
+  }
+  .side h2{margin-bottom:12px;font-size:11px;letter-spacing:.22em}
+  .side ol{
+    display:flex;gap:6px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding-bottom:4px;
+  }
+  .side ol::-webkit-scrollbar{display:none}
+  .side li{margin-bottom:0;flex:0 0 auto}
+  .side a{
+    padding:8px 12px;font-size:12px;
+    white-space:nowrap;border:1px solid var(--hair);
+    border-radius:18px;
+  }
+  .side a::before{margin-right:4px;font-size:10px}
+  .side .bonus a::before{content:"BN "}
+
+  .topbar{padding:10px 20px;font-size:10px;letter-spacing:.16em}
+
+  .main{padding:32px 20px 120px;max-width:none}
+  .course-title{font-size:24px;margin-bottom:6px}
+  .course-sub{font-size:11px;letter-spacing:.16em;margin-bottom:32px}
+
+  .lesson{padding-top:48px;margin-top:48px}
+  .lesson-tag{font-size:11px;letter-spacing:.22em;margin-bottom:10px}
+  .lesson h1{font-size:24px;line-height:1.2;margin-bottom:28px;max-width:none}
+
+  .point{margin-bottom:36px;padding-left:0}
+  .point .num{
+    position:static;display:inline-block;
+    margin-bottom:8px;
+    font-size:11px;letter-spacing:.18em;
+  }
+  .point h2{font-size:18px;margin-bottom:12px}
+  .point p,.point li{font-size:15px;line-height:1.6}
+  .point code{font-size:12px;word-break:break-word}
+  .point blockquote{font-size:15px;padding:10px 14px}
+  .point .say{font-size:14px;padding:10px 14px}
+
+  .lesson-end{margin-top:36px;padding:12px 14px;font-size:10px;letter-spacing:.12em}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<aside class="side">
+  <h2>Lezioni</h2>
+  <ol id="toc">
+    <li><a href="#l1">AI sta sostituendo il lavoro</a></li>
+    <li><a href="#l2">Claude Code</a></li>
+    <li><a href="#l3">Setup pratico</a></li>
+    <li><a href="#l4">Memoria + Graphify</a></li>
+    <li><a href="#l5">Primo agent — agent factory</a></li>
+    <li><a href="#l6">Graphify — il grafo del knowledge</a></li>
+    <li><a href="#l7">Shopify — setup + agent</a></li>
+    <li><a href="#l8">Shopify — backend + replica PDP</a></li>
+    <li><a href="#l9">Agent contabile</a></li>
+    <li><a href="#l10">Dashboard contabilità</a></li>
+    <li class="bonus"><a href="#bonus">Creative Strategist — la lezione finale</a></li>
+  </ol>
+</aside>
+
+<div>
+<div class="topbar">
+  <span>AI Operator · <b>Script Dettagliato</b></span>
+  <span><b>v2</b> · 2026-06-11</span>
+</div>
+
+<main class="main">
+
+<div class="course-title">Corso AI + Ecom con Claude</div>
+<div class="course-sub">Script di registrazione · 10 lezioni + 2 Bonus · Lucio</div>
+
+<!-- LESSON CONTENT INJECTED BELOW -->
+<div id="content">
+
+<!-- =================== LEZIONE 1 =================== -->
+<section class="lesson" id="l1">
+  <div class="lesson-tag">Lezione 01 · 30–35 min</div>
+  <h1>L'AI sta sostituendo il lavoro: le 4 regole, la paura giusta, demo del mio sistema</h1>
+
+  <div class="point">
+    <span class="num">01</span>
+    <h2>Hook + autorità — 3 brand, numeri reali, nomi censurati</h2>
+    <p>Apri secco, niente intro lunga. Non dire "ciao a tutti, oggi parliamo di…". Spara subito una frase forte e poi spieghi chi sei. La gente decide nei primi 5 secondi se resta o se va.</p>
+    <p>Mentre parli, a schermo metti 3 screenshot di dashboard dei tuoi brand. Nomi censurati. Numeri reali e visibili. Devono vedere: fatturato a 7 cifre, dashboard live, customer care con metriche. Non dire i nomi dei brand — fa più mistero e ti tutela.</p>
+    <div class="say"><b>Da dire:</b> "Quello che sto per mostrarti non è teoria. È quello che gira ogni giorno sui miei brand, mentre dormo, mentre sono a pranzo, mentre registro questo video. Sono Lucio. Negli ultimi anni ho scalato questi brand, nomi censurati ma numeri reali. 1.5M+ su un brand. Mezza giornata di customer care sparita su un altro. Decine di tool che girano da soli. Tutto costruito sopra una cosa sola: Claude Code."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02</span>
+    <h2>Le 4 regole d'oro</h2>
+    <p>Mostra la slide con tutte e 4 le regole. Poi una alla volta, rivelandole con il tasto destro. Non leggere la slide — commenta, racconta, dai esempi tuoi. La slide è un appoggio, tu sei il contenuto.</p>
+    <p>Regola 1: "Tutto quello che fa il computer, lo fa Claude." Mail, prodotti, tema Shopify, fogli di calcolo, scraping, niente è più tuo lavoro manuale. Esempio concreto: "Stamattina ho caricato 12 prodotti su Shopify. Non ho mai aperto l'admin." Questa frase fa il punto, valla a memoria.</p>
+    <p>Regola 2: "Tutto quello che non sai, lo chiedi a Claude." Non sai cos'è un MCP? Chiedi. Non sai come funziona una pipeline? Chiedi. È il tuo senior dev, marketer, copywriter, accountant. Frase chiave: "L'ignoranza non è più un problema. La pigrizia mentale sì."</p>
+    <p>Regola 3: "La velocità batte lo studio dettagliato." Non passare 3 settimane su un corso prima di provare. Apri, fai, sbagli, chiedi, rifai. Una settimana con Claude vale tre mesi di YouTube. Racconta come hai iniziato tu — niente bootcamp, hai aperto il terminale e basta.</p>
+    <p>Regola 4: "Sostituisci te stesso prima che lo faccia qualcun altro." Trova un task ripetitivo che fai ogni settimana. Trasformalo in agent. Quell'ora a settimana sparisce per sempre. Questa regola è il bridge verso il blocco 3 sulla paura.</p>
+    <div class="say"><b>Da dire:</b> "Se vai via con una cosa sola da questa lezione, deve essere questa: tutto quello che fa il computer ora lo fa Claude. Tutto quello che non sai, lo chiedi a Claude. La velocità batte lo studio. E sostituisci te stesso prima che lo faccia qualcun altro."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">03</span>
+    <h2>La paura giusta — finestra di 18 mesi, dirigi o vieni diretto</h2>
+    <p>Questo è il blocco emotivo. Senza paura non c'è azione. Ma deve essere la paura giusta — non FOMO da tweet, paura strutturale di restare indietro.</p>
+    <p>Mostra 30 secondi di clip Hormozi sulla finestra dei 18 mesi. Poi torni in camera e commenti. Quattro concetti rapidi: chi conosce meglio il tuo workflow sei tu, quindi sei tu che devi automatizzarlo; la finestra è ~18 mesi, chi si muove ora costruisce vantaggio strutturale; cloud-to-dirt — tu dirigi, l'AI esegue, non serve essere developer; la verità scomoda — l'AI sostituirà il tuo lavoro, anche il mio, l'unica scelta è chi guida la sostituzione.</p>
+    <p>Chiudi con la frase più forte di tutta la lezione, che usi anche in chiusura: "Non sei qui per imparare AI. Sei qui per scegliere da che parte stare." Questa è la riga che ti spinge dentro la demo.</p>
+    <div class="say"><b>Da dire:</b> "Tra 18 mesi sarai una di due persone. Quello che ha sostituito sé stesso e adesso dirige il sistema. O quello che è stato sostituito da chi ha agito prima. Non c'è una terza opzione."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">04</span>
+    <h2>Demo Vault Viewer</h2>
+    <p>Apri localhost:5174/lens.html in tab. Inizia dicendo: "Questa è la mappa del mio sistema. Si chiama Claude Code Lens." Mostri i numeri in alto: 24 tool, 4 brand, 9 brain, 1 vault unico. Non spiegarli ancora — semina curiosità.</p>
+    <p>Scrolli giù a "I 6 pezzi sotto il cofano": plugin, skill, hook, MCP, sub-agent, vault. Una riga ognuno. Non andare in profondità — dici "te lo spiego in Lezione 2 pezzo per pezzo". L'obiettivo è solo far vedere che esiste struttura.</p>
+    <p>Scrolli ancora ai tool — LiveKPI, DailyReport, ProductPusher, ProductCloner, Theme Deploy. "Ognuno di questi gira da solo o gira al mio comando." Chiudi tornando in cima alle 4 regole sulla pagina. "Le stesse di prima, sempre lì."</p>
+    <div class="say"><b>Da dire:</b> "Questa è la mappa del cervello esterno. Claude la legge in tempo reale. Io non devo ricordarmi niente — c'è scritto qui, lui sa."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">05</span>
+    <h2>Demo LiveKPI</h2>
+    <p>Apri il tab di LiveKPI (Bronzata o Leishape, scegli quello con il numero del giorno più sexy). Dici: "Questa è la dashboard del fatturato live di uno dei brand." Indica i numeri uno per uno: revenue del giorno, COGS, gross profit, net, BE ROAS.</p>
+    <p>Spiega che il numero cambia da solo. "Aggiornato ogni 30 secondi. Browser aperto su un secondo monitor = cassa in diretta." Questo è il momento dove la gente capisce che non è teoria — è sotto i loro occhi.</p>
+    <p>Se hai anche la versione Meta Ads separata, mostrala 10 secondi. Non perdere tempo a spiegarla — basta far vedere che esiste e che è un'altra vista dello stesso sistema.</p>
+    <div class="say"><b>Da dire:</b> "Ogni mattina non apro né Shopify né Meta. Apro questo. In 5 secondi so come sta il brand."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">06</span>
+    <h2>Demo Meta Scraper</h2>
+    <p>Apri terminale. Il comando lo hai già scritto in clipboard o in un file di appoggio — non perdere tempo a digitarlo a video. "Voglio sapere cosa fa un mio competitor in advertising. Lancio il Meta Scraper."</p>
+    <p>Esegui il comando. Mentre gira, spieghi: "Va su Meta Ad Library, prende le top N ads attive e inattive, scarica i video in HD, salva il JSON con tutti i metadati creativi." Non rallentare la demo — il valore è la velocità.</p>
+    <p>Quando finisce, apri la cartella output e mostra i video scaricati. Frase chiave: "3 minuti. Quello che un junior fa in 2 giorni di lavoro manuale."</p>
+    <div class="say"><b>Da dire:</b> "Sto guardando dentro la macchina dei miei competitor. Loro non sanno nemmeno che esisto, io ho già tutti i loro creativi sul mio Mac."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">07</span>
+    <h2>Demo Brain + Graphify</h2>
+    <p>Apri il grafo Graphify in tab. Dici: "Questi sono i miei 9 cervelli esperti." Se vuoi privacy chiamali A-I, altrimenti dici i nomi reali (Hormozi, Sarah, Zakaria, Chase, Frank, ecc.). "Sono guru, libri, corsi distillati. Ognuno con la sua voce, le sue lessons, le sue regole."</p>
+    <p>Apri terminale. Chiedi qualcosa di cross-brain: "Claude, chiedi a Hormozi + Sarah + Zakaria insieme: come aumento la retention su un brand DTC?" Mentre gira mostra il grafo che si muove o spiega che sta facendo query cross.</p>
+    <p>Output sintetico che combina i 3 cervelli. Frase chiave: "Non chiedo a Claude. Chiedo a 9 guru insieme, e ricevo una risposta sola."</p>
+    <div class="say"><b>Da dire:</b> "Questi non sono prompt. Sono cervelli persistenti. Hanno memoria, hanno regole, parlano con la loro voce. Quando li interrogo è come essere in una stanza con loro."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">08</span>
+    <h2>Demo Customer Care Dashboard</h2>
+    <p>Apri la dashboard del Customer Care Agent. "Questo è il CC di uno dei miei brand." Mostra inbox con ticket aperti. Clicca su un ticket reale (con dati censurati se necessario).</p>
+    <p>"Cliente chiede 'Quando arriva il mio ordine?'. L'agent ha già letto Shopify, ha già scritto la bozza in italiano nel mio tono, l'ha messa qui pronta." Mostra la bozza generata. Bello da vedere — è quello che convince.</p>
+    <p>Mostra le metriche in basso: auto-send rate 56% e cresce ogni settimana, tempo medio risposta 4 minuti. "Mezza giornata di customer care che non esiste più." Chiudi con la frase: "Il customer care non lo faccio più io. Lo supervisiono."</p>
+    <div class="say"><b>Da dire:</b> "Prima passavo 3-4 ore al giorno a rispondere. Adesso passo 20 minuti a controllare. È la stessa quantità di ticket. È la stessa qualità di risposta. Solo che il tempo l'ho riconquistato io."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">09</span>
+    <h2>Agent senza frontend (DailyReport, ProductPusher, Fulfillment, Order Agent, AdBriefer, GrowthGuide)</h2>
+    <p>Apri di nuovo il Vault Viewer, scrolla sulla sezione "I tool che girano". Dici: "Quelli che ti ho appena mostrato hanno una dashboard. Ma la maggior parte dei miei tool non ha un frontend. Girano nel terminale, lavorano da soli, mi mandano il risultato su Telegram o Drive."</p>
+    <p>Elenca veloce, uno a uno, mentre scrolli. DailyReport — alle 06:00 ricevo su Telegram ricavi, ordini, ROAS del giorno prima. ProductPusher — Word + foto → prodotto Shopify in 3 minuti invece di 40. FulfillmentAgent — XLSX tracking → 76 ordini spediti + email cliente in 1 run. Order Agent — ogni notte alle 00:01 raccoglie tutti gli ordini.</p>
+    <p>AdBriefer — guarda video competitor e genera il brief clip-by-clip per il video editor. GrowthGuide — loop di test ads: chiudi un batch, sistema propone il prossimo, il loop si autoalimenta. Chiudi: "Non serve un'interfaccia. Serve che funzioni mentre dormi."</p>
+    <div class="say"><b>Da dire:</b> "Tutto questo sta lavorando adesso, in background, mentre noi parliamo. Letteralmente. Sono i miei dipendenti che non vado a pagare a fine mese."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">10</span>
+    <h2>La promessa di fine corso</h2>
+    <p>Torna in camera, talking head primo piano. "A questo punto la domanda è: Lucio, ma io posso davvero fare la stessa cosa? Sì. E te lo dimostro adesso, dicendoti esattamente cosa saprai fare alla fine."</p>
+    <p>Mostra la slide "Cosa farai a fine corso" con 3 punti. Punto 1 — Setup del tuo Claude: vault, memoria, brain, struttura PARA, Graphify. Quello che a me ha richiesto 6 mesi te lo do pronto. Punto 2 — Costruire i tuoi agent: non solo usarli, crearli. Un agent = un workflow ripetitivo del tuo business automatizzato.</p>
+    <p>Punto 3 — Far lavorare l'AI al posto tuo: non è futuro, è adesso. A fine corso hai almeno 2-3 agent tuoi in produzione, daily report che arriva da solo, customer care che risponde, prodotti caricati in 3 minuti. Ore della tua settimana che tornano a te.</p>
+    <div class="say"><b>Da dire:</b> "Non ti insegno a usare Claude. Ti insegno a costruire il tuo Claude. Cucito su te, sul tuo business, sui tuoi workflow. Quando finisce il corso non sei un utente, sei un costruttore."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">11</span>
+    <h2>Anteprima delle 4 parti + bonus</h2>
+    <p>Slide con le 4 parti del corso. Commento veloce, una riga a parte: Parte 1 — Fondamenta (L3 setup pratico, L4 memoria + Graphify). Senza queste niente regge.</p>
+    <p>Parte 2 — Cervelli e agent (L5 creare un brain + cos'è un agent, L6 build live del primo agent davanti alla camera). Impari a costruire un esperto interrogabile e il tuo primo agent.</p>
+    <p>Parte 3 — Shopify dal terminale (L7 setup, L8 utilizzo: prodotti, PDP, tema). Qui l'admin lo apri solo per controllare, non per lavorare.</p>
+    <p>Parte 4 — Il sistema completo (L9 agent ecommerce schedulato, L10 dashboard + deploy + contabilità + LiveKPI). Il business che si gestisce da solo, numeri live nel browser.</p>
+    <p>Bonus — Agent Marketing pre-configurato, GrowthGuide, Meta Scraper per analisi competitor. Le 10 cose specifiche del mio brand marketing che hanno fatto i numeri.</p>
+    <div class="say"><b>Da dire:</b> "10 lezioni più un bonus. Una alla volta, ognuna ti lascia con qualcosa di concreto che funziona sul tuo Mac alla fine del video."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">12</span>
+    <h2>Chiusura + CTA Lezione 2</h2>
+    <p>Talking head, primo piano, sguardo dritto in camera. Ricicla la frase forte: "Non sei qui per imparare AI. Sei qui per scegliere da che parte stare."</p>
+    <p>Aggiungi il colpo finale: "Tra 18 mesi sarai uno dei due. Quello che ha sostituito sé stesso e adesso dirige il sistema. O quello che è stato sostituito da chi ha agito prima."</p>
+    <p>CTA: "Lezione 2: ti spiego cos'è Claude Code, perché esiste, e tutti i pezzi del sistema che useremo. Skill, hook, MCP, sub-agent, vault. Vai alla L2, si parte." Cut secco. Niente outro lunga, niente musica che sfuma.</p>
+    <div class="say"><b>Da dire:</b> "Vai alla Lezione 2. Si parte."</div>
+  </div>
+
+  <div class="lesson-end">Fine L1 · Cut secco · CTA → L2</div>
+</section>
+
+<!-- =================== LEZIONE 2 =================== -->
+<section class="lesson" id="l2">
+  <div class="lesson-tag">Lezione 02</div>
+  <h1>Claude Code: cos'è, perché esiste, e tutti i pezzi del sistema</h1>
+
+  <div class="point">
+    <span class="num">01</span>
+    <h2>Cos'è Claude e cos'è Claude Code</h2>
+    <p>Prima cosa: chiarisci la differenza tra il modello e l'agente. <b>Claude</b> è il modello AI di Anthropic — il cervello. È quello che capisce, ragiona, scrive. Lo trovi su claude.ai, dentro le API, dentro Claude Code, dentro Cursor — è sempre lo stesso modello. È il motore intellettuale.</p>
+    <p><b>Claude Code</b> invece è l'agente nel terminale: Claude che vive dentro il tuo Mac. Legge file, esegue comandi shell, lancia agent, modifica codice, automatizza interi flussi. È il modello + le mani. È quello che fa il lavoro vero.</p>
+    <p>Perché uno e non l'altro? Claude in chat è perfetto per ragionare, fare brainstorming, scrivere copy a freddo — quando vuoi solo testo. Claude Code lo usi quando devi <b>agire sul sistema</b>: leggere i tuoi prodotti Shopify, comprimere video, mandare un'email, lanciare uno scraper. Il 90% del lavoro in azienda è di questo secondo tipo.</p>
+    <div class="say"><b>Da dire:</b> "Claude pensa. Claude Code agisce. Per il lavoro vero in azienda serve quello che agisce."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02</span>
+    <h2>Claude Code — il motore nel terminale</h2>
+    <p>Mostra come si lancia: apri terminale, scrivi <code>claude</code>, parte. Mostra il prompt. "Da qui parte tutto. È il motore. Tutti gli agent, tutti i tool, tutto quello che hai visto nella L1 — è tutto qui dentro."</p>
+    <p>Fai un esempio piccolo: chiedi a Claude Code di leggere un file e riassumerlo. Mostra che apre il file, lo legge, ti risponde. Diverso dalla chat — qui sta agendo sul tuo filesystem.</p>
+    <div class="say"><b>Da dire:</b> "Quando dico Claude da qui in poi, intendo Claude Code, nel terminale. Non la chat. Da qui in avanti viviamo qui."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02b</span>
+    <h2>Il mio setup — Antigravity (fuori) + Claude Code (dentro)</h2>
+    <p>Chiarisci subito: il mio setup reale è <b>combinato</b>, non uno-o-l'altro. L'editor che apro la mattina è <b>Antigravity</b>, l'IDE agentico di Google — è come un VSCode di nuova generazione, con browser integrato, terminale, pannelli task multipli, diff live. È il guscio. È dove leggo, scrivo, navigo.</p>
+    <p>Dentro il terminale di Antigravity faccio partire <b>Claude Code</b>, il CLI ufficiale di Anthropic. Lì dentro vive tutto il mio sistema: le skill con la slash, gli hook che partono da soli, gli MCP, i sub-agent, AgentFactory, il vault, il way-stack. Quel terminale è il cervello operativo. Antigravity è la scrivania.</p>
+    <p>Perché questo combo e non solo Claude Code in terminale puro? Perché ho l'editor con i file a sinistra, il diff live mentre Claude modifica, il browser dentro la finestra, i pannelli per più task in parallelo. Tutto in una sola app. Più comodo da insegnare, più comodo da lavorare, e Claude Code dentro gira identico a come girerebbe in un terminale normale.</p>
+    <p>Detto questo: se non vuoi installare Antigravity, puoi fare benissimo con <b>solo Claude Code</b>. Apri il terminale del Mac, scrivi <code>claude</code>, e hai accesso a tutto il sistema lo stesso. Le skill, gli hook, gli MCP, il vault — tutto funziona identico. Antigravity è il guscio comodo, non il motore. Il motore è sempre Claude Code.</p>
+    <div class="say"><b>Da dire:</b> "Antigravity fuori, Claude Code dentro. L'editor è Google, il cervello è Anthropic. Tu puoi anche partire con solo il terminale — funziona lo stesso. Il sistema è il sistema, l'editor è solo dove ti siedi."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">03</span>
+    <h2>CLAUDE.md — il file madre</h2>
+    <p>Apri il CLAUDE.md nella root di un progetto. Mostra le prime 30 righe. "Questo file è la voce madre. Claude lo legge a ogni sessione, sempre. È il primo posto dove dirgli regole, contesto, preferenze."</p>
+    <p>Tipi di regole che ci scrivi: lingua di default ("rispondi sempre in italiano"), stile ("risposte brevi, niente fronzoli"), file ("leggi un file prima di modificarlo, mai sovrascrivere CSV"), notifiche ("a fine task manda un messaggio nel canale giusto"). Da quel momento in avanti Claude le applica senza che tu le ripeta.</p>
+    <p>Ne esistono 2 livelli: globale in <code>~/.claude/CLAUDE.md</code> (vale ovunque), e per-progetto nella cartella (vale solo lì). Il progetto sovrascrive il globale — utile quando un singolo cliente o brand ha regole sue diverse dal default.</p>
+    <div class="say"><b>Da dire:</b> "Se vuoi che Claude lavori bene, il CLAUDE.md è il primo file che apri. È come la job description del tuo dipendente."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">04</span>
+    <h2>Skill — i comandi rapidi</h2>
+    <p>Mostra l'elenco delle skill installate: <code>/help</code> e poi le tue. "Le skill sono i comandi che inizi con la slash. Tipo /commit, /review, /creative. Ognuna è una mini-procedura pre-scritta che Claude esegue."</p>
+    <p>Esempio concreto: lancia una skill tua, ad esempio /daily-report. Mostra che parte sola, fa tutto, restituisce output. "Ho 50+ skill mie. Sono i miei comandi personali."</p>
+    <div class="say"><b>Da dire:</b> "Quando trovi una procedura che ripeti — falla diventare una skill. Da quel momento è un comando slash, in qualunque progetto."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">05</span>
+    <h2>Hook — gli script che partono da soli</h2>
+    <p>Apri settings.json (o il file hooks). Mostra una entry. "Gli hook sono script che partono da soli, in risposta a eventi. Esempi: quando finisce una sessione, quando salvi un file, quando parte un comando."</p>
+    <p>Esempio reale: il mio hook SessionEnd salva automaticamente il log della sessione in 04_SESSIONS/, aggiorna log.md, fa il backup su GitHub. Tutto in 2 secondi, senza che io chieda niente.</p>
+    <p>Differenza con la skill: la skill è "manuale" — la lanci tu. L'hook è "automatico" — parte da solo a un evento.</p>
+    <div class="say"><b>Da dire:</b> "Skill = la chiami tu. Hook = parte da solo a un evento. Una è il comando manuale, l'altro è l'automatismo."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">06</span>
+    <h2>MCP — i ponti verso sistemi esterni</h2>
+    <p><b>Cos'è in semplice:</b> MCP (Model Context Protocol) è un plugin che dà a Claude le credenziali e i comandi per parlare con un'app esterna. Pensa a un adattatore già pronto. Tu lo attivi una volta, e da quel momento Claude può "chiamare" quell'app come se fosse un suo tool interno — leggere ordini Shopify, scrivere su Drive, mandare un messaggio Telegram, leggere insights Meta.</p>
+    <p><b>Quando usarlo:</b> quando per quell'app esiste già un MCP pronto e ti serve un'azione strutturata e ripetibile (creare un prodotto, leggere ROAS, salvare un file). È la mano più veloce e affidabile, perché parla la lingua dell'API ufficiale.</p>
+    <p>Esempio live: lancia una query a Shopify via MCP, vedi gli ultimi 5 ordini. Sotto il cofano è Claude che parla con Shopify in nome tuo. Anticipa: oltre a MCP, Claude usa anche la shell (CLI) e il browser come faresti tu — sono le altre due "mani" verso il mondo.</p>
+    <div class="say"><b>Da dire:</b> "MCP = ponte pronto. Quando c'è, lo usi sempre — è la via più veloce e pulita per fare parlare Claude con un sistema esterno."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">07</span>
+    <h2>CLI — la shell del Mac, il backstop universale</h2>
+    <p><b>Cos'è in semplice.</b> CLI vuol dire <b>Command Line Interface</b> — la riga di comando. Su Mac è <code>zsh</code> (su Linux/WSL è bash). Sono i comandi che scriveresti tu a mano nel terminale: <code>ls</code>, <code>cd</code>, <code>git commit</code>, <code>ffmpeg</code>, <code>python script.py</code>. Claude Code <b>non li simula</b>: prende il tuo terminale e ci scrive dentro direttamente. È la stessa shell che useresti tu, con la differenza che digita lui.</p>
+
+    <p><b>Differenza chiave con MCP.</b> L'MCP è un <i>plugin specifico</i> per un'app specifica (Shopify MCP, Meta MCP, Drive MCP) — qualcuno l'ha scritto, configurato, mantenuto. La CLI invece è <i>universale</i>: qualunque tool open-source o commerciale installabile sul Mac diventa subito utilizzabile da Claude, senza che nessuno scriva un MCP per quel tool. Per questo è il <b>backstop universale</b>: quando non c'è un MCP — e nel 90% dei casi minori non c'è — c'è quasi sempre un comando CLI che fa la stessa cosa.</p>
+
+    <p><b>Le 5 famiglie che uso ogni giorno</b> (fai vedere a schermo o leggi):</p>
+    <p>1. <b>Video / audio</b> → <code>ffmpeg</code> (comprime/converte/taglia video, gira sui PDP Shopify), <code>whisper</code> (trascrive audio in testo), <code>yt-dlp</code> (scarica qualsiasi video da YouTube/TikTok/IG con un URL).</p>
+    <p>2. <b>Codice / deploy</b> → <code>git</code> + <code>gh</code> (commit, branch, pull request da terminale), <code>shopify</code> CLI (deploy del tema senza aprire l'admin), <code>vercel</code>/<code>netlify</code> per il frontend.</p>
+    <p>3. <b>Web / API</b> → <code>curl</code> (chiama qualunque API REST), <code>jq</code> (parsa il JSON di risposta, prende solo quello che serve), <code>wget</code> (scarica file in batch).</p>
+    <p>4. <b>Dati / file</b> → <code>python</code> per qualsiasi script, <code>sed</code>/<code>grep</code>/<code>awk</code> per cercare e sostituire testo in centinaia di file in 1 secondo.</p>
+    <p>5. <b>Sistema / Mac</b> → <code>brew</code> per installare nuovi tool (<code>brew install &lt;nome&gt;</code> è il "ti serve quel comando? eccolo"), <code>open</code> per aprire app/file, <code>osascript</code> per pilotare AppleScript.</p>
+
+    <p><b>Esempio live (fai vedere).</b> Apri terminale, prendi un video <code>raw.mov</code> da 1 GB. Chiedi a Claude: "comprimi questo per Shopify, target 80 MB, mantieni qualità". Claude scrive <code>ffmpeg -i raw.mov -vcodec libx264 -crf 30 -preset slow out.mp4</code>, ti chiede conferma, lancia. Trenta secondi dopo: video da 80 MB pronto. <b>Zero MCP coinvolti. Zero API key.</b> Solo shell + ffmpeg già installato.</p>
+
+    <p><b>La regola pratica che insegno.</b> Prima <i>cerco un MCP</i> per quel servizio (più strutturato, più affidabile). Se non c'è, <i>cerco il tool CLI</i> — quasi sempre esiste. Se non è installato, lo installo con <code>brew install &lt;nome&gt;</code>. Da quel momento è "parte del vocabolario" di Claude per sempre, su quel Mac.</p>
+
+    <p><b>Potenza nascosta che pochi capiscono.</b> L'universo open-source CLI è enorme — decine di migliaia di tool su Homebrew. Sono tutti documentati nel <code>--help</code>, già "lingua nativa" per Claude perché ha letto la loro documentazione in training. <b>Non serve scrivere integrazioni</b>: basta che il comando esista sul Mac e Claude lo usa come se l'avesse usato mille volte. Questo moltiplica la sua capacità all'infinito senza dover scrivere una riga di codice di integrazione.</p>
+
+    <div class="say"><b>Da dire:</b> "L'MCP è il plugin pulito quando c'è. La CLI è il backstop universale: tutto quello che gira nel terminale del Mac, Claude lo lancia. Cinque famiglie da ricordare: video, codice, web, dati, sistema. Quando non c'è MCP, c'è quasi sempre un comando shell — e Claude lo conosce già."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">08</span>
+    <h2>Browser e PC use — Claude clicca e digita come te</h2>
+    <p>"Terza mano: il browser e il PC stesso. Quando un sistema non ha API e non ha MCP, Claude apre Chrome con Playwright o DevTools e fa quello che faresti tu — naviga, clicca, compila form, prende screenshot."</p>
+    <p>Esempio: vuoi i dati di un sito che non offre API. Setup Playwright MCP. Claude naviga, fa login, scrolla, estrae quello che ti serve. Output: JSON pulito o screenshot. Velocità di un umano, scala di un robot.</p>
+    <p>Computer-use va oltre: Claude pilota il Mac intero — mouse, tastiera, finestre. Come se ti facesse uno screen-share e prendesse il controllo. Utile per app desktop senza API.</p>
+    <div class="say"><b>Da dire:</b> "Quando non c'è API, non c'è MCP, non c'è CLI — c'è il browser. Claude apre Chrome e fa quello che faresti tu. Niente è inaccessibile."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">09</span>
+    <h2>Scraper — Apify e Firecrawl per estrarre dati dal web</h2>
+    <p>Per scraping seri (volumi grandi, anti-bot, cookie complessi) due tool dedicati: Apify e Firecrawl. Sono servizi cloud + MCP / SDK. Claude li chiama, loro fanno il lavoro sporco, ti tornano JSON pulito.</p>
+    <p>Apify: piattaforma con migliaia di "actor" pre-fatti — TikTok scraper, Instagram scraper, Google Maps, LinkedIn, Amazon, Trustpilot, ecc. Ogni actor è uno scraper pronto, paghi a uso. Esempio: voglio i commenti TikTok dei top video competitor → Apify actor TikTok comments → 1000 commenti in 2 minuti.</p>
+    <p>Firecrawl: scraping di siti web generici trasformati in markdown pulito. Tre comandi: scrape (singola URL), crawl (intero sito), search. Output ottimizzato per LLM. Esempio: voglio leggere tutto il sito di un competitor → firecrawl crawl → ho un solo MD con tutto, Claude lo legge in un colpo.</p>
+    <p>Differenza con CLI/browser: per 1-2 URL usi browser. Per centinaia/migliaia usi questi servizi. Costano (qualche centesimo per chiamata) ma ti risparmiano ore.</p>
+    <div class="say"><b>Da dire:</b> "Scraping da hobbista = browser. Scraping serio = Apify o Firecrawl. Costano poco, valgono ore del tuo tempo."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">10</span>
+    <h2>API keys — come si configurano e dove si salvano</h2>
+    <p>"Per ogni servizio esterno (Shopify, Meta, Apify, Firecrawl, OpenAI, ecc.) serve una API key. È la password macchina-a-macchina. Senza, Claude non può fare niente con quel servizio."</p>
+    <p>Dove prenderle: nel pannello del servizio (es. Shopify Admin → Apps → Create app → genera token). Ogni servizio ha la sua sezione "Developer" o "API". Lì copi la key.</p>
+    <p>Dove salvarle. Mai in chiaro nel codice. Mai in un file commit-tato su Git. Due posti corretti: <code>.env</code> nel progetto (con .gitignore che lo esclude) oppure macOS Keychain per chiavi globali. Pattern .env: <code>SHOPIFY_TOKEN=atkn_xxx</code>, una per riga.</p>
+    <p>Sicurezza: ruota le chiavi ogni 6 mesi (calendario reminder). Se una key trapela su Git per errore, REVOCALA SUBITO dal pannello servizio. Non è grave se reagisci in fretta.</p>
+    <div class="say"><b>Da dire:</b> "Le API key sono le chiavi di casa dei tuoi sistemi. Non lasciarle sotto lo zerbino del codice. .env o Keychain. Sempre."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">11</span>
+    <h2>Sub-agent — Claude in miniatura, contesto pulito</h2>
+    <p>Spiega il concetto: "Quando lavori su qualcosa di lungo, il contesto di Claude si riempie. Per ricerche pesanti, esplorazioni di codice, task isolati — apri un sub-agent. È un Claude figlio, con contesto pulito, che fa il task e ti restituisce solo il risultato."</p>
+    <p>Esempio: chiedi a Claude di delegare l'esplorazione di un codebase grosso a un sub-agent. Il sub-agent macina 200 file, ti torna 10 righe di sintesi, il tuo contesto principale resta pulito.</p>
+    <div class="say"><b>Da dire:</b> "Il sub-agent è il junior che mandi giù in archivio. Torna su con la cartella in mano. Tu non ti sei mai sporcato."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">12</span>
+    <h2>Il vault locale — dove vivono i progetti</h2>
+    <p>Apri Finder, vai in ~/Documents/Lucio_AI/. "Questo è il mio vault. Una sola cartella. Dentro c'è tutto: progetti, brain, agent, knowledge, sessioni."</p>
+    <p>Spiega perché tutto in una cartella sola: Claude la vede unitariamente, può fare query cross-progetto, Graphify lo indicizza tutto insieme. Il vault è il cervello esterno.</p>
+    <p>Anticipa la L4 dove diamo a Claude memoria persistente e il grafo Graphify (prima però, in L3, installiamo tutto da zero).</p>
+    <div class="say"><b>Da dire:</b> "Una cartella sola. Mai sparpagliare. Se è in 5 posti diversi, Claude non lo vede mai bene."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">13</span>
+    <h2>Google Drive — solo per condividere</h2>
+    <p>Distinguo netto: Drive non è il vault. Drive è la stampante. Lo uso solo per: condividere report con team o clienti, ricevere XLSX dai fornitori, archiviare PDF originali. Tutto il lavoro vero è nel vault locale.</p>
+    <p>Spiega il problema con Drive come vault: lento, search merda, niente versioning, niente git, niente integrazione con Claude in lettura veloce. Va bene come buffer in/out, non come base operativa.</p>
+    <div class="say"><b>Da dire:</b> "Drive = ufficio condiviso. Vault = il tuo studio privato. Non confonderli."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">14</span>
+    <h2>Memoria persistente — MEMORY.md</h2>
+    <p>Apri ~/.claude/projects/.../memory/MEMORY.md. "Questo è il diario di Claude. Si ricorda di te tra una sessione e l'altra. Profilo, preferenze, decisioni, contesto progetti."</p>
+    <p>Mostra 3-4 righe del tuo MEMORY.md. "Qui c'è scritto che parlo in caveman, che preferisco link cliccabili, che il mio brand X è di tipo Y." Lui rilegge questo a ogni sessione.</p>
+    <p>Anticipa L4 — sulla memoria approfondita e Graphify, che è il livello sopra (grafo di concetti, non file di note).</p>
+    <div class="say"><b>Da dire:</b> "Senza MEMORY.md ogni sessione è zero. Con MEMORY.md la quinta sessione comincia da dove finiva la quarta."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">15</span>
+    <h2>VSCode — l'editor</h2>
+    <p>Apri VSCode con l'estensione Claude Code. Mostra: sidebar con file, terminale integrato, Claude Code che gira dentro l'editor. "Puoi usare Claude direttamente in terminale. Io preferisco VSCode perché vedo i file mentre Claude li modifica."</p>
+    <p>Quick win: spiega come si installa l'estensione, dove si trova, come si lancia Claude da dentro. Tre click. Niente setup complicato.</p>
+    <div class="say"><b>Da dire:</b> "VSCode è opzionale ma raccomandato. Vedere il codice cambiare in tempo reale mentre Claude lavora vale i 30 secondi di setup."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">15b</span>
+    <h2>Setup Mac da zero — i 5 comandi per partire</h2>
+    <p>Apri il terminale del Mac. "Ora ti faccio vedere come si installa Claude Code partendo da una macchina pulita. 5 comandi in fila, dieci minuti totali, e sei operativo."</p>
+    <p><b>Comando 1 — Homebrew.</b> Il package manager del Mac. Se non ce l'hai già: <code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code>. Ti chiede password admin, lavora qualche minuto, finisce. Da qui in poi installi roba con <code>brew install</code> come fosse l'App Store da terminale.</p>
+    <p><b>Comando 2 — Node.js.</b> <code>brew install node</code>. Serve perché Claude Code è una libreria npm. Node ti dà <code>node</code> e <code>npm</code>.</p>
+    <p><b>Comando 3 — Claude Code.</b> <code>npm install -g @anthropic-ai/claude-code</code>. Globale (<code>-g</code>) così il comando <code>claude</code> diventa disponibile ovunque.</p>
+    <p><b>Comando 4 — Autenticazione.</b> Lanci <code>claude</code> per la prima volta. Si apre il browser, ti chiede di fare login con il tuo account Anthropic, conferma. Da quel momento Claude Code è collegato al tuo account, pronto a girare.</p>
+    <p><b>Comando 5 (opzionale) — Antigravity.</b> <code>brew install --cask antigravity</code>. Installa l'IDE che uso io come guscio. Se vuoi solo il terminale puro, saltalo — funziona uguale.</p>
+    <div class="say"><b>Da dire:</b> "Cinque comandi in fila. Homebrew, Node, Claude Code, login, opzionale Antigravity. Dieci minuti e hai esattamente il mio setup base."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">16</span>
+    <h2>way-stack (il mio GitHub) — replicare tutte le mie skill e tool con 3 comandi</h2>
+    <p>Apri github.com/Lucioway/way-stack. "Questo è il mio meta-plugin pubblico. Contiene tutte le mie skill, agent, hook, configurazioni — tutto quello che vi mostro nel corso."</p>
+    <p>Mostra il README. Tre comandi per installare: <code>git clone https://github.com/Lucioway/way-stack ~/.claude/way-stack</code>, poi <code>bash ~/.claude/way-stack/install.sh</code>, poi <code>claude</code>. In 5 minuti hai il mio setup esatto sul tuo Mac. "Non è un trucco da corso — è il mio stack vero."</p>
+    <p>Frase chiave: anticipa che nelle prossime lezioni costruisci sopra questa base. Non parti da zero — parti dal mio sistema e lo personalizzi sul tuo.</p>
+    <div class="say"><b>Da dire:</b> "3 comandi e hai sul tuo Mac quello che ho io. Da lì in poi è solo personalizzazione."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">16b</span>
+    <h2>Su Windows? — funziona, ma passa da WSL2</h2>
+    <p>Premessa onesta: <b>io uso Mac, Windows non lo padroneggio.</b> Ma qui ti do la rotta per non farti rimanere indietro se sei su PC.</p>
+    <p>Claude Code <b>non gira nativo su Windows</b>. Gli serve un terminale Unix. La soluzione ufficiale è <b>WSL2</b> — Windows Subsystem for Linux 2. In pratica: dentro Windows installi un Linux completo (Ubuntu di default) che gira come una "macchina dentro la macchina". Da quel Linux, lanci Claude Code esattamente come fai sul Mac.</p>
+    <p>Setup veloce: apri <b>PowerShell come amministratore</b>, lanci <code>wsl --install</code>. Windows scarica e installa Ubuntu da solo. Riavvii. Quando apri Ubuntu, sei in un terminale Linux normale.</p>
+    <p>Da lì: installi Node (<code>curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -</code> poi <code>sudo apt install nodejs</code>), poi <code>npm install -g @anthropic-ai/claude-code</code>, poi <code>claude</code> per autenticarti. Stessi comandi del Mac, dentro la shell Linux di WSL.</p>
+    <p>Per la guida ufficiale aggiornata di Anthropic per Windows, il link è <b>docs.claude.com/en/docs/claude-code</b>. Da lì trovi le sezioni Windows e WSL aggiornate con le ultime istruzioni.</p>
+    <div class="say"><b>Da dire:</b> "Su Windows funziona, ma serve WSL2. Io non sono il prof giusto per Windows — la guida ufficiale è su docs.claude.com. Da quando entri in WSL, sei in un Linux: i comandi sono identici al Mac."</div>
+  </div>
+
+  <div class="lesson-end">Fine L2 · CTA → L3 setup pratico</div>
+</section>
+
+<!-- =================== LEZIONE 3 =================== -->
+<section class="lesson" id="l3">
+  <div class="lesson-tag">Lezione 03 · 20–24 min</div>
+  <h1>Setup pratico: Claude Code, Antigravity e Claude Code Desktop installati da zero</h1>
+
+  <div class="point">
+    <span class="num">01</span>
+    <h2>Cosa installiamo e perché — la mappa dei 3 pezzi</h2>
+    <p>Apri una slide o una lavagna. Disegna 3 box: <b>Claude Code CLI</b> · <b>Antigravity IDE</b> · <b>Claude Code Desktop</b>. "Sono tre interfacce dello stesso cervello. Stesso Claude sotto. Cambia solo da dove ci parli."</p>
+    <p>CLI = motore. Vive nel terminale. È quello che chiama skill, hook, sub-agent, MCP. Antigravity = IDE in cui scrivi codice e lanci la CLI integrata. Claude Code Desktop = app per Mac/Windows con chat persistente, comoda per task non-coding.</p>
+    <p>"Io uso Antigravity come IDE principale, dentro ci gira la CLI. Il Desktop lo uso per chat lunghe e ricerca. Sono complementari, non alternativi."</p>
+    <div class="say"><b>Da dire:</b> "Tre porte d'ingresso, stesso Claude dentro. Le installiamo tutte e tre adesso. Su Mac live, Windows ti do la rotta a fine lezione."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02</span>
+    <h2>Step 1 Mac — Homebrew e Node</h2>
+    <p>Apri terminale. Spiega Homebrew in 10 secondi: "package manager del Mac. Tutto quello che installi da terminale passa di qui."</p>
+    <p>Lancia: <code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code>. Mentre installa, racconta cosa sta facendo. Una volta finito: <code>brew install node</code>. Verifica con <code>node -v</code> e <code>npm -v</code>.</p>
+    <p>"Node serve perché la CLI di Claude Code è una libreria npm. Senza Node, niente CLI."</p>
+    <div class="say"><b>Da dire:</b> "Homebrew e Node sono le fondamenta. Una volta soli — non ci pensi più."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">03</span>
+    <h2>Step 2 — Install Claude Code CLI globale</h2>
+    <p>Sempre nel terminale: <code>npm install -g @anthropic-ai/claude-code</code>. Spiega <code>-g</code>: "globale, lo lanci da qualsiasi cartella, non solo da una in particolare."</p>
+    <p>Quando finisce: <code>claude --version</code> per verificare. Poi <code>claude</code> nudo per partire la prima autenticazione. Si apre browser, login con account Anthropic (o Claude Pro/Max), torna in terminale. Pronto.</p>
+    <p>Prima sessione di test: in una cartella vuota lancia <code>claude</code> e chiedigli "ciao, chi sei?". Vedi che risponde. "Adesso la CLI gira. Da qui in poi è già tutto utile."</p>
+    <div class="say"><b>Da dire:</b> "Tre righe. Installato, autenticato, parla. Se hai problemi col login: <code>claude /login</code> e ripeti."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">04</span>
+    <h2>Step 3 — Install Claude Code Desktop</h2>
+    <p>Apri browser. Vai su <b>claude.com/download</b>. Scarica l'app desktop Claude per macOS. Installa, login con lo stesso account Anthropic.</p>
+    <p>Mostra l'interfaccia: chat persistente, progetti, file knowledge. "Questa è l'app che ti tieni aperta in background. La uso per chat lunghe, ricerca con knowledge files, brainstorm. Quando devo scrivere codice o lanciare agent — torno in Antigravity."</p>
+    <p>Differenza chiave: "Desktop = chat con cervello. Antigravity + CLI = mani che lavorano sul filesystem. Capisci che sono complementari quando li usi entrambi."</p>
+    <div class="say"><b>Da dire:</b> "Desktop per pensare, Antigravity + CLI per fare. Aperti tutti e due, una giornata di lavoro reale."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">05</span>
+    <h2>Step 4 — way-stack: il mio kit pubblico in 3 comandi</h2>
+    <p>Apri terminale, in Antigravity o normale. Spiega way-stack in una riga: "il mio Claude Code stack pubblicato su GitHub. Plugin, skill, orchestrator, hook. Tre comandi e te lo monti uguale al mio."</p>
+    <p>Comando 1: <code>/plugin marketplace add Lucioway/way-stack</code>. Comando 2: <code>/plugin install way-stack</code>. Comando 3: copi il CLAUDE.md root del repo dentro il tuo vault.</p>
+    <p>"Da quel momento hai GSD, BMAD, gstack, superpowers, frontend-design, cli-anything, ralph-loop, tutti i miei skill pre-cablati. Niente da configurare a mano."</p>
+    <p>Link: <b>github.com/Lucioway/way-stack</b>. README spiega tutto.</p>
+    <div class="say"><b>Da dire:</b> "6 mesi del mio lavoro, 3 comandi. Non c'è motivo di partire da zero quando puoi partire da qui."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">06</span>
+    <h2>Step 5 — Verifica che tutto comunichi</h2>
+    <p>Test live di fine setup. In Antigravity, terminale integrato. <code>claude</code>. Chiedigli: "elenca i plugin installati". Deve rispondere con way-stack visibile.</p>
+    <p>Secondo test: chiedi "che modello stai usando?". Deve rispondere con il nome del modello Anthropic corrente. Terzo test: chiedi "mostrami il CLAUDE.md attivo". Deve leggerlo e riassumertelo.</p>
+    <p>"Se tutti e tre i test passano — sei pronto. Dalla L4 in poi diamo memoria al sistema e iniziamo a costruire."</p>
+    <div class="say"><b>Da dire:</b> "Tre check rapidi. Se passano sei in pista. Se no, ricontrolla l'auth della CLI prima di tutto."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">07</span>
+    <h2>Come si lavora in Antigravity — la sessione di lavoro</h2>
+    <p>Adesso che è tutto installato, mostra il flusso reale di una giornata. Apri Antigravity. <b>File → Open Folder</b> → apri la cartella del progetto (il vault, una cartella agent, quello su cui lavori). "Antigravity lavora sempre dentro una cartella. Quella cartella è il contesto."</p>
+    <p>Apri il terminale integrato (<code>Ctrl+`</code>) e lancia <code>claude</code>. "Parte una sessione. Claude legge il CLAUDE.md di quella cartella, capisce dove sei, ed è pronto." Mostra i pannelli: editor file a sinistra, browser integrato, pannello task degli agent. "Tutto in una finestra: scrivi, vedi il browser, leggi i diff, lanci agent."</p>
+    <p>Il ciclo: gli chiedi una cosa a parole → lui propone modifiche → tu <b>leggi il diff</b> prima di accettare → approvi o correggi. "Mai accettare alla cieca. Il diff è dove controlli quello che fa." Quando il task è finito e vuoi ripartire pulito: <code>/clear</code> azzera il contesto. Chiudi il terminale = chiudi la sessione; riaprilo e <code>claude</code> per riprendere.</p>
+    <p>"Una sessione = una cartella aperta + la CLI che gira dentro. Cambi progetto = apri un'altra cartella, nuova sessione. Semplice."</p>
+    <div class="say"><b>Da dire:</b> "Apri cartella, lanci <code>claude</code>, parli a parole, leggi il diff, approvi. Questo è il 90% delle tue giornate da qui in poi."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">08</span>
+    <h2>Su Windows? — WSL2 + CLI, IDE a scelta</h2>
+    <p>Premessa identica a L2: "Io uso Mac. Windows non lo padroneggio. Ma la rotta è chiara."</p>
+    <p>Su Windows, la CLI gira dentro <b>WSL2</b> (Windows Subsystem for Linux). PowerShell amministratore → <code>wsl --install</code> → riavvio → apri Ubuntu → installi Node → <code>npm install -g @anthropic-ai/claude-code</code> → <code>claude</code> per autenticare. Stessi comandi del Mac, dentro la shell Linux di WSL.</p>
+    <p>Per l'IDE: <b>Antigravity</b> ha build Windows nativa. <b>Claude Code Desktop</b> idem. La CLI sta dentro WSL2 — quando in Antigravity apri il terminale integrato, scegli WSL come shell.</p>
+    <p>Guida ufficiale Anthropic per Windows: <b>docs.claude.com/en/docs/claude-code</b>. Sempre aggiornata, segui quella se i miei comandi qui dovessero invecchiare.</p>
+    <div class="say"><b>Da dire:</b> "Su Windows: WSL2 per la CLI, Antigravity e Desktop nativi. La logica è identica, cambia solo dove gira il terminale."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">09</span>
+    <h2>Esercizio — fai il setup ora, prima di L4</h2>
+    <p>"Adesso pausa il video. Fai i 5 step. Quando torni, in L4 diamo a Claude una memoria che non dimentica nulla. Senza la CLI installata, L4 non parte."</p>
+    <p>Checklist a schermo: ☐ Homebrew + Node installati · ☐ Claude Code CLI globale + login fatto · ☐ Antigravity installato e CLI parte dal terminale integrato · ☐ Claude Code Desktop installato e loggato · ☐ way-stack installato via /plugin · ☐ 3 test di verifica passati.</p>
+    <p>"Quando tutte le 6 spunte sono verdi, riapri il corso e vai a L4."</p>
+    <div class="say"><b>Da dire:</b> "Setup fatto = sei un costruttore. Non sei più uno spettatore. Da L4 in poi si lavora sul tuo sistema."</div>
+  </div>
+
+  <div class="lesson-end">Fine L3 · CTA → L4 memoria + Graphify</div>
+</section>
+
+<!-- =================== LEZIONE 4 =================== -->
+<section class="lesson" id="l4">
+  <div class="lesson-tag">Lezione 04 · 12–15 min</div>
+  <h1>Far ricordare e collegare tutto a Claude: memoria persistente + grafo Graphify</h1>
+
+  <div class="point">
+    <span class="num">01</span>
+    <h2>Il problema — Claude dimentica ad ogni chat</h2>
+    <p>Apri una chat nuova di Claude. Chiedigli: "Chi sono io?". Lui non sa niente. "Senza memoria, ogni sessione è zero. Devi ripetere chi sei, cosa fai, cosa vuoi, ogni volta. Costo cognitivo enorme."</p>
+    <p>Mostra l'esperimento contrario nel tuo terminale: apri Claude Code, chiedi "Chi sono io?". Lui risponde con dettagli precisi su Lucio. Perché? Ha letto MEMORY.md. Questa è la differenza tra chatbot e collaboratore.</p>
+    <div class="say"><b>Da dire:</b> "Senza memoria non lavori — chatti. Per costruire serve memoria. Punto."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02</span>
+    <h2>Auto-memory MEMORY.md — i 4 tipi (user, feedback, project, reference)</h2>
+    <p>Apri MEMORY.md. Mostra i 4 tipi. User — chi sei, ruolo, expertise. Feedback — preferenze e regole su come lavorare. Project — stato dei progetti attivi, decisioni, contesto. Reference — pointer a sistemi esterni (Linear, Notion, Drive).</p>
+    <p>Mostra come si salva una memoria: file separato per topic in memory/, riga nell'index MEMORY.md. Esempio reale: feedback_caveman.md, project_leishape_meta_ads.md, reference_telegram_groups.md.</p>
+    <p>Auto-attivazione: l'AGENT SDK la salva da solo durante la conversazione quando rileva fatti durevoli. Tu puoi forzarla dicendo "ricordati che…".</p>
+    <div class="say"><b>Da dire:</b> "4 tipi di memoria. User, feedback, project, reference. Non sbagli mai se rispetti la tassonomia."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">03</span>
+    <h2>Cos'è Graphify</h2>
+    <p>Apri il grafo Graphify in browser. Mostra la galassia di nodi. "Graphify trasforma la tua cartella di markdown in un grafo navigabile. Concetti = nodi, link tra concetti = archi."</p>
+    <p>Differenza con MEMORY.md: MEMORY è elenco piatto di fatti. Graphify è ragnatela di concetti che si parlano tra loro. Se MEMORY è il diario, Graphify è la mind map dell'intero vault.</p>
+    <p>Perché serve: Claude può interrogarlo via MCP. "Chi sono i nodi più collegati al concetto 'retention'?". Risposta in 2 secondi. Senza Graphify, dovrebbe grep-pare tutto il vault.</p>
+    <div class="say"><b>Da dire:</b> "MEMORY.md = elenco. Graphify = mappa. Servono entrambe."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">04</span>
+    <h2>Cosa indicizzare e cosa no</h2>
+    <p>Indicizza: PROJECTS attivi, KNOWLEDGE (pattern, decisioni, retro), Brains. NON indicizzare: REFERENCE pesante (PDF originali — sono fonte non concetto), SESSIONS automatiche (rumore), _GraphifyMeta/ stesso (loop).</p>
+    <p>Mostra il file di config con i pattern di include/exclude. Una scelta sbagliata qui = grafo rumoroso. Una scelta giusta = grafo nitido.</p>
+    <div class="say"><b>Da dire:</b> "Più non è meglio. Indicizza solo ciò che ha senso semantico. Il rumore degrada il segnale."</div>
+  </div>
+
+  <div class="lesson-end">Fine L4 · CTA → L5 build del primo agent</div>
+</section>
+
+<!-- =================== LEZIONE 5 =================== -->
+<section class="lesson" id="l5">
+  <div class="lesson-tag">Lezione 05 · 35–40 min</div>
+  <h1>Build live del primo agent: la agent factory del way-stack, step by step</h1>
+
+  <div class="point">
+    <span class="num">01</span>
+    <h2>Perché questo agent — un build, tutto il sistema</h2>
+    <p>Frame della lezione: finora hai parlato CON Claude. Un agent è Claude che lavora DA SOLO. Il primo agent lo strutturiamo apposta così, perché un solo build ci fa toccare tutto: le capacità agentiche (terminale, file, tool esterni, API), tutti i pezzi del way-stack che abbiamo installato nella lezione scorsa visti mentre lavorano, e il materiale che produce — che nella Lezione 6 diventa la memoria con Graphify.</p>
+    <p>Mostra la catena: YouTube → audio → trascrizione → lessons nel vault → PDF → Drive → Telegram. "Non è un esempio a caso. Ogni step usa un pezzo diverso del way-stack. E niente va sprecato: l'output di oggi è l'input della prossima lezione."</p>
+    <div class="say"><b>Da dire:</b> "Un build solo, e alla fine avete visto lavorare ogni pezzo del way-stack. Step by step, adesso."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02</span>
+    <h2>Step 1 — Prima cosa: andiamo a creare l'agent (brainstorming, plugin Superpowers)</h2>
+    <p>Si annuncia il piano: "creiamo l'agent del tool YouTube". Ma prima del prompt grande, si chiarisce l'idea. Qui entra il primo pezzo del way-stack: <b>Superpowers</b>. <b>Cos'è Superpowers:</b> un plugin che insegna a Claude un metodo di lavoro — prima fa le domande, poi scrive il piano, poi costruisce, poi controlla. Senza, parte a scrivere codice a caso come uno studente che non ha letto la consegna.</p>
+    <p>Dici a Claude: "Brainstorm: voglio un agent che da un canale YouTube mi crea un archivio ordinato nel vault. Aiutami a definirlo." La skill brainstorming prende il controllo e ti intervista: quanti video? solo audio? che formato per le lessons? dove ti notifico? Le tue risposte diventano i requisiti.</p>
+    <div class="say"><b>Da dire:</b> "Non si parte mai dal codice. Si parte dalle domande. Claude vi intervista finché l'idea non è chiara."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">03</span>
+    <h2>Step 2 — La agent factory: il prompt completo (/agent-spec)</h2>
+    <p>Secondo pezzo del way-stack: la <b>agent factory</b>. <b>Cos'è la agent factory:</b> la catena di montaggio degli agent. Cinque comandi in fila: <code>/agent-spec</code> (scrive il contratto), <code>/agent-tasks</code> (la lista dei lavori), <code>/agent-execute</code> (li esegue), <code>/agent-verify</code> (controlla), <code>/agent-ship</code> (consegna). Entra un'idea, esce un agent finito.</p>
+    <p>Lanci <code>/agent-spec</code> e gli dai tutto quanto in un prompt: "Voglio un agent che, dato l'URL di un canale YouTube: 1) scarica tutti i video in solo audio, 2) li trascrive con Whisper, 3) trasforma ogni trascrizione in lessons da 200-400 parole dentro il vault, una per concetto con take-away finale, 4) genera un PDF di presentazione dell'archivio in grafica SHIN-EN, 5) lo carica su Drive, 6) mi manda notifica Telegram col PDF allegato. Vincoli: niente video sopra 1 ora, tutto in italiano."</p>
+    <p>Il comando genera SPEC.md: input, output, vincoli, in italiano semplice. Regola d'oro: mai codice prima della spec. La spec è il contratto — Claude sa cosa costruire, tu sai cosa verificare alla fine.</p>
+    <div class="say"><b>Da dire:</b> "Un prompt, tutto dentro. Dieci righe di italiano valgono più di cento righe di codice scritto a caso."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">04</span>
+    <h2>Step 3 — /agent-tasks + /agent-execute: Claude costruisce da solo</h2>
+    <p>Lanci <code>/agent-tasks</code>: la spec diventa una lista di lavori numerati — scarica, trascrivi, organizza, impagina, carica, notifica. Mostri la lista a schermo: "questa è la to-do list dell'agent, l'ha scritta lui dalla spec".</p>
+    <p>Poi <code>/agent-execute</code>: Claude esegue i task uno alla volta, e ogni task completato è un salvataggio (un commit) — se qualcosa va storto, torni indietro di un passo, non ricominci da zero. Da qui in poi tu guardi e commenti: i prossimi step della lezione sono i task che l'agent sta eseguendo da solo.</p>
+    <div class="say"><b>Da dire:</b> "Spec → tasks → execute. Da questo momento il lavoro lo fa lui. Noi guardiamo dentro ogni pezzo."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">05</span>
+    <h2>Step 4 — Scaricare i video (yt-dlp, il terminale)</h2>
+    <p><b>Cos'è yt-dlp:</b> un programma gratuito che scarica video e audio da YouTube (e da mille altri siti). Lo usa mezzo internet, si comanda solo da terminale — perfetto per un agent.</p>
+    <p>Prima capacità agentica pura: il terminale. Il task dice "scarica tutti i video del canale in sources/, solo audio". Claude installa yt-dlp da solo se manca, lancia il download, e i file .mp3 appaiono in sources/.</p>
+    <p>Punto didattico: non hai aperto un browser, non hai cliccato niente. Hai descritto il risultato e Claude ha scelto il tool, l'ha installato e l'ha usato. Questa è la differenza tra usare un computer e dirigere un computer.</p>
+    <div class="say"><b>Da dire:</b> "Io non ho scaricato niente. Ho detto cosa volevo. Lui ha fatto. Memorizzate questa sensazione."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">06</span>
+    <h2>Step 5 — Trascrivere (Whisper)</h2>
+    <p><b>Cos'è Whisper:</b> un programma AI (fatto da OpenAI, quelli di ChatGPT) che ascolta un audio e scrive parola per parola quello che sente. Uno stenografo instancabile: gratis, gira sul tuo computer, niente abbonamenti.</p>
+    <p>Claude lancia Whisper sugli audio: da .mp3 a .txt. Mentre gira (1-2 minuti a video), spieghi cosa sta succedendo: il parlato diventa testo, in locale.</p>
+    <p>Apri un transcript appena generato. Mostra che è testo grezzo: niente punteggiatura perfetta, ripetizioni, intercalari. "Questo è il grezzo. Non si interroga. Adesso lo raffiniamo."</p>
+    <div class="say"><b>Da dire:</b> "Audio → testo, gratis, in locale. Qualsiasi video, qualsiasi podcast, qualsiasi vocale diventa testo lavorabile."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">07</span>
+    <h2>Step 6 — Da transcript a lessons (vault-ingest e le skill del vault)</h2>
+    <p>Terzo pezzo del way-stack: le <b>vault skills</b>, il bibliotecario della vostra libreria. Sono tre. <b>vault-ingest</b>: prende un file grezzo, lo spezza in pagine ordinate, dà un titolo a ognuna e aggiorna l'indice — tu porti il libro, lui lo sistema sullo scaffale giusto. <b>vault-query</b>: trova le risposte quando cerchi qualcosa nel vault. <b>vault-lint</b>: tiene tutto pulito e segnala il disordine. Oggi lavora la prima.</p>
+    <p>Il cuore della pipeline: Claude legge ogni transcript e lo spezza in lessons da 200-400 parole, una per concetto, con take-away finale, dentro il vault e con l'indice aggiornato.</p>
+    <p>Apri lessons/ e leggi una lesson a voce alta. Confronta col transcript grezzo: stesso contenuto, forma completamente diversa. "Questo adesso è organizzato. E nella prossima lezione diventa interrogabile con Graphify."</p>
+    <div class="say"><b>Da dire:</b> "Il grezzo diventa pillole dentro il vault. Una lesson = un concetto. Questo è il formato che l'AI legge meglio."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">08</span>
+    <h2>Step 7 — Il PDF in grafica SHIN-EN (plugin frontend-design)</h2>
+    <p>Quarto pezzo del way-stack: il plugin <b>frontend-design</b> + le 7 design skills installate con lo stack. <b>Cos'è frontend-design:</b> il plugin che fa uscire pagine e PDF belli senza pagare un designer — niente grafica "da AI", direzione precisa. E <b>SHIN-EN</b> è la mia grafica: bianco e nero, scritte grandi, zero decorazioni inutili. È nel way-stack — la usate anche voi, gratis.</p>
+    <p><b>Cos'è Chrome headless:</b> Chrome senza finestra. Apre la pagina di nascosto e la stampa in PDF, tutto da terminale. È il trucco per trasformare qualsiasi pagina web in un documento.</p>
+    <p>L'agent genera il PDF di presentazione dell'archivio: chi è il creator, quante lessons, gli argomenti, i 10 take-away migliori. Claude scrive la pagina HTML in SHIN-EN, Chrome headless la stampa in PDF. Apri il PDF: "questo l'ha impaginato lui. Nessun designer, nessun Canva."</p>
+    <div class="say"><b>Da dire:</b> "Qualsiasi documento vi serva — report, guide, preventivi — questo è il pattern. E con SHIN-EN esce già bello."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">09</span>
+    <h2>Step 8 — Drive + notifica Telegram (le API esterne)</h2>
+    <p><b>Cos'è un'API:</b> la porta di servizio che un sito offre ai programmi. Tu entri da Drive dal browser; un agent entra dall'API, senza click. <b>Cos'è un bot Telegram:</b> un contatto Telegram per i programmi — l'agent gli passa il messaggio, lui te lo recapita. Si crea in 2 minuti con BotFather, gratis.</p>
+    <p>Capacità agentica finale: le API esterne. L'agent carica il PDF su Drive nella cartella giusta e stampa il link. Poi manda la notifica Telegram: "Archivio pronto: N lessons, ecco il PDF" con documento allegato. Tira fuori il telefono e mostra la notifica arrivare in diretta.</p>
+    <p>Punto didattico: l'output di un agent deve arrivare dove vivi tu — non in un log che non leggerai mai.</p>
+    <div class="say"><b>Da dire:</b> "L'agent ha finito e me l'ha detto sul telefono. Io potevo essere al mare. Questo cambia il rapporto col lavoro."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">10</span>
+    <h2>Step 9 — Verifica: /agent-verify + plugin code-review</h2>
+    <p>Si chiude il giro della agent factory: <code>/agent-verify</code> controlla che ogni punto della SPEC sia coperto. Poi l'ultimo pezzo del way-stack di oggi: il plugin <b>code-review</b>. <b>Cos'è code-review:</b> prima di usare il codice, lo fa controllare da più revisori AI insieme — uno cerca i bug, uno i problemi di sicurezza, uno le cose scritte male. Trovano gli errori che a occhio non vedi.</p>
+    <p>Mostra una finding vera se esce — è il momento più educativo. Regola insegnata: mai fidarsi del primo run. La spec dice cosa, la verify conferma che c'è.</p>
+    <div class="say"><b>Da dire:</b> "Spec all'inizio, verify alla fine. È un cerchio che si chiude. Tutto quello che sta in mezzo lo fa l'agent."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">11</span>
+    <h2>Il run completo — un comando, davanti alla camera</h2>
+    <p>Gran finale: cartella pulita, lanci l'agent una volta sola con l'URL del canale. Mentre gira, ricapitoli a voce gli step che si stanno eseguendo da soli. Quando arriva la notifica Telegram, pausa drammatica.</p>
+    <p>Recap della potenza mostrata: brainstorming, spec, tasks, execute, terminale, install di tool, AI pipeline, vault, PDF in SHIN-EN, cloud, messaging, verify. "Tutto questo è UN agent costruito con la agent factory. E voi adesso sapete leggerne ogni pezzo."</p>
+    <div class="say"><b>Da dire:</b> "Un comando. Tutto il sistema. Un archivio perfetto nel vault. E adesso lo mettiamo in automatico."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">12</span>
+    <h2>Automazione giornaliera — ogni mattina, da solo (launchd)</h2>
+    <p><b>Cos'è launchd:</b> la sveglia del Mac. A un orario fisso sveglia un programma e lo fa partire, anche se tu non ci sei (su Linux/Windows si chiama cron / Utilità di pianificazione).</p>
+    <p>Ultimo upgrade, il più potente: schedulare l'agent. Dici a Claude: "schedula l'agent ogni mattina alle 7: controlla i video nuovi del canale, aggiorna l'archivio e mandami su Telegram il riassunto in PDF". Claude crea la sveglia da solo — tu non tocchi niente.</p>
+    <p>Punto didattico: l'agent diventa incrementale — non riscarica tutto, controlla solo cosa c'è di nuovo, aggiorna lessons e indice, e manda il PDF solo dei contenuti nuovi. Mostra il messaggio Telegram di una mattina vera: "2 video nuovi, ecco il riassunto."</p>
+    <div class="say"><b>Da dire:</b> "Ogni mattina, caffè e PDF. Il canale lo segue lui, voi leggete solo il riassunto. Questo è un agent: lavora anche quando non ci siete."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">13</span>
+    <h2>La mappa completa del way-stack — tutto quello che avete installato</h2>
+    <p>Recap finale di TUTTO quello che è entrato col way-stack, anche i pezzi che oggi non abbiamo toccato. <b>L'orchestrator</b> (il CLAUDE.md principale): il vigile che smista — legge la tua richiesta e decide da solo quale skill o plugin usare. <b>Il vault PARA</b>: la libreria dove vive tutto (l'abbiamo riempito oggi). <b>Gli hook di sessione</b>: il diario automatico — a fine sessione scrivono da soli cosa è stato fatto.</p>
+    <p>I 5 plugin: <b>superpowers</b> (il metodo: domande → piano → build → controllo — usato), <b>frontend-design</b> (grafica — usato), <b>code-review</b> (revisori AI — usato), <b>cli-anything</b> (comanda da terminale i programmi con interfaccia grafica, tipo GIMP o Blender — non usato oggi), <b>ralph-loop</b> (ripete il lavoro da solo, un pezzo alla volta, finché la lista non è finita — per i lavori lunghi tipo "sistemami 100 pagine" — non usato oggi).</p>
+    <p>E poi: la <b>agent factory</b> (i 5 comandi /agent-* — usata tutta), le <b>vault skills</b> (ingest usata, query e lint le vedrete usare sempre), le <b>7 design skills</b> (regole di design che si attivano da sole quando si tocca grafica). "Tutto questo ce l'avete già installato. Oggi l'avete visto lavorare insieme."</p>
+    <p>Ponte verso la L6: "il materiale è scaricato, trascritto, organizzato, e si aggiorna da solo ogni giorno. Ma Claude ancora non lo SA — non è memoria, è archivio. Nella prossima lezione lo trasformiamo in un knowledge vero: cartella ordinata, database di lessons e grafo interrogabile con Graphify."</p>
+    <div class="say"><b>Da dire:</b> "Adesso sapete cosa c'è dentro il way-stack, pezzo per pezzo, e l'avete visto montare un agent vero. Prossima lezione: i transcript diventano un knowledge interrogabile con Graphify."</div>
+  </div>
+
+  <div class="lesson-end">Fine L5 · CTA → L6 Graphify + brain</div>
+</section>
+
+<!-- =================== LEZIONE 6 =================== -->
+<section class="lesson" id="l6">
+  <div class="lesson-tag">Lezione 06 · 15–20 min</div>
+  <h1>Graphify: il grafo del knowledge — i transcript di Hormozi diventano un brain interrogabile</h1>
+
+  <div class="point">
+    <span class="num">01</span>
+    <h2>Apertura — cosa vedrai in questa lezione</h2>
+    <p><b>A schermo:</b> slide di apertura, poi il vault con la cartella <code>Brains/Hormozi/</code> piena di transcript.</p>
+    <div class="say"><b>Da dire:</b> "Nella scorsa lezione l'agent ha scaricato e trascritto tutti i video del canale YouTube di Hormozi. Adesso nel vault ho una cartella piena di file markdown: ogni file è un video trascritto. Bello — ma c'è un problema. Se voglio sapere cosa dice Hormozi sul pricing, dovrei aprire i file uno per uno e cercare a mano. Oppure far leggere tutto a Claude ogni volta, bruciando una montagna di token. Oggi risolviamo questo problema con uno strumento che si chiama Graphify: trasformiamo questa cartella in un grafo — una mappa di concetti collegati — che Claude può interrogare in pochi secondi. Lezione breve, molto pratica: alla fine avrete il vostro primo brain interrogabile."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02</span>
+    <h2>Cos'è Graphify — apri il GitHub e spiegalo semplice</h2>
+    <p><b>A schermo:</b> apri il browser su <code>github.com/safishamsi/graphify</code>. Scorri lentamente la pagina del repo: titolo, descrizione, screenshot del grafo se presente.</p>
+    <div class="say"><b>Da dire:</b> "Questo è Graphify. È un progetto open source, gratuito, e gira tutto in locale sul vostro computer: i vostri dati non escono da qui. Cosa fa? Tre cose, semplicissime. Uno: legge i vostri file markdown — i file di testo del vault. Due: estrae i concetti che trova dentro — ogni concetto diventa un puntino, che si chiama nodo. Tre: capisce quali concetti sono collegati tra loro — e ogni collegamento diventa una linea, che si chiama arco. Il risultato è una mappa: la apri nel browser e la navighi, oppure la colleghi a Claude che la interroga al posto tuo."</div>
+    <div class="say"><b>Da dire (analogia):</b> "Pensatela così: i vostri file sono un libro senza indice. Per trovare qualcosa dovete sfogliare tutto. Graphify costruisce l'indice — ma un indice intelligente, che non vi dice solo 'dove sta scritto pricing', vi dice anche 'pricing è collegato a garanzia, a offerta, a valore percepito'. È la differenza tra cercare e capire."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">03</span>
+    <h2>Perché un grafo — elenco vs mappa, e i 3 benefici</h2>
+    <p><b>A schermo:</b> slide "elenco vs mappa" (la rivedi dalla L4 in versione veloce), poi slide con i 3 benefici.</p>
+    <div class="say"><b>Da dire:</b> "Nella lezione 4 vi ho raccontato l'idea: un elenco di file vi dice cosa avete, una mappa vi dice come le cose si collegano. Questa idea viene da Andrej Karpathy, uno dei ricercatori AI più importanti al mondo: il modo migliore per dare conoscenza a un'AI non è un mucchio di documenti, ma una rete di concetti collegati — come una Wikipedia personale. Il grafo è esattamente questo."</div>
+    <p>I 3 benefici, da elencare con calma:</p>
+    <ul>
+      <li><b>Risparmio token.</b> Senza grafo, per rispondere a una domanda Claude deve rileggere decine o centinaia di file: contesto pieno, costo alto, risposte lente. Col grafo salta dritto al nodo giusto e legge solo quello e i suoi vicini. Tre nodi invece di trecento file.</li>
+      <li><b>Collegamenti che non ricordavi.</b> Il grafo vede relazioni tra documenti lontani: un video di due anni fa e uno di ieri che parlano dello stesso concetto finiscono collegati. Tu non lo ricordavi — il grafo sì.</li>
+      <li><b>Risposte citate.</b> Ogni nodo punta al file sorgente. Quando Claude risponde, ti dice anche da quale video viene l'informazione. Niente invenzioni: puoi sempre verificare.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Riassunto in una frase: elenco vuol dire che cerchi tu. Mappa vuol dire che chiedi e basta. E paghi una frazione dei token."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">04</span>
+    <h2>Il punto di partenza — i transcript di Hormozi nel vault</h2>
+    <p><b>A schermo:</b> terminale o Finder dentro <code>Brains/Hormozi/</code>. Apri 2 transcript a caso e scorri il contenuto.</p>
+    <div class="say"><b>Da dire:</b> "Questo è il materiale di partenza: la cartella che l'agent della lezione 5 ha riempito da solo. Ogni file è un video del canale di Hormozi, trascritto in markdown. Guardate dentro: titolo del video e tutto il parlato, pulito. È materiale perfetto per un grafo, per un motivo preciso: Hormozi parla sempre degli stessi grandi temi — offerte, prezzo, garanzie, acquisizione clienti — da angolazioni diverse. Tanti file, tanti concetti che si ripetono e si incrociano. Il grafo adora questa roba: più i concetti si incrociano, più la mappa diventa ricca."</div>
+    <div class="say"><b>Da dire (timeline):</b> "Tenete a mente la timeline: due giorni fa questi erano video su YouTube. Ieri sono diventati file nel mio vault, in automatico. Tra cinque minuti saranno un grafo interrogabile. Questo è il percorso che voglio vi resti in testa."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">05</span>
+    <h2>Install + build — 3 comandi e il grafo nasce</h2>
+    <p><b>A schermo:</b> terminale pulito. Digiti i comandi dal vivo, uno alla volta.</p>
+    <p>I 3 comandi di installazione (mostrali e commentali):</p>
+    <ul>
+      <li><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code> — installa uv, il gestore di pacchetti Python (se non ce l'hai già dalla L5)</li>
+      <li><code>uv tool install graphifyy</code> — installa Graphify. <b>Attenzione al nome:</b> il pacchetto si scrive con la doppia y finale, graphif-y-y. Il comando invece è <code>graphify</code> con una sola y.</li>
+      <li><code>graphify --help</code> — se vedi la schermata di aiuto, è installato.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Tre comandi, due minuti. Nessuna configurazione, nessun server, nessun abbonamento. Occhio solo al nome del pacchetto: doppia y quando installate, una sola y quando lo usate. Ve lo dico perché è l'errore numero uno."</div>
+    <p>Poi la build. In Claude Code dici semplicemente: <i>"costruisci il grafo Graphify della cartella Brains/Hormozi"</i> — oppure lanci il comando diretto sulla cartella. Mostra l'output mentre gira: scansiona i file, estrae i nodi, calcola gli archi.</p>
+    <div class="say"><b>Da dire (mentre gira):</b> "Guardate cosa sta facendo: sta leggendo ogni transcript, sta tirando fuori i concetti e sta calcolando i collegamenti. Su un canale intero ci mette uno-tre minuti. Io nel frattempo non faccio niente: questo è il punto. Il lavoro che una persona farebbe in settimane — leggere tutto, schedare tutto, collegare tutto — qui succede da solo."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">06</span>
+    <h2>Il grafo dal vivo — il momento "wow"</h2>
+    <p><b>A schermo:</b> apri il grafo HTML generato nel browser. Lascia qualche secondo di silenzio mentre la mappa si carica e si dispone. Poi naviga: zoom out totale, click su un nodo grosso, zoom sulle comunità di colore.</p>
+    <div class="say"><b>Da dire:</b> "Eccolo. Questo è il canale YouTube di Hormozi visto dall'alto. Ogni puntino è un concetto. Ogni linea è un collegamento tra due concetti. I colori che vedete sono le comunità: gruppi di concetti che parlano dello stesso tema — qui c'è tutto il blocco sulle offerte, qui il pricing, qui l'acquisizione. Nessuno ha raggruppato niente a mano: i temi sono emersi da soli dai contenuti."</div>
+    <p>Click su un nodo centrale — "pricing" o "offer" — e mostra i vicini che si accendono.</p>
+    <div class="say"><b>Da dire:</b> "Clicco su pricing e guardate cosa succede: si accendono tutti i concetti collegati — garanzia, valore percepito, sconti, posizionamento. Questo nodo era sparso dentro decine di video diversi. Adesso è un punto solo, con tutte le sue connessioni. E ricordatevi: due giorni fa questa roba era una playlist di YouTube."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">07</span>
+    <h2>Test di interrogazione — Claude parla col grafo</h2>
+    <p><b>A schermo:</b> terminale. Prima il collegamento MCP, poi le query dal vivo in Claude Code.</p>
+    <p>Il collegamento: <code>claude mcp add graphify-hormozi …</code> puntando al grafo appena creato. Richiamo veloce alla L4: MCP è la presa di corrente — collega Claude a un sistema esterno, in questo caso il grafo.</p>
+    <div class="say"><b>Da dire:</b> "Un comando solo e Claude è collegato al grafo. Da questo momento non deve più leggere i file: interroga la mappa direttamente. Facciamo tre test, dal facile al difficile."</div>
+    <p>Le 3 query dal vivo (leggi le risposte a voce e commenta):</p>
+    <ul>
+      <li><b>Query 1 — i god-node:</b> "Quali sono i concetti più collegati del knowledge di Hormozi?" → escono i nodi centrali: offer, value, pricing. Commento: questi sono i pilastri del suo pensiero, trovati matematicamente.</li>
+      <li><b>Query 2 — il percorso:</b> "Che collegamento c'è tra pricing e garanzia?" → il grafo mostra il path, due-tre salti. Commento: questa è una domanda che nessuna ricerca per parola chiave può fare.</li>
+      <li><b>Query 3 — la domanda secca:</b> "Cosa dice Hormozi sugli sconti?" → risposta in pochi secondi, con i file citati. Commento: apri uno dei file citati e fai vedere che la risposta è vera.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Guardate l'ultima cosa, la più importante: i token. Per rispondere ha letto tre nodi, non trecento file. Risposta più veloce, più precisa, e dieci volte più economica. Questo è il motivo per cui si costruisce il grafo."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">08</span>
+    <h2>Come usarlo davvero — il vault intero o i sottografi (i brain)</h2>
+    <p><b>A schermo:</b> slide con i due modi d'uso, poi un attimo sul vault per indicare le cartelle.</p>
+    <div class="say"><b>Da dire:</b> "Chiudo con la parte strategica: come si usa questa cosa nella vita vera. Due modi. Modo uno: il grafo del vault. Puntate Graphify sulle cartelle più importanti del vostro vault — le decisioni, i pattern, il knowledge accumulato — e Claude ha la mappa di tutto il vostro sistema. Attenzione: non tutto il vault, solo il segnale. I PDF pesanti, le sessioni automatiche, la roba temporanea restano fuori — il rumore degrada la mappa."</div>
+    <div class="say"><b>Da dire:</b> "Modo due: i sottografi. Un grafo dedicato per ogni knowledge specifico — come abbiamo fatto oggi con Hormozi. Ogni sottografo è quello che io chiamo un brain: un esperto interrogabile, isolato, economico. Io ne ho diversi: Hormozi per le offerte, esperti di nutrizione, di marketing, di creative strategy. Ognuno risponde solo sulla sua materia, senza mischiarsi con gli altri. E nel bonus del corso costruiremo insieme il brain più utile per chi fa ecommerce: il brain marketing, fatto coi vostri documenti."</div>
+    <p>Recap del metodo in una riga: <b>transcript → grafo → MCP → domande.</b> Vale per qualsiasi fonte: un altro canale, un corso comprato, i documenti del brand.</p>
+    <div class="say"><b>Da dire (chiusura + CTA):</b> "Ricapitolando: oggi avete visto cos'è Graphify, perché un grafo batte un elenco, e avete il metodo completo — transcript, grafo, MCP, domande. Il vostro primo brain è vivo. Dalla prossima lezione cambiamo marcia: colleghiamo Claude al vostro negozio. Shopify dal terminale — setup completo e il primo agent che gestisce lo store. Ci vediamo nella lezione 7."</div>
+  </div>
+
+  <div class="lesson-end">Fine L6 · CTA → L7 Shopify setup</div>
+</section>
+
+<!-- =================== LEZIONE 7 =================== -->
+<section class="lesson" id="l7">
+  <div class="lesson-tag">Lezione 07 · 30–35 min</div>
+  <h1>Shopify dentro Claude Code: setup, app dev con gli scopes, e l'agent frontend + backend</h1>
+
+  <div class="point">
+    <span class="num">01</span>
+    <h2>Apertura — perché collegare Shopify a Claude</h2>
+    <p><b>A schermo:</b> admin Shopify aperto da un lato, terminale con Claude Code dall'altro.</p>
+    <div class="say"><b>Da dire:</b> "Tutto quello che fate nell'admin Shopify a mano — caricare prodotti, cambiare prezzi, modificare l'inventario, toccare il tema, leggere gli ordini — Claude lo può fare al posto vostro, via API. Più veloce, ripetibile, senza errori di click. L'admin Shopify è fatto per le mani. L'API è fatta per gli agent. Da oggi lavorate con la seconda. Il piano di oggi: prima il setup — creiamo l'app dev e le chiavi di accesso — poi costruiamo l'agent che gestisce lo store, sia lato backend che lato frontend. Nella prossima lezione lo mettiamo al lavoro sul serio: modifiche vere e replica completa di una product page."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02</span>
+    <h2>Step 1 — L'app dev: creazione e scopes</h2>
+    <p><b>A schermo:</b> admin Shopify → Settings → Apps and sales channels → Develop apps → Create an app. Fai tutto il giro dal vivo.</p>
+    <div class="say"><b>Da dire:</b> "Prima cosa: l'app custom — o app dev. Cos'è? È la porta di servizio del vostro store. La create in due minuti dall'admin e vi dà la chiave con cui i programmi entrano al posto vostro. Senza app, niente API. Andiamo: Settings, Apps, Develop apps, Create an app. Nome: la chiamo claude-store-agent, così so subito a cosa serve."</div>
+    <p>Poi la parte importante: gli <b>scopes</b>. Vai in Configuration → Admin API integration e spiega cosa stai spuntando.</p>
+    <div class="say"><b>Da dire:</b> "Adesso gli scopes. Cos'è uno scope? È un permesso: dice all'app cosa può toccare e cosa no. Read vuol dire solo leggere, write vuol dire anche modificare. La regola è una: dai solo i permessi che ti servono — si chiama principio del minimo privilegio. Per il nostro agent ne servono quattro coppie: <b>products</b> read e write — per creare e modificare prodotti; <b>inventory</b> read e write — per le giacenze; <b>orders</b> in sola lettura — gli ordini li leggiamo, non li tocchiamo; e <b>themes</b> read e write — per il lato frontend, il tema. Tutto il resto lo lasciate spento. Se un domani serve altro, tornate qui e aggiungete."</div>
+    <p>Salva la configurazione e installa l'app sullo store.</p>
+  </div>
+
+  <div class="point">
+    <span class="num">03</span>
+    <h2>Step 2 — Il token: generalo e mettilo al sicuro</h2>
+    <p><b>A schermo:</b> tab API credentials → Install app → Reveal token once. Poi il terminale col file .env.</p>
+    <div class="say"><b>Da dire:</b> "Installata l'app, Shopify genera l'Admin API access token: la chiave vera e propria. Attenzione: ve la mostra UNA volta sola. La copiate subito e la mettete in un file .env dentro la cartella del progetto — due righe: SHOPIFY_STORE con l'indirizzo del negozio, e SHOPIFY_TOKEN con la chiave. Mai dentro gli script, mai in chat pubbliche, mai su GitHub. Il .env resta sul vostro computer e basta."</div>
+    <p>Mostra il file .env nel progetto (token offuscato a video):</p>
+    <ul>
+      <li><code>SHOPIFY_STORE=tuostore.myshopify.com</code></li>
+      <li><code>SHOPIFY_TOKEN=shpat_••••••••••••</code></li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Ultima cosa sul token: la rotazione. Mettete un promemoria a sei mesi per rigenerarlo. Un token che gira da anni è un rischio inutile. App custom, token in .env, scadenza in calendario: tre cose, non più."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">04</span>
+    <h2>Step 3 — Il primo comando: leggere lo store dal terminale</h2>
+    <p><b>A schermo:</b> Claude Code nel progetto. Detti la richiesta in italiano e mostri la risposta.</p>
+    <div class="say"><b>Da dire:</b> "Momento della verità. Apro Claude Code nella cartella del progetto e gli chiedo, in italiano: dammi gli ultimi cinque ordini dello store. Guardate: legge il .env, chiama l'API di Shopify col token, e gli ordini arrivano in chat. Numero, data, totale, cliente. Avete appena letto il vostro store senza aprirlo."</div>
+    <p>Secondo comando di prova: <i>"quanti prodotti attivi ho e quali sono i 3 più recenti?"</i> — risposta in chat.</p>
+    <div class="say"><b>Da dire:</b> "Ogni domanda sull'admin adesso è una frase in italiano. Niente più menu da navigare. Da qui in poi l'admin lo aprite per controllare, non per lavorare."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">05</span>
+    <h2>Step 4 — Theme CLI: il tema diventa una cartella di file</h2>
+    <p><b>A schermo:</b> terminale. Installi Shopify CLI e lanci il pull del tema.</p>
+    <div class="say"><b>Da dire:</b> "Passiamo al lato frontend: il tema. Shopify ha una CLI ufficiale — un programma da terminale — che vi serve per una cosa sola ma fondamentale: trasformare il tema in una cartella di file sul vostro computer. I comandi sono tre. <b>shopify theme pull</b>: scarica il tema in locale. <b>shopify theme dev</b>: apre un'anteprima live che si aggiorna mentre modificate. <b>shopify theme push</b>: carica le modifiche sullo store."</div>
+    <p>Lancia <code>shopify theme pull</code> e apri la cartella scaricata: sections/, templates/, assets/, snippets/.</p>
+    <div class="say"><b>Da dire:</b> "Guardate cosa è successo: il tema non è più una scatola nera dentro l'admin. È una cartella di file — file Liquid, che è il linguaggio dei temi Shopify. E qui scatta il punto chiave di tutto il corso: tutto quello che è un file, Claude lo sa leggere e modificare. Pull, dev, push. Ricordatevi questi tre."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">06</span>
+    <h2>Step 5 — La regola sacra: dev theme separato</h2>
+    <p><b>A schermo:</b> admin → Online Store → Themes → Duplicate sul tema live.</p>
+    <div class="say"><b>Da dire:</b> "Prima di costruire l'agent, la regola di sicurezza più importante di tutto il blocco Shopify: non si lavora MAI sul tema live. Mai. Si duplica il tema — Themes, Duplicate, due click — e tutte le modifiche vanno sul duplicato, il dev theme. Perché? Esempio concreto: un errore di sintassi nel Liquid sul tema live significa store rotto davanti ai clienti che stanno comprando in quel momento. Lo stesso errore sul dev theme non lo vede nessuno: lo sistemate con calma e poi pubblicate. Dev theme è sacro. Live è produzione. Mai mischiare. E questa regola adesso la scriviamo DENTRO l'agent, così non dipende dalla vostra memoria."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">07</span>
+    <h2>Step 6 — Build dell'agent Shopify con la agent factory</h2>
+    <p><b>A schermo:</b> Claude Code, lanci <code>/agent-spec</code> e detti il contratto a voce, per intero.</p>
+    <div class="say"><b>Da dire:</b> "E ora il pezzo grosso: costruiamo l'agent. Stesso identico metodo della lezione 5 — la agent factory — cambia solo il dominio. Lancio /agent-spec e detto il contratto: Voglio un agent che gestisce il mio store Shopify. Lato backend: crea e modifica prodotti, aggiorna inventario e prezzi, legge gli ordini, tocca i settings. Lato frontend: scarica il tema, crea e modifica sezioni, fa il deploy. Vincoli: lavora sempre sul dev theme, mai sul live senza la mia conferma esplicita; ogni modifica viene stampata in chat con il link all'admin; e non cancella mai niente senza chiedere."</div>
+    <p>Poi il giro completo già visto in L5: <code>/agent-tasks</code> → <code>/agent-execute</code> → <code>/agent-verify</code>. Mentre la factory lavora, commenti.</p>
+    <div class="say"><b>Da dire:</b> "Mentre costruisce, notate una cosa: questo giro l'avete già visto nella lezione 5 con YouTube. Spec, tasks, execute, verify. Il metodo non cambia mai — cambia solo cosa gli fate fare. Questo è il secondo agent della vostra vita, e ne avete già visto nascere due."</div>
+    <p>Risultato finale: la skill <code>/shopify-agent</code> — la porta d'ingresso unica per tutto quello che faremo nella prossima lezione.</p>
+    <div class="say"><b>Da dire:</b> "Da adesso esiste il comando /shopify-agent. Backend e frontend del negozio, una skill sola. Nella prossima lezione la mettiamo sotto torchio."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">08</span>
+    <h2>Checklist di fine setup + esercizio</h2>
+    <p><b>A schermo:</b> slide o lista con le 6 spunte.</p>
+    <ul>
+      <li>App custom creata con gli scopes giusti (products, inventory, orders read, themes)</li>
+      <li>Token salvato in .env (e promemoria rotazione a 6 mesi)</li>
+      <li>Primo comando funzionante — "dammi gli ultimi 5 ordini"</li>
+      <li>Shopify CLI installata + theme pull fatto</li>
+      <li>Dev theme duplicato</li>
+      <li>Agent Shopify creato e verificato — skill <code>/shopify-agent</code> attiva</li>
+    </ul>
+    <div class="say"><b>Da dire (chiusura + CTA):</b> "Sei spunte. Replicatele sul vostro store prima della prossima lezione — ci vogliono trenta-quaranta minuti. Senza queste spunte, la prossima lezione non parte: perché nella lezione 8 l'agent lavora sul serio. Creiamo un prodotto da un file Word, cambiamo inventario e prezzi a voce, e poi la parte che aspettate tutti: repliciamo una product page intera di uno store che converte, sezione per sezione. Mezz'ora di setup oggi, anni di lavoro risparmiato da domani. Pausa il video e fallo adesso. Ci vediamo nella lezione 8."</div>
+  </div>
+
+  <div class="lesson-end">Fine L7 · CTA → L8 l'agent al lavoro</div>
+</section>
+
+<!-- =================== LEZIONE 8 =================== -->
+<section class="lesson" id="l8">
+  <div class="lesson-tag">Lezione 08 · 40–45 min</div>
+  <h1>L'agent Shopify al lavoro: backend nella pratica, replica della product page, modifiche custom</h1>
+
+  <div class="point">
+    <span class="num">01</span>
+    <h2>Apertura — il piano: prima il backend, poi il frontend</h2>
+    <p><b>A schermo:</b> terminale pronto con <code>/shopify-agent</code>, admin Shopify in un'altra finestra.</p>
+    <div class="say"><b>Da dire:</b> "L'agent c'è — l'abbiamo costruito nella scorsa lezione. Oggi lavora. Zero teoria, solo operazioni vere sullo store, davanti alla camera. Prima parte: il backend — creiamo un prodotto, tocchiamo inventario e prezzi, facciamo le operazioni che fate ogni settimana nell'admin, ma a voce. Seconda parte: il frontend — repliciamo una product page intera di uno store di riferimento, sezione per sezione. E in chiusura vi faccio vedere come fare qualsiasi modifica custom al tema, sempre a voce. Prima la sostanza, poi la vetrina."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02</span>
+    <h2>Backend 1 — creare un prodotto da un file Word</h2>
+    <p><b>A schermo:</b> il file Word del prodotto (titolo, descrizione, prezzo, varianti) + cartella immagini. Poi il comando.</p>
+    <div class="say"><b>Da dire:</b> "Prima operazione: creare un prodotto. Ho un file Word con titolo, descrizione, prezzi e varianti, e una cartella di immagini. Dico all'agent: crea il prodotto da questo Word con queste immagini. Guardate cosa fa: legge il Word, mappa i campi, crea il prodotto via API, carica le immagini, e mi stampa il link all'admin in chat."</div>
+    <p>Apri il link admin: prodotto completo, varianti giuste, prezzi a scalare se è un bundle.</p>
+    <div class="say"><b>Da dire:</b> "Da Word a prodotto pronto in tre minuti — a mano sono quaranta. E notate il dettaglio: l'ha creato in <b>draft</b>, bozza. L'agent crea sempre in bozza: la pubblicazione la decido io. È uno dei vincoli che abbiamo scritto nella spec."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">03</span>
+    <h2>Backend 2 — inventario e prezzi a voce</h2>
+    <p><b>A schermo:</b> tre comandi in sequenza, con le risposte in chat e la verifica nell'admin.</p>
+    <ul>
+      <li><i>"Quanti pezzi ho della taglia M?"</i> → risposta immediata</li>
+      <li><i>"Porta la taglia M a 50 pezzi"</i> → fatto, link in chat</li>
+      <li><i>"Alza del 10% il prezzo di tutte le varianti di questo prodotto"</i> → fatto, tabella prima/dopo in chat</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Fermiamoci sull'ultima: venti varianti aggiornate con una frase. A mano sono venti volte click, form, salva — vi costava la pausa pranzo. Questo è il punto dove l'API umilia l'admin: le operazioni in blocco. Tutto quello che è ripetitivo, l'agent lo fa in una passata."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">04</span>
+    <h2>Backend 3 — settings e operazioni varie</h2>
+    <p><b>A schermo:</b> carrellata veloce, un comando dopo l'altro.</p>
+    <ul>
+      <li>"Crea uno sconto del 15% valido fino a domenica"</li>
+      <li>"Aggiungi il tag estate-2026 a questi prodotti"</li>
+      <li>"Sposta questi tre prodotti nella collezione Bestseller"</li>
+      <li>"Dammi gli ordini di oggi col totale"</li>
+      <li>"Quali prodotti sono sotto i 10 pezzi di giacenza?"</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Il messaggio è uno: non dovete ricordare nessun comando — perché i comandi non esistono. Descrivete l'operazione in italiano e l'agent la traduce in chiamate API. L'unico limite sono gli scopes del token: quelli che abbiamo scelto nella lezione 7. Il menu dell'admin non lo navigate più voi — lo naviga lui."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">05</span>
+    <h2>Frontend — lo store di riferimento: anatomia della PDP che converte</h2>
+    <p><b>A schermo:</b> la product page dello store di riferimento, scroll lento e completo, nominando ogni sezione.</p>
+    <div class="say"><b>Da dire:</b> "Cambio di parte: il frontend. Questo è lo store di riferimento — uno store che converte, non uno store bello. Scrolliamo la product page insieme e diamo un nome a ogni blocco: in alto la buy box con bundle e prezzi; i badges di fiducia; le reviews; i benefits; il before/after; la comparison table contro i competitor; le FAQ; la social proof. Una dozzina di sezioni, e ognuna ha un lavoro preciso: gestire un'obiezione del cliente. Una PDP che converte non è design — è una sequenza di obiezioni gestite. E ogni sezione è un file che l'agent sa scrivere. Adesso la ricostruiamo identica."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">06</span>
+    <h2>Replica step 1 — estrarre la struttura</h2>
+    <p><b>A schermo:</b> dai all'agent l'URL della PDP di riferimento; mostra la mappa che produce.</p>
+    <div class="say"><b>Da dire:</b> "Primo passo della replica: do all'agent l'indirizzo della pagina di riferimento e gli chiedo la mappa. Lui legge la pagina e mi produce la spec: lista ordinata delle sezioni, e per ognuna il contenuto, il layout — colonne, slider, accordion — e gli elementi: immagini, stelle, tabelle. Questa mappa è il progetto della nostra replica."</div>
+    <div class="say"><b>Da dire (regola etica):</b> "E qui la regola, chiara subito: si replica la STRUTTURA — che è informazione, e l'informazione non ha copyright. Il copy si riscrive col proprio brand voice, e le foto sono le PROPRIE. Niente plagio, niente foto rubate. Cloni la struttura, rifai il resto."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">07</span>
+    <h2>Replica step 2 — costruire le sezioni, una alla volta</h2>
+    <p><b>A schermo:</b> il workflow completo su una sezione (es. reviews slider), poi accelerato sulle altre.</p>
+    <p>Il giro per ogni sezione, da mostrare per intero almeno una volta:</p>
+    <ul>
+      <li>Descrivi il blocco di riferimento all'agent</li>
+      <li>L'agent scrive il file Liquid — sezione con schema e blocchi configurabili</li>
+      <li>Push sul dev theme → URL di preview in chat</li>
+      <li>Confronto side-by-side col riferimento</li>
+      <li>Aggiustamenti a voce: "più piccoli i badge", "sfondo chiaro" → ri-push</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Iterazione in minuti, non in giornate. E costruiamo in ordine: prima le sezioni alte — buy box, badges, benefits. Poi le tre che vendono davvero: reviews slider, before/after, comparison table noi-contro-loro — il settanta per cento della conversione vive in queste tre. Poi le basse: FAQ accordion e social proof — con numeri VERI, mai inventati. Ogni sezione nasce coi blocchi configurabili: il contenuto lo cambiate dall'editor del tema, il layout resta fisso. Le costruite una volta, le riusate su ogni prodotto futuro. Una sezione = un file, per sempre vostro."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">08</span>
+    <h2>Le modifiche custom — qualsiasi cosa del tema, a voce</h2>
+    <p><b>A schermo:</b> tre modifiche custom dal vivo su sezioni esistenti del tema.</p>
+    <div class="say"><b>Da dire:</b> "Prima di assemblare la pagina, la parte che vi libera per sempre dal cercare 'come si modifica X su Shopify': le modifiche custom. Il tema è una cartella di file, l'agent li conosce — quindi QUALSIASI modifica si chiede a voce. Tre esempi dal vivo."</div>
+    <ul>
+      <li><b>Modifica 1 — stile:</b> "Cambia il colore del bottone Aggiungi al carrello in nero, testo bianco" → l'agent trova il file giusto, modifica, push sul dev, preview in chat.</li>
+      <li><b>Modifica 2 — elemento nuovo:</b> "Aggiungi un badge 'Spedizione gratis sopra 50€' sotto il prezzo" → nuovo snippet, incluso nella sezione, preview.</li>
+      <li><b>Modifica 3 — da screenshot:</b> incolli lo screenshot di un dettaglio che ti piace di un altro store → "fammi questo sulla mia pagina" → l'agent lo replica.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Il metodo è sempre lo stesso: descrivi la modifica — o incolli uno screenshot — l'agent tocca i file, push sul dev theme, tu controlli la preview. Se non ti piace, lo dici e corregge. Non vi serve sapere il Liquid: vi serve saper descrivere cosa volete."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">09</span>
+    <h2>Assemblare la pagina + deploy dev → live</h2>
+    <p><b>A schermo:</b> editor del tema: ordini le sezioni nella sequenza del riferimento. Poi le due pagine affiancate. Poi il push live.</p>
+    <div class="say"><b>Da dire:</b> "Assembliamo: nell'editor del tema metto le sezioni nello stesso ordine del riferimento. E ora guardate le due pagine affiancate: stessa struttura, stessa macchina di conversione — ma contenuto cento per cento nostro. Questo è clonare bene."</div>
+    <div class="say"><b>Da dire (deploy):</b> "Il deploy, con la rete di sicurezza: il push va sempre sul dev theme con l'URL di preview. Sul live si va solo con conferma esplicita — l'agent me lo chiede, è un vincolo della spec. E un trucco da bottega: dopo il push live, Shopify tiene la cache per qualche minuto — un secondo 'tocco' sull'asset la invalida, e i clienti vedono la pagina nuova in cinque secondi invece che in dieci minuti."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">10</span>
+    <h2>Esercizio — backend + replica sul tuo store</h2>
+    <p><b>A schermo:</b> slide con l'esercizio doppio.</p>
+    <ul>
+      <li><b>Backend:</b> crea un prodotto da Word con l'agent, modifica l'inventario di 3 varianti, crea uno sconto.</li>
+      <li><b>Frontend:</b> scegli UNO store di riferimento nella tua nicchia (uno che converte, non uno bello), estrai la mappa delle sezioni, ricostruisci 3 sezioni sul dev theme.</li>
+      <li><b>Custom:</b> fai una modifica custom a voce — un colore, un badge, un dettaglio da screenshot.</li>
+    </ul>
+    <div class="say"><b>Da dire (chiusura + CTA):</b> "Tempo target: mezza giornata la prima volta. E ricordatevi la regola d'oro: non partite mai da pagina bianca — partite da chi sta già convertendo, replicate la struttura, metteteci il vostro motore dentro. Le sezioni che costruite oggi sono blocchi riusabili su ogni prodotto che lancerete. Prossima lezione, cambio di reparto: i soldi. Costruiamo l'agent contabile — quello che ogni mattina vi dice quanto avete guadagnato davvero. Ci vediamo nella lezione 9."</div>
+  </div>
+
+  <div class="lesson-end">Fine L8 · CTA → L9 agent contabilità</div>
+</section>
+
+<!-- =================== LEZIONE 9 =================== -->
+<section class="lesson" id="l9">
+  <div class="lesson-tag">Lezione 09 · 35–40 min</div>
+  <h1>L'agent contabile: backend collegato a Shopify → CSV giornaliero + report Telegram</h1>
+
+  <div class="point">
+    <span class="num">01</span>
+    <h2>Apertura — il contabile che non dorme</h2>
+    <p><b>A schermo:</b> terminale pulito + admin Shopify in un'altra finestra. Eventualmente uno screenshot di un report Telegram vero (numeri offuscati).</p>
+    <div class="say"><b>Da dire:</b> "Oggi costruiamo il terzo agent del corso, e per me è il più importante di tutti: l'agent contabile. Cosa fa? Ogni giorno, da solo, legge gli ordini del vostro store Shopify, incrocia i costi reali del fornitore, calcola quanto avete guadagnato davvero, scrive un file CSV con tutta la giornata, lo archivia in una cartella Drive ordinata, e vi manda il riassunto su Telegram. Ogni mattina, quando vi svegliate, il messaggio è già lì."</div>
+    <div class="say"><b>Da dire:</b> "E attenzione a una cosa: questo non è un report di fatturato. È un report di <b>profitto</b>. Quanto vi è rimasto in tasca davvero, ogni sera. Perché il fatturato è vanità, il profitto è verità. E questo agent vi dice la verità ogni mattina."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02</span>
+    <h2>Le 5 metriche che contano</h2>
+    <p><b>A schermo:</b> le 5 metriche scritte una sotto l'altra, poi l'esempio numerico.</p>
+    <ul>
+      <li><b>Revenue</b> — quanto incassa lo store (lordo)</li>
+      <li><b>COGS</b> — costo del venduto, quello che pagate al fornitore</li>
+      <li><b>Gross profit (GW)</b> — revenue − COGS</li>
+      <li><b>Net</b> — GW − spesa pubblicitaria − fees (commissioni di pagamento)</li>
+      <li><b>BE ROAS</b> — la soglia di ROAS sotto la quale state perdendo soldi</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Prima di costruire, definiamo cosa misuriamo. Cinque numeri, sempre gli stessi. Revenue: quanto è entrato. COGS: quanto vi costa la merce venduta. Gross profit: la differenza tra i due. Net: quello che resta dopo aver pagato anche le ads e le commissioni. E BE ROAS: il ritorno pubblicitario minimo per non andare in perdita — sopra quella soglia guadagnate, sotto state bruciando soldi."</div>
+    <div class="say"><b>Da dire:</b> "Esempio con numeri tondi: oggi lo store ha incassato 10.000 euro. La merce venduta vi è costata 3.000. Avete speso 4.000 di pubblicità e 500 di commissioni. Gross profit: 7.000. Net: 2.500. Ecco — 2.500 è il numero vero della giornata. Se non conoscete questi cinque numeri ogni mattina, state giocando una partita senza vedere il punteggio."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">03</span>
+    <h2>Hard rules — niente stime, niente overwrite</h2>
+    <p><b>A schermo:</b> le tre regole scritte grandi, una alla volta.</p>
+    <ul>
+      <li><b>Regola 1 — Niente stime.</b> Se manca un dato, la casella resta vuota e l'agent lo segnala. Mai inventare.</li>
+      <li><b>Regola 2 — STOP se manca un costo.</b> SKU senza costo nella fattura fornitore → l'agent si ferma e notifica. Mai percentuali o medie come ripiego.</li>
+      <li><b>Regola 3 — Mai sovrascrivere.</b> Ogni giorno il suo file. I test vanno in una cartella /TEST/ con prefisso TEST_.</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Prima del codice, le regole. Tre regole non negoziabili, che poi scriveremo dentro la spec dell'agent. Uno: niente stime. Se un dato manca, la casella resta vuota e l'agent lo dice — non lo inventa mai. Due: se nella fattura del fornitore manca il costo di un prodotto, l'agent si ferma e mi avvisa. Niente 'metto una percentuale media', niente ripieghi. Tre: mai sovrascrivere un file esistente — ogni giorno scrive il suo file, e i test finiscono in una cartella separata con un prefisso TEST."</div>
+    <div class="say"><b>Da dire:</b> "Perché sono così rigido su questo? Perché questi tre errori sono i killer della fiducia nei dati. Il giorno che scoprite che l'agent ha inventato un numero, smettete di credergli per sempre. E un report di cui non vi fidate non vale niente. Niente stime, niente ripieghi, niente sovrascritture. Tre cose."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">04</span>
+    <h2>Le due fonti — ordini Shopify + fattura del fornitore</h2>
+    <p><b>A schermo:</b> schema a due colonne: a sinistra l'admin Shopify (ordini), a destra il CSV/XLSX della fattura fornitore con le colonne SKU e costo.</p>
+    <div class="say"><b>Da dire:</b> "L'agent lavora con due fonti. Fonte numero uno: gli ordini Shopify, via API — col token che abbiamo creato nella lezione 7. E qui c'è un dettaglio tecnico che vale oro: gli ordini vanno filtrati per <b>processed_at</b>, la data effettiva del pagamento — non per la data di creazione. Se sbagliate questo filtro, i vostri numeri non torneranno mai con quelli che vedete nell'admin di Shopify. È l'errore numero uno di chi costruisce report sugli ordini."</div>
+    <div class="say"><b>Da dire:</b> "Fonte numero due: la fattura del fornitore. Il file CSV o Excel coi costi unitari per ogni SKU — per ogni codice prodotto. L'agent lo legge, costruisce la tabella prodotto-per-prodotto col suo costo, e per ogni riga d'ordine moltiplica quantità per costo. Così i COGS sono reali, non stimati. Shopify dice quanto è entrato. La fattura del fornitore dice quanto è uscito. L'agent incrocia i due e vi dice quanto è rimasto."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">05</span>
+    <h2>Build con la agent factory — la spec dettata per intero</h2>
+    <p><b>A schermo:</b> terminale, <code>/agent-spec</code>, detti la spec a voce per intero.</p>
+    <div class="say"><b>Da dire:</b> "E adesso costruiamolo. Terzo giro di agent factory — ormai per voi è routine: spec, tasks, execute, verify. Lancio /agent-spec e detto: voglio un agent che ogni giorno, uno, legge gli ordini Shopify del giorno filtrando per processed_at; due, legge i costi dalla fattura fornitore; tre, calcola revenue, COGS, gross profit, net e BE ROAS; quattro, scrive il CSV del giorno; cinque, lo archivia su Drive in cartelle anno slash mese; sei, mi manda il riassunto su Telegram. Hard rules: niente stime, STOP se manca un costo, mai sovrascrivere file esistenti."</div>
+    <div class="say"><b>Da dire:</b> "Notate il punto chiave: le tre regole di prima sono DENTRO la spec. L'agent nasce già con le regole — non gliele dovete ricordare ogni volta. Le regole si scrivono una volta, nella spec. Da lì in poi l'agent le rispetta sempre. Anche alle sei di mattina. Anche a Natale."</div>
+    <p>Poi <code>/agent-tasks</code> → <code>/agent-execute</code> → <code>/agent-verify</code>, in timelapse o tagliato. Mostra la skill finale attiva.</p>
+    <div class="say"><b>Da dire:</b> "Tasks, execute, verify — il giro che conoscete. Qualche minuto dopo: l'agent contabile esiste. Adesso vediamolo lavorare."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">06</span>
+    <h2>Il CSV giornaliero + la cartella Drive ordinata</h2>
+    <p><b>A schermo:</b> il CSV aperto (una riga per ordine + riga totali), poi la cartella Drive <code>Contabilità/2026/06-Giugno/</code> che si popola.</p>
+    <div class="say"><b>Da dire:</b> "Primo output: il CSV del giorno. Una riga per ogni ordine con tutti i numeri — prodotti, quantità, revenue, costo — più la riga finale coi totali. Nome del file fisso: anno-mese-giorno underscore report punto csv. Questa è la vostra contabilità, giorno per giorno, già pronta per il commercialista."</div>
+    <div class="say"><b>Da dire:</b> "E l'archivio si organizza da solo: l'agent carica il file su Drive in Contabilità, anno, mese — e se le cartelle non esistono, le crea lui. A fine anno avete 365 file, già divisi per mese, già su Drive. Il commercialista vi ama. E voi non avete mai aperto Excel. Ultima regola di igiene: l'agent stampa sempre il link al file in chat — un output senza link è un output invisibile."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">07</span>
+    <h2>Il report Telegram — 30 secondi di lettura ogni mattina</h2>
+    <p><b>A schermo:</b> il messaggio Telegram vero sul telefono, formato completo.</p>
+    <ul>
+      <li>Data · Revenue · Ordini · AOV</li>
+      <li>COGS · Gross profit · Ads spend · Net</li>
+      <li>BE ROAS soglia vs effettivo, con semaforo 🟢/🔴</li>
+      <li>Top 5 prodotti del giorno</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "Secondo output: il messaggio. Il bot Telegram lo conoscete già dalla lezione 5 — si crea gratis in due minuti con BotFather, è un contatto Telegram per i vostri programmi. Il formato del report: data, revenue, numero ordini, carrello medio, COGS, gross profit, spesa ads, net. Poi il BE ROAS: soglia contro effettivo, con l'emoji semaforo — verde se siete sopra, rosso se siete sotto. E i top 5 prodotti del giorno. Tutto in un messaggio: trenta secondi di lettura."</div>
+    <div class="say"><b>Da dire:</b> "Chi vive su WhatsApp può ricevere lo stesso messaggio lì — cambia il canale, non il principio. E il principio è questo: l'output di un agent deve arrivare dove vivete voi, non in un file che non aprirete mai. La mia routine: alle 6 leggo il giorno prima, alle 6 e mezza ho già preso le decisioni, alle 7 sono operativo."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">08</span>
+    <h2>Schedulazione + log — ogni mattina alle 06:00, e se si rompe urla</h2>
+    <p><b>A schermo:</b> il file launchd (richiamo L5) + il file di log con start/end/esito.</p>
+    <div class="say"><b>Da dire:</b> "Ultimo pezzo: la sveglia. Stesso pattern della lezione 5: launchd, ore 6 del mattino, l'agent parte da solo. E due regole di affidabilità. Primo: ogni esecuzione scrive un log — quando è partito, quando ha finito, com'è andata. Secondo, e questo è fondamentale: se qualcosa va storto — Shopify non risponde, manca la fattura del fornitore — l'agent NON muore in silenzio. Vi manda il messaggio di errore su Telegram, con scritto cosa si è rotto."</div>
+    <div class="say"><b>Da dire:</b> "Regola d'oro per ogni agent che girerà da solo nella vostra vita: quando un agent fallisce, deve urlare. Mai morire in silenzio. Mai. Perché un report che non arriva e nessuno se ne accorge è peggio di un report sbagliato."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">09</span>
+    <h2>La prova dal vivo — run completo davanti alla camera</h2>
+    <p><b>A schermo:</b> run manuale sul giorno precedente: terminale → CSV → Drive → notifica sul telefono, in sequenza.</p>
+    <div class="say"><b>Da dire:</b> "E adesso la prova, tutta davanti alla camera. Lancio l'agent a mano sul giorno di ieri. Guardate: legge gli ordini... incrocia i costi della fattura... calcola le cinque metriche... scrive il CSV... lo carica su Drive — vedete la cartella che si popola... e adesso... eccola. La notifica sul telefono. Apro il messaggio: revenue, ordini, carrello medio, costi, profitto, semaforo verde. Tutto qui, in trenta secondi."</div>
+    <div class="say"><b>Da dire (chiusura + CTA):</b> "Questo report, fatto da un contabile, vi costa 200 euro al mese. Il vostro lo fa ogni notte, gratis, senza ferie. Ma c'è un pezzo che manca: questi numeri arrivano una volta al giorno, la mattina. Nella prossima lezione li mettiamo in diretta: costruiamo la dashboard — la pagina nel browser dove vedete la cassa salire DURANTE il giorno, ordine dopo ordine. Vi faccio vedere la mia, quella che guardo dieci volte al giorno. Ci vediamo nella lezione 10."</div>
+  </div>
+
+  <div class="lesson-end">Fine L9 · CTA → L10 dashboard contabilità</div>
+</section>
+
+<!-- =================== LEZIONE 10 =================== -->
+<section class="lesson" id="l10">
+  <div class="lesson-tag">Lezione 10 · 30–35 min</div>
+  <h1>La dashboard dell'agent contabile: i numeri in diretta nel browser + deploy online</h1>
+
+  <div class="point">
+    <span class="num">01</span>
+    <h2>Apertura — quando serve un frontend</h2>
+    <p><b>A schermo:</b> il messaggio Telegram della L9 accanto a un browser vuoto.</p>
+    <div class="say"><b>Da dire:</b> "L'agent contabile c'è: report ogni mattina, CSV su Drive. Oggi gli costruiamo la faccia: la dashboard. Ma prima, una domanda onesta: quando serve davvero un frontend? Non sempre. La regola: serve quando dovete consultare i dati visivamente, tante volte al giorno — o quando il sistema deve usarlo qualcuno che non sta nel terminale: un collaboratore, il team. Se siete solo voi e vi bastano i numeri della mattina, il Telegram della lezione 9 è sufficiente."</div>
+    <div class="say"><b>Da dire:</b> "Per la contabilità però il frontend ha senso eccome: volete vedere i numeri salire DURANTE il giorno, ordine dopo ordine — non solo il riassunto del giorno dopo. Frontend non è bellezza. Frontend è 'lo guardo dieci volte al giorno' oppure 'serve a qualcun altro'. La cassa in diretta vale entrambe le cose."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02</span>
+    <h2>Il modello — vi mostro il mio LiveKPI</h2>
+    <p><b>A schermo:</b> il TUO LiveKPI vero, aperto nel browser (numeri sensibili offuscati se serve). Scroll lento: card revenue, ordini, AOV, costi, net, BE ROAS.</p>
+    <div class="say"><b>Da dire:</b> "Prima di costruire, vi faccio vedere il punto d'arrivo. Questo è il mio LiveKPI — la dashboard che uso ogni giorno sui miei store, costruita esattamente col metodo di questa lezione. Guardate: in alto il numero protagonista, la revenue del giorno, grande. Sotto le card: ordini, carrello medio, costi, profitto netto. E la riga del BE ROAS: la soglia di breakeven contro il ROAS effettivo — verde sopra, rosso sotto. Si aggiorna da sola, ogni trenta secondi. Questa pagina è aperta sul mio telefono e sul mio Mac tutto il giorno."</div>
+    <div class="say"><b>Da dire:</b> "E non è un prodotto che ho comprato: è una pagina HTML scritta dall'agent. Oggi costruite la vostra, identica nella sostanza, col vostro stile."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">03</span>
+    <h2>Stack minimo — HTML, JS, CSS, niente framework</h2>
+    <p><b>A schermo:</b> la cartella del progetto: tre file. Apri l'HTML nell'editor: è leggibile.</p>
+    <div class="say"><b>Da dire:</b> "Lo stack: tre file. Una pagina HTML, un file JavaScript, un foglio di stile CSS. Niente React, niente framework, niente passaggi di build. Perché? Perché qualsiasi cosa dentro un file HTML semplice, Claude la sa scrivere e modificare al primo colpo — e voi la potete capire leggendola. Plain HTML finché regge. Quando non regge più, allora i framework. Mai prima."</div>
+    <div class="say"><b>Da dire:</b> "Per la grafica usiamo SHIN-EN, lo stile del way-stack — la skill shinen-design che avete già installato. Così la dashboard esce già con la faccia giusta, scura, pulita, coerente con tutti gli altri tool del corso. Niente dashboard brutte."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">04</span>
+    <h2>L'architettura — backend centralina, frontend cruscotto</h2>
+    <p><b>A schermo:</b> schema a tre blocchi: Shopify → agent (endpoint <code>/api/kpi</code>) → pagina browser. Poi il JSON vero nel browser.</p>
+    <div class="say"><b>Da dire:</b> "L'architettura è un pattern che vi riportate a casa per sempre. L'agent contabile della lezione 9 espone un piccolo indirizzo sul vostro Mac — un endpoint — che risponde con i numeri del giorno in formato JSON, sempre freschi. La pagina HTML chiama quell'indirizzo ogni trenta secondi con una fetch, prende i numeri, e li scrive a schermo."</div>
+    <div class="say"><b>Da dire:</b> "Memorizzate la frase: backend uguale centralina, frontend uguale cruscotto. La pagina non parla MAI con Shopify direttamente — parla solo con l'agent. È l'agent che chiama Shopify, al massimo una volta ogni trenta secondi, così non sforate mai i limiti dell'API. Un solo punto che parla col mondo esterno, mille pagine che possono leggerlo."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">05</span>
+    <h2>Build live — le card della contabilità</h2>
+    <p><b>A schermo:</b> costruzione con Claude davanti alla camera: dal prompt alla pagina che si riempie di numeri veri.</p>
+    <div class="say"><b>Da dire:</b> "Costruiamo. Dico a Claude: crea la dashboard della contabilità, stile SHIN-EN. Revenue del giorno grande in alto — il numero protagonista. Sotto, le card: ordini, carrello medio, COGS, gross profit, net. E la riga del BE ROAS: soglia contro effettivo, verde sopra, rosso sotto — sopra la linea navighi, sotto affoghi. Si collega all'endpoint dell'agent e si aggiorna ogni trenta secondi."</div>
+    <div class="say"><b>Da dire:</b> "E vi regalo il trucco che fa la differenza: il contatore animato. Quando arriva un ordine, il numero non cambia secco — gira e sale, come una slot machine. Effetto cassa di Las Vegas, gratis. Sembra una sciocchezza, ma è il motivo per cui questa pagina la guarderete davvero: quando arriva un ordine, lo VEDETE entrare. Ultima richiesta a Claude: responsive — quattro colonne sul desktop, una colonna sul telefono. Il KPI in tasca, tutto il giorno."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">06</span>
+    <h2>Deploy online — da localhost al tuo dominio</h2>
+    <p><b>A schermo:</b> prima localhost, poi il giro Render: push GitHub → Web Service → URL pubblico → dominio Cloudflare.</p>
+    <div class="say"><b>Da dire:</b> "La dashboard gira sul Mac: la aprite su localhost, costo zero. Con una sveglia launchd il server parte da solo all'avvio — è 'sempre lì'. Per molti di voi questo basta. Ma se la dashboard deve vederla qualcun altro — un socio, il team — o voi da fuori casa, la portiamo online. E ci vogliono cinque minuti."</div>
+    <div class="say"><b>Da dire:</b> "Il giro: push del codice su GitHub. Poi Render — un servizio che prende il vostro repository e lo mette online: create un Web Service, gli puntate il repo, build automatico, e vi dà un indirizzo pubblico. Costo: circa 7 dollari al mese. Poi, se volete il vostro dominio — tipo kpi punto vostrobrand punto com — lo collegate via Cloudflare in due minuti. E ultima cosa, la sicurezza: questi sono i VOSTRI numeri — metteteci una password. Una password condivisa col team basta: niente sistemi complicati. Il mio LiveKPI che vi ho mostrato all'inizio gira esattamente così: Render, dominio mio, password."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">07</span>
+    <h2>Esercizio finale — il sistema contabile completo</h2>
+    <p><b>A schermo:</b> ricapitolo del sistema L9+L10 in uno schema unico: Shopify + fattura → agent → CSV/Drive/Telegram + dashboard online.</p>
+    <div class="say"><b>Da dire:</b> "Esercizio finale del blocco ecommerce, il più ambizioso del corso: il sistema completo. Lezione 9 più lezione 10. Collegate Shopify, configurate i costi del fornitore, schedulate il report delle 6, costruite la dashboard, e fate il deploy online. Tempo target: una giornata, la prima volta. Da quel momento in poi: report ogni mattina su Telegram, CSV ogni giorno su Drive, e la cassa in diretta nel browser — sul vostro dominio."</div>
+    <div class="say"><b>Da dire (chiusura + CTA):</b> "Report alle 6, archivio su Drive, cassa in diretta nel browser. Questa è contabilità da dirigente, costruita in due lezioni. E quando il team vede gli stessi numeri vostri, lavora con la vostra stessa testa. Il blocco ecommerce finisce qui — ma il corso no: nei bonus vi faccio vedere il Brain Marketing, il Creative Strategist che scrive le vostre ADV. Ci vediamo lì."</div>
+  </div>
+
+  <div class="lesson-end">Fine L10 · CTA → BONUS Brain Marketing</div>
+</section>
+
+<!-- =================== BONUS 1 =================== -->
+<section class="lesson" id="bonus">
+  <div class="lesson-tag">Bonus · 20–25 min</div>
+  <h1>Il Creative Strategist: la mente del marketing dei tuoi brand, in un agent</h1>
+
+  <div class="point">
+    <span class="num">01</span>
+    <h2>Apertura — la lezione finale, corta e densa</h2>
+    <p><b>A schermo:</b> schema col brand al centro e le uscite attorno (headline, PDP, creative, blog, iterazione, analisi).</p>
+    <div class="say"><b>Da dire:</b> "Ultima lezione del corso, e la teniamo corta e densa. Costruiamo il marketer del nostro brand: il Creative Strategist. Si occupa di tutte le creative e di tutto il copy — headline, product page, ad, blog, iterazioni, analisi. Tutto quello che facciamo ogni giorno per i nostri brand, dentro un agent solo."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">02</span>
+    <h2>La mente — i documenti, un file in due formati</h2>
+    <p><b>A schermo:</b> i documenti di marketing che si raggruppano in un PDF "bibbia" e in un file <code>.md</code>.</p>
+    <div class="say"><b>Da dire:</b> "Si parte dalla materia prima: i vostri documenti di marketing. Li raggruppiamo in un documento unico, in due formati. Primo: un PDF leggibile — la bibbia del marketing, quella che consultate voi. Secondo, e più importante: un file markdown, dove le stesse informazioni sono distillate e condensate. Quel file .md è la <b>mente</b> del Creative Strategist: è quello che legge l'agent."</div>
+    <div class="say"><b>Da dire:</b> "Una sola fonte, due usi: il PDF per gli umani, il .md per la macchina."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">03</span>
+    <h2>Nel grafo di Claude — Graphify sulla mente</h2>
+    <p><b>A schermo:</b> il comando Graphify sulla cartella della mente, poi il grafo che si apre.</p>
+    <div class="say"><b>Da dire:</b> "Come nella lezione 6: prendiamo la mente, il file .md, e ci costruiamo sopra il grafo con Graphify. Concetti collegati — hook, angle, offerta, obiezioni dei clienti — navigabili e interrogabili. Da qui l'agent pesca solo il segnale giusto, citando la fonte, risparmiando token."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">04</span>
+    <h2>L'istruzione iniziale — il voice contract</h2>
+    <p><b>A schermo:</b> il file di istruzione: chi è, cosa fa, per quale brand (brand esempio col sito + le ad vincenti).</p>
+    <div class="say"><b>Da dire:</b> "Prima di metterlo al lavoro, gli diamo un'istruzione iniziale — il voice contract. Tre cose. Chi è: un senior creative strategist e copywriter direct-response, diretto, zero fuffa. Cosa fa: tutte le creative e il copy del brand. E per quale brand lavora: gli diamo un brand esempio, col suo sito e le sue ad vincenti come riferimento."</div>
+    <div class="say"><b>Da dire:</b> "La mente nel grafo più il voice contract: il risultato è un personaggio che conosce il brand a memoria e parla con la sua voce."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">05</span>
+    <h2>Gli esempi dal vivo — le 6 uscite</h2>
+    <p><b>A schermo:</b> sei demo in sequenza, una per output.</p>
+    <ul>
+      <li><b>Headline</b> — titoli per sito e ad, dalle parole dei clienti</li>
+      <li><b>Copy product page</b> — la PDP intera, sezione per sezione</li>
+      <li><b>Creative</b> — concept di creative veri e propri</li>
+      <li><b>Script per il blog</b> — un articolo dal knowledge del brand</li>
+      <li><b>Iterazione di una creativa</b> — ne prendi una e la fai evolvere</li>
+      <li><b>Analisi di una creativa</b> — la smonti (tua o competitor) e dici perché funziona</li>
+    </ul>
+    <div class="say"><b>Da dire:</b> "E adesso lo mettiamo al lavoro, con esempi veri — quelli che facciamo ogni giorno per i nostri brand. Sei tipi di output: una headline; il copy di una product page intera; un concept di creative; uno script per un articolo del blog; l'iterazione di una creativa esistente, che facciamo evolvere; e l'analisi di una creativa — la nostra o del competitor — per capire perché funziona. Sei comandi, sei deliverable, ognuno citando la fonte dal grafo."</div>
+  </div>
+
+  <div class="point">
+    <span class="num">06</span>
+    <h2>Chiusura del corso</h2>
+    <p><b>A schermo:</b> recap del sistema completo costruito nel corso.</p>
+    <div class="say"><b>Da dire (chiusura):</b> "E con questo il corso è completo. Avete visto nascere agent operativi, un knowledge interrogabile, una dashboard in diretta e adesso il reparto creativo del vostro brand. Il metodo è sempre lo stesso: una fonte distillata, un grafo, un'istruzione, e l'agent lavora. Adesso tocca a voi: costruite il vostro sistema, un pezzo alla volta. Grazie per aver seguito il corso."</div>
+  </div>
+
+  <div class="lesson-end">Fine corso · Costruisci il tuo sistema</div>
+</section>
+
+
+</div>
+
+</main>
+</div>
+</div>
+
+<script>
+// scroll-spy for sidebar
+const links = document.querySelectorAll('.side a');
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id = e.target.id;
+      links.forEach(l=>l.classList.toggle('active', l.getAttribute('href') === '#'+id));
+    }
+  });
+},{rootMargin:'-30% 0px -60% 0px'});
+window.addEventListener('load',()=>{
+  document.querySelectorAll('.lesson').forEach(l=>observer.observe(l));
+});
+</script>
+
+</body>
+</html>

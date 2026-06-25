@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Guida Setup — La memoria del sistema</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;
+  --ink:#0a0a0a;
+  --fog:#4a4a4a;
+  --silt:#8a8a8a;
+  --hair:#ececec;
+  --ghost:#f3f3f3;
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --body:"Inter",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --jp:"Noto Sans JP",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#f6f6f6;color:var(--ink);font-family:var(--body);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+/* Screen: simulate an A4 sheet */
+.sheet{width:210mm;margin:0 auto;background:#fff;padding:18mm 18mm;box-shadow:0 1px 8px rgba(0,0,0,.08)}
+@media screen{ body{padding:18px 0} }
+
+/* Cover */
+.cover{position:relative;min-height:255mm;display:flex;flex-direction:column;justify-content:center;break-after:page;page-break-after:always;margin-bottom:14mm}
+.cover .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--silt);margin-bottom:18px}
+.cover h1{font-family:var(--display);font-weight:600;font-size:52px;line-height:1.04;letter-spacing:-.025em;margin-bottom:20px}
+.cover .lead{font-family:var(--display);font-weight:400;font-size:20px;line-height:1.4;color:var(--fog);max-width:150mm}
+.cover .ghostnum{position:absolute;top:6mm;right:0;font-family:var(--display);font-weight:700;font-size:190px;color:var(--ghost);line-height:1;letter-spacing:-.05em}
+.cover .meta{margin-top:38px;border-top:1px solid var(--ink);padding-top:16px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--silt)}
+.cover .toc{margin-top:30px;font-family:var(--body);font-size:14px;color:var(--fog);line-height:1.85}
+.cover .toc b{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--ink);margin-right:12px}
+
+h2.sec{font-family:var(--display);font-weight:600;font-size:28px;letter-spacing:-.02em;margin:0 0 6px;padding-top:4px}
+.sec-tag{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--silt);margin-bottom:8px}
+.sec-wrap{border-top:2px solid var(--ink);padding-top:14px;margin-bottom:24px;page-break-inside:avoid;break-inside:avoid}
+p.body{font-size:14px;line-height:1.6;color:var(--fog);margin:8px 0;max-width:165mm}
+p.body b{color:var(--ink);font-weight:600}
+.note{background:var(--ghost);border-left:3px solid var(--ink);padding:11px 15px;font-size:13px;line-height:1.55;color:var(--fog);margin:11px 0;border-radius:0 3px 3px 0}
+.note b{color:var(--ink)}
+
+code{font-family:var(--mono);font-size:.92em;background:#f0f0f0;padding:1px 5px;border-radius:3px;color:var(--ink)}
+pre{font-family:var(--mono);font-size:12px;line-height:1.6;background:#0a0a0a;color:#e6e6e6;padding:15px 17px;border-radius:5px;margin:11px 0;overflow-x:auto;white-space:pre-wrap;word-break:break-word}
+pre .c{color:#7a7a7a}
+pre .o{color:#fff}
+
+.steplist{margin:6px 0}
+.step{display:flex;gap:15px;padding:9px 0;border-bottom:1px solid var(--hair);page-break-inside:avoid;break-inside:avoid}
+.step:last-child{border-bottom:none}
+.step .n{flex:0 0 auto;width:28px;height:28px;border:1.5px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:500}
+.step .t{font-size:14px;line-height:1.5}
+.step .t b{font-family:var(--display);font-weight:600;font-size:15.5px;display:block;margin-bottom:3px;color:var(--ink)}
+
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:13px 0}
+.three .c{border:1px solid var(--hair);background:#fafafa;border-radius:3px;padding:13px}
+.three .c .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--silt);margin-bottom:6px}
+.three .c .nm{font-family:var(--display);font-weight:600;font-size:18px;margin-bottom:6px;letter-spacing:-.01em}
+.three .c .ds{font-size:12px;line-height:1.45;color:var(--fog)}
+
+.four{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin:13px 0}
+.four .c{border:1px solid var(--hair);background:#fafafa;border-radius:3px;padding:13px}
+.four .c .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--silt);margin-bottom:6px}
+.four .c .nm{font-family:var(--display);font-weight:600;font-size:18px;margin-bottom:6px;letter-spacing:-.01em}
+.four .c .ds{font-size:12px;line-height:1.45;color:var(--fog)}
+
+.check{margin:10px 0}
+.check .ci{display:flex;gap:14px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--hair)}
+.check .bx{flex:0 0 auto;width:20px;height:20px;border:2px solid var(--ink);margin-top:2px;border-radius:3px}
+.check .ct{font-size:14px;line-height:1.4}
+.check .ct b{font-family:var(--display);font-weight:600;font-size:15px}
+.check .ct small{display:block;color:var(--silt);font-size:12px;margin-top:2px}
+
+.tbl{width:100%;border-collapse:collapse;margin:11px 0;font-size:12.5px}
+.tbl th,.tbl td{text-align:left;padding:8px 11px;border-bottom:1px solid var(--hair);vertical-align:top}
+.tbl th{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--silt);border-bottom:1.5px solid var(--ink)}
+.tbl td b{font-family:var(--display);color:var(--ink)}
+
+.endline{border-top:2px solid var(--ink);padding-top:14px;margin-top:8px;page-break-inside:avoid;break-inside:avoid}
+.endline h2{font-family:var(--display);font-weight:600;font-size:23px;letter-spacing:-.015em;margin-bottom:6px}
+
+@media print{
+  @page{size:A4;margin:15mm 16mm}
+  html,body{background:#fff}
+  .sheet{width:auto;margin:0;padding:0;box-shadow:none}
+  .cover{min-height:auto;height:calc(297mm - 30mm);margin-bottom:0;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <!-- ===================== COVER ===================== -->
+  <section class="cover">
+    <div class="ghostnum">04</div>
+    <div class="kicker">Corso AI + Ecommerce · Lezione 04</div>
+    <h1>La memoria del sistema.<br>Setup completo.</h1>
+    <p class="lead">Memoria persistente su un Claude appena installato. Copia, incolla, verifica. Alla fine Claude ricorda tutto tra una sessione e l'altra — e sai già cosa entrerà nel grafo.</p>
+    <div class="toc">
+      <div><b>01</b> La mappa — memoria + grafo</div>
+      <div><b>02</b> Verifica la memoria automatica</div>
+      <div><b>03</b> I 4 tipi di memoria</div>
+      <div><b>04</b> Forza la prima memoria</div>
+      <div><b>05</b> Cosa indicizzare e cosa no</div>
+      <div><b>06</b> Checklist finale</div>
+    </div>
+    <div class="meta"><span>Guida d'installazione</span><span>Mac + Windows (WSL2)</span><span>~10 min</span></div>
+  </section>
+
+  <!-- 01 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">01 · La mappa</div>
+    <h2 class="sec">Due pezzi, un cervello</h2>
+    <p class="body">Il problema: ogni chat di Claude parte da zero. La soluzione sono <b>due sistemi che lavorano insieme</b> — uno ricorda, l'altro collega.</p>
+    <div class="four">
+      <div class="c"><div class="lbl">01 · ricorda</div><div class="nm">MEMORY.md</div><div class="ds">La memoria automatica di Claude Code. File di testo che Claude legge a inizio sessione e aggiorna da solo quando impara qualcosa su di te o sul progetto.</div></div>
+      <div class="c"><div class="lbl">02 · collega</div><div class="nm">Graphify</div><div class="ds">Trasforma il vault in un grafo: ogni concetto è un nodo, ogni relazione un arco. Claude lo interroga via MCP e vede connessioni che tu non vedi.</div></div>
+    </div>
+    <div class="note"><b>Regola:</b> MEMORY.md = <b>elenco</b> di cose da ricordare. Graphify = <b>mappa</b> di come si collegano. Servono entrambi.</div>
+  </div>
+
+  <!-- 02 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">02 · Memoria automatica</div>
+    <h2 class="sec">Verifica che la memoria sia attiva</h2>
+    <p class="body">La memoria persistente è <b>già inclusa</b> in Claude Code — nessuna installazione. Vive in una cartella per ogni progetto. Verifica così, dentro una sessione <code>claude</code>:</p>
+    <pre><span class="c"># Dentro Claude Code, chiedi:</span>
+<span class="o">› dove sta il tuo file di memoria per questo progetto?</span>
+
+<span class="c"># Risposta attesa: un percorso tipo</span>
+<span class="c"># ~/.claude/projects/&lt;nome-progetto&gt;/memory/MEMORY.md</span></pre>
+    <div class="note">Se Claude risponde con il percorso, la memoria è attiva. Il file <code>MEMORY.md</code> è l'<b>indice</b>: ogni voce punta a un file di dettaglio nella stessa cartella. Si crea da solo alla prima cosa che Claude decide di ricordare.</div>
+  </div>
+
+  <!-- 03 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">03 · I 4 tipi</div>
+    <h2 class="sec">I 4 tipi di memoria</h2>
+    <p class="body">Claude classifica ogni ricordo in uno di 4 tipi. Conoscerli ti serve per <b>dettare memorie precise</b> invece di sperare che capisca da solo.</p>
+    <div class="four">
+      <div class="c"><div class="lbl">tipo · 01</div><div class="nm">user</div><div class="ds">Chi sei, che ruolo hai, cosa sai già. Es: "preferisco risposte brevi", "il mio brand vende su Shopify".</div></div>
+      <div class="c"><div class="lbl">tipo · 02</div><div class="nm">feedback</div><div class="ds">Correzioni e conferme sul metodo. Es: "mai sovrascrivere i report", "i tool sempre in inglese".</div></div>
+      <div class="c"><div class="lbl">tipo · 03</div><div class="nm">project</div><div class="ds">Stato del lavoro: deadline, decisioni, contesto. Es: "lo store va live il 15", "il token scade a novembre".</div></div>
+      <div class="c"><div class="lbl">tipo · 04</div><div class="nm">reference</div><div class="ds">Dove stanno le cose fuori dal progetto. Es: "i bug si tracciano su quel foglio", "il gruppo Telegram giusto è questo".</div></div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">04 · Prima memoria</div>
+    <h2 class="sec">Forza la prima memoria</h2>
+    <p class="body">Non aspettare che succeda da solo: <b>detta tu la prima memoria</b> e verifica che persista tra sessioni.</p>
+    <div class="steplist">
+      <div class="step"><div class="n">1</div><div class="t"><b>Detta la memoria</b>In sessione: <code>ricordati che [fatto importante su di te o sul progetto]</code>. Claude salva il file e aggiorna l'indice MEMORY.md.</div></div>
+      <div class="step"><div class="n">2</div><div class="t"><b>Chiudi tutto</b>Esci dalla sessione (<code>Ctrl+C</code> o chiudi il terminale). La sessione muore, la memoria no.</div></div>
+      <div class="step"><div class="n">3</div><div class="t"><b>Riapri e verifica</b>Nuova sessione <code>claude</code> nella stessa cartella → chiedi: <code>cosa ti ricordi di me?</code>. Deve citare il fatto del passo 1.</div></div>
+    </div>
+    <div class="note"><b>Test passato = memoria operativa.</b> Da ora ogni cosa importante che dici a Claude può sopravvivere alla chat.</div>
+  </div>
+
+  <!-- 05 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">05 · Selezione</div>
+    <h2 class="sec">Cosa indicizzare e cosa no</h2>
+    <p class="body">Indicizzare tutto = grafo rumoroso e inutile. La regola: <b>dentro la conoscenza, fuori il materiale grezzo</b>.</p>
+    <table class="tbl">
+      <tr><th>Dentro il grafo</th><th>Fuori dal grafo</th></tr>
+      <tr><td><b>02_KNOWLEDGE</b> — pattern, decisioni, learnings</td><td><b>04_SESSIONS</b> — log automatici delle sessioni</td></tr>
+      <tr><td><b>01_PROJECTS</b> — i progetti attivi e le loro note</td><td><b>03_REFERENCE</b> pesante — PDF, export, dump grezzi</td></tr>
+      <tr><td><b>Brains/</b> — le lezioni dei tuoi esperti</td><td><b>00_INBOX</b> — materiale non ancora processato</td></tr>
+    </table>
+    <div class="note"><b>Criterio in una frase:</b> se è conoscenza scritta da te o per te → dentro. Se è materiale grezzo o log automatico → fuori.</div>
+  </div>
+
+  <!-- 06 -->
+  <div class="sec-wrap">
+    <div class="sec-tag">06 · Checklist</div>
+    <h2 class="sec">Checklist finale</h2>
+    <p class="body">Non passare alla Lezione 5 senza tutte e 3 le spunte verdi.</p>
+    <div class="check">
+      <div class="ci"><div class="bx"></div><div class="ct"><b>Memoria automatica verificata</b><small>Claude risponde con il percorso del suo MEMORY.md</small></div></div>
+      <div class="ci"><div class="bx"></div><div class="ct"><b>Prima memoria forzata e persistente</b><small>chiudi sessione → riapri → "cosa ti ricordi di me?" risponde giusto</small></div></div>
+      <div class="ci"><div class="bx"></div><div class="ct"><b>Lista "dentro/fuori" pronta</b><small>sai già quali cartelle del tuo vault entreranno nel grafo in Lezione 6</small></div></div>
+    </div>
+  </div>
+
+  <!-- End -->
+  <div class="endline">
+    <h2>Memoria attiva. Ora il primo agent.</h2>
+    <p class="body">Claude ricorda tra le sessioni e sai cosa entrerà nel grafo. Nella prossima lezione costruiamo il primo agent dal vivo: download, transcript e organizzazione da un canale YouTube. Poi, in Lezione 6, Graphify e il brain. &nbsp;·&nbsp; Corso AI + Ecommerce · Lezione 04 → 05</p>
+  </div>
+
+</div>
+
+</body>
+</html>
